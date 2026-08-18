@@ -1,0 +1,134 @@
+---
+// Text roll button — Super Interactions
+// Single file: save as TextRollButton.astro and use <TextRollButton /> anywhere.
+// Customize via the CSS variables on the root class (--btn-bg, --btn-text, --duration, --stagger, --ease). The remaining rules are layout-critical — leave them intact.
+---
+<button class="text-roll-button" aria-label="Schedule a call">
+  <span class="text-roll-button-label" aria-hidden="true">
+    <span class="text-roll-button-ch"><span>S</span><span>S</span></span>
+    <span class="text-roll-button-ch"><span>c</span><span>c</span></span>
+    <span class="text-roll-button-ch"><span>h</span><span>h</span></span>
+    <span class="text-roll-button-ch"><span>e</span><span>e</span></span>
+    <span class="text-roll-button-ch"><span>d</span><span>d</span></span>
+    <span class="text-roll-button-ch"><span>u</span><span>u</span></span>
+    <span class="text-roll-button-ch"><span>l</span><span>l</span></span>
+    <span class="text-roll-button-ch"><span>e</span><span>e</span></span>
+    <span class="text-roll-button-ch"><span>&nbsp;</span><span>&nbsp;</span></span>
+    <span class="text-roll-button-ch"><span>a</span><span>a</span></span>
+    <span class="text-roll-button-ch"><span>&nbsp;</span><span>&nbsp;</span></span>
+    <span class="text-roll-button-ch"><span>c</span><span>c</span></span>
+    <span class="text-roll-button-ch"><span>a</span><span>a</span></span>
+    <span class="text-roll-button-ch"><span>l</span><span>l</span></span>
+    <span class="text-roll-button-ch"><span>l</span><span>l</span></span>
+  </span>
+  <span class="text-roll-button-arrow" aria-hidden="true">
+    <svg viewBox="0 0 26 16" width="26" height="16"><path d="M1 8 H23 M17 2 L24 8 L17 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <svg viewBox="0 0 26 16" width="26" height="16"><path d="M1 8 H23 M17 2 L24 8 L17 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+  </span>
+</button>
+
+<style is:global>
+.text-roll-button {
+  --btn-bg: #0b0b09;
+  --btn-text: #f2f2ea;
+  --duration: 400ms;
+  --ease: cubic-bezier(.65, 0, .35, 1);
+  --stagger: 22ms;
+  /* arrow waits for the letter wave to be ~40% through (15 letters * 0.4 ≈ 6) */
+  --arrow-delay: calc(var(--stagger) * 6);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font: inherit;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 4px;
+  padding: 14px 18px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.text-roll-button:focus-visible {
+  outline: 2px solid var(--btn-text);
+  outline-offset: 3px;
+}
+
+.text-roll-button-label {
+  display: flex;
+}
+
+/* each letter is its own one-line clip window; --i staggers its roll */
+.text-roll-button-ch {
+  display: block;
+  overflow: hidden;
+  height: 22px;
+  line-height: 22px;
+}
+
+.text-roll-button-ch > span {
+  display: block;
+  height: 22px;
+  white-space: pre;
+  transition: transform var(--duration) var(--ease);
+}
+
+.text-roll-button-ch:nth-child(1) > span { transition-delay: calc(0 * var(--stagger)); }
+.text-roll-button-ch:nth-child(2) > span { transition-delay: calc(1 * var(--stagger)); }
+.text-roll-button-ch:nth-child(3) > span { transition-delay: calc(2 * var(--stagger)); }
+.text-roll-button-ch:nth-child(4) > span { transition-delay: calc(3 * var(--stagger)); }
+.text-roll-button-ch:nth-child(5) > span { transition-delay: calc(4 * var(--stagger)); }
+.text-roll-button-ch:nth-child(6) > span { transition-delay: calc(5 * var(--stagger)); }
+.text-roll-button-ch:nth-child(7) > span { transition-delay: calc(6 * var(--stagger)); }
+.text-roll-button-ch:nth-child(8) > span { transition-delay: calc(7 * var(--stagger)); }
+.text-roll-button-ch:nth-child(9) > span { transition-delay: calc(8 * var(--stagger)); }
+.text-roll-button-ch:nth-child(10) > span { transition-delay: calc(9 * var(--stagger)); }
+.text-roll-button-ch:nth-child(11) > span { transition-delay: calc(10 * var(--stagger)); }
+.text-roll-button-ch:nth-child(12) > span { transition-delay: calc(11 * var(--stagger)); }
+.text-roll-button-ch:nth-child(13) > span { transition-delay: calc(12 * var(--stagger)); }
+.text-roll-button-ch:nth-child(14) > span { transition-delay: calc(13 * var(--stagger)); }
+.text-roll-button-ch:nth-child(15) > span { transition-delay: calc(14 * var(--stagger)); }
+
+.text-roll-button:hover .text-roll-button-ch > span {
+  transform: translateY(-100%);
+}
+
+/* arrow: top copy exits right, second enters from the left, after the wave */
+.text-roll-button-arrow {
+  position: relative;
+  display: block;
+  width: 26px;
+  height: 16px;
+  overflow: hidden;
+  margin-left: 4px;
+}
+
+.text-roll-button-arrow svg {
+  position: absolute;
+  inset: 0;
+  transition: transform var(--duration) var(--ease);
+}
+
+.text-roll-button-arrow svg:first-child {
+  transition-delay: calc(var(--arrow-delay) + 60ms);
+}
+
+.text-roll-button-arrow svg:last-child {
+  transform: translateX(-140%);
+  transition-delay: var(--arrow-delay);
+}
+
+.text-roll-button:hover .text-roll-button-arrow svg:first-child {
+  transform: translateX(140%);
+  transition-delay: var(--arrow-delay);
+}
+
+.text-roll-button:hover .text-roll-button-arrow svg:last-child {
+  transform: translateX(0);
+  transition-delay: calc(var(--arrow-delay) + 60ms);
+}
+</style>

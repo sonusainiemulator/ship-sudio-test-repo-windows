@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/* Tobias TRIAL — real font files, self-hosted (public/fonts/) */
+@font-face {
+  font-family: "Tobias TRIAL";
+  src: url("/fonts/tobias-trial-regular.woff2") format("woff2"),
+       url("/fonts/tobias-trial-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  /* Brand palette (from Figma tokens) */
+  --color-ink: #0c0e1c;
+  --color-panel: #efeff1;
+  --color-line: #ebebeb;
+  --color-blue: #cee2f2;
+  --color-blue-accent: #659cff;
+  --color-teal: #319393;
+  --color-teal-light: #c5eeef;
+  --color-purple: #7f52bf;
+  --color-purple-light: #eddfff;
+  --color-beige: #e7e6dd;
+  --color-sage: #c8d5bb;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0c0e1c;
+  --muted: rgba(12, 14, 28, 0.6);
+  --accent: #659cff;
+  --font-display: "Tobias TRIAL", "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Geist", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+  /* Decorative blobs/patterns bleed past the viewport; clip the horizontal
+     overflow so mobile doesn't get a horizontal scroll / cut-off content.
+     `clip` (not `hidden`) avoids creating a scroll container that would
+     break the sticky nav. */
+  overflow-x: clip;
+}
+
+/* Scroll reveal: elements fade + rise into place as they enter the viewport.
+   Only active when JS is running and motion is allowed (`.js-reveal` on <html>,
+   set by the inline head script). Without it, content shows normally. */
+.js-reveal .reveal,
+.js-reveal .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js-reveal .reveal.is-visible,
+.js-reveal .reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Utility: mono eyebrow label */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: rgba(12, 14, 28, 0.6);
+}
+
+/* Cymatic ring icon used as eyebrow marker */
+.ring-mark {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 4px;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-dark { background: var(--color-ink); color: #fff; }
+.btn-dark:hover { opacity: 0.9; }
+.btn-light { background: #fff; color: var(--color-ink); border-color: #fff; box-shadow: 0 2px 4px rgba(12, 14, 28, 0.06); }
+.btn-ghost {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-panel);
+  color: var(--color-ink);
+  border: 1px solid #fff;
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn-ghost:hover { transform: translateY(-1px); background: #e8e8ec; }
+
+/* Section container */
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ---------------------------------------------------------------------------
+   Reusable cursor-follow glow.
+   Put class `glow-follow` on any positioned surface and drop a
+   `<span class="glow-follow__blob">` inside it. The glow eases toward the
+   cursor and rests at `data-glow-rest="left|center|right"` (default center).
+   Tune per-instance with CSS vars: --glow-color, --glow-size, --glow-ease.
+--------------------------------------------------------------------------- */
+.glow-follow { position: relative; overflow: hidden; }
+.glow-follow__blob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--glow-size, 124px);
+  height: var(--glow-size, 124px);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--glow-color, rgba(206, 226, 242, 0.95)), transparent);
+  transform: translate(-50%, -50%) translate(var(--gx, 0px), var(--gy, 0px));
+  transition: transform var(--glow-ease, 0.3s) ease-out;
+  will-change: transform;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .glow-follow__blob { transition: none; }
+}

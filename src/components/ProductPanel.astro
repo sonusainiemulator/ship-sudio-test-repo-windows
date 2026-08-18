@@ -1,0 +1,126 @@
+---
+interface Props {
+  bg?: string;        // panel background
+  blob?: string;      // blurred blob color
+  patternOpacity?: number;
+  noise?: "cymatic" | "dust" | "spread"; // grain treatment: light swirl vs dark dust vs full-bleed white dust
+  pattern?: string;   // override the cymatic noise image source
+  compact?: boolean;  // smaller, top-aligned card (feature-comparison panels)
+  class?: string;
+}
+const {
+  bg = "#319393",
+  blob = "#659cff",
+  patternOpacity = 0.5,
+  noise = "cymatic",
+  pattern = "/assets/cymatic-pattern-1757560466832-1920x1438.png",
+  compact = false,
+  class: className = "",
+} = Astro.props;
+---
+
+<div
+  class={`product-panel product-panel--${noise} ${compact ? "product-panel--compact" : ""} ${className}`}
+  style={`--panel-bg:${bg}; --blob:${blob}; --pattern-op:${patternOpacity};`}
+>
+  <div class="pp-blobs" aria-hidden="true">
+    <span class="pp-blob pp-blob--1"></span>
+    <span class="pp-blob pp-blob--2"></span>
+    <span class="pp-blob pp-blob--3"></span>
+    <img class="pp-pattern" src={pattern} alt="" />
+  </div>
+  <div class="pp-card">
+    <video
+      class="pp-video"
+      src="/assets/ai-card.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-label="AI analysis product demo"
+    ></video>
+  </div>
+</div>
+
+<style>
+  .product-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 44px;
+    min-height: 380px;
+    border-radius: 4px;
+    border: 10px solid #fff;
+    background: var(--panel-bg);
+    overflow: hidden;
+  }
+  /* Feature-comparison variant: smaller card pinned toward the top. */
+  .product-panel--compact { align-items: flex-start; padding-top: 40px; }
+  .product-panel--compact .pp-card { max-width: 320px; }
+  .pp-blobs { position: absolute; inset: 0; overflow: hidden; }
+  .pp-blob {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--blob);
+    filter: blur(70px);
+    opacity: 0.85;
+  }
+  .pp-blob--1 { width: 60%; height: 70%; top: -20%; left: -15%; }
+  .pp-blob--2 { width: 55%; height: 65%; bottom: -25%; right: -10%; }
+  .pp-blob--3 { width: 35%; height: 40%; top: 30%; right: 20%; opacity: 0.6; }
+  .pp-pattern {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 170%;
+    transform: translate(-50%, -50%);
+    opacity: var(--pattern-op);
+    mix-blend-mode: lighten;
+    pointer-events: none;
+  }
+  /* Customer-intelligence panels: bright cymatic swirl, spread wide so the
+     dust reads around the card instead of hiding behind it. */
+  .product-panel--cymatic .pp-pattern {
+    width: 220%;
+    opacity: calc(var(--pattern-op) + 0.2);
+    mix-blend-mode: lighten;
+  }
+  /* Feature-comparison panels: same cymatic source kept as white dust and
+     pushed to the right so it sits clear of the centred animated card.
+     `screen` keeps the dust white and drops the black source background. */
+  .product-panel--dust .pp-pattern {
+    width: 150%;
+    top: 44%; left: 88%;
+    opacity: 0.8;
+    mix-blend-mode: screen;
+  }
+  /* Team cards: white dust spread full-bleed across the panel so the grain
+     reads around the AI card. `screen` keeps the dust white and drops the
+     black background of the source PNG to transparent. */
+  .product-panel--spread .pp-pattern {
+    width: 128%;
+    height: 128%;
+    object-fit: cover;
+    opacity: 1;
+    mix-blend-mode: screen;
+  }
+  /* Video card — replaces the former AI Analysis card */
+  .pp-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.48);
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  }
+  .pp-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+/**
+ * PrimaryButton — reusable CTA with the cursor-follow glow + arrow-shuttle
+ * interaction. Change `bg` / `glow` / `color` per use; the interaction is fixed.
+ *
+ * The glow behavior comes from the global `.glow-follow` utility (styles in
+ * global.css, wiring in Layout.astro), so it stays in sync everywhere.
+ */
+interface Props {
+  label: string;
+  href?: string;
+  bg?: string; // background color
+  color?: string; // text color
+  glow?: string; // center color of the follow glow
+  glowSize?: string; // e.g. "124px"
+  glowRest?: "left" | "center" | "right"; // resting edge of the glow
+  arrow?: boolean;
+  class?: string;
+}
+const {
+  label,
+  href = "#",
+  bg = "#ffffff",
+  color = "#0c0e1c",
+  glow = "rgba(206, 226, 242, 0.95)",
+  glowSize = "124px",
+  glowRest = "right",
+  arrow = true,
+  class: className = "",
+} = Astro.props;
+
+const style = `--pbtn-bg:${bg};--pbtn-color:${color};--glow-color:${glow};--glow-size:${glowSize};`;
+---
+
+<a
+  href={href}
+  class={`pbtn glow-follow ${className}`}
+  data-glow-rest={glowRest}
+  style={style}
+>
+  <span class="glow-follow__blob" aria-hidden="true"></span>
+  <span class="pbtn__label">{label}</span>
+  {arrow && <span class="pbtn__arrow" aria-hidden="true">→</span>}
+</a>
+
+<style>
+  .pbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    font-size: 14px;
+    line-height: 1.2;
+    text-decoration: none;
+    background: var(--pbtn-bg);
+    color: var(--pbtn-color);
+  }
+  .pbtn__label,
+  .pbtn__arrow {
+    position: relative;
+    z-index: 1;
+    color: var(--pbtn-color);
+  }
+  .pbtn__arrow {
+    display: inline-block;
+    letter-spacing: -0.28px;
+  }
+  /* arrow shuttles out to the right and re-enters from the left — once per hover */
+  .pbtn:hover .pbtn__arrow {
+    animation: pbtn-arrow 0.6s ease-in-out;
+  }
+  @keyframes pbtn-arrow {
+    0% { transform: translateX(0); opacity: 1; }
+    45% { transform: translateX(26px); opacity: 0; }
+    46% { transform: translateX(-26px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pbtn:hover .pbtn__arrow { animation: none; }
+  }
+</style>

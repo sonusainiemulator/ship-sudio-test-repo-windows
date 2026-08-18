@@ -1,0 +1,371 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AiCard from "../components/AiCard.astro";
+import SolutionBlock from "../components/SolutionBlock.astro";
+import PrimaryButton from "../components/PrimaryButton.astro";
+import MagneticArrowCta from "../components/MagneticArrowCta.astro";
+
+const footerCols = [
+  {
+    title: "",
+    links: [
+      "Product",
+      "Pricing",
+      "Customers",
+      "About us",
+      "Privacy Policy",
+      "Terms of Service",
+    ],
+  },
+];
+---
+
+<Layout title="Loopwise — Turn what customers say into revenue">
+  <!-- ============ NAV ============ -->
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a href="/" class="wordmark" aria-label="Loopwise home">
+        <span class="wordmark__mark" aria-hidden="true"></span>
+        Loopwise
+      </a>
+      <ul class="nav-links">
+        <li><a href="/product">Product</a></li>
+        <li><a href="/solutions" aria-current="page">Solutions</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="nav-login">Log in</a>
+        <a href="#" class="nav-demo">Book a demo</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="shero">
+      <div class="shero__panel">
+        <div class="shero__panel-bg" aria-hidden="true">
+          <span class="shero__blob shero__blob--1"></span>
+          <span class="shero__blob shero__blob--2"></span>
+          <span class="shero__blob shero__blob--3"></span>
+          <img class="shero__noise" src="/assets/cymatic-pattern-1757619368429-1920x1438-3.png" alt="" />
+        </div>
+        <div class="shero__card reveal">
+          <AiCard />
+        </div>
+      </div>
+      <div class="container shero__inner">
+        <div class="shero__text reveal-stagger">
+          <span class="eyebrow eyebrow--mark">
+            <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
+            Solutions
+          </span>
+          <h1 class="shero__title">Turn what customers<br />say into revenue.</h1>
+          <p class="shero__desc">
+            Analytics tells you what customers did. Loopwise tells you why—
+            unifying reviews, support tickets, social mentions, and even return
+            reasons into one stream your teams can actually act on.
+          </p>
+          <div class="shero__cta">
+            <PrimaryButton
+              label="Book a demo"
+              bg="#0c0e1c"
+              color="#ffffff"
+              glow="rgba(206, 226, 242, 0.5)"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURE BLOCKS ============ -->
+    <section class="sblocks">
+      <div class="container sblocks__inner reveal-stagger">
+        <SolutionBlock
+          eyebrow="Detect"
+          title="Catch issues while they're still small"
+          body="Loopwise watches every channel around the clock and flags a theme while it's still fixable—when it affects dozens of customers, not thousands, and long before it becomes churn."
+          panelBg="#cee2f2"
+          panelBlob="#659cff"
+        />
+        <SolutionBlock
+          eyebrow="Unify"
+          title="See the whole customer journey"
+          body="Reviews, tickets, social tags, return reasons—connected into one story from discovery to purchase (or abandonment), with the accounts and revenue behind every signal."
+          reverse={true}
+          panelBg="#c5eeef"
+          panelBlob="#319393"
+        />
+        <SolutionBlock
+          eyebrow="Close"
+          title="Close the loop on every channel"
+          body="When you ship a fix, Loopwise reopens the conversation—replying to the review, updating the ticket, and telling every customer who asked that they were heard."
+          panelBg="#e2e6f2"
+          panelBlob="#8fa8e6"
+        />
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta">
+      <div class="cta__blob cta__blob--1" aria-hidden="true"></div>
+      <div class="cta__blob cta__blob--2" aria-hidden="true"></div>
+      <div class="cta__noise" aria-hidden="true"></div>
+      <div class="container cta__inner reveal-stagger">
+        <h2 class="cta__title">Close your first loop this week.</h2>
+        <p class="cta__sub">
+          Teams at Perplexity, Notion, and Linear close the loop on customer
+          feedback with Loopwise.
+        </p>
+        <div class="cta__btn"><MagneticArrowCta label="Book a demo" /></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner reveal">
+      <a href="/" class="wordmark footer__brand">
+        <span class="wordmark__mark" aria-hidden="true"></span>
+        Loopwise
+      </a>
+      <div class="footer__cols">
+        {footerCols.map((col) => (
+          <div class="footer__col">
+            {col.title && <p class="footer__col-title eyebrow">{col.title}</p>}
+            <ul>
+              {col.links.map((l) => <li><a href="#">{l}</a></li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ---------- NAV (shared with home) ---------- */
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    gap: 24px;
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .wordmark__mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--color-ink);
+    display: inline-block;
+  }
+  .nav-links { display: flex; gap: 22px; list-style: none; }
+  .nav-links a {
+    font-size: 14px;
+    color: rgba(12, 14, 28, 0.6);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--color-ink); }
+  .nav-links a[aria-current="page"] { color: var(--color-ink); font-weight: 500; }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .nav-login {
+    font-size: 14px;
+    color: rgba(12, 14, 28, 0.6);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+  }
+  .nav-login:hover { background: var(--color-panel); }
+  .nav-demo {
+    font-size: 14px;
+    color: var(--color-ink);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: var(--color-panel);
+    border: 1px solid #fff;
+  }
+  .nav-demo:hover { background: #e6e6ea; }
+
+  /* ---------- shared eyebrow marker ---------- */
+  .eyebrow--mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- HERO ---------- */
+  .shero {
+    position: relative;
+    background: #eeeef4;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-line);
+    display: flex;
+    align-items: center;
+    min-height: max(820px, 90vh);
+  }
+  .shero__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 52vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  /* lavender on the left drifting to blue on the right */
+  .shero__panel-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(55% 45% at 30% 28%, #e6ddf9 0%, transparent 70%),
+      radial-gradient(60% 60% at 100% 92%, #bcccf4 0%, transparent 68%),
+      linear-gradient(115deg, #ddd2f4 0%, #d3d4f0 48%, #c3d3f3 100%);
+  }
+  .shero__blob { position: absolute; border-radius: 50%; filter: blur(120px); }
+  .shero__blob--1 { width: 55%; height: 55%; top: 2%; left: 6%; background: #e7ddfa; opacity: 0.75; }
+  .shero__blob--2 { width: 60%; height: 60%; bottom: -14%; right: -10%; background: #a9c2f2; opacity: 0.7; }
+  .shero__blob--3 { width: 38%; height: 40%; top: 26%; right: 24%; background: #efe9fc; opacity: 0.5; }
+  .shero__noise {
+    position: absolute;
+    top: 42%; left: 55%;
+    width: 150%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+  .shero__card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 360px;
+    padding: 0 20px;
+    align-self: center;
+    /* nudge the card toward the upper-right, matching the master */
+    margin-right: -4%;
+  }
+  .shero__card :global(.ai-card) { max-width: 360px; }
+  .shero__inner { position: relative; width: 100%; }
+  .shero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 460px;
+    padding: 88px 0;
+  }
+  .shero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(38px, 5vw, 52px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  .shero__desc {
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(12, 14, 28, 0.62);
+    max-width: 400px;
+  }
+  .shero__cta { margin-top: 4px; }
+
+  /* ---------- FEATURE BLOCKS ---------- */
+  .sblocks { padding: 112px 0; }
+  .sblocks__inner { display: flex; flex-direction: column; gap: 24px; }
+
+  /* ---------- CTA (sage variant) ---------- */
+  .cta { position: relative; background: #e8ebe1; padding: 120px 0; overflow: hidden; }
+  .cta__blob { position: absolute; border-radius: 50%; filter: blur(90px); }
+  .cta__blob--1 { width: 520px; height: 400px; top: -120px; left: -80px; background: rgba(255, 255, 255, 0.6); }
+  .cta__blob--2 { width: 500px; height: 380px; bottom: -140px; right: -60px; background: rgba(200, 213, 187, 0.6); }
+  .cta__noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("/assets/cta-noise-tile.png");
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: 78% 100%;
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .cta__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  .cta__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(34px, 5vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    max-width: 620px;
+  }
+  .cta__sub { font-size: 14px; line-height: 1.5; color: rgba(12, 14, 28, 0.6); max-width: 340px; }
+  .cta__btn { margin-top: 4px; }
+
+  /* ---------- FOOTER (shared with home) ---------- */
+  .footer { padding: 80px 0 64px; border-top: 1px solid var(--color-line); }
+  .footer__inner { display: flex; justify-content: space-between; gap: 60px; flex-wrap: wrap; }
+  .footer__brand { font-size: 20px; }
+  .footer__cols { display: flex; gap: 56px; flex-wrap: wrap; }
+  .footer__col-title { margin-bottom: 16px; text-transform: lowercase; }
+  .footer__col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer__col a {
+    font-size: 14px;
+    color: rgba(12, 14, 28, 0.6);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .footer__col a:hover { color: var(--color-ink); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1000px) {
+    .shero { display: flex; flex-direction: column; min-height: 0; }
+    .shero__panel {
+      position: static;
+      order: 2;
+      width: 100%;
+      min-height: 420px;
+      padding: 48px 0;
+    }
+    .shero__inner { order: 1; }
+    .shero__text { max-width: none; padding: 64px 0 40px; }
+    .shero__card { max-width: 340px; margin-right: 0; }
+    .sblocks { padding: 72px 0; }
+  }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .footer__cols { gap: 32px; }
+  }
+</style>

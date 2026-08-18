@@ -1,0 +1,134 @@
+---
+import 'lenis/dist/lenis.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Ship Studio Starter' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Gate scroll-reveal styles on JS + motion preference so content is never
+      // hidden without a way to reveal it. Runs before <body> paints (no FOUC).
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("js-reveal");
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body class="bg-background text-foreground font-body antialiased">
+    <slot />
+  </body>
+</html>
+
+<script>
+  // Lenis smooth scrolling (eased inertia). Skipped when reduced motion is preferred.
+  import Lenis from "lenis";
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }
+</script>
+
+<script>
+  // Reusable cursor-follow glow. Wires every `.glow-follow` element on the page:
+  // the `.glow-follow__blob` inside eases toward the pointer and returns to its
+  // rest edge (data-glow-rest="left|center|right") when the pointer leaves.
+  const initGlowFollow = () => {
+    document.querySelectorAll<HTMLElement>(".glow-follow").forEach((el) => {
+      if (el.dataset.glowReady) return;
+      el.dataset.glowReady = "true";
+
+      const restSide = el.dataset.glowRest ?? "center";
+      let raf = 0;
+      let gx = 0;
+      let gy = 0;
+
+      const apply = () => {
+        raf = 0;
+        el.style.setProperty("--gx", `${gx}px`);
+        el.style.setProperty("--gy", `${gy}px`);
+      };
+      const schedule = () => {
+        if (!raf) raf = requestAnimationFrame(apply);
+      };
+      const rest = () => {
+        const w = el.getBoundingClientRect().width;
+        gx = restSide === "right" ? w / 2 : restSide === "left" ? -w / 2 : 0;
+        gy = 0;
+        schedule();
+      };
+
+      el.addEventListener("pointermove", (e) => {
+        const r = el.getBoundingClientRect();
+        gx = e.clientX - (r.left + r.width / 2);
+        gy = e.clientY - (r.top + r.height / 2);
+        schedule();
+      });
+      el.addEventListener("pointerleave", rest);
+      rest();
+    });
+  };
+
+  initGlowFollow();
+  document.addEventListener("astro:after-swap", initGlowFollow);
+</script>
+
+<script>
+  // Scroll reveal: fade + rise elements as they enter the viewport. Elements
+  // opt in with `.reveal`; `.reveal-stagger` cascades its direct children.
+  const initReveal = () => {
+    if (!document.documentElement.classList.contains("js-reveal")) return;
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>(".reveal, .reveal-stagger")
+    ).filter((el) => !el.dataset.revealReady);
+
+    if (!targets.length) return;
+
+    // Stagger the children of each grouped container.
+    targets.forEach((el) => {
+      el.dataset.revealReady = "true";
+      if (el.classList.contains("reveal-stagger")) {
+        Array.from(el.children).forEach((child, i) => {
+          (child as HTMLElement).style.transitionDelay = `${Math.min(i, 8) * 90}ms`;
+        });
+      }
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.05 }
+    );
+    targets.forEach((el) => io.observe(el));
+  };
+
+  initReveal();
+  document.addEventListener("astro:after-swap", initReveal);
+</script>

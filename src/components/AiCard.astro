@@ -1,0 +1,184 @@
+---
+// Reusable "AI Analysis" product visual (node 5301:579).
+// White analysis card on top, Spam / Confidence badges below it.
+const reasons = [
+  "The links and headers are consistent with a well-structured corporate email, providing an assumed level of authenticity and safety",
+  "The email contains a survey request which is typical of marketing or customer feedback emails, classifying it as spam",
+  "The links and headers are consistent with a well-structured corporate email, providing an assumed level of authenticity and safety",
+];
+---
+
+<div class="ai-card">
+  <!-- White analysis card -->
+  <div class="ai-inner">
+    <div class="ai-inner__head">
+      <span>AI Analysis</span>
+      <button class="ai-close" aria-label="Close" type="button">
+        <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="ai-reason-box">
+      <div class="ai-reason-scroll">
+        <p class="ai-reason-title">Reasoning:</p>
+        {reasons.map((r, i) => (
+          <div class="ai-reason">
+            <span class="ai-num">{i + 1}.</span>
+            <p>{r}</p>
+          </div>
+        ))}
+      </div>
+      <div class="ai-fade ai-fade--top"></div>
+      <div class="ai-fade ai-fade--bottom"></div>
+      <span class="ai-analyzing">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5l1.4 3.7 3.7 1.4-3.7 1.4L8 11.7 6.6 8l-3.7-1.4L6.6 5.2 8 1.5z" fill="currentColor"/></svg>
+        Analyzing..
+      </span>
+    </div>
+  </div>
+
+  <!-- Badge row (bottom) -->
+  <div class="ai-badges">
+    <span class="ai-pill ai-pill--spam">
+      Spam
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.1"/><path d="M8 7.2v3.4M8 5.1v.1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+    </span>
+    <span class="ai-conf">
+      <span class="ai-conf__label">Confidence:</span>
+      <span class="ai-pill ai-pill--score">
+        <span class="ai-bars"><i></i><i></i><i class="dim"></i></span>
+        95%
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.4" stroke="currentColor" stroke-width="1.1"/><path d="M8 7.2v3.4M8 5.1v.1" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+      </span>
+    </span>
+  </div>
+</div>
+
+<style>
+  .ai-card {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.48);
+    border-radius: 8px;
+    padding: 5px 5px 9px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    font-family: var(--font-body);
+    color: var(--color-ink);
+  }
+
+  .ai-inner {
+    width: 100%;
+    background: #fff;
+    border-radius: 7.7px;
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    box-shadow: 0 2px 2.9px rgba(0, 0, 0, 0.06);
+  }
+  .ai-inner__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+  }
+  .ai-inner__head span { font-size: 14px; color: rgba(12, 14, 28, 0.6); }
+  .ai-close {
+    width: 23px; height: 23px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(12, 14, 28, 0.05);
+    border: none; border-radius: 50%; cursor: pointer;
+    color: rgba(12, 14, 28, 0.6);
+  }
+  .ai-close svg { width: 12px; height: 12px; }
+
+  .ai-reason-box {
+    position: relative;
+    border: 1px solid rgba(12, 14, 28, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    height: 197px;
+  }
+  /* content is nudged up so "Reasoning:" is clipped and item 1 sits at the top */
+  .ai-reason-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 9px 0;
+    transform: translateY(-19px);
+  }
+  .ai-reason-title { font-size: 12.8px; color: rgba(12, 14, 28, 0.6); }
+  .ai-reason {
+    display: flex;
+    gap: 10px;
+  }
+  .ai-num {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(12, 14, 28, 0.05);
+    border-radius: 50%;
+    font-size: 10.3px;
+    color: rgba(12, 14, 28, 0.6);
+  }
+  .ai-reason p { font-size: 12.8px; line-height: 1.32; color: rgba(12, 14, 28, 0.6); }
+  .ai-fade {
+    position: absolute;
+    left: 0; right: 0;
+    height: 46px;
+    pointer-events: none;
+    backdrop-filter: blur(1.5px);
+  }
+  .ai-fade--top { top: 0; background: linear-gradient(to top, rgba(255, 255, 255, 0), #fff 85%); }
+  .ai-fade--bottom { bottom: 0; background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 85%); }
+  .ai-analyzing {
+    position: absolute;
+    left: 50%; bottom: 12px;
+    transform: translateX(-50%);
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--color-ink);
+    color: #fff;
+    border-radius: 15px;
+    padding: 5px 8px;
+    font-size: 12.8px;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .ai-analyzing svg { width: 13px; height: 13px; }
+
+  /* Badge row — sits below the white card on the frosted panel */
+  .ai-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 1px;
+  }
+  .ai-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 5px;
+    padding: 5px 6.5px;
+    font-size: 12.8px;
+    line-height: 1;
+    color: var(--color-ink);
+  }
+  .ai-pill svg { width: 13px; height: 13px; opacity: 0.5; }
+  .ai-conf {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.48);
+    border-radius: 5px;
+    padding-left: 6.5px;
+  }
+  .ai-conf__label { font-size: 12.8px; color: rgba(12, 14, 28, 0.6); }
+  .ai-bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 10px; }
+  .ai-bars i { width: 2px; height: 10px; border-radius: 4px; background: var(--color-ink); }
+  .ai-bars i.dim { background: rgba(12, 14, 28, 0.2); }
+</style>

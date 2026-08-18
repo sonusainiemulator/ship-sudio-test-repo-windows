@@ -1,0 +1,150 @@
+---
+// Magnetic arrow CTA — Super Interactions
+// The <script> below runs client-side automatically.
+// Customize via the CSS variables on the root class (--disc-color, --label-color,
+// --strength, --grow, --duration, --ease). The remaining rules are layout-critical.
+interface Props {
+  label?: string;
+}
+
+const { label = "Schedule a call" } = Astro.props;
+---
+
+<button class="magnetic-arrow-cta">
+  <span class="disc">
+    <span class="arrow-swap">
+      <svg class="arrow" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+        <path d="M2.5 8h11M9.5 3.5 14 8l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <svg class="arrow arrow-copy" aria-hidden="true" viewBox="0 0 16 16" fill="none">
+        <path d="M2.5 8h11M9.5 3.5 14 8l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+  </span>
+  <span class="cta-label">
+    <span class="roll">
+      <span class="line">{label}</span>
+      <span class="line">{label}</span>
+    </span>
+  </span>
+</button>
+
+<style is:global>
+.magnetic-arrow-cta {
+  --disc-color: #ffffff;
+  --label-color: var(--color-ink, #17150f);
+  --strength: 0.35;
+  --grow: 1.33;
+  --duration: 380ms;
+  --ease: cubic-bezier(0.33, 1, 0.68, 1);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: var(--label-color);
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  will-change: transform;
+  transform: translate(var(--tx, 0px), var(--ty, 0px));
+  transition: transform var(--duration) var(--ease);
+}
+
+.magnetic-arrow-cta .disc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--disc-color);
+  box-shadow: 0 1px 3px rgba(20, 15, 0, 0.1), 0 0 0 1px rgba(20, 15, 0, 0.05);
+  overflow: hidden;
+  will-change: transform;
+  transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(1);
+  transition: transform var(--duration) var(--ease);
+}
+
+.magnetic-arrow-cta:hover .disc {
+  transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(var(--grow));
+}
+
+.magnetic-arrow-cta .arrow-swap {
+  position: relative;
+  display: inline-flex;
+  transition: transform 400ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.magnetic-arrow-cta .arrow {
+  width: 16px;
+  height: 16px;
+}
+
+.magnetic-arrow-cta .arrow-copy {
+  position: absolute;
+  top: 0;
+  left: -300%;
+}
+
+.magnetic-arrow-cta:hover .arrow-swap {
+  transform: translateX(300%);
+}
+
+.magnetic-arrow-cta .cta-label {
+  display: block;
+  overflow: hidden;
+}
+
+.magnetic-arrow-cta .roll {
+  position: relative;
+  display: block;
+  transition: transform 400ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.magnetic-arrow-cta .line {
+  display: block;
+}
+
+.magnetic-arrow-cta .line + .line {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.magnetic-arrow-cta:hover .roll {
+  transform: translateY(-100%);
+}
+</style>
+
+<script>
+document.querySelectorAll<HTMLElement>(".magnetic-arrow-cta:not([data-magnetic-arrow-cta-inited])").forEach((btn) => {
+  btn.dataset.magneticArrowCtaInited = "true";
+
+  function strength() {
+    const v = parseFloat(getComputedStyle(btn).getPropertyValue("--strength"));
+    return Number.isNaN(v) ? 0.35 : v;
+  }
+
+  btn.addEventListener("mousemove", (e) => {
+    const rect = btn.getBoundingClientRect();
+    const dx = e.clientX - rect.left - rect.width / 2;
+    const dy = e.clientY - rect.top - rect.height / 2;
+    const s = strength();
+    btn.style.setProperty("--tx", `${dx * s}px`);
+    btn.style.setProperty("--ty", `${dy * s}px`);
+    btn.style.setProperty("--dx", `${dx * s * 0.3}px`);
+    btn.style.setProperty("--dy", `${dy * s * 0.3}px`);
+  });
+
+  btn.addEventListener("mouseleave", () => {
+    ["--tx", "--ty", "--dx", "--dy"].forEach((p) => btn.style.setProperty(p, "0px"));
+  });
+});
+</script>

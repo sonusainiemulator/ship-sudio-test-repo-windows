@@ -1,0 +1,58 @@
+---
+import ProductPanel from "./ProductPanel.astro";
+
+interface Props {
+  label: string;
+  body: string;
+  bg?: string;
+  blob?: string;
+}
+const { label, body, bg = "#319393", blob = "#659cff" } = Astro.props;
+---
+
+<div class="team-card">
+  <div class="team-card__visual">
+    <ProductPanel
+      bg={bg}
+      blob={blob}
+      noise="spread"
+      pattern="/assets/cymatic-pattern-1757560466832-1920x1438-4.png"
+    />
+  </div>
+  <div class="team-card__foot">
+    <span class="eyebrow team-card__label">
+      <svg class="tc-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M15.1143 5.10937L15.1123 5.11035C15.146 5.17763 15.167 5.25264 15.167 5.33301L15.167 14.666C15.167 14.9421 14.9431 15.1659 14.667 15.166L1.33301 15.166C1.05709 15.1658 0.833008 14.942 0.833008 14.666L0.833008 5.33301C0.833008 5.25269 0.854042 5.1776 0.887695 5.11035L0.885742 5.10938L3.02441 0.833008L12.9756 0.833008L15.1143 5.10937ZM1.83301 14.166L14.167 14.166L14.167 5.83301L1.83301 5.83301L1.83301 14.166ZM10 8.5H6V7.5H10L10 8.5ZM2.14258 4.83301L7.5 4.83301L7.5 1.83301L3.64258 1.83301L2.14258 4.83301ZM8.5 4.83301L13.8574 4.83301L12.3574 1.83301L8.5 1.83301V4.83301Z" fill="rgba(12,14,28,0.64)"/>
+      </svg>
+      {label}
+    </span>
+    <p class="team-card__body">{body}</p>
+  </div>
+</div>
+
+<style>
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--color-line);
+  }
+  .team-card__visual { padding: 0; }
+  .team-card__visual :global(.product-panel) {
+    min-height: 300px;
+    border-radius: 0;
+  }
+  .team-card__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .team-card__label { display: inline-flex; align-items: center; gap: 8px; }
+  .tc-ico { width: 16px; height: 16px; }
+  .team-card__body {
+    font-size: 16px;
+    line-height: 1.32;
+    color: rgba(12, 14, 28, 0.6);
+  }
+</style>

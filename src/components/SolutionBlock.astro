@@ -1,0 +1,109 @@
+---
+/**
+ * SolutionBlock — a large bordered feature card: eyebrow + serif headline +
+ * body + "See it in action" on one side, a full-height gradient ProductPanel
+ * on the other. `reverse` puts the panel on the left.
+ */
+import ProductPanel from "./ProductPanel.astro";
+import PrimaryButton from "./PrimaryButton.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+  reverse?: boolean;
+  panelBg?: string;
+  panelBlob?: string;
+}
+const {
+  eyebrow,
+  title,
+  body,
+  reverse = false,
+  panelBg = "#cee2f2",
+  panelBlob = "#659cff",
+} = Astro.props;
+---
+
+<div class={`sblock ${reverse ? "sblock--rev" : ""}`}>
+  <div class="sblock__text">
+    <span class="eyebrow sblock__eyebrow">
+      <svg class="tkt" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+        <path d="M2 4.5A1.5 1.5 0 013.5 3h15A1.5 1.5 0 0120 4.5v1a1.5 1.5 0 000 3v2A1.5 1.5 0 0118.5 12h-15A1.5 1.5 0 012 10.5v-2a1.5 1.5 0 000-3v-1z" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M8.5 6.3l5 3.4M13.5 6.3l-5 3.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      {eyebrow}
+    </span>
+    <h2 class="sblock__title">{title}</h2>
+    <p class="sblock__body">{body}</p>
+    <div class="sblock__cta">
+      <PrimaryButton label="See it in action" bg="#efeff1" />
+    </div>
+  </div>
+  <div class="sblock__visual">
+    <ProductPanel bg={panelBg} blob={panelBlob} patternOpacity={0.5} />
+  </div>
+</div>
+
+<style>
+  .sblock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    border: 1px solid var(--color-line);
+    background: #f4f4f5;
+    overflow: hidden;
+  }
+  .sblock__text {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 22px;
+    padding: 64px 56px;
+  }
+  .sblock__visual { order: 2; display: flex; }
+  .sblock--rev .sblock__text { order: 2; }
+  .sblock--rev .sblock__visual { order: 1; }
+  .sblock__visual :global(.product-panel) {
+    flex: 1;
+    width: 100%;
+    min-height: 460px;
+    border-radius: 0;
+  }
+
+  .sblock__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .tkt { width: 20px; height: 14px; color: rgba(12, 14, 28, 0.55); flex-shrink: 0; }
+  .sblock__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    max-width: 420px;
+  }
+  .sblock__body {
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(12, 14, 28, 0.6);
+    max-width: 400px;
+  }
+  .sblock__cta { margin-top: 6px; }
+
+  @media (max-width: 900px) {
+    .sblock { grid-template-columns: 1fr; }
+    .sblock--rev .sblock__text,
+    .sblock__text { order: 2; padding: 40px 28px; }
+    .sblock--rev .sblock__visual,
+    .sblock__visual { order: 1; }
+    .sblock__visual :global(.product-panel) { min-height: 360px; }
+  }
+</style>

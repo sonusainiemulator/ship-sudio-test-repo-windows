@@ -1,0 +1,100 @@
+---
+/**
+ * PanelSplit — a two-column marketing block: a large gradient ProductPanel on
+ * one side, an eyebrow + serif headline + body + "See it in action" CTA on the
+ * other. `reverse` moves the visual to the right (text on the left).
+ */
+import ProductPanel from "./ProductPanel.astro";
+import PrimaryButton from "./PrimaryButton.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+  reverse?: boolean;
+  panelBg?: string;
+  panelBlob?: string;
+}
+const {
+  eyebrow,
+  title,
+  body,
+  reverse = false,
+  panelBg = "#cee2f2",
+  panelBlob = "#659cff",
+} = Astro.props;
+---
+
+<div class={`psplit ${reverse ? "psplit--rev" : ""}`}>
+  <div class="psplit__visual">
+    <ProductPanel bg={panelBg} blob={panelBlob} patternOpacity={0.55} />
+  </div>
+  <div class="psplit__text">
+    <span class="eyebrow psplit__eyebrow">
+      <svg class="tkt" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+        <path d="M2 4.5A1.5 1.5 0 013.5 3h15A1.5 1.5 0 0120 4.5v1a1.5 1.5 0 000 3v2A1.5 1.5 0 0118.5 12h-15A1.5 1.5 0 012 10.5v-2a1.5 1.5 0 000-3v-1z" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M8.5 6.3l5 3.4M13.5 6.3l-5 3.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      {eyebrow}
+    </span>
+    <h2 class="psplit__title">{title}</h2>
+    <p class="psplit__body">{body}</p>
+    <div class="psplit__cta">
+      <PrimaryButton label="See it in action" bg="#efeff1" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .psplit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .psplit__visual { order: 1; }
+  .psplit__text { order: 2; }
+  /* reverse: text on the left, visual on the right */
+  .psplit--rev .psplit__visual { order: 2; }
+  .psplit--rev .psplit__text { order: 1; }
+
+  .psplit__visual :global(.product-panel) { min-height: 420px; }
+
+  .psplit__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    max-width: 440px;
+  }
+  .psplit__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .tkt { width: 20px; height: 14px; color: rgba(12, 14, 28, 0.55); flex-shrink: 0; }
+  .psplit__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(30px, 3.4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  .psplit__body {
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(12, 14, 28, 0.6);
+  }
+  .psplit__cta { margin-top: 4px; }
+
+  @media (max-width: 900px) {
+    .psplit { grid-template-columns: 1fr; gap: 32px; }
+    .psplit--rev .psplit__visual,
+    .psplit__visual { order: 1; }
+    .psplit--rev .psplit__text,
+    .psplit__text { order: 2; max-width: none; }
+  }
+</style>

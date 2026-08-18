@@ -1,0 +1,85 @@
+---
+/**
+ * UseCaseCard — a soft gradient thumbnail (cymatic grain, no product card),
+ * flush to the card edges, above a mono label + short description.
+ * `wide` gives the landscape (3-up row) aspect ratio; default is square.
+ */
+interface Props {
+  label: string;
+  body: string;
+  bg?: string;
+  blob?: string;
+  wide?: boolean;
+}
+const { label, body, bg = "#cbd8f5", blob = "#659cff", wide = false } = Astro.props;
+---
+
+<article class="uc-card">
+  <div
+    class={`uc-thumb ${wide ? "uc-thumb--wide" : ""}`}
+    style={`--uc-bg:${bg};--uc-blob:${blob};`}
+    aria-hidden="true"
+  >
+    <span class="uc-blob uc-blob--1"></span>
+    <span class="uc-blob uc-blob--2"></span>
+    <img class="uc-pattern" src="/assets/cymatic-pattern-1757560466832-1920x1438-4.png" alt="" />
+  </div>
+  <div class="uc-foot">
+    <span class="eyebrow uc-label">
+      <svg class="uc-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M15.1143 5.10937L15.1123 5.11035C15.146 5.17763 15.167 5.25264 15.167 5.33301L15.167 14.666C15.167 14.9421 14.9431 15.1659 14.667 15.166L1.33301 15.166C1.05709 15.1658 0.833008 14.942 0.833008 14.666L0.833008 5.33301C0.833008 5.25269 0.854042 5.1776 0.887695 5.11035L0.885742 5.10938L3.02441 0.833008L12.9756 0.833008L15.1143 5.10937ZM1.83301 14.166L14.167 14.166L14.167 5.83301L1.83301 5.83301L1.83301 14.166ZM10 8.5H6V7.5H10L10 8.5ZM2.14258 4.83301L7.5 4.83301L7.5 1.83301L3.64258 1.83301L2.14258 4.83301ZM8.5 4.83301L13.8574 4.83301L12.3574 1.83301L8.5 1.83301V4.83301Z" fill="rgba(12,14,28,0.64)"/>
+      </svg>
+      {label}
+    </span>
+    <p class="uc-body">{body}</p>
+  </div>
+</article>
+
+<style>
+  .uc-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-line);
+    background: #fff;
+  }
+  /* thumbnail is flush to the top and sides of the card */
+  .uc-thumb {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--uc-bg);
+    overflow: hidden;
+  }
+  .uc-thumb--wide { aspect-ratio: 3 / 2; }
+  .uc-blob {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--uc-blob);
+    filter: blur(64px);
+    opacity: 0.5;
+  }
+  .uc-blob--1 { width: 75%; height: 85%; top: -22%; left: -20%; }
+  .uc-blob--2 { width: 65%; height: 75%; bottom: -26%; right: -14%; opacity: 0.4; }
+  .uc-pattern {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 155%; height: 155%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+  .uc-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 14px 18px;
+  }
+  .uc-label { display: inline-flex; align-items: center; gap: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .uc-ico { width: 15px; height: 15px; flex-shrink: 0; }
+  .uc-body {
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(12, 14, 28, 0.6);
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+import ProductPanel from "./ProductPanel.astro";
+import PrimaryButton from "./PrimaryButton.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  button?: boolean;
+  traditional: string;
+  intelligence: string;
+  panelBlob?: string;
+  btnGlow?: string;
+}
+const {
+  eyebrow,
+  title,
+  subtitle,
+  button = false,
+  traditional,
+  intelligence,
+  panelBlob = "#c8d5bb",
+  btnGlow = "#c8d5bb",
+} = Astro.props;
+---
+
+<article class="cmp-card">
+  <div class={`cmp-head ${!eyebrow ? "cmp-head--compact" : ""}`}>
+    {eyebrow && (
+      <span class="cmp-eyebrow eyebrow">
+        <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
+        {eyebrow}
+      </span>
+    )}
+    <div class="cmp-titles">
+      <h3 class="cmp-title">{title}</h3>
+      {subtitle && <p class="cmp-sub">{subtitle}</p>}
+    </div>
+    {button && (
+      <div class="cmp-btn">
+        <PrimaryButton label="See it in action" bg="#efeff1" glow={btnGlow} />
+      </div>
+    )}
+  </div>
+
+  <div class="cmp-compare">
+    <div class="cmp-cell cmp-cell--trad">
+      <span class="eyebrow cmp-cell__label">TRADITIONAL</span>
+      <p class="cmp-cell__text">{traditional}</p>
+    </div>
+    <div class="cmp-cell cmp-cell--intel" style={`--intel-blob:${panelBlob}`}>
+      <span class="cmp-cell__blob" aria-hidden="true"></span>
+      <span class="eyebrow cmp-cell__label">customer intelligence</span>
+      <p class="cmp-cell__text">{intelligence}</p>
+    </div>
+  </div>
+
+  <div class="cmp-visual">
+    <ProductPanel bg="#efeff1" blob={panelBlob} noise="dust" compact />
+  </div>
+</article>
+
+<style>
+  .cmp-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-line);
+  }
+
+  .cmp-head {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    justify-content: center;
+  }
+  .cmp-head--compact { gap: 0; }
+  .cmp-eyebrow { display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .cmp-titles { display: flex; flex-direction: column; gap: 12px; }
+  .cmp-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  .cmp-sub {
+    font-size: 14px;
+    line-height: 1.3;
+    color: rgba(12, 14, 28, 0.6);
+    max-width: 240px;
+  }
+  .cmp-btn { align-self: flex-start; }
+
+  .cmp-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .cmp-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 12px 10px;
+    border: 1px solid var(--color-line);
+    min-height: 75px;
+  }
+  .cmp-cell--trad { background: rgba(255, 255, 255, 0.4); }
+  .cmp-cell--intel { position: relative; overflow: hidden; background: var(--color-panel); }
+  .cmp-cell__blob {
+    position: absolute;
+    top: -24px;
+    right: -12px;
+    width: 160px;
+    height: 110px;
+    background: var(--intel-blob, #c8d5bb);
+    filter: blur(34px);
+    opacity: 0.8;
+    pointer-events: none;
+    will-change: transform;
+    animation: intel-drift 9s ease-in-out infinite;
+  }
+  @keyframes intel-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    35% { transform: translate(-46px, 18px) scale(1.25); }
+    70% { transform: translate(-18px, -6px) scale(1.1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cmp-cell__blob { animation: none; }
+  }
+  .cmp-cell__label,
+  .cmp-cell__text { position: relative; z-index: 1; }
+  .cmp-cell__label { letter-spacing: 0.06em; text-transform: uppercase; }
+  .cmp-cell__text {
+    font-size: 14px;
+    line-height: 1.3;
+    color: rgba(12, 14, 28, 0.6);
+  }
+
+  .cmp-visual { display: flex; }
+  .cmp-visual :global(.product-panel) {
+    flex: 1;
+    width: 100%;
+    min-height: 400px;
+    border-radius: 0;
+  }
+
+  @media (max-width: 560px) {
+    .cmp-compare { grid-template-columns: 1fr; }
+  }
+</style>

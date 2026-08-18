@@ -1,0 +1,202 @@
+---
+import ProductPanel from "./ProductPanel.astro";
+import PrimaryButton from "./PrimaryButton.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  statValue?: string;
+  statLabel?: string;
+  logo?: string;        // text label for the logo box
+  logoSrc?: string;     // image logo for the stat box
+  panelBg?: string;
+  panelBlob?: string;
+  btnGlow?: string;     // glow color of the "See it in action" button
+  statBlob?: string;    // subtle blurred blob behind the stat row
+  reverse?: boolean;    // visual on the left
+}
+const {
+  eyebrow,
+  title,
+  subtitle,
+  description,
+  statValue,
+  statLabel,
+  logo,
+  logoSrc,
+  panelBg = "#319393",
+  panelBlob = "#659cff",
+  btnGlow = "#eddfff",
+  statBlob,
+  reverse = false,
+} = Astro.props;
+---
+
+<div class={`feature-row ${reverse ? "feature-row--rev" : ""}`}>
+  <div class="fr-text">
+    <div class="fr-head">
+      <span class="fr-eyebrow eyebrow">
+        <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
+        {eyebrow}
+      </span>
+      <div class="fr-titles">
+        <h3 class="fr-title">{title}</h3>
+        <p class="fr-sub">{subtitle}</p>
+      </div>
+      <div class="fr-btn-wrap">
+        <PrimaryButton label="See it in action" bg="#efeff1" glow={btnGlow} />
+      </div>
+    </div>
+
+    <div class="fr-detail">
+      <p class="fr-desc">{description}</p>
+      {(statValue || logo || logoSrc) && (
+        <div class="fr-stat-row">
+          {statBlob && <span class="fr-stat-blob" aria-hidden="true" style={`background:${statBlob}`}></span>}
+          {statValue && (
+            <div class="fr-stat">
+              <div class="fr-stat__val">
+                <svg viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 9l3.5-4L7 7l5.5-6M12.5 1H9M12.5 1v3.5" stroke="rgba(12,14,28,0.5)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {statValue}
+              </div>
+              <p class="fr-stat__label">{statLabel}</p>
+            </div>
+          )}
+          {logoSrc ? (
+            <div class="fr-logo"><img src={logoSrc} alt="" /></div>
+          ) : logo ? (
+            <div class="fr-logo">{logo}</div>
+          ) : null}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <div class="fr-visual">
+    <ProductPanel
+      bg={panelBg}
+      blob={panelBlob}
+      noise="spread"
+      pattern="/assets/cymatic-pattern-1757560466832-1920x1438-4.png"
+    />
+  </div>
+</div>
+
+<style>
+  .feature-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 640px;
+    gap: 0;
+    align-items: stretch;
+    border: 1px solid var(--color-line);
+  }
+  .feature-row--rev { direction: rtl; }
+  .feature-row--rev > * { direction: ltr; }
+  .fr-visual { border-left: 1px solid var(--color-line); }
+  .feature-row--rev .fr-visual { border-left: none; border-right: 1px solid var(--color-line); }
+
+  .fr-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .fr-head {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+  }
+  .fr-eyebrow { display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .fr-btn-wrap { align-self: flex-start; }
+  .fr-titles { display: flex; flex-direction: column; gap: 12px; }
+  .fr-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .fr-sub {
+    font-size: 14px;
+    line-height: 1.3;
+    color: rgba(12, 14, 28, 0.6);
+    max-width: 260px;
+  }
+
+  .fr-detail {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-line);
+  }
+  .fr-desc {
+    background: rgba(12, 14, 28, 0.02);
+    padding: 16px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: rgba(12, 14, 28, 0.6);
+  }
+  .fr-stat-row {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    border-top: 1px solid var(--color-line);
+    overflow: hidden;
+  }
+  .fr-stat-blob {
+    position: absolute;
+    left: 55px;
+    top: 50%;
+    width: 84px;
+    height: 78px;
+    transform: translateY(-50%);
+    filter: blur(30px);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .fr-stat {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 12px;
+  }
+  .fr-stat__val {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .fr-stat__val svg { width: 13px; height: 9px; }
+  .fr-stat__label { font-size: 14px; color: rgba(12, 14, 28, 0.6); }
+  .fr-logo {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-left: 1px solid var(--color-line);
+    font-size: 16px;
+    color: rgba(12, 14, 28, 0.6);
+  }
+  .fr-logo img { height: 28px; opacity: 0.55; }
+
+  .fr-visual { padding: 0; display: flex; }
+  .fr-visual :global(.product-panel) { flex: 1; width: 100%; }
+
+  @media (max-width: 900px) {
+    .feature-row { grid-template-columns: 1fr; }
+    .feature-row--rev { direction: ltr; }
+    .fr-visual { border-left: none; border-top: 1px solid var(--color-line); }
+    .feature-row--rev .fr-visual { border-right: none; }
+  }
+</style>
