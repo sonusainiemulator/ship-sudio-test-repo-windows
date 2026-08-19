@@ -8,48 +8,48 @@ import MagneticArrowCta from "../components/MagneticArrowCta.astro";
 import AiCard from "../components/AiCard.astro";
 
 const heroLogos = [
-  { src: "/assets/webflowlogosvg.svg", alt: "Webflow", h: 21 },
-  { src: "/assets/hingeidj958bdhp2.svg", alt: "Hinge", h: 22 },
-  { src: "/assets/linearlogo0-1.svg", alt: "Linear", h: 26 },
-  { src: "/assets/frame-2018778295.svg", alt: "Perplexity", h: 26 },
-  { src: "/assets/hingeidj958bdhp2.svg", alt: "Hinge", h: 22 },
+  { name: "Northbeam" },
+  { name: "Vertex" },
+  { name: "Halcyon" },
+  { name: "Meridian" },
+  { name: "Orbit" },
 ];
 
 // "Save time" grid — first row (4 up), second row (3 up)
 const useCasesTop = [
-  { label: "Product", body: "Build from what customers actually ask for, ranked by reach and revenue.", bg: "#cdbef5", blob: "#7f52bf" },
-  { label: "Customer experience", body: "Spot friction early and fix root causes—not the same complaint on repeat.", bg: "#d7f0ec", blob: "#319393" },
-  { label: "Support", body: "Stop re-answering the same ticket. Route systemic issues to the team that owns them.", bg: "#dcefe9", blob: "#c8d5bb" },
-  { label: "Voice of customer", body: "Be the reason your company consistently beats retention and NPS goals.", bg: "#cbd8f5", blob: "#659cff" },
+  { label: "Operations", body: "Automate the manual steps between systems—so work moves without anyone babysitting it.", bg: "#cdbef5", blob: "#7f52bf" },
+  { label: "Customer support", body: "Resolve the tickets that don't need a human, and hand off the ones that do—with full context attached.", bg: "#d7f0ec", blob: "#319393" },
+  { label: "Engineering", body: "Ship internal tools and agents that plug into your existing stack, not a new one to maintain.", bg: "#dcefe9", blob: "#c8d5bb" },
+  { label: "Data & analytics", body: "Turn scattered reports into an agent that answers the question the moment it's asked.", bg: "#cbd8f5", blob: "#659cff" },
 ];
 const useCasesBottom = [
-  { label: "Sales", body: "Walk into every renewal knowing what the account asked for—and what shipped.", bg: "#cdbef5", blob: "#7f52bf" },
-  { label: "Marketing", body: "Turn closed loops into stories: launches, changelogs, and win-back campaigns.", bg: "#d7f0ec", blob: "#319393" },
-  { label: "Leadership", body: "Watch retention and NPS climb as every loop closes a little faster.", bg: "#cbd8f5", blob: "#659cff" },
+  { label: "Sales", body: "Walk into every call knowing what the account needs—pulled automatically from every prior touchpoint.", bg: "#cdbef5", blob: "#7f52bf" },
+  { label: "Marketing", body: "Turn campaign data into next actions automatically, instead of a monthly report nobody reads.", bg: "#d7f0ec", blob: "#319393" },
+  { label: "Leadership", body: "Watch cost-per-workflow drop and throughput climb as every automation goes live.", bg: "#cbd8f5", blob: "#659cff" },
 ];
 
 const benefits = [
-  { label: "Rebuild trust at scale", body: "Customers see their voice directly shape product decisions—and stick around because of it." },
-  { label: "Recover and retain revenue", body: "Re-engage at-risk accounts, convert detractors, and win back churned users the moment their issue ships." },
-  { label: "Automate the follow-through", body: "Free your team from hours of manual follow-up without losing control of a single message." },
-  { label: "Prove the value", body: "Measure sentiment lift, NPS movement, and revenue recovered from every loop closed." },
+  { label: "Reclaim real hours", body: "Teams get back the hours they spent on repetitive work—hours that go straight back into higher-value output." },
+  { label: "Ship without the guesswork", body: "We scope, build, and test against your real data, so what launches is what your team actually needs." },
+  { label: "Keep control of every output", body: "Every agent runs inside guardrails your team sets and reviews—nothing goes out unchecked." },
+  { label: "Prove the value", body: "Track hours saved, throughput gained, and cost-per-workflow for every agent we ship." },
 ];
 
 const loopSteps = [
-  { title: "Detect resolutions automatically", body: "Track when linked Jira or Linear issues are marked complete." },
-  { title: "Aggregate context instantly", body: "Pull every related ticket, conversation, and account signal into one unified view." },
-  { title: "Review & approve with control", body: "Your team approves every outbound message before it reaches a customer." },
-  { title: "Deliver at scale", body: "Send personalized close-the-loop updates across every channel at once." },
-  { title: "Measure the impact", body: "Quantify sentiment lift, NPS movement, and revenue recovered from every loop closed." },
+  { title: "Audit your workflows", body: "Map the manual steps, systems, and data behind the process worth automating." },
+  { title: "Scope the agent", body: "Define exactly what it does, what it touches, and where a human stays in the loop." },
+  { title: "Build against your stack", body: "Engineer the agent directly against your APIs, data, and edge cases—not a generic template." },
+  { title: "Test before it ships", body: "Run it against real scenarios and your team's review before it ever reaches a live workflow." },
+  { title: "Monitor and extend", body: "Track performance after launch and extend the agent as your workflows evolve." },
 ];
 
 const footerCols = [
   {
     title: "",
     links: [
-      "Product",
+      "Services",
       "Pricing",
-      "Customers",
+      "Case Studies",
       "About us",
       "Privacy Policy",
       "Terms of Service",
@@ -58,21 +58,21 @@ const footerCols = [
 ];
 ---
 
-<Layout title="Loopwise — See the customer behind every signal">
+<Layout title="Cortexa — Custom AI Agents Built for Your Business">
   <!-- ============ NAV ============ -->
   <header class="nav-wrap">
     <nav class="nav container">
-      <a href="/" class="wordmark" aria-label="Loopwise home">
+      <a href="/" class="wordmark" aria-label="Cortexa home">
         <span class="wordmark__mark" aria-hidden="true"></span>
-        Loopwise
+        Cortexa
       </a>
       <ul class="nav-links">
-        <li><a href="/product" aria-current="page">Product</a></li>
-        <li><a href="/solutions">Solutions</a></li>
+        <li><a href="/product" aria-current="page">Services</a></li>
+        <li><a href="/solutions">Industries</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="#" class="nav-login">Log in</a>
-        <a href="#" class="nav-demo">Book a demo</a>
+        <a href="#" class="nav-login">Client Login</a>
+        <a href="#" class="nav-demo">Book a Consultation</a>
       </div>
     </nav>
   </header>
@@ -95,16 +95,16 @@ const footerCols = [
         <div class="phero__text reveal-stagger">
           <span class="eyebrow eyebrow--mark">
             <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
-            Signal Engine
+            Agent Studio
           </span>
-          <h1 class="phero__title">See the customer<br />behind every signal</h1>
+          <h1 class="phero__title">Custom AI agents,<br />built for your business</h1>
           <p class="phero__desc">
-            A ticket on its own is just noise. Loopwise ties every signal to
-            the account behind it—who they are, what they pay, what they’ve
-            asked for before—so each piece of feedback arrives ready to act on.
+            A generic chatbot is just noise. Cortexa builds agents tied to
+            the systems behind them—your CRM, your data, your workflows—so
+            every agent arrives ready to do real work.
           </p>
           <div class="phero__cta">
-            <MagneticArrowCta label="Book a demo" />
+            <MagneticArrowCta label="Book a Consultation" />
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ const footerCols = [
         {heroLogos.map((l) => (
           <div class="lstrip__cell glow-follow" data-glow-rest="center">
             <span class="glow-follow__blob" aria-hidden="true"></span>
-            <img class="lstrip__logo" src={l.src} alt={l.alt} style={`height:${l.h}px`} />
+            <span class="lstrip__logo lstrip__wordmark">{l.name}</span>
           </div>
         ))}
       </div>
@@ -127,15 +127,15 @@ const footerCols = [
       <div class="container splits__inner reveal-stagger">
         <PanelSplit
           eyebrow="Connect"
-          title="Connect every signal to business reality"
-          body="Feedback never stands alone. Loopwise links each signal to the users, accounts, and revenue behind it—so a spike in complaints reads as three enterprise renewals at risk, not just a bigger number on a chart."
+          title="Connect every agent to business reality"
+          body="An agent working in isolation is just a chatbot. Cortexa links each agent to the systems, data, and workflows behind it—so a support agent doesn't just answer a question, it opens the ticket, checks the account, and knows what's been asked before."
           panelBg="#cee2f2"
           panelBlob="#659cff"
         />
         <PanelSplit
           eyebrow="Model"
-          title="A model that mirrors how your business works"
-          body="Define the things that matter to you—agents, stores, personas, campaigns—and Loopwise organizes every signal around them, getting sharper with each piece of feedback it sees."
+          title="A system that mirrors how your business works"
+          body="Define what matters to you—accounts, workflows, playbooks, teams—and Cortexa architects every agent around them, getting sharper with every workflow it's given."
           reverse={true}
           panelBg="#eddfff"
           panelBlob="#7f52bf"
@@ -154,11 +154,11 @@ const footerCols = [
             </svg>
             Use cases
           </span>
-          <h2 class="usecases__title">Stop hand-sorting feedback.<br />Start acting on it.</h2>
+          <h2 class="usecases__title">Stop bolting AI onto old workflows.<br />Start engineering it in.</h2>
           <p class="usecases__sub">
-            Loopwise tags every signal against your own taxonomy and routes it
-            to the team that owns it—so triage disappears and every team works
-            from the customer's actual words.
+            Cortexa builds against your own systems and data model—so there's
+            no retraining a generic tool, and every team works from agents
+            built for their actual job.
           </p>
         </div>
 
@@ -187,23 +187,24 @@ const footerCols = [
           Customer story
         </span>
         <blockquote class="cstory__quote">
-          “Loopwise gives every team a live view of what customers are asking
-          for and whose job it is to answer. Prioritization went from a monthly
-          argument to a five-minute look at the board.”
+          “Cortexa didn't hand us a deck—they shipped an agent that
+          reconciles our inventory feed every night without anyone touching
+          it. Ops went from firefighting discrepancies to reviewing an
+          already-clean report.”
         </blockquote>
         <div class="cstory__foot">
           <div class="cstory__author">
-            <img class="cstory__avatar" src="/assets/rectangle-240664309.png" alt="Jesse Walker" />
+            <img class="cstory__avatar" src="/assets/rectangle-240664309.png" alt="Priya Anand" />
             <div class="cstory__meta">
-              <span class="cstory__name">Jesse Walker</span>
-              <span class="cstory__role">Head of Insights &amp; User Advocacy,</span>
+              <span class="cstory__name">Priya Anand</span>
+              <span class="cstory__role">VP of Operations,</span>
             </div>
           </div>
-          <span class="cstory__company">Apollo.io</span>
+          <span class="cstory__company">Northbeam Retail</span>
         </div>
         <div class="cstory__cta">
           <PrimaryButton
-            label="See how Apollo.io closes the loop with Loopwise"
+            label="See how Northbeam Retail ships with Cortexa"
             bg="#ffffff"
             glow="rgba(206, 226, 242, 0.9)"
           />
@@ -220,12 +221,12 @@ const footerCols = [
               <path d="M2 4.5A1.5 1.5 0 013.5 3h15A1.5 1.5 0 0120 4.5v1a1.5 1.5 0 000 3v2A1.5 1.5 0 0118.5 12h-15A1.5 1.5 0 012 10.5v-2a1.5 1.5 0 000-3v-1z" stroke="currentColor" stroke-width="1.2"/>
               <path d="M8.5 6.3l5 3.4M13.5 6.3l-5 3.4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
             </svg>
-            Why Loopwise
+            Why Cortexa
           </span>
-          <h2 class="benefits__title">What a closed loop earns you</h2>
+          <h2 class="benefits__title">What a shipped agent earns you</h2>
           <p class="benefits__sub">
-            Every loop you close pays out twice—customers who feel heard, and
-            a team that stops guessing what to build next.
+            Every agent you ship pays out twice—hours back for your team, and
+            a system that keeps compounding.
           </p>
         </div>
 
@@ -243,16 +244,16 @@ const footerCols = [
       </div>
     </section>
 
-    <!-- ============ HOW CLOSE THE LOOP WORKS ============ -->
+    <!-- ============ HOW CORTEXA BUILDS ============ -->
     <section class="loop">
       <div class="loop__bg" aria-hidden="true"></div>
       <div class="container">
         <div class="loop__head reveal">
-          <h2 class="loop__title">How Loopwise closes the loop</h2>
+          <h2 class="loop__title">How Cortexa builds an agent</h2>
           <p class="loop__sub">
-            From detecting a fix to telling every customer who asked for it,
-            Loopwise handles the follow-through—and your team stays in control
-            of every message that goes out.
+            From first workshop to a system your team owns, Cortexa handles
+            the engineering—and you stay in control of every decision along
+            the way.
           </p>
         </div>
 
@@ -284,15 +285,15 @@ const footerCols = [
       <div class="container splits__inner reveal-stagger">
         <PanelSplit
           eyebrow="Route"
-          title="Every insight lands with its owner"
-          body="Loopwise learns your team structure and sends each theme to the person who can act on it—no forwarded threads, no lost context, no wondering whose job it is."
+          title="Every task lands with the right system"
+          body="Cortexa learns your team's tools and routes every agent output to the right place—no manual handoffs, no context lost between systems, no wondering whose job it is."
           panelBg="#cee2f2"
           panelBlob="#659cff"
         />
         <PanelSplit
-          eyebrow="Close"
-          title="Tell customers the moment you ship"
-          body="When a linked issue resolves, Loopwise drafts the follow-up, you approve it, and every customer who asked hears the news—at scale, in your voice."
+          eyebrow="Deploy"
+          title="From workshop to production, on your timeline"
+          body="When an agent is ready, Cortexa deploys it into your stack, trains your team on it, and stays on to monitor how it performs in the real world."
           reverse={true}
           panelBg="#eddfff"
           panelBlob="#7f52bf"
@@ -306,12 +307,12 @@ const footerCols = [
       <div class="cta__blob cta__blob--2" aria-hidden="true"></div>
       <div class="cta__noise" aria-hidden="true"></div>
       <div class="container cta__inner reveal-stagger">
-        <h2 class="cta__title">Close your first loop this week.</h2>
+        <h2 class="cta__title">Ship your first agent this month.</h2>
         <p class="cta__sub">
-          Teams at Perplexity, Notion, and Linear close the loop on customer
-          feedback with Loopwise.
+          Teams across retail, healthcare, and logistics build production AI
+          with Cortexa.
         </p>
-        <div class="cta__btn"><MagneticArrowCta label="Book a demo" /></div>
+        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" /></div>
       </div>
     </section>
   </main>
@@ -321,7 +322,7 @@ const footerCols = [
     <div class="container footer__inner reveal">
       <a href="/" class="wordmark footer__brand">
         <span class="wordmark__mark" aria-hidden="true"></span>
-        Loopwise
+        Cortexa
       </a>
       <div class="footer__cols">
         {footerCols.map((col) => (
@@ -526,6 +527,14 @@ const footerCols = [
   .lstrip__cell:hover .glow-follow__blob { opacity: 1; }
   .lstrip__logo { position: relative; z-index: 1; opacity: 0.55; max-width: 100%; transition: opacity 0.2s ease; }
   .lstrip__cell:hover .lstrip__logo { opacity: 0.85; }
+  .lstrip__wordmark {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    white-space: nowrap;
+  }
 
   /* ---------- PANEL SPLITS ---------- */
   .splits { padding: 112px 0; }
@@ -647,7 +656,7 @@ const footerCols = [
   .benefit__label { display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink); }
   .benefit__body { font-size: 15px; line-height: 1.45; color: rgba(12, 14, 28, 0.6); }
 
-  /* ---------- HOW CLOSE THE LOOP WORKS ---------- */
+  /* ---------- HOW CORTEXA BUILDS ---------- */
   .loop {
     position: relative;
     overflow: hidden;

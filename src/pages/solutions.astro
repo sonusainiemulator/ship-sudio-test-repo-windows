@@ -9,9 +9,9 @@ const footerCols = [
   {
     title: "",
     links: [
-      "Product",
+      "Services",
       "Pricing",
-      "Customers",
+      "Case Studies",
       "About us",
       "Privacy Policy",
       "Terms of Service",
@@ -20,21 +20,21 @@ const footerCols = [
 ];
 ---
 
-<Layout title="Loopwise — Turn what customers say into revenue">
+<Layout title="Cortexa — AI Systems That Turn Operations Into Revenue">
   <!-- ============ NAV ============ -->
   <header class="nav-wrap">
     <nav class="nav container">
-      <a href="/" class="wordmark" aria-label="Loopwise home">
+      <a href="/" class="wordmark" aria-label="Cortexa home">
         <span class="wordmark__mark" aria-hidden="true"></span>
-        Loopwise
+        Cortexa
       </a>
       <ul class="nav-links">
-        <li><a href="/product">Product</a></li>
-        <li><a href="/solutions" aria-current="page">Solutions</a></li>
+        <li><a href="/product">Services</a></li>
+        <li><a href="/solutions" aria-current="page">Industries</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="#" class="nav-login">Log in</a>
-        <a href="#" class="nav-demo">Book a demo</a>
+        <a href="#" class="nav-login">Client Login</a>
+        <a href="#" class="nav-demo">Book a Consultation</a>
       </div>
     </nav>
   </header>
@@ -57,17 +57,17 @@ const footerCols = [
         <div class="shero__text reveal-stagger">
           <span class="eyebrow eyebrow--mark">
             <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
-            Solutions
+            Industries
           </span>
-          <h1 class="shero__title">Turn what customers<br />say into revenue.</h1>
+          <h1 class="shero__title">Turn your operations<br />into a revenue engine.</h1>
           <p class="shero__desc">
-            Analytics tells you what customers did. Loopwise tells you why—
-            unifying reviews, support tickets, social mentions, and even return
-            reasons into one stream your teams can actually act on.
+            Dashboards tell you what happened. Cortexa builds the agents that
+            act on it—unifying your support tickets, sales data, and
+            operations into systems your teams can actually run on.
           </p>
           <div class="shero__cta">
             <PrimaryButton
-              label="Book a demo"
+              label="Book a Consultation"
               bg="#0c0e1c"
               color="#ffffff"
               glow="rgba(206, 226, 242, 0.5)"
@@ -82,23 +82,23 @@ const footerCols = [
       <div class="container sblocks__inner reveal-stagger">
         <SolutionBlock
           eyebrow="Detect"
-          title="Catch issues while they're still small"
-          body="Loopwise watches every channel around the clock and flags a theme while it's still fixable—when it affects dozens of customers, not thousands, and long before it becomes churn."
+          title="Catch problems while they're still small"
+          body="Cortexa's agents watch your operations around the clock and flag issues while they're still fixable—when they affect a handful of orders, not thousands, and long before they become a churn event."
           panelBg="#cee2f2"
           panelBlob="#659cff"
         />
         <SolutionBlock
           eyebrow="Unify"
-          title="See the whole customer journey"
-          body="Reviews, tickets, social tags, return reasons—connected into one story from discovery to purchase (or abandonment), with the accounts and revenue behind every signal."
+          title="See the whole operation in one system"
+          body="Support tickets, sales data, inventory, and ops logs—connected into one story from request to resolution, with the context and cost behind every event."
           reverse={true}
           panelBg="#c5eeef"
           panelBlob="#319393"
         />
         <SolutionBlock
-          eyebrow="Close"
-          title="Close the loop on every channel"
-          body="When you ship a fix, Loopwise reopens the conversation—replying to the review, updating the ticket, and telling every customer who asked that they were heard."
+          eyebrow="Deploy"
+          title="Put AI to work on every channel"
+          body="When we ship an agent, it goes where the work already happens—your inbox, your CRM, your internal tools—so adoption doesn't depend on anyone changing habits."
           panelBg="#e2e6f2"
           panelBlob="#8fa8e6"
         />
@@ -111,12 +111,12 @@ const footerCols = [
       <div class="cta__blob cta__blob--2" aria-hidden="true"></div>
       <div class="cta__noise" aria-hidden="true"></div>
       <div class="container cta__inner reveal-stagger">
-        <h2 class="cta__title">Close your first loop this week.</h2>
+        <h2 class="cta__title">Ship your first agent this month.</h2>
         <p class="cta__sub">
-          Teams at Perplexity, Notion, and Linear close the loop on customer
-          feedback with Loopwise.
+          Teams across retail, healthcare, and logistics build production AI
+          with Cortexa.
         </p>
-        <div class="cta__btn"><MagneticArrowCta label="Book a demo" /></div>
+        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" /></div>
       </div>
     </section>
   </main>
@@ -126,7 +126,7 @@ const footerCols = [
     <div class="container footer__inner reveal">
       <a href="/" class="wordmark footer__brand">
         <span class="wordmark__mark" aria-hidden="true"></span>
-        Loopwise
+        Cortexa
       </a>
       <div class="footer__cols">
         {footerCols.map((col) => (
