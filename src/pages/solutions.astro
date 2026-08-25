@@ -20,17 +20,20 @@ const footerCols = [
 ];
 ---
 
-<Layout title="Cortexa — AI Systems That Turn Operations Into Revenue">
+<Layout title="Rakebig — Perfex CRM & SaaS Solutions">
   <!-- ============ NAV ============ -->
   <header class="nav-wrap">
     <nav class="nav container">
-      <a href="/" class="wordmark" aria-label="Cortexa home">
-        <span class="wordmark__mark" aria-hidden="true"></span>
-        Cortexa
+      <a href="/" class="wordmark" aria-label="Rakebig home">
+        <svg class="wordmark__mark" viewBox="0 0 22 22" aria-hidden="true">
+          <rect width="22" height="22" rx="6" fill="currentColor" />
+          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
+        </svg>
+        Rakebig
       </a>
       <ul class="nav-links">
         <li><a href="/product">Services</a></li>
-        <li><a href="/solutions" aria-current="page">Industries</a></li>
+        <li><a href="/solutions" aria-current="page">Solutions</a></li>
       </ul>
       <div class="nav-actions">
         <a href="#" class="nav-login">Client Login</a>
@@ -57,13 +60,14 @@ const footerCols = [
         <div class="shero__text reveal-stagger">
           <span class="eyebrow eyebrow--mark">
             <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
-            Industries
+            Solutions
           </span>
-          <h1 class="shero__title">Turn your operations<br />into a revenue engine.</h1>
+          <h1 class="shero__title">Turn Perfex CRM into<br />your growth engine.</h1>
           <p class="shero__desc">
-            Dashboards tell you what happened. Cortexa builds the agents that
-            act on it—unifying your support tickets, sales data, and
-            operations into systems your teams can actually run on.
+            Dashboards tell you what happened. Rakebig builds the CRM and
+            SaaS systems that act on it—unifying your sales, support
+            tickets, and payments into one platform your team can actually
+            run on.
           </p>
           <div class="shero__cta">
             <PrimaryButton
@@ -81,24 +85,24 @@ const footerCols = [
     <section class="sblocks">
       <div class="container sblocks__inner reveal-stagger">
         <SolutionBlock
-          eyebrow="Detect"
-          title="Catch problems while they're still small"
-          body="Cortexa's agents watch your operations around the clock and flag issues while they're still fixable—when they affect a handful of orders, not thousands, and long before they become a churn event."
+          eyebrow="Customize"
+          title="Perfex CRM configured for how you sell"
+          body="Rakebig customizes Perfex CRM with modules built for your process—workflow automation, staff payroll and commissions, and multi-tenant SaaS setup for agencies reselling under their own brand."
           panelBg="#cee2f2"
           panelBlob="#659cff"
         />
         <SolutionBlock
-          eyebrow="Unify"
-          title="See the whole operation in one system"
-          body="Support tickets, sales data, inventory, and ops logs—connected into one story from request to resolution, with the context and cost behind every event."
+          eyebrow="Connect"
+          title="Every channel unified in one platform"
+          body="WhatsApp, IP telephony, and payment gateways—connected into one CRM so a lead, a call, and a payment all show up on the same timeline, not three different tools."
           reverse={true}
           panelBg="#c5eeef"
           panelBlob="#319393"
         />
         <SolutionBlock
           eyebrow="Deploy"
-          title="Put AI to work on every channel"
-          body="When we ship an agent, it goes where the work already happens—your inbox, your CRM, your internal tools—so adoption doesn't depend on anyone changing habits."
+          title="Deployed on infrastructure that doesn't fall over"
+          body="When your CRM or SaaS platform ships, Rakebig sets up the servers, domains, SSL, and CI/CD pipelines behind it—then keeps monitoring so it stays online."
           panelBg="#e2e6f2"
           panelBlob="#8fa8e6"
         />
@@ -111,10 +115,10 @@ const footerCols = [
       <div class="cta__blob cta__blob--2" aria-hidden="true"></div>
       <div class="cta__noise" aria-hidden="true"></div>
       <div class="container cta__inner reveal-stagger">
-        <h2 class="cta__title">Ship your first agent this month.</h2>
+        <h2 class="cta__title">Get your systems built right this quarter.</h2>
         <p class="cta__sub">
-          Teams across retail, healthcare, and logistics build production AI
-          with Cortexa.
+          Growing companies run their CRM, SaaS, and internal tools on
+          Rakebig.
         </p>
         <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" /></div>
       </div>
@@ -125,8 +129,11 @@ const footerCols = [
   <footer class="footer">
     <div class="container footer__inner reveal">
       <a href="/" class="wordmark footer__brand">
-        <span class="wordmark__mark" aria-hidden="true"></span>
-        Cortexa
+        <svg class="wordmark__mark" viewBox="0 0 22 22" aria-hidden="true">
+          <rect width="22" height="22" rx="6" fill="currentColor" />
+          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
+        </svg>
+        Rakebig
       </a>
       <div class="footer__cols">
         {footerCols.map((col) => (
@@ -173,9 +180,8 @@ const footerCols = [
   .wordmark__mark {
     width: 22px;
     height: 22px;
-    border-radius: 6px;
-    background: var(--color-ink);
     display: inline-block;
+    flex-shrink: 0;
   }
   .nav-links { display: flex; gap: 22px; list-style: none; }
   .nav-links a {

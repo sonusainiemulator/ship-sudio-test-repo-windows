@@ -28,7 +28,7 @@ const testimonials = [
     role: "VP of Operations",
     avatar: "/assets/rectangle-240664309.png",
     quote:
-      "Cortexa didn't hand us a deck—they shipped an agent that reconciles our inventory feed every night without anyone touching it. Ops went from firefighting discrepancies to reviewing an already-clean report.",
+      "Rakebig didn't hand us a deck—they customized our Perfex CRM to match our actual order process and wired WhatsApp straight into it. Ops stopped juggling four tools and started working from one screen.",
   },
   {
     company: "Halcyon Health",
@@ -36,7 +36,7 @@ const testimonials = [
     role: "Chief Technology Officer",
     avatar: "https://randomuser.me/api/portraits/men/45.jpg",
     quote:
-      "We'd tried two other vendors who could only demo. Cortexa built against our actual EHR integration and had a working agent in production inside six weeks.",
+      "We'd tried two agencies who could only theme the CRM. Rakebig built us custom Perfex modules against our real patient workflow and had it live in six weeks.",
   },
   {
     company: "Vertex Logistics",
@@ -44,7 +44,7 @@ const testimonials = [
     role: "Director of Automation",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg",
     quote:
-      "The dispatch agent Cortexa built now handles routing decisions our team used to spend two hours a day on. It just runs, and it's right more often than we were.",
+      "The dispatch dashboard Rakebig built now handles routing decisions our team used to manage in spreadsheets. It's connected to our CRM, our calling system, and it just works.",
   },
   {
     company: "Meridian Bank",
@@ -52,7 +52,7 @@ const testimonials = [
     role: "Head of Digital Transformation",
     avatar: "https://randomuser.me/api/portraits/men/33.jpg",
     quote:
-      "Compliance review was our biggest blocker for AI. Cortexa built the guardrails in from day one, so the agent shipped with sign-off instead of fighting for it after the fact.",
+      "Compliance review was our biggest blocker for any new system. Rakebig built the audit trail and permissions in from day one, so it shipped with sign-off instead of fighting for it after.",
   },
   {
     company: "Orbit Media",
@@ -60,7 +60,7 @@ const testimonials = [
     role: "VP of Product",
     avatar: "https://randomuser.me/api/portraits/men/76.jpg",
     quote:
-      "Every other agency wanted to sell us a platform. Cortexa just built the thing—an agent that drafts our campaign reports before the team even asks for them.",
+      "Every other vendor wanted to sell us a platform. Rakebig just built the thing—a multi-tenant SaaS product with billing, tenant management, and a dashboard our clients actually use.",
   },
   {
     company: "Summit Manufacturing",
@@ -68,7 +68,7 @@ const testimonials = [
     role: "Chief Operating Officer",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg",
     quote:
-      "Downtime used to mean scrolling through logs by hand. Now the agent flags the anomaly, pulls the maintenance history, and pages the right technician automatically.",
+      "Server issues used to mean a 2am phone call to whoever built the site. Now Rakebig's DevOps team catches it, fixes it, and we hear about it after it's already resolved.",
   },
 ];
 
@@ -83,17 +83,20 @@ const baseLogos = [
 const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
 ---
 
-<Layout title="Cortexa — AI Agency for Systems That Actually Ship">
+<Layout title="Rakebig — IT Services, Consulting & Perfex CRM SaaS Solutions">
   <!-- ============ NAV ============ -->
   <header class="nav-wrap">
     <nav class="nav container">
-      <a href="#" class="wordmark" aria-label="Cortexa home">
-        <span class="wordmark__mark" aria-hidden="true"></span>
-        Cortexa
+      <a href="#" class="wordmark" aria-label="Rakebig home">
+        <svg class="wordmark__mark" viewBox="0 0 22 22" aria-hidden="true">
+          <rect width="22" height="22" rx="6" fill="currentColor" />
+          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
+        </svg>
+        Rakebig
       </a>
       <ul class="nav-links">
         <li><a href="/product">Services</a></li>
-        <li><a href="/solutions">Industries</a></li>
+        <li><a href="/solutions">Solutions</a></li>
       </ul>
       <div class="nav-actions">
         <a href="#" class="nav-login">Client Login</a>
@@ -115,19 +118,20 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
       <div class="container hero-inner reveal-stagger">
         <span class="hero-badge">
           <span class="hero-badge__shine" aria-hidden="true"></span>
-          <span class="hero-badge__text">New — Cortexa Agent Studio</span>
+          <span class="hero-badge__text">New — Rakebig SaaS Studio</span>
         </span>
 
         <h1 class="hero-title text-left">
-          Stop experimenting with AI.<br />
-          Start shipping outcomes.
+          Stop working around software.<br />
+          Start running systems built for you.
         </h1>
 
         <div class="hero-lower">
           <p class="hero-desc">
-            Cortexa designs, builds, and deploys custom AI agents and
-            automation for ambitious teams—so you move from pilot to
-            production and see real ROI in weeks, not quarters.
+            Rakebig designs, builds, and supports custom software, Perfex CRM,
+            and SaaS platforms for growing businesses—so your team runs on
+            systems built for how you actually work, not a template you have
+            to work around.
           </p>
           <div class="hero-cta">
             <PrimaryButton
@@ -166,17 +170,17 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
     <section class="platform">
       <div class="container">
         <h2 class="platform__title reveal">
-          The AI delivery system your whole company runs on
+          The IT partner your whole company runs on
         </h2>
 
         <div class="feature-rows reveal-stagger">
           <FeatureRow
-            eyebrow="AUDIT"
-            title="Every workflow, mapped and scored"
-            subtitle="We map your operations end-to-end and score each one for AI automation potential."
-            description="Cortexa runs a structured audit across your tools, teams, and data—surfacing the highest-leverage places to deploy AI, ranked by effort and impact, so you know exactly where to start."
+            eyebrow="CONSULT"
+            title="Technical consulting that starts with your workflow"
+            subtitle="We map your processes and systems before writing a line of code."
+            description="Rakebig audits your current stack, workflows, and bottlenecks—then designs a technical roadmap for custom software, automation, or SaaS that actually fits how your team works."
             statValue="2 weeks"
-            statLabel="from kickoff to a scored roadmap"
+            statLabel="from kickoff to a scoped roadmap"
             logo="Halcyon"
             panelBg="#eddfff"
             panelBlob="#659cff"
@@ -185,21 +189,21 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
           />
           <FeatureRow
             eyebrow="BUILD"
-            title="Ship agents that work in production"
-            subtitle="Custom-built AI agents engineered for your stack, not a generic template."
-            description="Our engineers embed with your team to design, build, and harden agents against your real data and edge cases—so what ships to production actually holds up under load."
+            title="Perfex CRM and custom software, built to fit"
+            subtitle="From CRM customization to full SaaS platforms, engineered for your stack."
+            description="Our engineers build and customize Perfex CRM, Laravel and Vue applications, and multi-tenant SaaS platforms against your real data and workflows—not a generic template forced to fit."
             statValue="3x faster"
-            statLabel="time-to-production vs. in-house builds"
+            statLabel="delivery vs. generic off-the-shelf setups"
             logo="Vertex"
             panelBg="#cee2f2"
             panelBlob="#659cff"
             reverse={true}
           />
           <FeatureRow
-            eyebrow="SCALE"
-            title="Scale without breaking a single workflow"
-            subtitle="We monitor, retrain, and extend every agent we ship."
-            description="Cortexa stays on as your AI systems team—watching performance, catching drift, and extending each agent to new workflows as your business grows."
+            eyebrow="SUPPORT"
+            title="DevOps, hosting, and support that don't disappear"
+            subtitle="We stay on to deploy, monitor, and extend what we build."
+            description="Rakebig sets up your CI/CD pipelines, cloud infrastructure, domains, and SSL—then stays on as your DevOps and support partner as your systems grow."
             panelBg="#c5eeef"
             panelBlob="#c8d5bb"
           />
@@ -212,38 +216,39 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
       <div class="story-inner">
         <span class="eyebrow story__eyebrow reveal">
           <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
-          why we started cortexa
+          why we started rakebig
         </span>
-        <h2 class="story__title reveal">Most AI pilots die before they reach production.</h2>
+        <h2 class="story__title reveal">Most businesses run on software that almost fits.</h2>
         <p class="story__lead">
-          Companies have never had more AI tools—and never shipped less real
-          automation. Proofs of concept pile up in decks. Pilots stall in
-          Slack threads. The one agent that could save a team ten hours a
-          week sits in a sandbox nobody ever promoted to production.
+          Off-the-shelf CRMs get customized until they break. SaaS tools pile
+          up until nobody remembers which one owns which data. The workflow
+          every team actually follows lives in someone's head, not in any
+          system anyone paid for.
         </p>
         <div class="story-reveal">
           <p>
-            The problem was never the technology. It's the distance between a
-            demo that works once and a system that works every time—the gap
-            that never quite closes.
+            The problem was never a shortage of software. It's the distance
+            between a tool that's 80% right and a system that's actually
+            yours—the gap teams quietly work around every day.
           </p>
           <p>
-            Every workflow carries the shape of an agent inside it. Left
-            alone it's just manual work. Engineered properly, it becomes
-            leverage your team keeps for good.
+            Every business runs a real process underneath the mess. Left
+            unbuilt, it's tribal knowledge. Engineered properly, it's a
+            system the whole team can rely on.
           </p>
           <p>
-            The teams pulling ahead treat AI as infrastructure, not a side
-            project. They scope narrow, ship fast, and measure what changed—
-            not what's theoretically possible.
+            The businesses pulling ahead don't wait for a platform to catch
+            up to them. They get Perfex CRM configured for how they sell,
+            their SaaS built for how they bill, and their integrations wired
+            for how they actually communicate.
           </p>
           <p>
-            That's the shift Cortexa is built for—from AI experiments to AI
-            systems, from slide decks to shipped software.
+            That's the shift Rakebig is built for—from software you work
+            around to software you work on.
           </p>
           <p>
-            When an agent quietly saves a team real hours every week, nobody
-            has to be convinced AI was worth it. They already feel it.
+            When a system finally fits, nobody has to be convinced it was
+            worth building. The support tickets just stop.
           </p>
         </div>
       </div>
@@ -254,10 +259,10 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
       <div class="container features2__inner">
         <aside class="features2__nav reveal">
           <p class="features2__lead">
-            Most AI vendors sell you a demo. Cortexa ships you a system.
+            Most IT vendors sell you a template. Rakebig builds you a system.
           </p>
           <ul class="feat-nav">
-            {["Audit", "Build", "Deploy", "Scale"].map((f, i) => (
+            {["Consult", "Build", "Integrate", "Support"].map((f, i) => (
               <li class={`feat-nav__item ${i === 0 ? "is-active" : ""}`}>
                 <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
                 <span>{f}</span>
@@ -268,38 +273,38 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
 
         <div class="features2__cards reveal-stagger">
           <ComparisonCard
-            eyebrow="AUDIT"
-            title="Find the AI, not just the buzzwords"
-            subtitle="Most AI vendors sell you a demo. Cortexa ships you a system."
+            eyebrow="CONSULT"
+            title="Advice grounded in how you actually work"
+            subtitle="Most IT vendors sell you a template. Rakebig builds you a system."
             button={true}
-            traditional="Generic AI recommendations from a slide deck"
-            intelligence="A scored roadmap built from your actual workflows and data"
+            traditional="Generic recommendations from a sales deck"
+            intelligence="A roadmap built from your real workflows, data, and stack"
             panelBlob="#c8d5bb"
             btnGlow="#c8d5bb"
           />
           <ComparisonCard
             eyebrow="BUILD"
-            title="Engineering that understands your stack"
-            subtitle="Most AI vendors sell you a demo. Cortexa ships you a system."
+            title="Perfex CRM that fits, not fights, your process"
+            subtitle="Most IT vendors sell you a template. Rakebig builds you a system."
             button={true}
-            traditional="Off-the-shelf tools bolted onto your existing process"
-            intelligence="Custom agents built against your APIs, data, and edge cases"
+            traditional="Off-the-shelf CRM stretched until it breaks"
+            intelligence="Perfex CRM customized and extended for your actual sales process"
             panelBlob="#cee2f2"
             btnGlow="#cee2f2"
           />
           <ComparisonCard
-            title="From proof-of-concept to production system"
-            traditional="Pilots that impress in a demo, then quietly stall"
-            intelligence="Agents hardened, monitored, and owned all the way to launch"
+            title="From scattered tools to one connected system"
+            traditional="WhatsApp, calling, and payments running in separate silos"
+            intelligence="Every channel wired into one CRM, one dashboard, one source of truth"
             panelBlob="#eddfff"
           />
           <ComparisonCard
-            eyebrow="SCALE"
-            title="Support that doesn't disappear after launch"
-            subtitle="Most AI vendors sell you a demo. Cortexa ships you a system."
+            eyebrow="SUPPORT"
+            title="DevOps that doesn't end at handoff"
+            subtitle="Most IT vendors sell you a template. Rakebig builds you a system."
             button={true}
-            traditional="A handoff document and a wave goodbye"
-            intelligence="An embedded team that monitors, retrains, and extends every agent"
+            traditional="A deployment guide and a wave goodbye"
+            intelligence="An embedded team that manages your CI/CD, hosting, and uptime"
             panelBlob="#c5eeef"
             btnGlow="#c5eeef"
           />
@@ -318,10 +323,10 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
 
       <div class="container stories__inner">
         <div class="stories__head reveal">
-          <h2 class="stories__title">How teams ship real AI with Cortexa</h2>
+          <h2 class="stories__title">How teams run on Rakebig</h2>
           <p class="stories__sub">
-            Operations, engineering, and leadership teams at fast-growing
-            companies build their AI systems on Cortexa.
+            Operations, sales, and engineering teams at growing companies run
+            their CRM, SaaS, and internal tools on Rakebig.
           </p>
           <PrimaryButton label="Explore case studies" bg="#ffffff" glow="rgba(206, 226, 242, 0.9)" />
         </div>
@@ -382,11 +387,11 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
       <div class="container">
         <div class="teams__head reveal">
           <h2 class="teams__title">
-            Give every team its own AI leverage
+            Give every team a system built for how they work
           </h2>
           <p class="teams__sub">
-            From operations to engineering to leadership, everyone gets
-            agents built for how they actually work.
+            From operations to sales to engineering, everyone gets tools that
+            fit the job—not a platform they have to work around.
           </p>
           <PrimaryButton label="See our work" bg="#efeff1" />
         </div>
@@ -394,19 +399,19 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
         <div class="teams__grid reveal-stagger">
           <TeamCard
             label="Operations"
-            body="Cut manual busywork and catch process breakdowns before they cost you a customer."
+            body="Cut the manual busywork between tools and catch process breakdowns before they cost you a customer."
             bg="#cfe1c1"
             blob="#c8d5bb"
           />
           <TeamCard
             label="Engineering"
-            body="Ship agents that plug into your stack—not another dashboard nobody opens."
+            body="Ship on Laravel, Vue, and Flutter with CI/CD already wired—not another stack to maintain solo."
             bg="#cbd8f5"
             blob="#7392ff"
           />
           <TeamCard
             label="Leadership"
-            body="Watch cost-per-workflow drop and throughput climb as every automation goes live."
+            body="Watch support tickets drop and throughput climb as every workflow finally has a home."
             bg="#c3d3f2"
             blob="#4f74e6"
           />
@@ -420,9 +425,10 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
       <div class="cta__blob cta__blob--2" aria-hidden="true"></div>
       <div class="cta__noise" aria-hidden="true"></div>
       <div class="container cta__inner reveal-stagger">
-        <h2 class="cta__title">Ship your first agent this month.</h2>
+        <h2 class="cta__title">Get your systems built right this quarter.</h2>
         <p class="cta__sub">
-          Teams at fast-growing companies build production AI with Cortexa.
+          Growing companies run their CRM, SaaS, and internal tools on
+          Rakebig.
         </p>
         <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" /></div>
       </div>
@@ -433,8 +439,11 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
   <footer class="footer">
     <div class="container footer__inner reveal">
       <a href="#" class="wordmark footer__brand">
-        <span class="wordmark__mark" aria-hidden="true"></span>
-        Cortexa
+        <svg class="wordmark__mark" viewBox="0 0 22 22" aria-hidden="true">
+          <rect width="22" height="22" rx="6" fill="currentColor" />
+          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
+        </svg>
+        Rakebig
       </a>
       <div class="footer__cols">
         {footerCols.map((col) => (
@@ -555,9 +564,8 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
   .wordmark__mark {
     width: 22px;
     height: 22px;
-    border-radius: 6px;
-    background: var(--color-ink);
     display: inline-block;
+    flex-shrink: 0;
   }
   .nav-links {
     display: flex;
