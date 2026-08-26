@@ -1,0 +1,945 @@
+---
+interface Props {
+  current?: "home" | "product" | "solutions" | "contact";
+}
+
+const { current } = Astro.props;
+
+const services = [
+  {
+    title: "Installation & Publishing",
+    body: "End-to-end setup, configuration, and go-live for CRM and business platforms.",
+    href: "/product",
+    icon: "install",
+    tint: "#E8F1FF",
+    color: "#3B82F6",
+  },
+  {
+    title: "Custom Development",
+    body: "Modules, portals, and workflows built around how your team actually works.",
+    href: "/product",
+    icon: "code",
+    tint: "#E8F8EF",
+    color: "#22A06B",
+  },
+  {
+    title: "Maintenance & Support",
+    body: "Ongoing updates, monitoring, and fixes so your systems stay reliable.",
+    href: "/product",
+    icon: "wrench",
+    tint: "#FFF3E8",
+    color: "#E67E22",
+  },
+  {
+    title: "Dedicated Team",
+    body: "A focused engineering squad embedded with your product and ops leads.",
+    href: "/product",
+    icon: "team",
+    tint: "#F3E8FF",
+    color: "#8B5CF6",
+  },
+  {
+    title: "Cloud Deployment",
+    body: "Docker, CI/CD, and cloud infrastructure from staging through production.",
+    href: "/solutions",
+    icon: "cloud",
+    tint: "#E8F1FF",
+    color: "#3B82F6",
+  },
+  {
+    title: "AI Business Automation",
+    body: "Automate handoffs, tickets, and reporting with practical AI workflows.",
+    href: "/solutions",
+    icon: "ai",
+    tint: "#FFE8F3",
+    color: "#E11D8C",
+  },
+];
+
+const products = [
+  { title: "Perfex CRM Solutions", body: "Custom modules, multi-tenant SaaS, and workflow automation.", href: "/solutions" },
+  { title: "Web Applications", body: "Laravel and Vue platforms, portals, and dashboards.", href: "/product" },
+  { title: "Mobile Apps", body: "Flutter apps for Android and iOS tied to your CRM.", href: "/product" },
+];
+
+const company = [
+  { title: "About Us", body: "Who we are and how we build for growing teams.", href: "/" },
+  { title: "Case Studies", body: "Real projects, real outcomes for ops and product teams.", href: "/" },
+  { title: "Careers", body: "Join a team that ships practical systems, not decks.", href: "/" },
+];
+---
+
+<header class="site-header" data-site-header>
+  <nav class="site-header__bar container" aria-label="Primary">
+    <a href="/" class="site-header__logo" aria-label="Rakebig home">
+      <svg class="site-header__mark" viewBox="0 0 28 28" aria-hidden="true">
+        <circle cx="14" cy="14" r="13" fill="none" stroke="#2F6BFF" stroke-width="2.2" />
+        <path d="M9 18.5V9.5h5.2c2.1 0 3.4 1.1 3.4 2.8 0 1.2-.7 2.1-1.8 2.5l2.4 3.7h-2.4l-2.1-3.3H11.2V18.5H9zm2.2-5.2h2.8c.9 0 1.4-.4 1.4-1.1s-.5-1.1-1.4-1.1h-2.8v2.2z" fill="#2F6BFF" />
+      </svg>
+      <span>Rakebig</span>
+    </a>
+
+    <ul class="site-header__links" data-nav-links>
+      <li class="site-header__item" data-menu="products">
+        <button
+          type="button"
+          class="site-header__trigger"
+          aria-expanded="false"
+          aria-controls="menu-products"
+          data-menu-trigger
+        >
+          Products
+          <svg class="site-header__caret" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="site-header__panel site-header__panel--simple" id="menu-products" data-menu-panel hidden>
+          <ul class="site-header__simple-list">
+            {products.map((item) => (
+              <li>
+                <a href={item.href} class="site-header__simple-link">
+                  <strong>{item.title}</strong>
+                  <span>{item.body}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+
+      <li class="site-header__item" data-menu="services">
+        <button
+          type="button"
+          class="site-header__trigger"
+          aria-expanded="false"
+          aria-controls="menu-services"
+          data-menu-trigger
+        >
+          Services
+          <svg class="site-header__caret" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="site-header__panel site-header__panel--mega" id="menu-services" data-menu-panel hidden>
+          <div class="mega">
+            <div class="mega__main">
+              <div class="mega__intro">
+                <div>
+                  <p class="mega__eyebrow">Our Services</p>
+                  <h2 class="mega__title">
+                    Complete Services. <span>Lasting Impact.</span>
+                  </h2>
+                </div>
+                <div class="mega__deco" aria-hidden="true">
+                  <span class="mega__cube"></span>
+                  <span class="mega__bars">
+                    <i></i><i></i><i></i>
+                  </span>
+                  <span class="mega__plus mega__plus--1">+</span>
+                  <span class="mega__plus mega__plus--2">+</span>
+                  <span class="mega__dot"></span>
+                </div>
+              </div>
+
+              <div class="mega__grid">
+                {services.map((service) => (
+                  <a href={service.href} class="mega__card">
+                    <span class="mega__icon" style={`background:${service.tint};color:${service.color}`}>
+                      {service.icon === "install" && (
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M12 3v10m0 0l-3.5-3.5M12 13l3.5-3.5M5 17.5V19a2 2 0 002 2h10a2 2 0 002-2v-1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      )}
+                      {service.icon === "code" && (
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M8 8L4 12l4 4M16 8l4 4-4 4M13 5l-2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      )}
+                      {service.icon === "wrench" && (
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M14.7 6.3a4.5 4.5 0 00-5.9 5.9L3 18l3 3 5.8-5.8a4.5 4.5 0 005.9-5.9l-2.5 2.5-2.5-2.5 2.5-2.5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      )}
+                      {service.icon === "team" && (
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M16 19v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 17.5V19M17.5 11a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM9 11a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      )}
+                      {service.icon === "cloud" && (
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M7.5 18h9a4 4 0 00.4-8 5.5 5.5 0 00-10.7 1.6A3.5 3.5 0 007.5 18z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M12 14v-4m0 0l-2 2m2-2l2 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      )}
+                      {service.icon === "ai" && (
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M12 3l1.2 4.2L17.5 8.5 13.2 9.8 12 14l-1.2-4.2L6.5 8.5l4.3-1.3L12 3zM18.5 14l.7 2.3 2.3.7-2.3.7-.7 2.3-.7-2.3-2.3-.7 2.3-.7.7-2.3zM6 15.5l.5 1.7 1.7.5-1.7.5L6 20l-.5-1.8-1.7-.5 1.7-.5L6 15.5z" fill="currentColor" />
+                        </svg>
+                      )}
+                    </span>
+                    <span class="mega__card-body">
+                      <strong>{service.title}</strong>
+                      <span>{service.body}</span>
+                      <em>Learn More →</em>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <aside class="mega__aside">
+              <div class="mega__talk">
+                <span class="mega__talk-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 12a8 8 0 0116 0v3.5a2.5 2.5 0 01-2.5 2.5H15M4 12v3.5A2.5 2.5 0 006.5 18H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                    <path d="M9 21h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <p class="mega__eyebrow">Let's Talk</p>
+                <h3 class="mega__talk-title">Have a project in mind?</h3>
+                <p class="mega__talk-copy">Our experts will help you find the right fit.</p>
+                <a href="/#contact" class="mega__cta">
+                  Book a Free Consultation
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </div>
+              <ul class="mega__stats">
+                <li>
+                  <span class="mega__stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h16M12 4c2.5 2.8 2.5 13.2 0 16M12 4c-2.5 2.8-2.5 13.2 0 16" stroke="currentColor" stroke-width="1.5"/></svg>
+                  </span>
+                  <div>
+                    <strong>25+</strong>
+                    <span>Countries Served</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="mega__stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M16 19v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 17.5V19M17.5 11a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM9 11a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <div>
+                    <strong>3100+</strong>
+                    <span>Happy Clients</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="mega__stat-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <div>
+                    <strong>99.9%</strong>
+                    <span>Uptime &amp; Reliability</span>
+                  </div>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </li>
+
+      <li class="site-header__item" data-menu="company">
+        <button
+          type="button"
+          class="site-header__trigger"
+          aria-expanded="false"
+          aria-controls="menu-company"
+          data-menu-trigger
+        >
+          Company
+          <svg class="site-header__caret" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="site-header__panel site-header__panel--simple" id="menu-company" data-menu-panel hidden>
+          <ul class="site-header__simple-list">
+            {company.map((item) => (
+              <li>
+                <a href={item.href} class="site-header__simple-link">
+                  <strong>{item.title}</strong>
+                  <span>{item.body}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <a
+          href="/#contact"
+          class="site-header__link"
+          aria-current={current === "contact" ? "page" : undefined}
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+
+    <div class="site-header__actions">
+      <button type="button" class="site-header__icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7" />
+          <path d="M16.2 16.2L20 20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+      </button>
+      <a href="#" class="site-header__icon-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 7h13l-1.4 8.2a2 2 0 01-2 1.6H9.2a2 2 0 01-2-1.7L5.5 4H3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="9.5" cy="20" r="1.2" fill="currentColor" />
+          <circle cx="17" cy="20" r="1.2" fill="currentColor" />
+        </svg>
+      </a>
+      <a href="#" class="site-header__avatar" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="9" r="3.2" stroke="currentColor" stroke-width="1.7" />
+          <path d="M5.5 19c1.4-2.8 3.7-4.2 6.5-4.2S17.6 16.2 19 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+      </a>
+      <button type="button" class="site-header__burger" aria-label="Open menu" aria-expanded="false" data-burger>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function initSiteHeader() {
+    const root = document.querySelector<HTMLElement>("[data-site-header]");
+    if (!root || root.dataset.bound === "1") return;
+    root.dataset.bound = "1";
+
+    const items = Array.from(root.querySelectorAll<HTMLElement>("[data-menu]"));
+    const burger = root.querySelector<HTMLButtonElement>("[data-burger]");
+    const links = root.querySelector<HTMLElement>("[data-nav-links]");
+    const mq = window.matchMedia("(max-width: 960px)");
+    let closeTimer: number | undefined;
+
+    const closeAll = () => {
+      items.forEach((item) => {
+        const trigger = item.querySelector<HTMLButtonElement>("[data-menu-trigger]");
+        const panel = item.querySelector<HTMLElement>("[data-menu-panel]");
+        item.classList.remove("is-open");
+        trigger?.setAttribute("aria-expanded", "false");
+        if (panel) panel.hidden = true;
+      });
+    };
+
+    const openItem = (item: HTMLElement) => {
+      closeAll();
+      const trigger = item.querySelector<HTMLButtonElement>("[data-menu-trigger]");
+      const panel = item.querySelector<HTMLElement>("[data-menu-panel]");
+      item.classList.add("is-open");
+      trigger?.setAttribute("aria-expanded", "true");
+      if (panel) panel.hidden = false;
+    };
+
+    items.forEach((item) => {
+      const trigger = item.querySelector<HTMLButtonElement>("[data-menu-trigger]");
+      trigger?.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (item.classList.contains("is-open")) closeAll();
+        else openItem(item);
+      });
+
+      item.addEventListener("mouseenter", () => {
+        if (mq.matches) return;
+        window.clearTimeout(closeTimer);
+        openItem(item);
+      });
+      item.addEventListener("mouseleave", () => {
+        if (mq.matches) return;
+        closeTimer = window.setTimeout(closeAll, 120);
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAll();
+    });
+    document.addEventListener("click", (e) => {
+      if (!root.contains(e.target as Node)) closeAll();
+    });
+
+    burger?.addEventListener("click", () => {
+      const open = root.classList.toggle("is-mobile-open");
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      if (links) links.toggleAttribute("data-open", open);
+      if (!open) closeAll();
+    });
+  }
+
+  initSiteHeader();
+  document.addEventListener("astro:after-swap", () => {
+    const prev = document.querySelector<HTMLElement>("[data-site-header]");
+    if (prev) delete prev.dataset.bound;
+    initSiteHeader();
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 80;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid #eceff3;
+  }
+
+  .site-header__bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 68px;
+    gap: 20px;
+  }
+
+  .site-header__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #0f172a;
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    flex-shrink: 0;
+  }
+
+  .site-header__mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .site-header__links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-header__item {
+    position: static;
+  }
+
+  .site-header__trigger,
+  .site-header__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    background: transparent;
+    color: #334155;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .site-header__trigger:hover,
+  .site-header__link:hover,
+  .site-header__item.is-open .site-header__trigger {
+    color: #0f172a;
+    background: #f4f7fb;
+  }
+
+  .site-header__caret {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.2s ease;
+  }
+
+  .site-header__item.is-open .site-header__caret {
+    transform: rotate(180deg);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .site-header__icon-btn {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    color: #475569;
+    border-radius: 999px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .site-header__icon-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  .site-header__icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .site-header__avatar {
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #2F6BFF;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 2px;
+  }
+
+  .site-header__avatar svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .site-header__burger {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .site-header__burger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #0f172a;
+    border-radius: 2px;
+  }
+
+  .site-header__panel {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    z-index: 90;
+  }
+
+  .site-header__panel--simple {
+    width: min(360px, calc(100vw - 32px));
+    background: #fff;
+    border: 1px solid #e8edf3;
+    border-radius: 16px;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+    padding: 10px;
+  }
+
+  .site-header__panel--mega {
+    width: min(1080px, calc(100vw - 32px));
+  }
+
+  .site-header__simple-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  .site-header__simple-link {
+    display: grid;
+    gap: 2px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .site-header__simple-link:hover {
+    background: #f5f8fc;
+  }
+
+  .site-header__simple-link strong {
+    font-size: 14px;
+    color: #0f172a;
+  }
+
+  .site-header__simple-link span {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #64748b;
+  }
+
+  .mega {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    background: #fff;
+    border: 1px solid #e8edf3;
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+    overflow: hidden;
+  }
+
+  .mega__main {
+    padding: 28px 28px 24px;
+  }
+
+  .mega__intro {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+
+  .mega__eyebrow {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5B8CFF;
+  }
+
+  .mega__title {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: clamp(22px, 2.2vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+    font-weight: 700;
+    max-width: 16ch;
+  }
+
+  .mega__title span {
+    color: #2F6BFF;
+  }
+
+  .mega__deco {
+    position: relative;
+    width: 110px;
+    height: 78px;
+    flex-shrink: 0;
+  }
+
+  .mega__cube {
+    position: absolute;
+    right: 18px;
+    top: 8px;
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #7BA6FF, #2F6BFF);
+    box-shadow: 8px 10px 0 rgba(47, 107, 255, 0.18);
+    transform: rotate(18deg);
+  }
+
+  .mega__bars {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 36px;
+  }
+
+  .mega__bars i {
+    display: block;
+    width: 8px;
+    border-radius: 3px 3px 0 0;
+    background: #93c5fd;
+  }
+
+  .mega__bars i:nth-child(1) { height: 14px; }
+  .mega__bars i:nth-child(2) { height: 24px; background: #60a5fa; }
+  .mega__bars i:nth-child(3) { height: 34px; background: #3b82f6; }
+
+  .mega__plus {
+    position: absolute;
+    color: #93c5fd;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .mega__plus--1 { top: 0; left: 36px; }
+  .mega__plus--2 { top: 18px; right: 0; color: #bfdbfe; }
+  .mega__dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #60a5fa;
+    right: 8px;
+    bottom: 28px;
+  }
+
+  .mega__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px 10px;
+  }
+
+  .mega__card {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    padding: 14px 12px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+  }
+
+  .mega__card:hover {
+    background: #f5f8fc;
+  }
+
+  .mega__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mega__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .mega__card-body {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .mega__card-body strong {
+    font-size: 15px;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+
+  .mega__card-body span {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #64748b;
+  }
+
+  .mega__card-body em {
+    margin-top: 4px;
+    font-style: normal;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2F6BFF;
+  }
+
+  .mega__aside {
+    background: #f7f9fc;
+    border-left: 1px solid #e8edf3;
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .mega__talk-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #e8f0ff;
+    color: #2F6BFF;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .mega__talk-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mega__talk-title {
+    margin: 0 0 8px;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+  }
+
+  .mega__talk-copy {
+    margin: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #64748b;
+  }
+
+  .mega__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px 16px;
+    border-radius: 10px;
+    background: #2F6BFF;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(47, 107, 255, 0.28);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .mega__cta:hover {
+    background: #1f5aef;
+    transform: translateY(-1px);
+  }
+
+  .mega__cta svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mega__stats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .mega__stats li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .mega__stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e8edf3;
+    color: #2F6BFF;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mega__stat-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mega__stats strong {
+    display: block;
+    font-size: 15px;
+    color: #0f172a;
+  }
+
+  .mega__stats span {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  @media (max-width: 960px) {
+    .site-header__links {
+      display: none;
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: calc(100% + 8px);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 4px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid #e8edf3;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      max-height: min(78vh, 720px);
+      overflow: auto;
+    }
+
+    .site-header__links[data-open] {
+      display: flex;
+    }
+
+    .site-header__burger {
+      display: inline-flex;
+    }
+
+    .site-header__icon-btn[aria-label="Cart"],
+    .site-header__avatar {
+      display: none;
+    }
+
+    .site-header__panel {
+      position: static;
+      transform: none;
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .site-header__panel--mega,
+    .site-header__panel--simple {
+      width: 100%;
+      box-shadow: none;
+    }
+
+    .mega {
+      grid-template-columns: 1fr;
+    }
+
+    .mega__aside {
+      border-left: 0;
+      border-top: 1px solid #e8edf3;
+    }
+
+    .mega__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mega__deco {
+      display: none;
+    }
+
+    .mega__title {
+      max-width: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header__caret,
+    .mega__cta,
+    .site-header__trigger,
+    .site-header__link,
+    .site-header__icon-btn {
+      transition: none;
+    }
+  }
+</style>

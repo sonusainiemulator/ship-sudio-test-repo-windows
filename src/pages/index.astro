@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import ProductPanel from "../components/ProductPanel.astro";
 import FeatureRow from "../components/FeatureRow.astro";
 import TeamCard from "../components/TeamCard.astro";
@@ -84,26 +85,7 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
 ---
 
 <Layout title="Rakebig — IT Services, Consulting & Perfex CRM SaaS Solutions">
-  <!-- ============ NAV ============ -->
-  <header class="nav-wrap">
-    <nav class="nav container">
-      <a href="#" class="wordmark" aria-label="Rakebig home">
-        <svg class="wordmark__mark" viewBox="0 0 22 22" aria-hidden="true">
-          <rect width="22" height="22" rx="6" fill="currentColor" />
-          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
-        </svg>
-        Rakebig
-      </a>
-      <ul class="nav-links">
-        <li><a href="/product">Services</a></li>
-        <li><a href="/solutions">Solutions</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="#" class="nav-login">Client Login</a>
-        <a href="#" class="nav-demo">Book a Consultation</a>
-      </div>
-    </nav>
-  </header>
+  <SiteHeader current="home" />
 
   <main>
     <!-- ============ HERO ============ -->
@@ -534,71 +516,6 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
 </script>
 
 <style>
-  /* ---------- NAV ---------- */
-  .nav-wrap {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-line);
-  }
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
-    gap: 24px;
-  }
-  .wordmark {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--color-ink);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-  }
-  .wordmark__mark {
-    width: 22px;
-    height: 22px;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-  .nav-links {
-    display: flex;
-    gap: 22px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-size: 14px;
-    color: rgba(12, 14, 28, 0.6);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  .nav-links a:hover { color: var(--color-ink); }
-  .nav-actions { display: flex; align-items: center; gap: 10px; }
-  .nav-login {
-    font-size: 14px;
-    color: rgba(12, 14, 28, 0.6);
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-  }
-  .nav-login:hover { background: var(--color-panel); }
-  .nav-demo {
-    font-size: 14px;
-    color: var(--color-ink);
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    background: var(--color-panel);
-    border: 1px solid #fff;
-  }
-  .nav-demo:hover { background: #e6e6ea; }
-
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
@@ -1221,7 +1138,6 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
   }
 
   @media (max-width: 720px) {
-    .nav-links { display: none; }
     .trusted__grid { grid-template-columns: repeat(2, 1fr); }
     .hero-title { font-size: 40px; }
     .footer__cols { gap: 32px; }
