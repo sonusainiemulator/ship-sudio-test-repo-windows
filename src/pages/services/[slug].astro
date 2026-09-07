@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
 import PrimaryButton from "../../components/PrimaryButton.astro";
 import { offerings, offeringHref, relatedOfferings } from "../../data/catalog";
 import { BOOK_CONSULTATION_URL, SITE_NAME, SITE_URL } from "../../consts";
@@ -197,26 +198,7 @@ const jsonLd = [
   </main>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="container footer__inner reveal">
-      <a href="/" class="footer__brand">
-        <svg class="wordmark__mark" viewBox="0 0 22 22" aria-hidden="true">
-          <rect width="22" height="22" rx="6" fill="#2F6BFF" />
-          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
-        </svg>
-        <span class="footer__brand-text">
-          <strong>Rakebig Services</strong>
-          <span class="footer__brand-tag">AI Automation Agency</span>
-        </span>
-      </a>
-      <ul class="footer__list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/product">Services</a></li>
-        <li><a href="/solutions">Solutions</a></li>
-        <li><a href="/#contact">Contact</a></li>
-      </ul>
-    </div>
-  </footer>
+  <SiteFooter />
 </Layout>
 
 <style>

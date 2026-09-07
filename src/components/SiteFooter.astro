@@ -1,0 +1,400 @@
+---
+// Shared site footer — design follows the razinsoft.com dark footer (navy
+// gradient, brand + link columns + contact/support area + bottom policy bar).
+// Content is Rakebig's. Edit the FIELDS below when you have real details:
+//   - contact.email / contact.phone / contact.whatsapp  -> shown only if non-empty
+//   - socials                                            -> icon row shown only if non-empty
+// Leave a field "" (or the array []) and that block is hidden.
+import { BOOK_CONSULTATION_URL } from "../consts";
+
+const year = new Date().getFullYear();
+
+// ---- Rakebig footer content (edit here) ----
+const brand = {
+  name: "Rakebig Services",
+  tag: "AI Automation Agency",
+  blurb:
+    "An AI automation agency that designs, builds, and supports Perfex CRM, web & mobile apps, SaaS platforms, and practical AI workflows for growing teams.",
+};
+
+const contact = {
+  email: "",
+  phone: "",
+  whatsapp: "",
+  // e.g. { label: "Sales", href: "https://wa.me/91XXXXXXXXXX" }
+  lines: [] as { label: string; href: string; value: string }[],
+};
+
+const socials = [] as { label: string; href: string }[];
+
+const companyLinks = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/product" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Contact Us", href: "/#contact" },
+];
+
+const serviceLinks = [
+  { label: "Perfex CRM Solutions", href: "/services/perfex-crm-solutions" },
+  { label: "App Clone Development", href: "/services/app-clone-development" },
+  { label: "AI Business Automation", href: "/services/ai-business-automation" },
+  { label: "Cloud Deployment & DevOps", href: "/services/cloud-deployment-devops" },
+  { label: "Maintenance & Support", href: "/services/maintenance-support" },
+];
+
+const policyLinks = [
+  { label: "Terms & Conditions", href: "#" },
+  { label: "Refund Policy", href: "#" },
+  { label: "Privacy Policy", href: "#" },
+];
+
+// Keep T&C/Refund/Privacy above pointing at real policy pages once they exist.
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <!-- Brand -->
+    <div class="site-footer__brand">
+      <a href="/" class="site-footer__logo" aria-label="Rakebig Services home">
+        <svg class="site-footer__mark" viewBox="0 0 22 22" aria-hidden="true">
+          <rect width="22" height="22" rx="6" fill="#2F6BFF" />
+          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-body)" font-size="13" font-weight="700" fill="#ffffff">R</text>
+        </svg>
+        <span class="site-footer__brand-name">
+          <strong>{brand.name}</strong>
+          <span class="site-footer__tag">{brand.tag}</span>
+        </span>
+      </a>
+      <p class="site-footer__about">{brand.blurb}</p>
+
+      <!-- Contact rows: rendered only when contact.* has a value -->
+      {(contact.email || contact.phone || contact.whatsapp || contact.lines.length > 0) && (
+        <div class="site-footer__contact">
+          {contact.email && (
+            <a href={`mailto:${contact.email}`} class="site-footer__contact-row">
+              <span class="site-footer__cicon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5" stroke="currentColor" stroke-width="1.7" /><path d="M4.5 7.5 12 13l7.5-5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </span>
+              <span>{contact.email}</span>
+            </a>
+          )}
+          {contact.phone && (
+            <a href={`tel:${contact.phone}`} class="site-footer__contact-row">
+              <span class="site-footer__cicon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l1.5 4.5L8 10a11 11 0 0 0 6 6l1.5-2.5L20 15v4a1.5 1.5 0 0 1-1.7 1.5C10.4 19.6 4.4 13.6 3.5 5.7A1.5 1.5 0 0 1 5 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></svg>
+              </span>
+              <span>{contact.phone}</span>
+            </a>
+          )}
+          {contact.whatsapp && (
+            <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" class="site-footer__contact-row">
+              <span class="site-footer__cicon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L4 20l3.8-1A8.5 8.5 0 1 0 12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /><path d="M9 8.5c.4 2.3 2.2 4.1 4.5 4.5l1.3-1.3 2 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </span>
+              <span>{contact.whatsapp}</span>
+            </a>
+          )}
+          {contact.lines.map((l) => (
+            <a href={l.href} target={/^https?:/.test(l.href) ? "_blank" : undefined} rel={/^https?:/.test(l.href) ? "noopener noreferrer" : undefined} class="site-footer__contact-row">
+              <span class="site-footer__cicon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0v3a2.5 2.5 0 0 1-2.5 2.5H15M4 12v3.5A2.5 2.5 0 0 0 6.5 18H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+              </span>
+              <span><strong>{l.label}:</strong> {l.value}</span>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {socials.length > 0 && (
+        <ul class="site-footer__socials">
+          {socials.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" /><path d="M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5C9.5 6.1 9.5 17.9 12 20.5M3.5 12h17" stroke="currentColor" stroke-width="1.6" /></svg>
+                <span>{s.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    <!-- Company links -->
+    <nav class="site-footer__col" aria-label="Company">
+      <h2 class="site-footer__title">Company</h2>
+      <ul>
+        {companyLinks.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Services links -->
+    <nav class="site-footer__col" aria-label="Services">
+      <h2 class="site-footer__title">Services</h2>
+      <ul>
+        {serviceLinks.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Get in touch / cards -->
+    <div class="site-footer__touch">
+      <h2 class="site-footer__title">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0v3.5a2.5 2.5 0 0 1-2.5 2.5H15M4 12v3.5A2.5 2.5 0 0 0 6.5 18H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /><path d="M9 21h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+        Get in Touch
+      </h2>
+      <div class="site-footer__cards">
+        <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="site-footer__card">
+          <strong>Start a project</strong>
+          <span>Book a free consultation and get a scoped, fixed-price quote.</span>
+          <em>Book a Consultation →</em>
+        </a>
+        <a href="https://aiwidget.rakebig.com/" target="_blank" rel="noopener noreferrer" class="site-footer__card">
+          <strong>AI Widget</strong>
+          <span>Try our ready-made AI assistant you can embed on any site.</span>
+          <em>Explore AI Widget →</em>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>© {year} {brand.name}. All rights reserved.</p>
+    <ul>
+      {policyLinks.map((l) => (
+        <li><a href={l.href}>{l.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: linear-gradient(180deg, #0e1c33 0%, #0a1120 100%);
+    color: #aab8ca;
+    padding: 72px 0 0;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 44px 36px;
+  }
+
+  .site-footer__brand {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .site-footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .site-footer__mark { width: 34px; height: 34px; flex-shrink: 0; }
+  .site-footer__brand-name {
+    display: grid;
+    gap: 3px;
+    line-height: 1;
+  }
+  .site-footer__brand-name strong {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  .site-footer__tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  .site-footer__about {
+    margin: 0;
+    max-width: 34ch;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #8b98ab;
+  }
+
+  .site-footer__contact {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+  }
+  .site-footer__contact-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #c7d2e0;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .site-footer__contact-row:hover { color: #fff; }
+  .site-footer__contact-row strong { color: #fff; font-weight: 600; }
+  .site-footer__cicon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #6f9bff;
+  }
+  .site-footer__cicon svg { width: 16px; height: 16px; }
+
+  .site-footer__socials {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+  }
+  .site-footer__socials a {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #c7d2e0;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .site-footer__socials a svg { width: 17px; height: 17px; }
+  .site-footer__socials a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .site-footer__socials a:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+
+  .site-footer__col {
+    grid-column: span 2;
+  }
+  .site-footer__col h2,
+  .site-footer__touch h2 {
+    margin: 0 0 18px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+  .site-footer__col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .site-footer__col a {
+    font-size: 14px;
+    color: #8b98ab;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .site-footer__col a:hover { color: #fff; }
+
+  .site-footer__touch {
+    grid-column: span 4;
+  }
+  .site-footer__touch h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .site-footer__touch h2 svg { width: 18px; height: 18px; color: #6f9bff; }
+
+  .site-footer__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .site-footer__card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .site-footer__card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(111, 155, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  .site-footer__card strong {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .site-footer__card span {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #8b98ab;
+  }
+  .site-footer__card em {
+    margin-top: 4px;
+    font-style: normal;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6f9bff;
+  }
+
+  .site-footer__bottom {
+    margin-top: 56px;
+    padding: 22px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .site-footer__bottom p {
+    margin: 0;
+    font-size: 13px;
+    color: #6b7890;
+  }
+  .site-footer__bottom ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .site-footer__bottom a {
+    font-size: 13px;
+    color: #6b7890;
+    text-decoration: none;
+  }
+  .site-footer__bottom a:hover { color: #fff; }
+
+  @media (max-width: 1000px) {
+    .site-footer__brand { grid-column: span 7; }
+    .site-footer__col { grid-column: span 2; }
+    .site-footer__touch { grid-column: span 5; }
+  }
+
+  @media (max-width: 720px) {
+    .site-footer { padding: 56px 0 0; }
+    .site-footer__grid { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
+    .site-footer__brand { grid-column: 1 / -1; }
+    .site-footer__col { grid-column: span 1; }
+    .site-footer__touch { grid-column: 1 / -1; }
+    .site-footer__cards { grid-template-columns: 1fr; }
+  }
+</style>
