@@ -14,6 +14,8 @@ interface Props {
   reverse?: boolean;
   panelBg?: string;
   panelBlob?: string;
+  /** Optional target for the "See how it works" CTA. */
+  ctaHref?: string;
 }
 const {
   eyebrow,
@@ -22,6 +24,7 @@ const {
   reverse = false,
   panelBg = "#cee2f2",
   panelBlob = "#659cff",
+  ctaHref,
 } = Astro.props;
 ---
 
@@ -37,7 +40,7 @@ const {
     <h2 class="sblock__title">{title}</h2>
     <p class="sblock__body">{body}</p>
     <div class="sblock__cta">
-      <PrimaryButton label="See how it works" bg="#efeff1" />
+      <PrimaryButton label="See how it works" href={ctaHref} bg="#efeff1" />
     </div>
   </div>
   <div class="sblock__visual">

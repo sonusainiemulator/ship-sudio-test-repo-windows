@@ -16,17 +16,17 @@ const heroLogos = [
   { name: "Orbit" },
 ];
 
-// Eight service lines — first row (4 up), second row (3 up)
+// Service lines — first row (4 up), second row (3 up), each linking to its detail page
 const useCasesTop = [
-  { label: "IT Services & Consulting", body: "Custom software development, business process automation, and technical consulting scoped to your actual roadmap.", bg: "#cdbef5", blob: "#7f52bf" },
-  { label: "Perfex CRM Solutions", body: "Custom modules, multi-tenant SaaS setup, workflow automation, and integrations built on top of Perfex CRM.", bg: "#d7f0ec", blob: "#319393" },
-  { label: "Web Application Development", body: "Laravel and Vue.js platforms, custom business portals, admin panels, and real-time dashboards.", bg: "#dcefe9", blob: "#c8d5bb" },
-  { label: "Mobile App Development", body: "Flutter apps for Android and iOS, CRM companion apps, and business automation on the go.", bg: "#cbd8f5", blob: "#659cff" },
+  { label: "IT Services & Consulting", body: "Custom software development, business process automation, and technical consulting scoped to your actual roadmap.", href: "/services/it-consulting", bg: "#cdbef5", blob: "#7f52bf" },
+  { label: "Perfex CRM Solutions", body: "Custom modules, multi-tenant SaaS setup, workflow automation, and integrations built on top of Perfex CRM.", href: "/services/perfex-crm-solutions", bg: "#d7f0ec", blob: "#319393" },
+  { label: "Web Application Development", body: "Laravel and Vue.js platforms, custom business portals, admin panels, and real-time dashboards.", href: "/services/web-application-development", bg: "#dcefe9", blob: "#c8d5bb" },
+  { label: "Mobile App Development", body: "Flutter apps for Android and iOS, CRM companion apps, and business automation on the go.", href: "/services/mobile-app-development", bg: "#cbd8f5", blob: "#659cff" },
 ];
 const useCasesBottom = [
-  { label: "SaaS Solutions", body: "Multi-tenant architecture, subscription and payment systems, tenant management, and custom SaaS dashboards.", bg: "#cdbef5", blob: "#7f52bf" },
-  { label: "Business Integrations", body: "WhatsApp, IP telephony, payment gateways, and third-party APIs wired into automated workflows and notifications.", bg: "#d7f0ec", blob: "#319393" },
-  { label: "DevOps, Cloud & Infrastructure", body: "Docker, Jenkins, GitHub Actions, Coolify, and aaPanel—plus domains, SSL, email, and hosting handled end to end.", bg: "#cbd8f5", blob: "#659cff" },
+  { label: "SaaS Solutions", body: "Multi-tenant architecture, subscription and payment systems, tenant management, and custom SaaS dashboards.", href: "/services/saas-platform-development", bg: "#cdbef5", blob: "#7f52bf" },
+  { label: "Business Integrations", body: "WhatsApp, IP telephony, payment gateways, and third-party APIs wired into automated workflows and notifications.", href: "/services/business-integrations", bg: "#d7f0ec", blob: "#319393" },
+  { label: "DevOps, Cloud & Infrastructure", body: "Docker, Jenkins, GitHub Actions, Coolify, and aaPanel—plus domains, SSL, email, and hosting handled end to end.", href: "/services/cloud-deployment-devops", bg: "#cbd8f5", blob: "#659cff" },
 ];
 
 const benefits = [
@@ -116,6 +116,7 @@ const footerCols = [
           body="A default CRM install is just a starting point. Rakebig customizes Perfex CRM end to end—custom modules, workflow automation, and multi-tenant SaaS setup—so it matches how your team actually sells and supports."
           panelBg="#cee2f2"
           panelBlob="#659cff"
+          ctaHref="/services/perfex-crm-solutions"
         />
         <PanelSplit
           eyebrow="Architect"
@@ -124,6 +125,7 @@ const footerCols = [
           reverse={true}
           panelBg="#eddfff"
           panelBlob="#7f52bf"
+          ctaHref="/services/saas-platform-development"
         />
       </div>
     </section>
@@ -148,12 +150,12 @@ const footerCols = [
 
         <div class="usecases__grid usecases__grid--4 reveal-stagger">
           {useCasesTop.map((c) => (
-            <UseCaseCard label={c.label} body={c.body} bg={c.bg} blob={c.blob} />
+            <UseCaseCard label={c.label} body={c.body} href={c.href} bg={c.bg} blob={c.blob} />
           ))}
         </div>
         <div class="usecases__grid usecases__grid--3 reveal-stagger">
           {useCasesBottom.map((c) => (
-            <UseCaseCard label={c.label} body={c.body} bg={c.bg} blob={c.blob} wide={true} />
+            <UseCaseCard label={c.label} body={c.body} href={c.href} bg={c.bg} blob={c.blob} wide={true} />
           ))}
         </div>
       </div>
@@ -273,6 +275,7 @@ const footerCols = [
           body="WhatsApp, IP calling, payment gateways, and third-party APIs—Rakebig connects them all into your CRM or SaaS platform, so no channel runs in a silo."
           panelBg="#cee2f2"
           panelBlob="#659cff"
+          ctaHref="/services/business-integrations"
         />
         <PanelSplit
           eyebrow="Deploy"
@@ -281,6 +284,7 @@ const footerCols = [
           reverse={true}
           panelBg="#eddfff"
           panelBlob="#7f52bf"
+          ctaHref="/services/cloud-deployment-devops"
         />
       </div>
     </section>
@@ -309,7 +313,10 @@ const footerCols = [
           <rect width="22" height="22" rx="6" fill="currentColor" />
           <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
         </svg>
-        Rakebig
+        <span class="brand-lock">
+          <span class="brand-lock__name">Rakebig Services</span>
+          <span class="brand-lock__tag">AI Automation Agency</span>
+        </span>
       </a>
       <div class="footer__cols">
         {footerCols.map((col) => (

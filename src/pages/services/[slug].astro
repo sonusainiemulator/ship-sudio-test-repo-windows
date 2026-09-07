@@ -1,0 +1,371 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import PrimaryButton from "../../components/PrimaryButton.astro";
+import { offerings, offeringHref, relatedOfferings } from "../../data/catalog";
+import { SITE_NAME, SITE_URL } from "../../consts";
+import type { Offering } from "../../data/catalog";
+
+export function getStaticPaths() {
+  return offerings.map((offering) => ({ params: { slug: offering.slug }, props: { offering } }));
+}
+
+const { offering } = Astro.props;
+const related = relatedOfferings(offering);
+const canonical = offeringHref(offering.slug);
+const pageTitle = `${offering.name} | ${SITE_NAME}`;
+const typeLabel = offering.type === "product" ? "Product" : "Service";
+
+const schemaBase = { "@context": "https://schema.org" };
+const crumbs = [
+  { name: "Home", item: "/" },
+  { name: "Services", item: "/product" },
+  { name: offering.name, item: canonical },
+];
+
+const jsonLd = [
+  {
+    ...schemaBase,
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.item, SITE_URL).toString(),
+    })),
+  },
+  {
+    ...schemaBase,
+    "@type": offering.type === "product" ? "Product" : "Service",
+    name: offering.name,
+    description: offering.metaDescription,
+    url: new URL(canonical, SITE_URL).toString(),
+    provider: { "@type": "Organization", name: SITE_NAME },
+  },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={offering.metaDescription}
+  canonicalPath={canonical}
+  jsonLd={jsonLd}
+>
+  <SiteHeader />
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="d-hero">
+      <div class="container d-hero__inner">
+        <nav class="d-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/product">Services</a></li>
+            <li aria-current="page">{offering.name}</li>
+          </ol>
+        </nav>
+
+        <div class="d-hero__content reveal">
+          <span class="d-chip">{typeLabel}</span>
+          <h1 class="d-hero__title">{offering.heroTitle}</h1>
+          <p class="d-hero__lead">{offering.heroLead}</p>
+          <div class="d-hero__cta">
+            <PrimaryButton label="Book a consultation" href="/#contact" />
+            <a class="d-ghost" href="/product">All services <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT IT IS ============ -->
+    <section class="d-sec">
+      <div class="container">
+        <div class="d-head reveal">
+          <span class="eyebrow">What it is</span>
+          <h2 class="d-title">{offering.name} in plain terms</h2>
+        </div>
+        <div class="d-prose reveal">
+          {offering.whatItIs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT'S INCLUDED ============ -->
+    <section class="d-sec d-sec--alt">
+      <div class="container">
+        <div class="d-head reveal">
+          <span class="eyebrow">What's included</span>
+          <h2 class="d-title">Everything that comes with the work</h2>
+        </div>
+        <div class="d-features reveal-stagger">
+          {offering.features.map((f) => (
+            <article class="d-feat">
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW WE DELIVER ============ -->
+    <section class="d-sec">
+      <div class="container">
+        <div class="d-head reveal">
+          <span class="eyebrow">How we deliver</span>
+          <h2 class="d-title">A simple path from start to launch</h2>
+        </div>
+        <ol class="d-steps reveal">
+          {offering.steps.map((s, i) => (
+            <li class="d-step">
+              <span class="d-step__num">{String(i + 1).padStart(2, "0")}</span>
+              <div class="d-step__body">
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ WHAT YOU GET ============ -->
+    <section class="d-sec d-sec--alt">
+      <div class="container">
+        <div class="d-head reveal">
+          <span class="eyebrow">What you get</span>
+          <h2 class="d-title">The outcome, not the process</h2>
+        </div>
+        <div class="d-outcomes reveal-stagger">
+          {offering.outcomes.map((o) => (
+            <article class="d-outcome">
+              <h3>{o.label}</h3>
+              <p>{o.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="d-sec">
+      <div class="container">
+        <div class="d-head reveal">
+          <span class="eyebrow">Common questions</span>
+          <h2 class="d-title">Straight answers</h2>
+        </div>
+        <div class="d-faq reveal">
+          {offering.faqs.map((f) => (
+            <details class="d-faq__item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RELATED ============ -->
+    {related.length > 0 && (
+      <section class="d-sec d-sec--related">
+        <div class="container">
+          <div class="d-head reveal">
+            <span class="eyebrow">Related</span>
+            <h2 class="d-title">Often paired with {offering.name.toLowerCase()}</h2>
+          </div>
+          <div class="d-related reveal-stagger">
+            {related.map((r) => (
+              <a href={offeringHref(r.slug)} class="d-rel">
+                <span class="d-rel__arrow" aria-hidden="true">→</span>
+                <h3>{r.name}</h3>
+                <p>{r.shortSummary}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============ CTA ============ -->
+    <section class="d-cta">
+      <div class="container d-cta__inner reveal-stagger">
+        <h2>Let's build this for you.</h2>
+        <p>Tell us where your team is stuck — we'll scope the right fix, honestly.</p>
+        <PrimaryButton label="Book a free consultation" href="/#contact" bg="#0c0e1c" color="#ffffff" />
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner reveal">
+      <a href="/" class="footer__brand">
+        <svg class="wordmark__mark" viewBox="0 0 22 22" aria-hidden="true">
+          <rect width="22" height="22" rx="6" fill="#2F6BFF" />
+          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-size="13" font-weight="500" fill="#ffffff">R</text>
+        </svg>
+        <span class="footer__brand-text">
+          <strong>Rakebig Services</strong>
+          <span class="footer__brand-tag">AI Automation Agency</span>
+        </span>
+      </a>
+      <ul class="footer__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/product">Services</a></li>
+        <li><a href="/solutions">Solutions</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* ---------- shared ---------- */
+  .d-sec { padding: 96px 0; }
+  .d-sec--alt { background: #f7f6f9; border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+  .d-head { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; max-width: 560px; margin-bottom: 40px; }
+  .d-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(26px, 3.2vw, 36px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  .eyebrow { letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ---------- HERO ---------- */
+  .d-hero {
+    padding: 40px 0 88px;
+    background: radial-gradient(90% 100% at 100% 0%, #e4def4 0%, transparent 60%), linear-gradient(180deg, #f2f0f6 0%, #fbfafc 100%);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .d-crumbs ol { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; font-size: 13px; color: rgba(12, 14, 28, 0.5); }
+  .d-crumbs li { display: inline-flex; align-items: center; gap: 6px; }
+  .d-crumbs li + li::before { content: "/"; color: rgba(12, 14, 28, 0.3); }
+  .d-crumbs a { color: rgba(12, 14, 28, 0.6); text-decoration: none; }
+  .d-crumbs a:hover { color: var(--color-ink); }
+  .d-crumbs li[aria-current] { color: rgba(12, 14, 28, 0.85); }
+  .d-hero__content { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; max-width: 720px; padding-top: 56px; }
+  .d-chip {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5a43a8;
+    border: 1px solid rgba(127, 82, 191, 0.35);
+    background: rgba(255, 255, 255, 0.6);
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+  .d-hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(38px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+  .d-hero__lead {
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(12, 14, 28, 0.62);
+    max-width: 560px;
+  }
+  .d-hero__cta { display: flex; align-items: center; gap: 22px; margin-top: 6px; flex-wrap: wrap; }
+  .d-ghost { font-size: 14px; font-weight: 500; color: var(--color-ink); text-decoration: none; border-bottom: 1px solid rgba(12, 14, 28, 0.3); }
+  .d-ghost:hover { border-color: var(--color-ink); }
+
+  /* ---------- PROSE ---------- */
+  .d-prose { max-width: 720px; display: flex; flex-direction: column; gap: 18px; }
+  .d-prose p { font-size: 16px; line-height: 1.7; color: rgba(12, 14, 28, 0.7); }
+
+  /* ---------- FEATURES ---------- */
+  .d-features { display: grid; grid-template-columns: 1fr 1fr; background: #fff; border: 1px solid var(--color-line); }
+  .d-feat { padding: 28px; border-right: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); display: flex; flex-direction: column; gap: 10px; }
+  .d-feat:nth-child(2n) { border-right: none; }
+  .d-feat:nth-last-child(-n + 2) { border-bottom: none; }
+  .d-feat h3 { margin: 0; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ink); }
+  .d-feat p { margin: 0; font-size: 15px; line-height: 1.55; color: rgba(12, 14, 28, 0.65); }
+
+  /* ---------- STEPS ---------- */
+  .d-steps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-line); }
+  .d-step { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--color-line); }
+  .d-step__num { font-family: var(--font-mono); font-size: 14px; color: rgba(12, 14, 28, 0.4); padding-top: 2px; }
+  .d-step__body h3 { margin: 0 0 8px; font-size: 19px; letter-spacing: -0.01em; color: var(--color-ink); }
+  .d-step__body p { margin: 0; font-size: 15px; line-height: 1.6; color: rgba(12, 14, 28, 0.62); max-width: 620px; }
+
+  /* ---------- OUTCOMES ---------- */
+  .d-outcomes { display: grid; grid-template-columns: 1fr 1fr; background: #fff; border: 1px solid var(--color-line); }
+  .d-outcome { padding: 28px; border-right: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); display: flex; flex-direction: column; gap: 10px; }
+  .d-outcome:nth-child(2n) { border-right: none; }
+  .d-outcome:nth-last-child(-n + 2) { border-bottom: none; }
+  .d-outcome h3 { margin: 0; font-size: 17px; letter-spacing: -0.01em; color: var(--color-ink); }
+  .d-outcome p { margin: 0; font-size: 15px; line-height: 1.55; color: rgba(12, 14, 28, 0.65); }
+
+  /* ---------- FAQ ---------- */
+  .d-faq { border-top: 1px solid var(--color-line); }
+  .d-faq__item { border-bottom: 1px solid var(--color-line); }
+  .d-faq__item summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+  .d-faq__item summary::-webkit-details-marker { display: none; }
+  .d-faq__item summary::after { content: "+"; font-size: 20px; color: rgba(12, 14, 28, 0.4); transition: transform 0.2s ease; }
+  .d-faq__item[open] summary::after { transform: rotate(45deg); }
+  .d-faq__item p { margin: 0; padding: 0 4px 24px; font-size: 15px; line-height: 1.65; color: rgba(12, 14, 28, 0.65); max-width: 640px; }
+
+  /* ---------- RELATED ---------- */
+  .d-sec--related { padding-bottom: 0; }
+  .d-related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 96px; }
+  .d-rel { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 24px; background: #fff; border: 1px solid var(--color-line); border-radius: 4px; text-decoration: none; transition: border-color 0.15s ease, transform 0.15s ease; }
+  .d-rel:hover { border-color: #c6bde0; transform: translateY(-2px); }
+  .d-rel__arrow { font-size: 18px; color: #7f52bf; }
+  .d-rel h3 { margin: 0; font-size: 17px; letter-spacing: -0.01em; color: var(--color-ink); }
+  .d-rel p { margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(12, 14, 28, 0.6); }
+
+  /* ---------- CTA ---------- */
+  .d-cta { padding: 110px 0; background: #dfe9f6; border-top: 1px solid var(--color-line); }
+  .d-cta__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+  .d-cta h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(32px, 4.5vw, 44px); line-height: 1.05; letter-spacing: -0.02em; color: var(--color-ink); }
+  .d-cta p { margin: 0; font-size: 15px; color: rgba(12, 14, 28, 0.6); max-width: 420px; line-height: 1.5; }
+
+  /* ---------- FOOTER ---------- */
+  .footer { padding: 72px 0 56px; border-top: 1px solid var(--color-line); }
+  .footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .footer__brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+  .wordmark__mark { width: 30px; height: 30px; flex-shrink: 0; }
+  .footer__brand-text { display: grid; gap: 3px; line-height: 1; }
+  .footer__brand-text strong { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: var(--color-ink); }
+  .footer__brand-tag { font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(12, 14, 28, 0.5); }
+  .footer__list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; }
+  .footer__list a { font-size: 14px; color: rgba(12, 14, 28, 0.6); text-decoration: none; }
+  .footer__list a:hover { color: var(--color-ink); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1000px) {
+    .d-sec { padding: 72px 0; }
+    .d-hero { padding: 28px 0 64px; }
+  }
+  @media (max-width: 720px) {
+    .d-features, .d-outcomes { grid-template-columns: 1fr; }
+    .d-feat, .d-outcome { border-right: none; }
+    .d-feat:nth-last-child(-n + 2), .d-outcome:nth-last-child(-n + 2) { border-bottom: 1px solid var(--color-line); }
+    .d-feat:last-child, .d-outcome:last-child { border-bottom: none; }
+    .d-related { grid-template-columns: 1fr; margin-bottom: 72px; }
+    .d-step { grid-template-columns: 40px 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .d-faq__item summary::after { transition: none; }
+    .d-rel { transition: none; }
+  }
+</style>

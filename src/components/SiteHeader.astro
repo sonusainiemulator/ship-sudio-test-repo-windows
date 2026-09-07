@@ -1,4 +1,6 @@
 ---
+import MegaMenuList from "./MegaMenuList.astro";
+
 interface Props {
   current?: "home" | "product" | "solutions" | "contact";
 }
@@ -9,7 +11,7 @@ const services = [
   {
     title: "Installation & Publishing",
     body: "End-to-end setup, configuration, and go-live for CRM and business platforms.",
-    href: "/product",
+    href: "/services/perfex-crm-solutions",
     icon: "install",
     tint: "#E8F1FF",
     color: "#3B82F6",
@@ -17,7 +19,7 @@ const services = [
   {
     title: "Custom Development",
     body: "Modules, portals, and workflows built around how your team actually works.",
-    href: "/product",
+    href: "/services/web-application-development",
     icon: "code",
     tint: "#E8F8EF",
     color: "#22A06B",
@@ -25,7 +27,7 @@ const services = [
   {
     title: "Maintenance & Support",
     body: "Ongoing updates, monitoring, and fixes so your systems stay reliable.",
-    href: "/product",
+    href: "/services/maintenance-support",
     icon: "wrench",
     tint: "#FFF3E8",
     color: "#E67E22",
@@ -33,7 +35,7 @@ const services = [
   {
     title: "Dedicated Team",
     body: "A focused engineering squad embedded with your product and ops leads.",
-    href: "/product",
+    href: "/services/dedicated-team",
     icon: "team",
     tint: "#F3E8FF",
     color: "#8B5CF6",
@@ -41,7 +43,7 @@ const services = [
   {
     title: "Cloud Deployment",
     body: "Docker, CI/CD, and cloud infrastructure from staging through production.",
-    href: "/solutions",
+    href: "/services/cloud-deployment-devops",
     icon: "cloud",
     tint: "#E8F1FF",
     color: "#3B82F6",
@@ -49,17 +51,83 @@ const services = [
   {
     title: "AI Business Automation",
     body: "Automate handoffs, tickets, and reporting with practical AI workflows.",
-    href: "/solutions",
+    href: "/services/ai-business-automation",
     icon: "ai",
     tint: "#FFE8F3",
     color: "#E11D8C",
   },
 ];
 
-const products = [
-  { title: "Perfex CRM Solutions", body: "Custom modules, multi-tenant SaaS, and workflow automation.", href: "/solutions" },
-  { title: "Web Applications", body: "Laravel and Vue platforms, portals, and dashboards.", href: "/product" },
-  { title: "Mobile Apps", body: "Flutter apps for Android and iOS tied to your CRM.", href: "/product" },
+// ---- Products mega menu content (edit here) ----
+// Structure mirrors the LobeHub reference: labeled groups of icon + title + description rows.
+const productGroups = [
+  {
+    label: "Perfex CRM",
+    items: [
+      { title: "Perfex CRM Solutions", body: "Custom modules, multi-tenant SaaS, and workflow automation.", href: "/services/perfex-crm-solutions", icon: "crm", tint: "#E8F1FF", color: "#2F6BFF" },
+      { title: "Web Applications", body: "Laravel & Vue platforms, portals, and dashboards.", href: "/services/web-application-development", icon: "web", tint: "#E8F8EF", color: "#22A06B" },
+      { title: "Mobile Apps", body: "Flutter apps for Android and iOS tied to your CRM.", href: "/services/mobile-app-development", icon: "mobile", tint: "#F3E8FF", color: "#8B5CF6" },
+    ],
+  },
+  {
+    label: "Platform & Cloud",
+    items: [
+      { title: "AI Widget", body: "Drop-in AI assistant that answers your customers on any site.", href: "https://aiwidget.rakebig.com/", external: true, icon: "ai", tint: "#E8F1FF", color: "#2F6BFF" },
+      { title: "Cloud Deployment", body: "Docker, CI/CD, and infrastructure from staging to production.", href: "/services/cloud-deployment-devops", icon: "cloud", tint: "#E8F1FF", color: "#3B82F6" },
+      { title: "AI Business Automation", body: "Automate handoffs, tickets, and reporting with practical AI.", href: "/services/ai-business-automation", icon: "ai", tint: "#FFE8F3", color: "#E11D8C" },
+      { title: "Dedicated Team", body: "An engineering squad embedded with your product and ops leads.", href: "/services/dedicated-team", icon: "team", tint: "#FFF3E8", color: "#E67E22" },
+    ],
+  },
+];
+
+// ---- Solutions (AI) mega menu content (edit here) ----
+// Same list-menu design as Products. Add your AI services here.
+const aiSolutionGroups = [
+  {
+    label: "AI Applications",
+    items: [
+      { title: "AI Business Automation", body: "Route tickets, triage messages, and draft reports with AI.", href: "/services/ai-business-automation", icon: "ai", tint: "#FFE8F3", color: "#E11D8C" },
+      { title: "App Publish Solution", body: "Publish your app with a 24x7 AI agent handling users.", href: "/services/app-publish-solution", icon: "launch", tint: "#E8F1FF", color: "#2F6BFF" },
+      { title: "AI Assistants & Chatbots", body: "Answer customers around the clock in your brand voice.", href: "/solutions", icon: "chat", tint: "#E8F8EF", color: "#22A06B" },
+    ],
+  },
+  {
+    label: "AI Agents & Workflows",
+    items: [
+      { title: "Document & Data Extraction", body: "Turn PDFs, emails, and records into structured data.", href: "/solutions", icon: "doc", tint: "#FFF3E8", color: "#E67E22" },
+      { title: "Custom AI Integrations", body: "Wire models and AI flows into the tools you run.", href: "/solutions", icon: "bolt", tint: "#E8F1FF", color: "#3B82F6" },
+      { title: "AI Workflow Automation", body: "Multi-step AI workflows that hand off between tools.", href: "/solutions", icon: "workflow", tint: "#F3E8FF", color: "#8B5CF6" },
+      { title: "AI Strategy & Consulting", body: "Where AI removes real work — and where it would not.", href: "/solutions", icon: "chip", tint: "#FFE8F3", color: "#E11D8C" },
+    ],
+  },
+];
+
+// ---- Clone Apps mega menu content (edit here) ----
+// Products-style two-column list menu. Each row currently links to the single
+// App Clone Development page; repoint per-clone hrefs to dedicated pages later
+// if you split them out as their own offerings in src/data/catalog.ts.
+const cloneOverviewHref = "/services/app-clone-development";
+const cloneGroups = [
+  {
+    label: "On-Demand & Delivery",
+    items: [
+      { title: "Zapto Clone", body: "On-demand grocery & 10-minute convenience delivery app.", href: cloneOverviewHref, icon: "bag", tint: "#E8F1FF", color: "#2F6BFF" },
+      { title: "Blinkit Clone", body: "Quick-commerce app with hyperlocal 10-minute delivery.", href: cloneOverviewHref, icon: "bag", tint: "#E8F8EF", color: "#0E9F6E" },
+      { title: "Food App Clone", body: "Restaurant ordering & delivery marketplace — Swiggy/Zomato-style.", href: cloneOverviewHref, icon: "bag", tint: "#FFE8F3", color: "#E11D8C" },
+      { title: "Taxi App Clone", body: "Ride-hailing with separate rider and driver apps.", href: cloneOverviewHref, icon: "car", tint: "#FFF3E8", color: "#E67E22" },
+      { title: "On-Demand Services Clone", body: "Book local professionals — cleaning, repairs & home services.", href: cloneOverviewHref, icon: "home", tint: "#F3E8FF", color: "#8B5CF6" },
+    ],
+  },
+  {
+    label: "Chat, Social & Streaming",
+    items: [
+      { title: "WhatsApp Clone", body: "Secure messaging — chats, groups, calls & status.", href: cloneOverviewHref, icon: "chat", tint: "#E8F8EF", color: "#22A06B" },
+      { title: "TikTok Clone", body: "Short-video app with a For You feed, likes & creators.", href: cloneOverviewHref, icon: "note", tint: "#EDEDF7", color: "#12121F" },
+      { title: "Dating App Clone", body: "Swipe-based dating with profiles, matching & chat.", href: cloneOverviewHref, icon: "heart", tint: "#FFE9EE", color: "#F43F5E" },
+      { title: "Streaming App Clone", body: "Video platform with channels, subscriptions & live.", href: cloneOverviewHref, icon: "screen", tint: "#FFE9E9", color: "#E50914" },
+      { title: "Video Conferencing Clone", body: "Meetings, rooms & screen share — Zoom-style.", href: cloneOverviewHref, icon: "cam", tint: "#E8F1FF", color: "#1E6FFF" },
+    ],
+  },
 ];
 
 const company = [
@@ -71,16 +139,19 @@ const company = [
 
 <header class="site-header" data-site-header>
   <nav class="site-header__bar container" aria-label="Primary">
-    <a href="/" class="site-header__logo" aria-label="Rakebig home">
+    <a href="/" class="site-header__logo" aria-label="Rakebig Services home">
       <svg class="site-header__mark" viewBox="0 0 28 28" aria-hidden="true">
         <circle cx="14" cy="14" r="13" fill="none" stroke="#2F6BFF" stroke-width="2.2" />
         <path d="M9 18.5V9.5h5.2c2.1 0 3.4 1.1 3.4 2.8 0 1.2-.7 2.1-1.8 2.5l2.4 3.7h-2.4l-2.1-3.3H11.2V18.5H9zm2.2-5.2h2.8c.9 0 1.4-.4 1.4-1.1s-.5-1.1-1.4-1.1h-2.8v2.2z" fill="#2F6BFF" />
       </svg>
-      <span>Rakebig</span>
+      <span class="site-header__brand">
+        <span class="site-header__brand-name">Rakebig Services</span>
+        <span class="site-header__brand-tag">AI Automation Agency</span>
+      </span>
     </a>
 
     <ul class="site-header__links" data-nav-links>
-      <li class="site-header__item" data-menu="products">
+      <li class="site-header__item site-header__item--products" data-menu="products">
         <button
           type="button"
           class="site-header__trigger"
@@ -93,17 +164,118 @@ const company = [
             <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <div class="site-header__panel site-header__panel--simple" id="menu-products" data-menu-panel hidden>
-          <ul class="site-header__simple-list">
-            {products.map((item) => (
-              <li>
-                <a href={item.href} class="site-header__simple-link">
-                  <strong>{item.title}</strong>
-                  <span>{item.body}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+        <div class="site-header__panel site-header__panel--products" id="menu-products" data-menu-panel hidden>
+          <div class="pm">
+            <div class="pm__groups">
+              {productGroups.map((group) => (
+                <div class="pm__group">
+                  <p class="pm__label">{group.label}</p>
+                  <ul class="pm__list">
+                    {group.items.map((item) => (
+                      <li>
+                        <a
+                          href={item.href}
+                          class="pm__row"
+                          target={item.external ? "_blank" : undefined}
+                          rel={item.external ? "noopener noreferrer" : undefined}
+                        >
+                          <span class="pm__icon" style={`background:${item.tint};color:${item.color}`}>
+                            {item.icon === "crm" && (
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 3.5l7.5 4.25L12 12 4.5 7.75 12 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                                <path d="M4.5 12L12 16.25 19.5 12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                                <path d="M4.5 16.25L12 20.5l7.5-4.25" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                              </svg>
+                            )}
+                            {item.icon === "web" && (
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <rect x="3.5" y="4.5" width="17" height="15" rx="2.5" stroke="currentColor" stroke-width="1.6" />
+                                <path d="M3.5 9.5h17M7 7h.01M10 7h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                              </svg>
+                            )}
+                            {item.icon === "mobile" && (
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <rect x="7" y="3.5" width="10" height="17" rx="2.5" stroke="currentColor" stroke-width="1.6" />
+                                <path d="M11 18h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                              </svg>
+                            )}
+                            {item.icon === "cloud" && (
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M7.5 18h9a4 4 0 00.4-8 5.5 5.5 0 00-10.7 1.6A3.5 3.5 0 007.5 18z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                            )}
+                            {item.icon === "ai" && (
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M12 3l1.2 4.2L17.5 8.5 13.2 9.8 12 14l-1.2-4.2L6.5 8.5l4.3-1.3L12 3zM18.5 14l.7 2.3 2.3.7-2.3.7-.7 2.3-.7-2.3-2.3-.7 2.3-.7.7-2.3zM6 15.5l.5 1.7 1.7.5-1.7.5L6 20l-.5-1.8-1.7-.5 1.7-.5L6 15.5z" fill="currentColor" />
+                              </svg>
+                            )}
+                            {item.icon === "team" && (
+                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M16 19v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 17.5V19M17.5 11a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM9 11a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                            )}
+                          </span>
+                          <span class="pm__copy">
+                            <strong>
+                              {item.title}
+                              {item.external && (
+                                <svg class="pm__ext" viewBox="0 0 16 16" aria-hidden="true">
+                                  <path d="M6 3h7v7M13 3L5 11M10 13H3V6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                              )}
+                            </strong>
+                            <span>{item.body}</span>
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <a href="/solutions" class="pm__footer">
+              <span>See everything Rakebig builds</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="site-header__item site-header__item--products" data-align="right" data-menu="solutions">
+        <button
+          type="button"
+          class="site-header__trigger"
+          aria-expanded="false"
+          aria-controls="menu-solutions"
+          data-menu-trigger
+        >
+          Solutions
+          <svg class="site-header__caret" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="site-header__panel site-header__panel--products" id="menu-solutions" data-menu-panel hidden>
+          <MegaMenuList groups={aiSolutionGroups} footerLabel="Explore AI & automation services" footerHref="/solutions" />
+        </div>
+      </li>
+
+      <li class="site-header__item site-header__item--products" data-menu="clone-apps">
+        <button
+          type="button"
+          class="site-header__trigger"
+          aria-expanded="false"
+          aria-controls="menu-clone-apps"
+          data-menu-trigger
+        >
+          Clone Apps
+          <svg class="site-header__caret" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <div class="site-header__panel site-header__panel--products" id="menu-clone-apps" data-menu-panel hidden>
+          <MegaMenuList groups={cloneGroups} footerLabel="Explore App Clone Development" footerHref={cloneOverviewHref} />
         </div>
       </li>
 
@@ -403,16 +575,35 @@ const company = [
     gap: 10px;
     text-decoration: none;
     color: #0f172a;
-    font-family: var(--font-body);
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
     flex-shrink: 0;
   }
 
   .site-header__mark {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .site-header__brand {
+    display: grid;
+    line-height: 1;
+    gap: 0;
+  }
+
+  .site-header__brand-name {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0f172a;
+  }
+
+  .site-header__brand-tag {
+    margin-top: 4px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #64748b;
   }
 
   .site-header__links {
@@ -866,6 +1057,172 @@ const company = [
     color: #64748b;
   }
 
+  /* ---- Products mega menu (LobeHub-style) ---- */
+  .site-header__item--products {
+    position: relative;
+  }
+
+  .site-header__panel--products {
+    left: 0;
+    top: calc(100% + 14px);
+    transform: none;
+    width: min(672px, calc(100vw - 48px));
+    background: #fff;
+    border: 1px solid #e8edf3;
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+    padding: 14px;
+  }
+
+  /* Right-hand tabs (e.g. Solutions) open the same panel leftward instead of
+     overhanging the viewport's right edge. */
+  .site-header__item--products[data-align="right"] .site-header__panel--products {
+    left: auto;
+    right: 0;
+  }
+
+  .pm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pm__groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 18px;
+  }
+
+  .pm__group + .pm__group {
+    border-left: 1px solid #eef2f7;
+    padding-left: 18px;
+  }
+
+  .pm__label {
+    margin: 0 0 6px;
+    padding: 0 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+
+  .pm__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+
+  .pm__row {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 10px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+  }
+
+  .pm__row:hover {
+    background: #f5f8fc;
+  }
+
+  .pm__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pm__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .pm__copy {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .pm__copy strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #0f172a;
+  }
+
+  .pm__ext {
+    width: 13px;
+    height: 13px;
+    color: #94a3b8;
+    flex-shrink: 0;
+  }
+
+  .pm__row:hover .pm__ext {
+    color: #2F6BFF;
+  }
+
+  .pm__copy span {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: #64748b;
+  }
+
+  .pm__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 10px 2px;
+    border-top: 1px solid #eef2f7;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .pm__footer svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .pm__footer:hover {
+    color: #2F6BFF;
+  }
+
+  /* Mid-width band (just above the mobile collapse): the extra "Clone Apps"
+     tab makes the full six-item nav + action icons tight on ~1024px screens.
+     Tighten spacing and drop the two non-functional icon placeholders until
+     there is room for them again. */
+  @media (max-width: 1180px) and (min-width: 961px) {
+    .site-header__trigger,
+    .site-header__link {
+      padding: 9px 11px;
+      font-size: 14px;
+    }
+
+    .site-header__links {
+      gap: 2px;
+    }
+
+    .site-header__icon-btn[aria-label="Cart"],
+    .site-header__avatar {
+      display: none;
+    }
+  }
+
   @media (max-width: 960px) {
     .site-header__links {
       display: none;
@@ -906,9 +1263,26 @@ const company = [
     }
 
     .site-header__panel--mega,
-    .site-header__panel--simple {
+    .site-header__panel--simple,
+    .site-header__panel--products {
       width: 100%;
       box-shadow: none;
+    }
+
+    .site-header__item--products {
+      position: static;
+    }
+
+    .pm__groups {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .pm__group + .pm__group {
+      border-left: 0;
+      padding-left: 0;
+      padding-top: 14px;
+      border-top: 1px solid #eef2f7;
     }
 
     .mega {
@@ -938,7 +1312,9 @@ const company = [
     .mega__cta,
     .site-header__trigger,
     .site-header__link,
-    .site-header__icon-btn {
+    .site-header__icon-btn,
+    .pm__row,
+    .pm__footer {
       transition: none;
     }
   }

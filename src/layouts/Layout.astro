@@ -1,12 +1,36 @@
 ---
 import 'lenis/dist/lenis.css';
 import '../styles/global.css';
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_TAGLINE,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+} from '../consts';
 
 interface Props {
   title?: string;
+  description?: string;
+  /** Path this page canonically lives at (defaults to the current URL path). */
+  canonicalPath?: string;
+  /** Path to a social share image (defaults to the shared site preview). */
+  ogImage?: string;
+  type?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>[];
 }
 
-const { title = 'Rakebig — IT Services, Consulting & Perfex CRM SaaS Solutions' } = Astro.props;
+const {
+  title = `${SITE_NAME} — ${SITE_TAGLINE}`,
+  description = DEFAULT_DESCRIPTION,
+  canonicalPath = Astro.url.pathname,
+  ogImage = DEFAULT_OG_IMAGE,
+  type = 'website',
+  jsonLd = [],
+} = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
+const ogImageUrl = new URL(ogImage, SITE_URL).toString();
 ---
 
 <!doctype html>
@@ -17,6 +41,29 @@ const { title = 'Rakebig — IT Services, Consulting & Perfex CRM SaaS Solutions
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {jsonLd.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
     <script is:inline>
       // Gate scroll-reveal styles on JS + motion preference so content is never
       // hidden without a way to reveal it. Runs before <body> paints (no FOUC).
@@ -30,7 +77,6 @@ const { title = 'Rakebig — IT Services, Consulting & Perfex CRM SaaS Solutions
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
   </head>
   <body class="bg-background text-foreground font-body antialiased">
     <slot />
