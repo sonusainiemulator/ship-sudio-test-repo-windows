@@ -1,5 +1,6 @@
 ---
 import MegaMenuList from "./MegaMenuList.astro";
+import { BOOK_CONSULTATION_URL } from "../consts";
 
 interface Props {
   current?: "home" | "product" | "solutions" | "contact";
@@ -370,7 +371,7 @@ const company = [
                 <p class="mega__eyebrow">Let's Talk</p>
                 <h3 class="mega__talk-title">Have a project in mind?</h3>
                 <p class="mega__talk-copy">Our experts will help you find the right fit.</p>
-                <a href="/#contact" class="mega__cta">
+                <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="mega__cta">
                   Book a Free Consultation
                   <svg viewBox="0 0 16 16" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />

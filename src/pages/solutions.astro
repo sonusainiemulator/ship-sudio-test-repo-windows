@@ -5,6 +5,7 @@ import AiCard from "../components/AiCard.astro";
 import SolutionBlock from "../components/SolutionBlock.astro";
 import PrimaryButton from "../components/PrimaryButton.astro";
 import MagneticArrowCta from "../components/MagneticArrowCta.astro";
+import { BOOK_CONSULTATION_URL } from "../consts";
 
 const footerCols = [
   {
@@ -54,6 +55,7 @@ const footerCols = [
           <div class="shero__cta">
             <PrimaryButton
               label="Book a Consultation"
+              href={BOOK_CONSULTATION_URL}
               bg="#0c0e1c"
               color="#ffffff"
               glow="rgba(206, 226, 242, 0.5)"
@@ -105,7 +107,7 @@ const footerCols = [
           Growing companies run their CRM, SaaS, and internal tools on
           Rakebig.
         </p>
-        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" /></div>
+        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" href={BOOK_CONSULTATION_URL} /></div>
       </div>
     </section>
   </main>

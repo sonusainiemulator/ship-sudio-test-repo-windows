@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import PrimaryButton from "../../components/PrimaryButton.astro";
 import { offerings, offeringHref, relatedOfferings } from "../../data/catalog";
-import { SITE_NAME, SITE_URL } from "../../consts";
+import { BOOK_CONSULTATION_URL, SITE_NAME, SITE_URL } from "../../consts";
 import type { Offering } from "../../data/catalog";
 
 export function getStaticPaths() {
@@ -70,7 +70,7 @@ const jsonLd = [
           <h1 class="d-hero__title">{offering.heroTitle}</h1>
           <p class="d-hero__lead">{offering.heroLead}</p>
           <div class="d-hero__cta">
-            <PrimaryButton label="Book a consultation" href="/#contact" />
+            <PrimaryButton label="Book a consultation" href={BOOK_CONSULTATION_URL} />
             <a class="d-ghost" href="/product">All services <span aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -191,7 +191,7 @@ const jsonLd = [
       <div class="container d-cta__inner reveal-stagger">
         <h2>Let's build this for you.</h2>
         <p>Tell us where your team is stuck — we'll scope the right fix, honestly.</p>
-        <PrimaryButton label="Book a free consultation" href="/#contact" bg="#0c0e1c" color="#ffffff" />
+        <PrimaryButton label="Book a free consultation" href={BOOK_CONSULTATION_URL} bg="#0c0e1c" color="#ffffff" />
       </div>
     </section>
   </main>

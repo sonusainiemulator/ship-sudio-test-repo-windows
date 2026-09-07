@@ -30,10 +30,14 @@ const {
 } = Astro.props;
 
 const style = `--pbtn-bg:${bg};--pbtn-color:${color};--glow-color:${glow};--glow-size:${glowSize};`;
+// External destinations (e.g. the Cal.com booking page) open in a new tab.
+const isExternal = /^https?:\/\//.test(href);
 ---
 
 <a
   href={href}
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
   class={`pbtn glow-follow ${className}`}
   data-glow-rest={glowRest}
   style={style}

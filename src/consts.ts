@@ -12,3 +12,7 @@ export const DEFAULT_DESCRIPTION =
 
 // Shared preview card used when a page has no image of its own.
 export const DEFAULT_OG_IMAGE = "/assets/preview.png";
+
+// Where every "Book a consultation"-style CTA across the site points (external
+// Cal.com scheduling page). Import and reuse this — don't hardcode the URL.
+export const BOOK_CONSULTATION_URL = "https://cal.com/rakebigservices";

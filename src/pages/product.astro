@@ -7,6 +7,7 @@ import UseCaseCard from "../components/UseCaseCard.astro";
 import PrimaryButton from "../components/PrimaryButton.astro";
 import MagneticArrowCta from "../components/MagneticArrowCta.astro";
 import AiCard from "../components/AiCard.astro";
+import { BOOK_CONSULTATION_URL } from "../consts";
 
 const heroLogos = [
   { name: "Northbeam" },
@@ -89,7 +90,7 @@ const footerCols = [
             integrations—so every tool arrives ready to run your business.
           </p>
           <div class="phero__cta">
-            <MagneticArrowCta label="Book a Consultation" />
+            <MagneticArrowCta label="Book a Consultation" href={BOOK_CONSULTATION_URL} />
           </div>
         </div>
       </div>
@@ -300,7 +301,7 @@ const footerCols = [
           Growing companies run their CRM, SaaS, and internal tools on
           Rakebig.
         </p>
-        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" /></div>
+        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" href={BOOK_CONSULTATION_URL} /></div>
       </div>
     </section>
   </main>

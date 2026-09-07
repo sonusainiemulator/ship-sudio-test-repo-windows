@@ -7,7 +7,7 @@ import TeamCard from "../components/TeamCard.astro";
 import PrimaryButton from "../components/PrimaryButton.astro";
 import ComparisonCard from "../components/ComparisonCard.astro";
 import MagneticArrowCta from "../components/MagneticArrowCta.astro";
-import { SITE_NAME, SITE_URL } from "../consts";
+import { BOOK_CONSULTATION_URL, SITE_NAME, SITE_URL } from "../consts";
 
 const footerCols = [
   {
@@ -135,6 +135,7 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
           <div class="hero-cta">
             <PrimaryButton
               label="Book a Consultation"
+              href={BOOK_CONSULTATION_URL}
               bg="#0c0e1c"
               color="#ffffff"
               glow="rgba(206, 226, 242, 0.5)"
@@ -429,7 +430,7 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
           Growing companies run their CRM, SaaS, and internal tools on
           Rakebig.
         </p>
-        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" /></div>
+        <div class="cta__btn"><MagneticArrowCta label="Book a Consultation" href={BOOK_CONSULTATION_URL} /></div>
       </div>
     </section>
   </main>
