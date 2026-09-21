@@ -1,0 +1,956 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PrimaryButton from "../components/PrimaryButton.astro";
+import {
+  SITE_NAME,
+  SITE_URL,
+  SUPPORT_EMAIL,
+  SUPPORT_PHONE,
+  TECH_SUPPORT_PHONE,
+  BOOK_CONSULTATION_URL,
+  HEAD_OFFICE,
+  UK_OFFICE,
+  SOCIAL_LINKS,
+} from "../consts";
+
+const pageTitle = `About Us — Engineering & AI Automation Agency | ${SITE_NAME}`;
+const pageDescription =
+  "Learn about Rakebig Services: an engineering and AI automation agency building mission-critical CRM solutions, enterprise open-source software, and autonomous workflows worldwide.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: `${SITE_URL}/about`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Rakebig Services",
+    alternateName: "Rakebig",
+    url: SITE_URL,
+    logo: `${SITE_URL}/assets/preview.png`,
+    description: pageDescription,
+    telephone: SUPPORT_PHONE,
+    email: SUPPORT_EMAIL,
+    sameAs: [
+      SOCIAL_LINKS.facebook,
+      SOCIAL_LINKS.instagram,
+      SOCIAL_LINKS.linkedin,
+      SOCIAL_LINKS.youtube,
+      SOCIAL_LINKS.twitter,
+      SOCIAL_LINKS.github,
+    ],
+    address: [
+      {
+        "@type": "PostalAddress",
+        streetAddress: HEAD_OFFICE.street,
+        addressLocality: HEAD_OFFICE.locality,
+        addressRegion: HEAD_OFFICE.region,
+        postalCode: HEAD_OFFICE.postalCode,
+        addressCountry: HEAD_OFFICE.countryCode,
+      },
+      {
+        "@type": "PostalAddress",
+        streetAddress: UK_OFFICE.street,
+        addressLocality: UK_OFFICE.locality,
+        addressRegion: UK_OFFICE.region,
+        postalCode: UK_OFFICE.postalCode,
+        addressCountry: UK_OFFICE.countryCode,
+      },
+    ],
+  },
+];
+
+const stats = [
+  { value: "3,100+", label: "Systems Deployed", sub: "Globally across 25+ countries" },
+  { value: "99.9%", label: "Production Uptime", sub: "Backed by strict DevOps SLAs" },
+  { value: "100%", label: "Code Ownership", sub: "Zero vendor lock-in or proprietary traps" },
+  { value: "24/7", label: "Proactive Monitoring", sub: "SecOps & incident response" },
+];
+
+const values = [
+  {
+    icon: "code",
+    title: "100% Source Code Ownership",
+    desc: "We don't hold your business hostage. Every database schema, Docker container, and custom feature belongs entirely to you.",
+  },
+  {
+    icon: "bolt",
+    title: "Pragmatic Engineering, Not Decks",
+    desc: "We ship tested production code. No theoretical slide decks or endless discovery phases without tangible milestones.",
+  },
+  {
+    icon: "shield",
+    title: "Enterprise Hardened Security",
+    desc: "Air-gapped deployment capability, automated vulnerability patching, encrypted offsite backups, and strict compliance standards.",
+  },
+  {
+    icon: "cloud",
+    title: "Open-Source First",
+    desc: "We champion open-source software like Nextcloud, Rocket.Chat, Mattermost, and Coolify to eliminate monthly per-seat SaaS tax.",
+  },
+  {
+    icon: "ai",
+    title: "Autonomous AI & Automation",
+    desc: "We integrate state-of-the-art LLMs, multi-agent workflows, and webhook automations directly into existing operational tools.",
+  },
+  {
+    icon: "team",
+    title: "Dedicated Embedded Teams",
+    desc: "Our engineers become an extension of your company, offering direct Slack/Mattermost communication and rapid sprint delivery.",
+  },
+];
+
+const milestones = [
+  {
+    year: "Founding",
+    title: "CRM Engineering & Automation",
+    desc: "Started as specialized Perfex CRM module architects, building bespoke billing, tenant isolation, and client portals.",
+  },
+  {
+    year: "Expansion",
+    title: "Full-Stack Web & Mobile Ecosystem",
+    desc: "Scaled into end-to-end Laravel, Vue.js, and Flutter cross-platform mobile development for high-volume delivery & marketplace apps.",
+  },
+  {
+    year: "Cloud Era",
+    title: "Open Source & Managed DevOps",
+    desc: "Pioneered turn-key open-source deployments for Nextcloud, Rocket.Chat, and zero-downtime database migrations across major cloud providers.",
+  },
+  {
+    year: "Today",
+    title: "AI-Powered Enterprise Systems",
+    desc: "Empowering 3,100+ businesses with autonomous agent pipelines, document extraction, and high-availability self-hosted architectures.",
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd}>
+  <SiteHeader />
+
+  <main class="about-page">
+    <!-- Breadcrumb -->
+    <nav class="about-page__breadcrumb container" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page">About Us</li>
+      </ol>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero container">
+      <div class="about-hero__badge">
+        <span class="about-hero__badge-dot"></span>
+        <span>About Rakebig Services</span>
+      </div>
+
+      <h1 class="about-hero__title">
+        We Build High-Performance <span>Software, Open-Source</span> &amp; Autonomous AI Systems.
+      </h1>
+
+      <p class="about-hero__subtitle">
+        Rakebig Services is a technology engineering agency headquartered in India with operations in the UK. 
+        We help growing companies eliminate expensive per-seat SaaS fees, automate manual operations with AI, and run 
+        resilient self-hosted software with 99.9% uptime.
+      </p>
+
+      <div class="about-hero__actions">
+        <PrimaryButton href={BOOK_CONSULTATION_URL} external size="lg">
+          Schedule Tech Consultation
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </PrimaryButton>
+        <a href="/contact" class="about-hero__btn-secondary">
+          Visit Our Offices
+        </a>
+      </div>
+
+      <!-- Stats Strip -->
+      <div class="about-stats">
+        {stats.map((item) => (
+          <div class="about-stat-card">
+            <strong class="about-stat-card__val">{item.value}</strong>
+            <span class="about-stat-card__label">{item.label}</span>
+            <span class="about-stat-card__sub">{item.sub}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Our Mission & Story -->
+    <section class="about-story container">
+      <div class="about-story__grid">
+        <div class="about-story__content">
+          <span class="about-section-tag">WHO WE ARE</span>
+          <h2 class="about-story__heading">Engineering for Teams That Can’t Afford Downtime</h2>
+          <p class="about-story__text">
+            Most technology agencies give you two extremes: either rigid off-the-shelf software with endless per-user pricing 
+            tiers, or overpriced consultants who deliver 80-page slide decks instead of functioning code.
+          </p>
+          <p class="about-story__text">
+            At Rakebig, we operate differently. We are engineers, sysadmins, and automation builders. We deploy production-ready 
+            solutions that you own outright—complete with full source code, hardened Docker containers, automated CI/CD pipelines, 
+            and proactive 24/7 monitoring.
+          </p>
+          <div class="about-story__highlights">
+            <div class="about-story__highlight-item">
+              <span class="about-story__check">✓</span>
+              <span>100% Intellectual Property &amp; Database Ownership</span>
+            </div>
+            <div class="about-story__highlight-item">
+              <span class="about-story__check">✓</span>
+              <span>No Per-User Subscriptions or License Locks</span>
+            </div>
+            <div class="about-story__highlight-item">
+              <span class="about-story__check">✓</span>
+              <span>Transparent Sprints with Verifiable Milestones</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-story__visual">
+          <div class="about-visual-card">
+            <div class="about-visual-card__header">
+              <div class="about-visual-card__dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="about-visual-card__title">rakebig-infrastructure-core.ts</span>
+            </div>
+            <div class="about-visual-card__body">
+              <p class="code-line"><span class="code-keyword">const</span> <span class="code-var">deployment</span> = &#123;</p>
+              <p class="code-line indent-1"><span class="code-prop">ownership</span>: <span class="code-str">"100% Client Owned"</span>,</p>
+              <p class="code-line indent-1"><span class="code-prop">cloudEnvironment</span>: <span class="code-str">"Bare-Metal / AWS / Hetzner"</span>,</p>
+              <p class="code-line indent-1"><span class="code-prop">containerization</span>: <span class="code-str">"Docker Swarm &amp; K8s"</span>,</p>
+              <p class="code-line indent-1"><span class="code-prop">aiWorkflows</span>: <span class="code-keyword">true</span>,</p>
+              <p class="code-line indent-1"><span class="code-prop">slaUptime</span>: <span class="code-num">99.9</span>,</p>
+              <p class="code-line indent-1"><span class="code-prop">supportWindow</span>: <span class="code-str">"24/7 Monitored"</span></p>
+              <p class="code-line">&#125;;</p>
+            </div>
+            <div class="about-visual-card__badge">
+              <span class="shield-icon">🛡️</span> Verified Production Grade Architecture
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="about-values">
+      <div class="container">
+        <div class="about-section-head">
+          <span class="about-section-tag">OUR PRINCIPLES</span>
+          <h2 class="about-section-title">Values That Drive Every Line of Code</h2>
+          <p class="about-section-sub">
+            We prioritize stability, performance, and long-term autonomy for every client we partner with.
+          </p>
+        </div>
+
+        <div class="about-values__grid">
+          {values.map((val) => (
+            <div class="about-value-card">
+              <div class="about-value-card__icon">
+                {val.icon === "code" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                )}
+                {val.icon === "bolt" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                )}
+                {val.icon === "shield" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                )}
+                {val.icon === "cloud" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                  </svg>
+                )}
+                {val.icon === "ai" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                  </svg>
+                )}
+                {val.icon === "team" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                )}
+              </div>
+              <h3 class="about-value-card__title">{val.title}</h3>
+              <p class="about-value-card__desc">{val.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey Milestones -->
+    <section class="about-journey container">
+      <div class="about-section-head">
+        <span class="about-section-tag">OUR JOURNEY</span>
+        <h2 class="about-section-title">Milestones in Our Evolution</h2>
+        <p class="about-section-sub">
+          From focused CRM customizations to full-scale enterprise open-source and autonomous AI infrastructure.
+        </p>
+      </div>
+
+      <div class="about-timeline">
+        {milestones.map((m, idx) => (
+          <div class="about-timeline__item">
+            <div class="about-timeline__marker">
+              <span class="about-timeline__number">0{idx + 1}</span>
+            </div>
+            <div class="about-timeline__content">
+              <span class="about-timeline__year">{m.year}</span>
+              <h3 class="about-timeline__title">{m.title}</h3>
+              <p class="about-timeline__desc">{m.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Global Offices & Presence -->
+    <section class="about-offices container">
+      <div class="about-section-head">
+        <span class="about-section-tag">GLOBAL REACH</span>
+        <h2 class="about-section-title">Where We Work &amp; Build</h2>
+        <p class="about-section-sub">
+          Global engineering with dedicated hubs in India and the United Kingdom.
+        </p>
+      </div>
+
+      <div class="about-offices__grid">
+        <!-- India HQ -->
+        <div class="about-office-card about-office-card--hq">
+          <div class="about-office-card__badge">GLOBAL HEADQUARTERS</div>
+          <h3 class="about-office-card__name">India HQ (Bhadra, Rajasthan)</h3>
+          <p class="about-office-card__address">{HEAD_OFFICE.fullAddress}</p>
+          <div class="about-office-card__details">
+            <div class="about-office-card__detail">
+              <strong>Direct Phone:</strong>
+              <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, "")}`}>{SUPPORT_PHONE}</a>
+            </div>
+            <div class="about-office-card__detail">
+              <strong>Tech Support:</strong>
+              <a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, "")}`}>{TECH_SUPPORT_PHONE}</a>
+            </div>
+            <div class="about-office-card__detail">
+              <strong>Email:</strong>
+              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+            </div>
+          </div>
+          <a href={HEAD_OFFICE.googleMapsUrl} target="_blank" rel="noopener noreferrer" class="about-office-card__map-link">
+            View on Google Maps →
+          </a>
+        </div>
+
+        <!-- UK Office -->
+        <div class="about-office-card">
+          <div class="about-office-card__badge about-office-card__badge--uk">UK ENTITY</div>
+          <h3 class="about-office-card__name">{UK_OFFICE.name}</h3>
+          <p class="about-office-card__address">{UK_OFFICE.fullAddress}</p>
+          <div class="about-office-card__details">
+            <div class="about-office-card__detail">
+              <strong>Email:</strong>
+              <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+            </div>
+            <div class="about-office-card__detail">
+              <strong>Service Coverage:</strong>
+              <span>UK &amp; European Enterprise Timezones</span>
+            </div>
+          </div>
+          <a href="/contact" class="about-office-card__map-link">
+            Contact UK Desk →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation CTA -->
+    <section class="about-cta container">
+      <div class="about-cta__card">
+        <div class="about-cta__glow"></div>
+        <div class="about-cta__content">
+          <span class="about-cta__badge">LET'S COLLABORATE</span>
+          <h2 class="about-cta__title">Ready to Partner With an Engineering Team That Ships?</h2>
+          <p class="about-cta__desc">
+            Book a complimentary 30-minute architecture review. We will evaluate your software requirements, 
+            recommend an open-source or custom stack, and outline a fixed-scope roadmap.
+          </p>
+          <div class="about-cta__actions">
+            <PrimaryButton href={BOOK_CONSULTATION_URL} external size="lg">
+              Book Technical Consultation
+            </PrimaryButton>
+            <a href="/case-studies" class="about-cta__btn-sec">
+              Read Case Studies
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .about-page {
+    background: #f8fafc;
+    color: #0f172a;
+    padding-bottom: 80px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Breadcrumb */
+  .about-page__breadcrumb {
+    padding-top: 24px;
+    padding-bottom: 12px;
+  }
+  .about-page__breadcrumb ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #64748b;
+  }
+  .about-page__breadcrumb a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+  .about-page__breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hero */
+  .about-hero {
+    padding: 40px 20px 60px;
+    text-align: center;
+  }
+  .about-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .about-hero__badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2563eb;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+  }
+
+  .about-hero__title {
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+    max-width: 900px;
+    margin: 0 auto 20px;
+  }
+  .about-hero__title span {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .about-hero__subtitle {
+    font-size: clamp(16px, 2.2vw, 19px);
+    line-height: 1.6;
+    color: #475569;
+    max-width: 800px;
+    margin: 0 auto 36px;
+  }
+  .about-hero__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  .about-hero__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 24px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .about-hero__btn-secondary:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
+  /* Stats */
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .about-stat-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  }
+  .about-stat-card__val {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    color: #2563eb;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .about-stat-card__label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+  .about-stat-card__sub {
+    font-size: 13px;
+    color: #64748b;
+  }
+
+  /* Story Section */
+  .about-story {
+    padding: 70px 20px;
+  }
+  .about-story__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .about-section-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .about-story__heading {
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 800;
+    line-height: 1.25;
+    color: #0f172a;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .about-story__text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #475569;
+    margin-bottom: 16px;
+  }
+  .about-story__highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .about-story__highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 15px;
+  }
+  .about-story__check {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* Code visual */
+  .about-visual-card {
+    background: #0f172a;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+    overflow: hidden;
+    border: 1px solid #1e293b;
+  }
+  .about-visual-card__header {
+    background: #1e293b;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .about-visual-card__dots {
+    display: flex;
+    gap: 6px;
+  }
+  .about-visual-card__dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #475569;
+  }
+  .about-visual-card__dots span:nth-child(1) { background: #ef4444; }
+  .about-visual-card__dots span:nth-child(2) { background: #eab308; }
+  .about-visual-card__dots span:nth-child(3) { background: #22c55e; }
+  .about-visual-card__title {
+    font-family: monospace;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+  .about-visual-card__body {
+    padding: 24px;
+    font-family: monospace;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .code-line { margin: 0; }
+  .indent-1 { padding-left: 20px; }
+  .code-keyword { color: #f43f5e; font-weight: 600; }
+  .code-var { color: #38bdf8; }
+  .code-prop { color: #a5b4fc; }
+  .code-str { color: #34d399; }
+  .code-num { color: #fbbf24; }
+  .about-visual-card__badge {
+    background: rgba(37, 99, 235, 0.15);
+    border-top: 1px solid rgba(37, 99, 235, 0.3);
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #93c5fd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Values */
+  .about-values {
+    background: #fff;
+    padding: 80px 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .about-section-head {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+  }
+  .about-section-title {
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .about-section-sub {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+  .about-values__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .about-value-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px 24px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .about-value-card:hover {
+    transform: translateY(-3px);
+    border-color: #93c5fd;
+  }
+  .about-value-card__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .about-value-card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .about-value-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+  }
+  .about-value-card__desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* Journey */
+  .about-journey {
+    padding: 80px 20px;
+  }
+  .about-timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .about-timeline__item {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+  }
+  .about-timeline__marker {
+    display: inline-block;
+    background: #eff6ff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    margin-bottom: 16px;
+  }
+  .about-timeline__number {
+    font-weight: 800;
+    font-size: 13px;
+    color: #2563eb;
+  }
+  .about-timeline__year {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .about-timeline__title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+  }
+  .about-timeline__desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* Offices */
+  .about-offices {
+    padding: 30px 20px 70px;
+  }
+  .about-offices__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+  .about-office-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  }
+  .about-office-card--hq {
+    border-color: #bfdbfe;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+  }
+  .about-office-card__badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #dbeafe;
+    color: #1e40af;
+    margin-bottom: 14px;
+  }
+  .about-office-card__badge--uk {
+    background: #f1f5f9;
+    color: #475569;
+  }
+  .about-office-card__name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+  }
+  .about-office-card__address {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #64748b;
+    margin-bottom: 20px;
+  }
+  .about-office-card__details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .about-office-card__detail {
+    display: flex;
+    gap: 8px;
+    color: #475569;
+  }
+  .about-office-card__detail strong {
+    color: #0f172a;
+  }
+  .about-office-card__detail a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .about-office-card__detail a:hover {
+    text-decoration: underline;
+  }
+  .about-office-card__map-link {
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2563eb;
+    text-decoration: none;
+  }
+  .about-office-card__map-link:hover {
+    text-decoration: underline;
+  }
+
+  /* CTA */
+  .about-cta {
+    padding: 20px 20px 40px;
+  }
+  .about-cta__card {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+  }
+  .about-cta__glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-cta__content {
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  .about-cta__badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #60a5fa;
+    margin-bottom: 16px;
+  }
+  .about-cta__title {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+  }
+  .about-cta__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #94a3b8;
+    margin-bottom: 32px;
+  }
+  .about-cta__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .about-cta__btn-sec {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 24px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .about-cta__btn-sec:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  @media (max-width: 860px) {
+    .about-story__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

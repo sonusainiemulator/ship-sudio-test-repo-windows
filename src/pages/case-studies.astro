@@ -1,0 +1,519 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PrimaryButton from "../components/PrimaryButton.astro";
+import {
+  SITE_NAME,
+  SITE_URL,
+  SUPPORT_PHONE,
+  BOOK_CONSULTATION_URL,
+} from "../consts";
+
+const pageTitle = `Client Case Studies & Enterprise Outcomes | ${SITE_NAME}`;
+const pageDescription =
+  "Explore how Rakebig Services engineers mission-critical software, executes zero-downtime server migrations, deploys open-source Nextcloud/Rocket.Chat clusters, and automates business workflows with AI.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: `${SITE_URL}/case-studies`,
+  },
+];
+
+const caseStudies = [
+  {
+    tag: "Open-Source & Cloud",
+    client: "Global Logistics & Freight Group",
+    title: "Migrating 4,500+ Seats from Google Workspace to Self-Hosted Nextcloud Enterprise",
+    metrics: [
+      { label: "Cost Reduction", value: "82%" },
+      { label: "Data Sovereignty", value: "100%" },
+      { label: "Sync Latency", value: "< 45ms" },
+    ],
+    challenge:
+      "A fast-growing freight network was facing exponential per-seat SaaS license escalation on Google Drive, alongside strict European data sovereignty mandates forbidding storage of customs manifests on US-controlled public cloud regions.",
+    solution:
+      "Engineered a high-availability Nextcloud cluster on dedicated bare-metal servers backed by MinIO S3 object storage, Redis cluster caching, and OnlyOffice real-time document collaboration with SAML SSO.",
+    architecture: ["Nextcloud Enterprise", "Docker Swarm", "MinIO S3", "Redis Cluster", "OnlyOffice", "PostgreSQL"],
+    quote:
+      "“Rakebig eliminated our staggering monthly SaaS bill and gave us total ownership over our files. The performance is faster than Google Drive ever was.”",
+  },
+  {
+    tag: "Server Migrations",
+    client: "High-Volume B2B Marketplace",
+    title: "Zero-Downtime Migration of 18TB Database & Product Media to AWS Cloud",
+    metrics: [
+      { label: "Unplanned Downtime", value: "0 sec" },
+      { label: "Query Speedup", value: "4.2x" },
+      { label: "Data Loss", value: "0 bytes" },
+    ],
+    challenge:
+      "The client's legacy VPS hosting was crashing under peak sale events. With over 18TB of live product catalogs, order ledgers, and media files, a standard offline database transfer would have meant 36+ hours of business halt.",
+    solution:
+      "Configured dual-master MySQL replication with binlog synchronization and multi-threaded rsync streaming. Conducted automated integrity checksums and executed a seamless DNS cutover with zero cart abandonments.",
+    architecture: ["AWS RDS Aurora", "MySQL Replication", "Cloudflare DNS", "Nginx Reverse Proxy", "Rsync Streaming"],
+    quote:
+      "“We cut over in the middle of our busiest quarter without a single dropped transaction or customer noticing. Textbook execution.”",
+  },
+  {
+    tag: "AI Automation",
+    client: "Financial Advisory & Wealth Firm",
+    title: "Automating 80% of KYC Document Extraction & WhatsApp Lead Triage with AI Agents",
+    metrics: [
+      { label: "Ticket Triage Automated", value: "78%" },
+      { label: "Lead Response Time", value: "< 90s" },
+      { label: "Extraction Accuracy", value: "99.4%" },
+    ],
+    challenge:
+      "Wealth advisors spent 4+ hours daily manually reading bank statements, tax documents, and identity cards received across email and WhatsApp, creating massive bottlenecks in client onboarding.",
+    solution:
+      "Designed an autonomous multi-agent pipeline using vision LLMs and OCR. The system extracts tabular bank records, verifies tax identification numbers against regulatory registries, and populates client profiles directly in Perfex CRM.",
+    architecture: ["OpenAI & DeepSeek APIs", "FastAPI Python Microservice", "WhatsApp Cloud API", "Perfex CRM Webhooks", "Docker"],
+    quote:
+      "“Our onboarding cycle dropped from 3 days to 15 minutes. It transformed our operational efficiency overnight.”",
+  },
+  {
+    tag: "Mobile & Clones",
+    client: "Regional Quick-Commerce Operator",
+    title: "Launching a Hyperlocal 10-Minute Grocery Super-App Scaled to 35,000 Daily Orders",
+    metrics: [
+      { label: "Peak Daily Orders", value: "35,000+" },
+      { label: "Order Dispatch Time", value: "8 min avg" },
+      { label: "Peak App Uptime", value: "99.98%" },
+    ],
+    challenge:
+      "Needed to compete against legacy supermarket chains by launching a turn-key quick-commerce ecosystem with customer apps, dark-store warehouse picking tablets, and rider routing.",
+    solution:
+      "Built and deployed a customized quick-commerce platform using Flutter cross-platform mobile apps, Redis geo-spatial driver tracking, and an automated POS sync engine connecting 14 dark stores.",
+    architecture: ["Flutter iOS/Android", "Node.js & Redis Geo", "PostgreSQL", "Socket.io", "Google Maps SDK"],
+    quote:
+      "“We went from kickoff to live store deployments in 7 weeks. 100% source code ownership gave us full independence.”",
+  },
+  {
+    tag: "Security & SecOps",
+    client: "Healthcare IT & Telemedicine Provider",
+    title: "Air-Gapped Rocket.Chat & Jitsi Meet Deployment with HIPAA Compliance",
+    metrics: [
+      { label: "Third-Party SaaS Calls", value: "0" },
+      { label: "HIPAA Audit Pass", value: "100%" },
+      { label: "Active Telehealth Rooms", value: "12,000+/mo" },
+    ],
+    challenge:
+      "Strict healthcare privacy regulations prohibited patient consultation recordings or clinical chat logs from flowing through commercial clouds like Zoom or Slack.",
+    solution:
+      "Deployed an isolated, air-gapped communication stack combining hardened Rocket.Chat for clinical collaboration and Jitsi Meet for WebRTC encrypted video consultations with automated session shredding.",
+    architecture: ["Rocket.Chat", "Jitsi Meet WebRTC", "CrowdSec WAF", "WireGuard VPN", "Debian Hardened OS"],
+    quote:
+      "“Our clinicians conduct thousands of private patient consultations monthly with full confidence that our data never leaves our sovereign perimeter.”",
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd}>
+  <SiteHeader />
+
+  <main class="case-studies-page">
+    <!-- Breadcrumb -->
+    <nav class="case-breadcrumb container" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page">Case Studies</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="case-hero container">
+      <div class="case-hero__badge">
+        <span>VERIFIED CLIENT OUTCOMES</span>
+      </div>
+      <h1 class="case-hero__title">
+        Real Engineering. <span>Measurable Impact.</span> Zero Theoretical Fluff.
+      </h1>
+      <p class="case-hero__sub">
+        Explore how Rakebig builds, scales, and safeguards infrastructure for organizations worldwide—from zero-downtime 
+        cloud migrations to air-gapped open-source deployments and automated AI pipelines.
+      </p>
+    </section>
+
+    <!-- Case Studies List -->
+    <section class="case-list container">
+      <div class="case-grid">
+        {caseStudies.map((cs) => (
+          <article class="case-card">
+            <div class="case-card__header">
+              <span class="case-card__tag">{cs.tag}</span>
+              <span class="case-card__client">{cs.client}</span>
+            </div>
+
+            <h2 class="case-card__title">{cs.title}</h2>
+
+            <!-- Metrics Strip -->
+            <div class="case-metrics">
+              {cs.metrics.map((m) => (
+                <div class="case-metric-box">
+                  <strong class="case-metric-val">{m.value}</strong>
+                  <span class="case-metric-lbl">{m.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <!-- Problem / Solution Blocks -->
+            <div class="case-body">
+              <div class="case-body__block">
+                <h3 class="case-body__subheading">The Challenge</h3>
+                <p>{cs.challenge}</p>
+              </div>
+              <div class="case-body__block">
+                <h3 class="case-body__subheading">The Engineering Solution</h3>
+                <p>{cs.solution}</p>
+              </div>
+            </div>
+
+            <!-- Architecture Stack -->
+            <div class="case-tech">
+              <span class="case-tech__label">Architecture &amp; Stack:</span>
+              <div class="case-tech__tags">
+                {cs.architecture.map((tech) => (
+                  <span class="case-tech__badge">{tech}</span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Client Quote -->
+            <blockquote class="case-quote">
+              <p>{cs.quote}</p>
+            </blockquote>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="case-cta container">
+      <div class="case-cta__card">
+        <div class="case-cta__glow"></div>
+        <div class="case-cta__content">
+          <span class="case-cta__badge">START YOUR PROJECT</span>
+          <h2 class="case-cta__title">Have an Architecture or Migration Challenge?</h2>
+          <p class="case-cta__desc">
+            Speak directly with our senior cloud architects and software engineers. We’ll review your systems, 
+            diagnose bottlenecks, and present a hardened implementation roadmap.
+          </p>
+          <div class="case-cta__actions">
+            <PrimaryButton href={BOOK_CONSULTATION_URL} external size="lg">
+              Book Technical Consultation
+            </PrimaryButton>
+            <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, "")}`} class="case-cta__btn-sec">
+              Call Support: {SUPPORT_PHONE}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .case-studies-page {
+    background: #f8fafc;
+    color: #0f172a;
+    padding-bottom: 80px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Breadcrumb */
+  .case-breadcrumb {
+    padding-top: 24px;
+    padding-bottom: 12px;
+  }
+  .case-breadcrumb ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #64748b;
+  }
+  .case-breadcrumb a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+  .case-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hero */
+  .case-hero {
+    text-align: center;
+    padding: 40px 20px 50px;
+    max-width: 900px;
+  }
+  .case-hero__badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 18px;
+  }
+  .case-hero__title {
+    font-size: clamp(32px, 4.5vw, 50px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+    margin-bottom: 18px;
+  }
+  .case-hero__title span {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .case-hero__sub {
+    font-size: clamp(16px, 2vw, 19px);
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* Grid */
+  .case-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    margin-top: 20px;
+  }
+  .case-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .case-card:hover {
+    border-color: #93c5fd;
+    transform: translateY(-2px);
+  }
+  .case-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .case-card__tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .case-card__client {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #64748b;
+  }
+  .case-card__title {
+    font-size: clamp(22px, 2.8vw, 28px);
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  /* Metrics */
+  .case-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+  }
+  .case-metric-box {
+    text-align: center;
+  }
+  .case-metric-val {
+    display: block;
+    font-size: 30px;
+    font-weight: 800;
+    color: #2563eb;
+    letter-spacing: -0.02em;
+    margin-bottom: 2px;
+  }
+  .case-metric-lbl {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  /* Body */
+  .case-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 24px;
+  }
+  .case-body__subheading {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .case-body__block p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #475569;
+    margin: 0;
+  }
+
+  /* Tech */
+  .case-tech {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .case-tech__label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #64748b;
+  }
+  .case-tech__tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .case-tech__badge {
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+
+  /* Quote */
+  .case-quote {
+    margin: 0;
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    font-style: italic;
+    color: #1e40af;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .case-quote p { margin: 0; }
+
+  /* CTA */
+  .case-cta {
+    margin-top: 60px;
+  }
+  .case-cta__card {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+  }
+  .case-cta__glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .case-cta__content {
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  .case-cta__badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #60a5fa;
+    margin-bottom: 16px;
+  }
+  .case-cta__title {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+  }
+  .case-cta__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #94a3b8;
+    margin-bottom: 32px;
+  }
+  .case-cta__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .case-cta__btn-sec {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 24px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .case-cta__btn-sec:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  @media (max-width: 768px) {
+    .case-body {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

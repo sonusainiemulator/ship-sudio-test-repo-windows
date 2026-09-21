@@ -1,0 +1,652 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PrimaryButton from "../components/PrimaryButton.astro";
+import {
+  SITE_NAME,
+  SITE_URL,
+  SUPPORT_EMAIL,
+  SUPPORT_PHONE,
+  BOOK_CONSULTATION_URL,
+} from "../consts";
+
+const pageTitle = `Careers & Open Positions | ${SITE_NAME}`;
+const pageDescription =
+  "Join Rakebig Services. Explore remote engineering and DevOps careers building enterprise open-source software, cloud infrastructure, and autonomous AI automation pipelines.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: `${SITE_URL}/careers`,
+  },
+];
+
+const perks = [
+  {
+    icon: "globe",
+    title: "Remote-First Flexibility",
+    desc: "Work from anywhere in India, the UK, or worldwide. We judge outcomes, clean code, and reliability—not clock-in hours.",
+  },
+  {
+    icon: "cpu",
+    title: "Modern Engineering Stack",
+    desc: "Work with Docker, Kubernetes, Astro, Laravel, Vue 3, Flutter, PostgreSQL, Redis, and cutting-edge open-weight LLMs.",
+  },
+  {
+    icon: "rocket",
+    title: "High Ownership, Zero Red Tape",
+    desc: "No multi-layered corporate bureaucracy. You architect solutions directly with tech leads and deploy real systems.",
+  },
+  {
+    icon: "book",
+    title: "Learning & Certification Stipend",
+    desc: "Annual budget for AWS, Linux Foundation, or Kubernetes certifications, technical courses, and developer tooling.",
+  },
+  {
+    icon: "shield",
+    title: "Transparent & Stable",
+    desc: "Funded by profitable client revenue and high-retention enterprise SLAs with dependable, competitive compensation.",
+  },
+  {
+    icon: "heart",
+    title: "Respect for Focus Time",
+    desc: "Async-first communication via Mattermost and Git. Minimal meetings so you can stay in the flow state.",
+  },
+];
+
+const jobs = [
+  {
+    title: "Senior Full-Stack Engineer",
+    dept: "Software Engineering",
+    type: "Full-Time · 100% Remote",
+    exp: "3+ Years Experience",
+    stack: ["Laravel", "Vue.js", "TypeScript", "PostgreSQL", "Docker", "REST APIs"],
+    desc: "Architect and build high-performance client portals, custom SaaS modules, and data-intensive business systems.",
+  },
+  {
+    title: "Cloud & DevOps Architect",
+    dept: "Infrastructure & SecOps",
+    type: "Full-Time · 100% Remote",
+    exp: "4+ Years Experience",
+    stack: ["Docker Swarm", "Kubernetes", "Linux / Debian", "CrowdSec", "Prometheus", "Hetzner / AWS"],
+    desc: "Design zero-downtime server migration pipelines, deploy hardened open-source clusters (Nextcloud, Rocket.Chat), and maintain 99.9% uptime SLAs.",
+  },
+  {
+    title: "AI & Workflow Automation Engineer",
+    dept: "AI Lab",
+    type: "Full-Time · 100% Remote",
+    exp: "2+ Years Experience",
+    stack: ["Python", "FastAPI", "OpenAI / Anthropic APIs", "LangChain / LangGraph", "Vector DBs"],
+    desc: "Engineer practical multi-agent workflows, OCR document extraction microservices, and WhatsApp conversational AI integrations.",
+  },
+  {
+    title: "Lead Perfex CRM Developer",
+    dept: "Platform Extensions",
+    type: "Full-Time · 100% Remote",
+    exp: "3+ Years Experience",
+    stack: ["PHP 8.x", "CodeIgniter", "MySQL", "Perfex Hooks API", "Stripe / Razorpay"],
+    desc: "Own our core Perfex CRM module ecosystem—building bespoke multi-tenant SaaS features, automated billing pipelines, and client portals.",
+  },
+  {
+    title: "QA Automation & Performance Specialist",
+    dept: "Quality Engineering",
+    type: "Full-Time · 100% Remote",
+    exp: "2+ Years Experience",
+    stack: ["Playwright", "Jest", "k6 / Locust", "GitHub Actions", "API Testing"],
+    desc: "Ensure rock-solid reliability across web and mobile clone apps through automated regression suites and stress testing under peak load.",
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription} jsonLd={jsonLd}>
+  <SiteHeader />
+
+  <main class="careers-page">
+    <!-- Breadcrumb -->
+    <nav class="careers-breadcrumb container" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page">Careers</li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <section class="careers-hero container">
+      <div class="careers-hero__badge">
+        <span class="careers-hero__badge-dot"></span>
+        <span>WE ARE HIRING</span>
+      </div>
+      <h1 class="careers-hero__title">
+        Build Systems That Power <span>Real Enterprises Worldwide</span>.
+      </h1>
+      <p class="careers-hero__sub">
+        Join an autonomous, remote-first team of software engineers, cloud architects, and AI automation specialists. 
+        We build practical software with 100% client code ownership, open-source integrity, and zero fluff.
+      </p>
+      <div class="careers-hero__cta">
+        <a href="#open-positions" class="careers-hero__btn-scroll">
+          Explore {jobs.length} Open Roles ↓
+        </a>
+      </div>
+    </section>
+
+    <!-- Perks / Culture -->
+    <section class="careers-perks">
+      <div class="container">
+        <div class="careers-section-head">
+          <span class="careers-section-tag">CULTURE &amp; BENEFITS</span>
+          <h2 class="careers-section-title">Why Engineers Love Building at Rakebig</h2>
+          <p class="careers-section-sub">
+            We’ve structured our agency around what real engineers care about: autonomy, clean tooling, and deep focus.
+          </p>
+        </div>
+
+        <div class="careers-perks__grid">
+          {perks.map((p) => (
+            <div class="careers-perk-card">
+              <div class="careers-perk-card__icon">
+                {p.icon === "globe" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                )}
+                {p.icon === "cpu" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                  </svg>
+                )}
+                {p.icon === "rocket" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                  </svg>
+                )}
+                {p.icon === "book" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                )}
+                {p.icon === "shield" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                )}
+                {p.icon === "heart" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                )}
+              </div>
+              <h3 class="careers-perk-card__title">{p.title}</h3>
+              <p class="careers-perk-card__desc">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Open Roles -->
+    <section id="open-positions" class="careers-roles container">
+      <div class="careers-section-head">
+        <span class="careers-section-tag">OPEN POSITIONS</span>
+        <h2 class="careers-section-title">Current Opportunities</h2>
+        <p class="careers-section-sub">
+          All positions are 100% remote. We accept applications on a rolling basis.
+        </p>
+      </div>
+
+      <div class="careers-jobs-list">
+        {jobs.map((job) => (
+          <div class="careers-job-card">
+            <div class="careers-job-card__main">
+              <div class="careers-job-card__meta">
+                <span class="careers-job-card__dept">{job.dept}</span>
+                <span class="careers-job-card__type">{job.type}</span>
+                <span class="careers-job-card__exp">{job.exp}</span>
+              </div>
+              <h3 class="careers-job-card__title">{job.title}</h3>
+              <p class="careers-job-card__desc">{job.desc}</p>
+              <div class="careers-job-card__stack">
+                {job.stack.map((s) => (
+                  <span class="careers-stack-tag">{s}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="careers-job-card__action">
+              <a
+                href={`mailto:${SUPPORT_EMAIL}?subject=Application for ${encodeURIComponent(job.title)} — [Your Name]&body=Hi Rakebig Team,%0D%0A%0D%0AI'm excited to apply for the ${encodeURIComponent(job.title)} role.%0D%0A%0D%0AGitHub Profile: %0D%0APortfolio / LinkedIn: %0D%0ASummary of Relevant Experience: `}
+                class="careers-apply-btn"
+              >
+                Apply for Role →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- How We Hire -->
+    <section class="careers-process container">
+      <div class="careers-process__card">
+        <h2 class="careers-process__title">Our Hiring Process: Fast &amp; Pragmatic</h2>
+        <p class="careers-process__sub">
+          We don’t do 8-round interview loops or useless whiteboard puzzles. Our hiring process is simple:
+        </p>
+
+        <div class="careers-process__steps">
+          <div class="careers-step">
+            <span class="careers-step__num">1</span>
+            <strong>Review</strong>
+            <p>We review your GitHub, recent code repos, and portfolio within 48 hours.</p>
+          </div>
+          <div class="careers-step">
+            <span class="careers-step__num">2</span>
+            <strong>Technical Chat</strong>
+            <p>A 30-minute conversation with our technical lead discussing past architectures.</p>
+          </div>
+          <div class="careers-step">
+            <span class="careers-step__num">3</span>
+            <strong>Paid Real-World Task</strong>
+            <p>A short, paid trial task reflective of our actual day-to-day problems.</p>
+          </div>
+          <div class="careers-step">
+            <span class="careers-step__num">4</span>
+            <strong>Offer &amp; Onboard</strong>
+            <p>Transparent compensation offer and immediate onboarding into our team.</p>
+          </div>
+        </div>
+
+        <div class="careers-process__footer">
+          <p>Don’t see a specific role that fits? We’re always eager to meet outstanding talent.</p>
+          <a href={`mailto:${SUPPORT_EMAIL}?subject=General Engineering Application`} class="careers-general-link">
+            Send General Application to {SUPPORT_EMAIL} →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .careers-page {
+    background: #f8fafc;
+    color: #0f172a;
+    padding-bottom: 80px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Breadcrumb */
+  .careers-breadcrumb {
+    padding-top: 24px;
+    padding-bottom: 12px;
+  }
+  .careers-breadcrumb ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #64748b;
+  }
+  .careers-breadcrumb a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+  .careers-breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  /* Hero */
+  .careers-hero {
+    text-align: center;
+    padding: 40px 20px 60px;
+    max-width: 900px;
+  }
+  .careers-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    color: #15803d;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .careers-hero__badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #16a34a;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+  }
+
+  .careers-hero__title {
+    font-size: clamp(32px, 4.8vw, 52px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+    margin-bottom: 20px;
+  }
+  .careers-hero__title span {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .careers-hero__sub {
+    font-size: clamp(16px, 2.2vw, 19px);
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 30px;
+  }
+  .careers-hero__btn-scroll {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 26px;
+    border-radius: 12px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .careers-hero__btn-scroll:hover {
+    background: #1d4ed8;
+  }
+
+  /* Perks */
+  .careers-perks {
+    background: #fff;
+    padding: 80px 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .careers-section-head {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+  }
+  .careers-section-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .careers-section-title {
+    font-size: clamp(26px, 3.5vw, 36px);
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .careers-section-sub {
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+  .careers-perks__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .careers-perk-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px 24px;
+    transition: transform 0.2s ease;
+  }
+  .careers-perk-card:hover {
+    transform: translateY(-3px);
+  }
+  .careers-perk-card__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .careers-perk-card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .careers-perk-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+  }
+  .careers-perk-card__desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* Roles */
+  .careers-roles {
+    padding: 80px 20px 60px;
+  }
+  .careers-jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .careers-job-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .careers-job-card:hover {
+    border-color: #93c5fd;
+    transform: translateY(-2px);
+  }
+  .careers-job-card__main {
+    flex: 1;
+  }
+  .careers-job-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .careers-job-card__dept {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 3px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .careers-job-card__type,
+  .careers-job-card__exp {
+    font-size: 13px;
+    color: #64748b;
+    font-weight: 500;
+  }
+  .careers-job-card__title {
+    font-size: 21px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 8px;
+  }
+  .careers-job-card__desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 14px;
+  }
+  .careers-job-card__stack {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .careers-stack-tag {
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 6px;
+  }
+  .careers-job-card__action {
+    flex-shrink: 0;
+  }
+  .careers-apply-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 22px;
+    border-radius: 12px;
+    background: #0f172a;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .careers-apply-btn:hover {
+    background: #2563eb;
+  }
+
+  /* Process */
+  .careers-process {
+    padding: 20px 20px 40px;
+  }
+  .careers-process__card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  }
+  .careers-process__title {
+    font-size: clamp(24px, 3.5vw, 32px);
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .careers-process__sub {
+    font-size: 16px;
+    color: #64748b;
+    max-width: 650px;
+    margin: 0 auto 40px;
+  }
+  .careers-process__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+  .careers-step {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px 20px;
+  }
+  .careers-step__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .careers-step strong {
+    display: block;
+    font-size: 16px;
+    color: #0f172a;
+    margin-bottom: 6px;
+  }
+  .careers-step p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0;
+  }
+  .careers-process__footer {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 24px;
+    font-size: 14.5px;
+    color: #64748b;
+  }
+  .careers-general-link {
+    display: inline-block;
+    color: #2563eb;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .careers-general-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .careers-job-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

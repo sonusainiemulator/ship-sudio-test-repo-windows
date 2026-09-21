@@ -155,11 +155,7 @@ const openSourceGroups = [
   },
 ];
 
-const company = [
-  { title: "About Us", body: "Who we are and how we build for growing teams.", href: "/" },
-  { title: "Case Studies", body: "Real projects, real outcomes for ops and product teams.", href: "/" },
-  { title: "Careers", body: "Join a team that ships practical systems, not decks.", href: "/" },
-];
+
 ---
 
 <header class="site-header" data-site-header>
@@ -454,32 +450,7 @@ const company = [
         </div>
       </li>
 
-      <li class="site-header__item" data-menu="company">
-        <button
-          type="button"
-          class="site-header__trigger"
-          aria-expanded="false"
-          aria-controls="menu-company"
-          data-menu-trigger
-        >
-          Company
-          <svg class="site-header__caret" viewBox="0 0 12 12" aria-hidden="true">
-            <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-        <div class="site-header__panel site-header__panel--simple" id="menu-company" data-menu-panel hidden>
-          <ul class="site-header__simple-list">
-            {company.map((item) => (
-              <li>
-                <a href={item.href} class="site-header__simple-link">
-                  <strong>{item.title}</strong>
-                  <span>{item.body}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </li>
+
 
     </ul>
 

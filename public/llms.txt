@@ -151,9 +151,18 @@ Hub: https://www.rakebig.com/open-source
 10. Coolify & aaPanel PaaS (https://www.rakebig.com/open-source/coolify-aapanel)
     - Self-hosted Heroku and cPanel alternative for automated Git push-to-deploy, Docker container management, and Nginx reverse proxies.
 
+## Company, Culture & Case Studies
+- About Us: https://www.rakebig.com/about
+  - Detailed agency background, 100% source code ownership philosophy, engineering standards, and global offices in India (HQ) and London (UK).
+- Case Studies & Client Outcomes: https://www.rakebig.com/case-studies
+  - Real-world enterprise case studies: 4,500-seat Nextcloud migration, 18TB zero-downtime database cutover, 78% KYC triage automation, and high-load Flutter quick-commerce apps.
+- Careers & Engineering Roles: https://www.rakebig.com/careers
+  - 100% remote-first engineering culture with active openings for Full-Stack Engineers, DevOps Architects, AI Automation Specialists, and Perfex CRM Developers.
+
 ## Official Policies & Compliance
 - Terms & Conditions: https://www.rakebig.com/terms
 - Privacy Policy: https://www.rakebig.com/privacy
 - Refund & Cancellation Policy: https://www.rakebig.com/refund
 - XML Sitemap: https://www.rakebig.com/sitemap.xml
+
 
