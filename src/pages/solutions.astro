@@ -7,6 +7,7 @@ import PrimaryButton from "../components/PrimaryButton.astro";
 import MagneticArrowCta from "../components/MagneticArrowCta.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { BOOK_CONSULTATION_URL } from "../consts";
+import { solutions } from "../data/solutions";
 
 const footerCols = [
   {
@@ -107,6 +108,40 @@ const footerCols = [
           panelBlob="#8fa8e6"
           ctaHref="/services/cloud-deployment-devops"
         />
+      </div>
+    </section>
+
+    <!-- ============ ALL SOLUTIONS CATALOG ============ -->
+    <section class="sol-catalog">
+      <div class="container">
+        <div class="sol-catalog__head reveal">
+          <span class="eyebrow eyebrow--mark">
+            <img class="ring-mark" src="/assets/frame.svg" alt="" width="24" height="24" />
+            AI Solutions Catalog
+          </span>
+          <h2 class="sol-catalog__title">Autonomous AI systems built for real operations</h2>
+          <p class="sol-catalog__desc">
+            Explore our specialized AI applications, document extractors, and workflow pipelines built to scale company operations.
+          </p>
+        </div>
+
+        <div class="sol-catalog__grid reveal-stagger">
+          {solutions.map((s) => (
+            <a href={`/solutions/${s.slug}`} class="sol-catalog-card">
+              <div class="sol-catalog-card__top">
+                <span class="sol-catalog-card__chip" style={`background:${s.tintColor};color:${s.accentColor}`}>
+                  {s.category}
+                </span>
+                <span class="sol-catalog-card__arrow" aria-hidden="true">→</span>
+              </div>
+              <h3 class="sol-catalog-card__name">{s.name}</h3>
+              <p class="sol-catalog-card__summary">{s.shortSummary}</p>
+              <div class="sol-catalog-card__footer">
+                <span class="sol-catalog-card__link">Explore solution →</span>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -273,6 +308,112 @@ const footerCols = [
     transition: color 0.15s ease;
   }
   .footer__col a:hover { color: var(--color-ink); }
+
+  /* ---------- SOLUTIONS CATALOG SECTION ---------- */
+  .sol-catalog {
+    padding: 96px 0 64px;
+    background: #f8fafc;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+  }
+  .sol-catalog__head {
+    max-width: 680px;
+    margin-bottom: 48px;
+  }
+  .sol-catalog__title {
+    font-family: var(--font-display, "Tobias TRIAL", serif);
+    font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin: 12px 0 16px;
+    color: var(--color-ink);
+  }
+  .sol-catalog__desc {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0;
+  }
+  .sol-catalog__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .sol-catalog-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 28px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .sol-catalog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    border-color: #3b82f6;
+  }
+  .sol-catalog-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .sol-catalog-card__chip {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .sol-catalog-card__arrow {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+  }
+  .sol-catalog-card:hover .sol-catalog-card__arrow {
+    transform: translateX(4px);
+  }
+  .sol-catalog-card__name {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #0f172a;
+  }
+  .sol-catalog-card__summary {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #64748b;
+    flex-grow: 1;
+  }
+  .sol-catalog-card__footer {
+    margin-top: 10px;
+    padding-top: 14px;
+    border-top: 1px solid #f1f5f9;
+  }
+  .sol-catalog-card__link {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2563eb;
+  }
+
+  @media (max-width: 1024px) {
+    .sol-catalog__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 680px) {
+    .sol-catalog__grid {
+      grid-template-columns: 1fr;
+    }
+  }
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 1000px) {

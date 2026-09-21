@@ -57,6 +57,29 @@ Rakebig Services (https://www.rakebig.com) is an engineering and AI automation a
 
 12. IT Consulting (https://www.rakebig.com/services/it-consulting)
     - Architectural reviews, tech audits, security compliance, and technology roadmaps.
+## AI Solutions & Autonomous Agents
+Hub: https://www.rakebig.com/solutions
+
+1. AI Business Automation (https://www.rakebig.com/solutions/ai-business-automation)
+   - Route tickets, triage inbox messages, draft business reports, and automate cross-app workflows with AI.
+
+2. App Publish Solution (https://www.rakebig.com/solutions/app-publish-solution)
+   - Store compliance, automated iOS/Android build pipelines, and 24x7 AI support agents managing user reviews.
+
+3. AI Assistants & Chatbots (https://www.rakebig.com/solutions/ai-assistants-chatbots)
+   - Multi-channel conversational AI trained on company knowledge, handling WhatsApp, web chat, and Zendesk 24x7.
+
+4. Document & Data Extraction (https://www.rakebig.com/solutions/document-data-extraction)
+   - Zero-shot unstructured parsing converting invoices, PDFs, statements, and receipts into validated JSON/database records.
+
+5. Custom AI Integrations (https://www.rakebig.com/solutions/custom-ai-integrations)
+   - Embed OpenAI, Anthropic, Gemini, DeepSeek, and local LLMs into proprietary enterprise stacks and databases.
+
+6. AI Workflow Automation (https://www.rakebig.com/solutions/ai-workflow-automation)
+   - Autonomous multi-agent pipelines with human-in-the-loop approvals, routing tasks seamlessly across enterprise tools.
+
+7. AI Strategy & Consulting (https://www.rakebig.com/solutions/ai-strategy-consulting)
+   - Pragmatic AI feasibility audits, ROI calculations, vendor benchmarking, and technical roadmaps.
 
 ## Official Policies & Compliance
 - Terms & Conditions: https://www.rakebig.com/terms

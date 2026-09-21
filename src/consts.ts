@@ -18,8 +18,8 @@ export const BOOK_CONSULTATION_URL = "https://cal.com/rakebigservices";
 
 // Official contact & support email used across legal pages and footer
 export const SUPPORT_EMAIL = "support@rakebig.com";
-export const SUPPORT_PHONE = "+91 97722 34567";
-export const TECH_SUPPORT_PHONE = "+91 97722 34568";
+export const SUPPORT_PHONE = "+91 7827408866";
+export const TECH_SUPPORT_PHONE = "+91 9782533298";
 
 // Official social media links (username: rakebigservices across all platforms)
 export const SOCIAL_LINKS = {

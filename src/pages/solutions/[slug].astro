@@ -1,0 +1,836 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import PrimaryButton from "../../components/PrimaryButton.astro";
+import { solutions } from "../../data/solutions";
+import { BOOK_CONSULTATION_URL, SITE_NAME, SITE_URL } from "../../consts";
+import type { SolutionItem } from "../../data/solutions";
+
+export function getStaticPaths() {
+  return solutions.map((solution) => ({
+    params: { slug: solution.slug },
+    props: { solution },
+  }));
+}
+
+interface Props {
+  solution: SolutionItem;
+}
+
+const { solution } = Astro.props;
+const canonical = `/solutions/${solution.slug}`;
+const pageTitle = `${solution.name} — AI Solutions | ${SITE_NAME}`;
+
+const schemaBase = { "@context": "https://schema.org" };
+const crumbs = [
+  { name: "Home", item: "/" },
+  { name: "Solutions", item: "/solutions" },
+  { name: solution.name, item: canonical },
+];
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    ...schemaBase,
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.item, SITE_URL).toString(),
+    })),
+  },
+  {
+    ...schemaBase,
+    "@type": "Service",
+    name: solution.name,
+    description: solution.metaDescription,
+    url: new URL(canonical, SITE_URL).toString(),
+    provider: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    category: solution.category,
+    serviceType: "AI Automation & Engineering",
+  },
+  {
+    ...schemaBase,
+    "@type": "FAQPage",
+    mainEntity: solution.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  },
+];
+
+const relatedSolutions = solutions.filter((s) => solution.related.includes(s.slug));
+---
+
+<Layout
+  title={pageTitle}
+  description={solution.metaDescription}
+  canonicalPath={canonical}
+  jsonLd={jsonLd}
+>
+  <SiteHeader current="solutions" />
+
+  <main class="sol-page">
+    <!-- ============ HERO ============ -->
+    <header class="sol-hero">
+      <div class="sol-hero__bg" aria-hidden="true">
+        <span class="sol-hero__blob" style={`--sol-tint:${solution.tintColor}; --sol-accent:${solution.accentColor}`}></span>
+      </div>
+
+      <div class="container sol-hero__inner">
+        <nav class="sol-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/solutions">Solutions</a></li>
+            <li aria-current="page">{solution.name}</li>
+          </ol>
+        </nav>
+
+        <div class="sol-hero__content reveal">
+          <div class="sol-hero__badge-row">
+            <span class="sol-chip" style={`background:${solution.tintColor};color:${solution.accentColor}`}>
+              {solution.category}
+            </span>
+            <span class="sol-hero__tagline">{solution.tagline}</span>
+          </div>
+
+          <h1 class="sol-hero__title">{solution.heroTitle}</h1>
+          <p class="sol-hero__lead">{solution.heroLead}</p>
+
+          <div class="sol-hero__cta">
+            <PrimaryButton label="Book a Consultation" href={BOOK_CONSULTATION_URL} />
+            <a class="sol-ghost-btn" href="/solutions">All Solutions <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ WHAT IT IS ============ -->
+    <section class="sol-sec">
+      <div class="container">
+        <div class="sol-head reveal">
+          <span class="eyebrow">Overview</span>
+          <h2 class="sol-title">Why this matters for your operations</h2>
+        </div>
+        <div class="sol-prose reveal">
+          {solution.whatItIs.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CAPABILITIES ============ -->
+    <section class="sol-sec sol-sec--alt">
+      <div class="container">
+        <div class="sol-head reveal">
+          <span class="eyebrow">Core Capabilities</span>
+          <h2 class="sol-title">Engineered for production scale & reliability</h2>
+        </div>
+        <div class="sol-grid reveal-stagger">
+          {solution.capabilities.map((c) => (
+            <article class="sol-card">
+              <div class="sol-card__head">
+                <h3>{c.title}</h3>
+                {c.badge && <span class="sol-card__badge">{c.badge}</span>}
+              </div>
+              <p>{c.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ARCHITECTURE PIPELINE ============ -->
+    <section class="sol-sec">
+      <div class="container">
+        <div class="sol-head reveal">
+          <span class="eyebrow">How It Operates</span>
+          <h2 class="sol-title">The end-to-end data pipeline</h2>
+        </div>
+        <div class="sol-arch-grid reveal-stagger">
+          {solution.architecture.map((arch) => (
+            <div class="sol-arch-card">
+              <span class="sol-arch-card__num">{arch.step}</span>
+              <h3>{arch.title}</h3>
+              <p>{arch.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MEASURABLE OUTCOMES ============ -->
+    <section class="sol-sec sol-sec--metrics">
+      <div class="container">
+        <div class="sol-head reveal sol-head--center">
+          <span class="eyebrow">Measurable ROI</span>
+          <h2 class="sol-title">Outcomes that justify the investment</h2>
+        </div>
+        <div class="sol-metrics-grid reveal-stagger">
+          {solution.outcomes.map((o) => (
+            <div class="sol-metric-card">
+              <strong class="sol-metric-card__val" style={`color:${solution.accentColor}`}>{o.metric}</strong>
+              <span class="sol-metric-card__label">{o.label}</span>
+              <p class="sol-metric-card__desc">{o.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEP-BY-STEP ROADMAP ============ -->
+    <section class="sol-sec sol-sec--alt">
+      <div class="container">
+        <div class="sol-head reveal">
+          <span class="eyebrow">Delivery Process</span>
+          <h2 class="sol-title">A clear 4-step path from scope to launch</h2>
+        </div>
+        <ol class="sol-steps reveal">
+          {solution.steps.map((s, i) => (
+            <li class="sol-step">
+              <span class="sol-step__num">{String(i + 1).padStart(2, "0")}</span>
+              <div class="sol-step__body">
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ FAQS ============ -->
+    <section class="sol-sec">
+      <div class="container">
+        <div class="sol-head reveal">
+          <span class="eyebrow">Common Questions</span>
+          <h2 class="sol-title">Frequently asked questions</h2>
+        </div>
+        <div class="sol-faq reveal">
+          {solution.faqs.map((f) => (
+            <details class="sol-faq__item">
+              <summary>
+                <span>{f.q}</span>
+                <svg class="sol-faq__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div class="sol-faq__answer">
+                <p>{f.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RELATED SOLUTIONS ============ -->
+    {relatedSolutions.length > 0 && (
+      <section class="sol-sec sol-sec--alt">
+        <div class="container">
+          <div class="sol-head reveal">
+            <span class="eyebrow">Related Solutions</span>
+            <h2 class="sol-title">Complementary AI systems</h2>
+          </div>
+          <div class="sol-related-grid reveal-stagger">
+            {relatedSolutions.map((r) => (
+              <a href={`/solutions/${r.slug}`} class="sol-rel-card">
+                <div class="sol-rel-card__top">
+                  <span class="sol-chip sol-chip--sm" style={`background:${r.tintColor};color:${r.accentColor}`}>{r.category}</span>
+                  <span class="sol-rel-card__arrow" aria-hidden="true">→</span>
+                </div>
+                <h3>{r.name}</h3>
+                <p>{r.shortSummary}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============ BOTTOM CTA ============ -->
+    <section class="sol-cta">
+      <div class="container">
+        <div class="sol-cta__inner reveal">
+          <h2>Ready to automate with certainty?</h2>
+          <p>Schedule a technical scoping session to map out your custom AI pipeline with our engineering team.</p>
+          <div class="sol-cta__actions">
+            <PrimaryButton label="Schedule a Consultation" href={BOOK_CONSULTATION_URL} bg="#ffffff" color="#0c0e1c" />
+            <a href="/solutions" class="sol-cta__ghost">Back to All Solutions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .sol-page {
+    background: #ffffff;
+    color: var(--color-ink, #0c0e1c);
+  }
+
+  /* Breadcrumbs */
+  .sol-crumbs {
+    margin-bottom: 24px;
+    font-size: 13px;
+  }
+  .sol-crumbs ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .sol-crumbs li:not(:last-child)::after {
+    content: "/";
+    margin-left: 8px;
+    color: #94a3b8;
+  }
+  .sol-crumbs a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .sol-crumbs a:hover {
+    color: #0f172a;
+  }
+  .sol-crumbs li[aria-current="page"] {
+    color: #0f172a;
+    font-weight: 500;
+  }
+
+  /* Hero Section */
+  .sol-hero {
+    position: relative;
+    padding: 60px 0 68px;
+    border-bottom: 1px solid #ebebeb;
+    background: #fafbfc;
+    overflow: hidden;
+  }
+  .sol-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .sol-hero__blob {
+    position: absolute;
+    right: -10%;
+    top: -30%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--sol-tint, #e8f1ff) 0%, transparent 70%);
+    filter: blur(50px);
+    opacity: 0.8;
+  }
+
+  .sol-hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+  .sol-hero__content {
+    max-width: 820px;
+  }
+  .sol-hero__badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .sol-chip {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .sol-chip--sm {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+  .sol-hero__tagline {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .sol-hero__title {
+    font-family: var(--font-display, "Tobias TRIAL", serif);
+    font-size: clamp(34px, 4.5vw, 54px);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    color: #0c0e1c;
+    margin: 0 0 20px;
+  }
+
+  .sol-hero__lead {
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height: 1.6;
+    color: #475569;
+    margin: 0 0 32px;
+    max-width: 720px;
+  }
+
+  .sol-hero__cta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .sol-ghost-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .sol-ghost-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+  }
+
+  /* Section Styles */
+  .sol-sec {
+    padding: 72px 0;
+  }
+  .sol-sec--alt {
+    background: #f8fafc;
+  }
+  .sol-sec--metrics {
+    background: #0c1524;
+    color: #ffffff;
+  }
+
+  .sol-head {
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+  .sol-head--center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sol-title {
+    font-family: var(--font-body);
+    font-size: clamp(26px, 2.6vw, 36px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: inherit;
+    margin: 8px 0 0;
+  }
+  .sol-sec--metrics .eyebrow {
+    color: #60a5fa;
+  }
+
+  /* Prose */
+  .sol-prose {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 780px;
+  }
+  .sol-prose p {
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: #334155;
+    margin: 0;
+  }
+
+  /* Capabilities Grid */
+  .sol-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .sol-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .sol-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+  }
+  .sol-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .sol-card__head h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+  }
+  .sol-card__badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .sol-card p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #64748b;
+  }
+
+  /* Architecture Flow Grid */
+  .sol-arch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .sol-arch-card {
+    background: #fafbfc;
+    border: 1px solid #e8edf3;
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sol-arch-card__num {
+    font-family: var(--font-mono, monospace);
+    font-size: 13px;
+    font-weight: 700;
+    color: #2563eb;
+    background: #e0f2fe;
+    padding: 2px 8px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+  .sol-arch-card h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .sol-arch-card p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #64748b;
+  }
+
+  /* Measurable Outcomes Grid */
+  .sol-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .sol-metric-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .sol-metric-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(96, 165, 250, 0.4);
+  }
+  .sol-metric-card__val {
+    font-size: clamp(38px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .sol-metric-card__label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.01em;
+  }
+  .sol-metric-card__desc {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #94a3b8;
+  }
+
+  /* Step-by-Step Delivery Roadmap */
+  .sol-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .sol-step {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .sol-step__num {
+    font-family: var(--font-mono, monospace);
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sol-step__body h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .sol-step__body p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #64748b;
+  }
+
+  /* FAQ Accordion */
+  .sol-faq {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 820px;
+  }
+  .sol-faq__item {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+  .sol-faq__item[open] {
+    border-color: #93c5fd;
+  }
+  .sol-faq__item summary {
+    padding: 18px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+  }
+  .sol-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .sol-faq__caret {
+    width: 18px;
+    height: 18px;
+    color: #64748b;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .sol-faq__item[open] .sol-faq__caret {
+    transform: rotate(180deg);
+  }
+  .sol-faq__answer {
+    padding: 0 22px 20px;
+  }
+  .sol-faq__answer p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* Related Solutions */
+  .sol-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .sol-rel-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.15s ease;
+  }
+  .sol-rel-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    border-color: #3b82f6;
+  }
+  .sol-rel-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .sol-rel-card__arrow {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 16px;
+    transition: transform 0.15s ease;
+  }
+  .sol-rel-card:hover .sol-rel-card__arrow {
+    transform: translateX(4px);
+  }
+  .sol-rel-card h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .sol-rel-card p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #64748b;
+  }
+
+  /* Bottom CTA */
+  .sol-cta {
+    padding: 40px 0 80px;
+  }
+  .sol-cta__inner {
+    background: #0b1322;
+    background-image: linear-gradient(135deg, #0e1c33 0%, #080e1a 100%);
+    border-radius: 24px;
+    padding: 56px 40px;
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 20px 50px rgba(8, 14, 26, 0.35);
+  }
+  .sol-cta__inner h2 {
+    font-family: var(--font-display, "Tobias TRIAL", serif);
+    font-size: clamp(28px, 3.2vw, 42px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .sol-cta__inner p {
+    font-size: 16.5px;
+    color: #94a3b8;
+    max-width: 540px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .sol-cta__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .sol-cta__ghost {
+    color: #cbd5e1;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+  }
+  .sol-cta__ghost:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1080px) {
+    .sol-arch-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .sol-steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .sol-hero {
+      padding: 40px 0 48px;
+    }
+    .sol-sec {
+      padding: 50px 0;
+    }
+    .sol-grid {
+      grid-template-columns: 1fr;
+    }
+    .sol-metrics-grid {
+      grid-template-columns: 1fr;
+    }
+    .sol-related-grid {
+      grid-template-columns: 1fr;
+    }
+    .sol-steps {
+      grid-template-columns: 1fr;
+    }
+    .sol-cta__inner {
+      padding: 40px 24px;
+    }
+  }
+</style>
