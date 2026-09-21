@@ -1,7 +1,8 @@
 // Site-wide constants used by Layout.astro for SEO (canonical URLs, Open Graph).
 
-// Replace with the real production domain when it's live.
-export const SITE_URL = "https://rake.big";
+// Site-wide constants used by Layout.astro for SEO (canonical URLs, Open Graph).
+
+export const SITE_URL = "https://rakebig.com";
 
 export const SITE_NAME = "Rakebig Services";
 
@@ -16,3 +17,7 @@ export const DEFAULT_OG_IMAGE = "/assets/preview.png";
 // Where every "Book a consultation"-style CTA across the site points (external
 // Cal.com scheduling page). Import and reuse this — don't hardcode the URL.
 export const BOOK_CONSULTATION_URL = "https://cal.com/rakebigservices";
+
+// Official contact & support email used across legal pages and footer
+export const SUPPORT_EMAIL = "support@rakebig.com";
+

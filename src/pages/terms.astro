@@ -1,0 +1,972 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PrimaryButton from "../components/PrimaryButton.astro";
+import { SITE_NAME, SITE_URL, SUPPORT_EMAIL, BOOK_CONSULTATION_URL } from "../consts";
+
+const lastUpdated = "March 21, 2026";
+const effectiveDate = "January 1, 2026";
+
+const pageTitle = `Terms & Conditions | ${SITE_NAME}`;
+const pageDescription =
+  "Terms of Service and legal conditions for Rakebig Services — Perfex CRM solutions, custom software engineering, AI automation, and cloud deployments.";
+
+const sections = [
+  { id: "acceptance", title: "1. Acceptance of Terms" },
+  { id: "services", title: "2. Description of Services" },
+  { id: "client-obligations", title: "3. Client Obligations & Account Security" },
+  { id: "payments-razorpay", title: "4. Pricing, Invoicing & Razorpay Payments" },
+  { id: "electronic-delivery", title: "5. Electronic Delivery & Fulfillment Policy" },
+  { id: "intellectual-property", title: "6. Intellectual Property & Code Ownership" },
+  { id: "confidentiality", title: "7. Confidentiality & Non-Disclosure" },
+  { id: "third-party", title: "8. Third-Party APIs & Vendor Dependencies" },
+  { id: "warranties", title: "9. Limited Warranty & Post-Launch Support" },
+  { id: "liability", title: "10. Limitation of Liability & Indemnification" },
+  { id: "cancellation", title: "11. Project Termination & Cancellation" },
+  { id: "governing-law", title: "12. Governing Law & Jurisdiction" },
+  { id: "contact-info", title: "13. Contact Information" },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/terms"
+>
+  <SiteHeader />
+
+  <main class="legal-page">
+    <!-- ============ HERO ============ -->
+    <header class="legal-hero">
+      <div class="container legal-hero__inner">
+        <nav class="legal-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li aria-current="page">Terms & Conditions</li>
+          </ol>
+        </nav>
+
+        <div class="legal-hero__badge">
+          <span class="legal-chip">Legal Agreement</span>
+          <span class="legal-badge-dot" aria-hidden="true"></span>
+          <span class="legal-meta-text">Merchant Verified & Razorpay Compliant</span>
+        </div>
+
+        <h1 class="legal-hero__title">Terms & Conditions</h1>
+        <p class="legal-hero__lead">
+          These Terms of Service govern your access to and use of software engineering, Perfex CRM customization,
+          AI automation, cloud deployment, and consulting services provided by <strong>{SITE_NAME}</strong>.
+        </p>
+
+        <div class="legal-meta-bar">
+          <div class="legal-meta-item">
+            <span class="legal-meta-label">Effective Date</span>
+            <span class="legal-meta-value">{effectiveDate}</span>
+          </div>
+          <div class="legal-meta-item">
+            <span class="legal-meta-label">Last Updated</span>
+            <span class="legal-meta-value">{lastUpdated}</span>
+          </div>
+          <div class="legal-meta-item">
+            <span class="legal-meta-label">Entity</span>
+            <span class="legal-meta-value">{SITE_NAME} (rakebig.com)</span>
+          </div>
+          <div class="legal-meta-item">
+            <span class="legal-meta-label">Payment Gateway</span>
+            <span class="legal-meta-value">Razorpay (PCI-DSS Level 1)</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ BODY / CONTENT ============ -->
+    <section class="legal-content">
+      <div class="container legal-layout">
+        <!-- Sticky Table of Contents -->
+        <aside class="legal-sidebar">
+          <div class="legal-toc-card">
+            <h2 class="legal-toc-title">On This Page</h2>
+            <ul class="legal-toc-list">
+              {sections.map((sec) => (
+                <li>
+                  <a href={`#${sec.id}`} class="legal-toc-link">
+                    {sec.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div class="legal-toc-cta">
+              <p>Have questions about a contract or custom enterprise quote?</p>
+              <a href={`mailto:${SUPPORT_EMAIL}`} class="legal-toc-btn">
+                Contact Legal Support
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Prose -->
+        <article class="legal-prose">
+          <!-- 1. ACCEPTANCE -->
+          <section id="acceptance" class="legal-section">
+            <h2>1. Acceptance of Terms</h2>
+            <p>
+              By visiting our website (<strong>{SITE_URL}</strong>), engaging <strong>{SITE_NAME}</strong> ("we," "us," or "our")
+              for technical services, approving a written Statement of Work (SOW), or completing any payment transaction through our
+              designated payment gateway (<strong>Razorpay</strong>), you ("Client," "Customer," or "User") agree to be legally bound
+              by these Terms & Conditions, along with our <a href="/privacy">Privacy Policy</a> and <a href="/refund">Cancellation & Refund Policy</a>.
+            </p>
+            <p>
+              If you are accepting these terms on behalf of a company, enterprise, or legal entity, you represent and warrant that you possess
+              the legal authority to bind such entity to these provisions. If you do not agree with any part of these terms, you must refrain
+              from commissioning our services or accessing our platforms.
+            </p>
+          </section>
+
+          <!-- 2. DESCRIPTION OF SERVICES -->
+          <section id="services" class="legal-section">
+            <h2>2. Description of Services</h2>
+            <p>
+              <strong>{SITE_NAME}</strong> is a specialized technology agency delivering end-to-end software engineering, CRM customization,
+              AI workflow automation, and cloud management solutions. Our core commercial offerings include:
+            </p>
+            <div class="legal-services-grid">
+              <div class="legal-service-item">
+                <h3>Perfex CRM Solutions</h3>
+                <p>
+                  Bespoke module programming, workflow triggers, multi-tenant SaaS transformation, third-party ERP/accounting bridges,
+                  and WhatsApp Business API integrations built on the Perfex CRM architecture.
+                </p>
+              </div>
+
+              <div class="legal-service-item">
+                <h3>Custom Web Applications</h3>
+                <p>
+                  Full-stack portal development, enterprise admin dashboards, and custom business platforms engineered with Laravel,
+                  Vue.js, REST/GraphQL APIs, and PostgreSQL/MySQL databases.
+                </p>
+              </div>
+
+              <div class="legal-service-item">
+                <h3>Cross-Platform Mobile Apps</h3>
+                <p>
+                  iOS and Android business applications developed with Flutter, featuring offline local storage, CRM synchronization,
+                  real-time push alerts, and field-force operational tools.
+                </p>
+              </div>
+
+              <div class="legal-service-item">
+                <h3>SaaS Platform Engineering</h3>
+                <p>
+                  Multi-tenant software-as-a-service architectures featuring isolated tenant schemas, role-based access control (RBAC),
+                  usage metering, and automated subscription billing workflows.
+                </p>
+              </div>
+
+              <div class="legal-service-item">
+                <h3>App Clone & Rapid Product Builds</h3>
+                <p>
+                  Clean-room engineering of custom software modeled after proven on-demand commerce, ride-hailing, messaging, and
+                  multimedia streaming workflows—built strictly with 100% original client-owned source code.
+                </p>
+              </div>
+
+              <div class="legal-service-item">
+                <h3>AI Automation & Drop-In Widgets</h3>
+                <p>
+                  Practical enterprise AI implementations, including ticket classification, document data parsing, automated agent triage,
+                  and our hosted <em>AI Widget</em> embeddable across customer digital channels.
+                </p>
+              </div>
+
+              <div class="legal-service-item">
+                <h3>Cloud Deployment, DevOps & Retainers</h3>
+                <p>
+                  Docker containerization, automated CI/CD pipeline configuration (GitHub Actions), server staging/production provisioning,
+                  SSL/domain hardening, and ongoing 24/7 technical monitoring retainers.
+                </p>
+              </div>
+
+              <div class="legal-service-item">
+                <h3>App Publishing Solutions</h3>
+                <p>
+                  End-to-end preparation, build signing, metadata verification, privacy policy compliance, and store submission for the
+                  Google Play Store and Apple App Store, supplemented with 24x7 automated AI tier-1 triage.
+                </p>
+              </div>
+            </div>
+            <p>
+              Every custom project is executed under a distinct, mutually agreed Statement of Work (SOW), project brief, or formal quote
+              specifying exact functional milestones, deliverables, and estimated timelines.
+            </p>
+          </section>
+
+          <!-- 3. CLIENT OBLIGATIONS -->
+          <section id="client-obligations" class="legal-section">
+            <h2>3. Client Obligations & Account Security</h2>
+            <p>
+              To ensure punctual project completion and maintain system integrity, the Client agrees to:
+            </p>
+            <ul>
+              <li>Provide accurate, complete, and authentic commercial information, billing addresses, and technical requirements.</li>
+              <li>Furnish necessary digital assets, logos, brand guidelines, staging credentials, server SSH keys, and third-party API keys within agreed project schedules.</li>
+              <li>Participate in scheduled milestone reviews and provide written feedback or acceptance within five (5) business days of deliverable submission.</li>
+              <li>Maintain strict confidentiality of any administrative accounts, sandbox credentials, or repository access granted by {SITE_NAME}.</li>
+              <li>Ensure that all content, data, trademarks, or materials provided to {SITE_NAME} do not infringe any intellectual property rights or violate applicable laws.</li>
+            </ul>
+          </section>
+
+          <!-- 4. PAYMENTS & RAZORPAY -->
+          <section id="payments-razorpay" class="legal-section">
+            <h2>4. Pricing, Invoicing & Razorpay Payments</h2>
+            <p>
+              All financial transactions conducted through our digital platforms or formal invoices adhere to transparent, secure billing standards.
+            </p>
+
+            <div class="legal-callout legal-callout--blue">
+              <div class="legal-callout__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/></svg>
+              </div>
+              <div class="legal-callout__body">
+                <strong>Razorpay Payment Gateway Integration</strong>
+                <p>
+                  Online card payments, Unified Payments Interface (UPI), Net Banking, and digital wallet transactions on {SITE_NAME}
+                  are processed through <strong>Razorpay Software Private Limited ("Razorpay")</strong>. Razorpay is a PCI-DSS Level 1
+                  compliant payment aggregator. We do not store or process sensitive credit/debit card numbers, CVVs, net banking credentials,
+                  or UPI PINs on our servers.
+                </p>
+              </div>
+            </div>
+
+            <h3>4.1 Billing Models & Currencies</h3>
+            <ul>
+              <li><strong>Fixed-Price Milestones:</strong> Custom development and CRM builds are billed against structured deliverables (e.g., initial deposit before kickoff, alpha milestone, beta delivery, and final deployment sign-off).</li>
+              <li><strong>Monthly Retainers & Subscriptions:</strong> Cloud DevOps support, maintenance retainers, and dedicated developer squad services are invoiced on a recurring monthly or quarterly basis in advance.</li>
+              <li><strong>Currencies:</strong> Prices are quoted in Indian National Rupees (INR) for domestic customers, or United States Dollars (USD) / convertible foreign currencies for international clientele, inclusive or exclusive of applicable taxes as indicated on the invoice.</li>
+              <li><strong>Taxes:</strong> Invoices issued to Indian entities are subject to statutory Goods and Services Tax (GST). International clients are responsible for any applicable withholding taxes or cross-border payment transfer levies.</li>
+            </ul>
+
+            <h3>4.2 Payment Verification & Default</h3>
+            <p>
+              Services commence only upon confirmed receipt of the designated deposit or milestone advance. If an invoice remains unpaid
+              past its due date (typically 7 calendar days from issuance), {SITE_NAME} reserves the right to pause active development,
+              withhold staging environment access, or suspend non-critical automated support until payment clearance.
+            </p>
+          </section>
+
+          <!-- 5. ELECTRONIC DELIVERY & FULFILLMENT -->
+          <section id="electronic-delivery" class="legal-section">
+            <h2>5. Electronic Delivery & Fulfillment Policy</h2>
+            <p>
+              Because {SITE_NAME} provides intangible digital services, custom software engineering, and cloud configurations,
+              <strong>no physical goods or physical shipping are involved in our transactions.</strong>
+            </p>
+
+            <div class="legal-callout legal-callout--purple">
+              <div class="legal-callout__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="legal-callout__body">
+                <strong>Electronic Fulfillment Channels</strong>
+                <p>
+                  All project deliverables—including bespoke module source code, SQL database scripts, compiled mobile APK/AAB/IPA packages,
+                  Docker compose files, and documentation—are delivered electronically via:
+                </p>
+                <ul class="legal-callout-list">
+                  <li>Transfer of ownership in private Git repositories (e.g., GitHub or GitLab).</li>
+                  <li>Direct server staging or production container deployment onto Client-controlled cloud infrastructure.</li>
+                  <li>Secure digital download links delivered via email or encrypted customer portals.</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3>5.1 Delivery Timelines</h3>
+            <p>
+              Delivery schedules are determined by the complexity of the agreed scope:
+            </p>
+            <ul>
+              <li><strong>Focused Perfex Modules & Integrations:</strong> Typically delivered within 2 to 4 weeks from project kickoff.</li>
+              <li><strong>Custom Web Applications & Full CRM Deployments:</strong> Typically delivered in 4 to 8 weeks in staged sprint releases.</li>
+              <li><strong>App Clones & Multi-Tenant SaaS Builds:</strong> Typically delivered in 8 to 12 weeks with staged alpha, beta, and release candidates.</li>
+              <li><strong>Immediate Cloud Setup & Consultations:</strong> Consultations and advisory sessions occur on the scheduled date booked via our scheduling system.</li>
+            </ul>
+            <p>
+              Delivery timelines are contingent upon the Client providing necessary assets, API access, and feedback without unreasonable delay.
+            </p>
+          </section>
+
+          <!-- 6. INTELLECTUAL PROPERTY -->
+          <section id="intellectual-property" class="legal-section">
+            <h2>6. Intellectual Property & Code Ownership</h2>
+            <h3>6.1 Client Ownership of Custom Deliverables</h3>
+            <p>
+              Upon 100% full and final settlement of all invoices associated with a bespoke project, <strong>{SITE_NAME}</strong> assigns
+              and transfers full intellectual property ownership and copyright of the custom source code, unique design assets, and database
+              schemas developed specifically for the Client under that project's Statement of Work.
+            </p>
+
+            <h3>6.2 Pre-Existing Frameworks & Open-Source Software</h3>
+            <p>
+              Certain deliverables incorporate open-source frameworks, runtime libraries, and third-party platforms (such as PHP, Laravel,
+              Vue.js, Flutter, Docker, Linux, and the Perfex CRM core). These underlying components remain subject to their respective open-source
+              licenses (e.g., MIT, BSD, Apache, or CodeCanyon Envato commercial licensing for Perfex CRM core). The Client is responsible for
+              maintaining valid commercial licenses for any underlying third-party platforms they operate.
+            </p>
+
+            <h3>6.3 Agency Proprietary Tools</h3>
+            <p>
+              {SITE_NAME} retains ownership of its internal scaffolding tools, reusable boilerplate logic, developer utilities, and the proprietary
+              architecture of its drop-in <em>AI Widget</em> service, granting the Client a non-exclusive, perpetual license to use embedded
+              components necessary for the operation of the delivered software.
+            </p>
+          </section>
+
+          <!-- 7. CONFIDENTIALITY -->
+          <section id="confidentiality" class="legal-section">
+            <h2>7. Confidentiality & Non-Disclosure</h2>
+            <p>
+              Both parties agree to treat all non-public technical information, business workflows, customer databases, software source code,
+              financial quotations, and API secrets shared during the engagement as strictly confidential. Neither party shall disclose such
+              confidential information to any third party without prior written consent, except to employees, contractors, or authorized
+              sub-processors who require access for project execution and are bound by confidentiality obligations no less restrictive than these terms.
+            </p>
+          </section>
+
+          <!-- 8. THIRD PARTY DEPENDENCIES -->
+          <section id="third-party" class="legal-section">
+            <h2>8. Third-Party APIs & Vendor Dependencies</h2>
+            <p>
+              Our custom software and AI workflows often integrate with external platforms, including but not limited to:
+            </p>
+            <ul>
+              <li><strong>Meta / WhatsApp Business API:</strong> For messaging, template management, and automated notifications.</li>
+              <li><strong>Payment Aggregators (Razorpay, Stripe):</strong> For online checkout and subscription billing.</li>
+              <li><strong>Large Language Model & AI Providers (OpenAI, Anthropic, Google Cloud):</strong> For generative intelligence, summaries, and agentic workflows.</li>
+              <li><strong>App Distribution Platforms (Google Play Console, Apple Developer):</strong> For mobile app review, distribution, and store listing policies.</li>
+              <li><strong>Cloud Infrastructure Providers (AWS, Hetzner, DigitalOcean, Cloudflare):</strong> For hosting and DNS management.</li>
+            </ul>
+            <p>
+              {SITE_NAME} is not responsible for service outages, rate limit modifications, pricing revisions, account suspensions, or policy
+              enforcement enacted independently by these third-party platforms. Any third-party subscription or usage fees (e.g., WhatsApp conversation
+              fees, OpenAI token costs, Google Play registration charges) are the direct financial responsibility of the Client.
+            </p>
+          </section>
+
+          <!-- 9. LIMITED WARRANTY -->
+          <section id="warranties" class="legal-section">
+            <h2>9. Limited Warranty & Post-Launch Support</h2>
+            <p>
+              We pride ourselves on engineering robust, high-performance software. Every custom development project includes a
+              <strong>30-calendar-day warranty period</strong> beginning on the date of final production deployment or code handover.
+            </p>
+            <ul>
+              <li><strong>Warranty Coverage:</strong> During this period, {SITE_NAME} will promptly diagnose and remedy any reproducible functional bugs or errors that deviate from the agreed project specifications at no additional cost.</li>
+              <li><strong>Exclusions:</strong> The warranty does not cover issues resulting from modifications made by the Client's internal team or third parties, unauthorized server configuration changes, upstream API changes by third-party vendors, or new feature requests outside the original SOW.</li>
+              <li><strong>Ongoing Maintenance:</strong> Following the expiration of the 30-day warranty, ongoing support, security updates, server monitoring, and feature extensions are available through our dedicated monthly maintenance plans.</li>
+            </ul>
+          </section>
+
+          <!-- 10. LIABILITY -->
+          <section id="liability" class="legal-section">
+            <h2>10. Limitation of Liability & Indemnification</h2>
+            <p>
+              To the maximum extent permitted by applicable law, in no event shall <strong>{SITE_NAME}</strong>, its founders, directors,
+              engineers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages—including loss of
+              profits, data loss, business interruption, or reputation harm—arising out of or related to your use or inability to use the
+              delivered software or services.
+            </p>
+            <p>
+              Our aggregate cumulative liability for any and all claims arising under an engagement, whether in contract, tort (including negligence),
+              or otherwise, shall be strictly capped at the total amount actually paid by the Client to {SITE_NAME} for the specific service
+              milestone giving rise to the claim during the preceding three (3) months.
+            </p>
+          </section>
+
+          <!-- 11. CANCELLATION & TERMINATION -->
+          <section id="cancellation" class="legal-section">
+            <h2>11. Project Termination & Cancellation</h2>
+            <p>
+              Either party may terminate a project engagement by providing written notice if the other party materially breaches these terms
+              and fails to cure such breach within fourteen (14) calendar days of receiving written notification.
+            </p>
+            <p>
+              Clients may request project cancellation prior to completion subject to our <a href="/refund">Cancellation & Refund Policy</a>.
+              In the event of cancellation, the Client shall remain liable for all work performed, hours logged, and milestones completed up
+              to the effective date of termination. Any eligible refunds approved under our policy will be credited back to the original payment
+              source via <strong>Razorpay</strong> within 5 to 7 business days.
+            </p>
+          </section>
+
+          <!-- 12. GOVERNING LAW -->
+          <section id="governing-law" class="legal-section">
+            <h2>12. Governing Law & Jurisdiction</h2>
+            <p>
+              These Terms & Conditions and any dispute or claim arising out of or in connection with them shall be governed by and construed
+              in accordance with the laws of the <strong>Republic of India</strong>, without regard to its conflict of law principles.
+            </p>
+            <p>
+              The parties mutually agree to attempt to resolve any dispute amicably through good-faith negotiation. If a dispute cannot be
+              resolved within thirty (30) days, it shall be subject to the exclusive jurisdiction of the competent courts situated in
+              <strong>Jaipur, Rajasthan / New Delhi, India</strong>.
+            </p>
+          </section>
+
+          <!-- 13. CONTACT INFO -->
+          <section id="contact-info" class="legal-section">
+            <h2>13. Contact Information</h2>
+            <p>
+              For legal inquiries, contract clarification, invoice verifications, or dispute notices, please reach out to our legal and
+              compliance desk:
+            </p>
+
+            <div class="legal-contact-card">
+              <div class="legal-contact-row">
+                <span class="legal-contact-k">Brand Name:</span>
+                <span class="legal-contact-v">{SITE_NAME}</span>
+              </div>
+              <div class="legal-contact-row">
+                <span class="legal-contact-k">Official Website:</span>
+                <span class="legal-contact-v"><a href={SITE_URL}>{SITE_URL}</a></span>
+              </div>
+              <div class="legal-contact-row">
+                <span class="legal-contact-k">Support & Billing Email:</span>
+                <span class="legal-contact-v"><a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a></span>
+              </div>
+              <div class="legal-contact-row">
+                <span class="legal-contact-k">Schedule Consultation:</span>
+                <span class="legal-contact-v"><a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer">cal.com/rakebigservices</a></span>
+              </div>
+            </div>
+          </section>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ BOTTOM CTA ============ -->
+    <section class="legal-bottom-cta">
+      <div class="container legal-bottom-cta__inner reveal">
+        <h2>Ready to build with certainty?</h2>
+        <p>Talk with our engineering leadership to scope your Perfex CRM, SaaS, or custom automation build.</p>
+        <div class="legal-bottom-cta__actions">
+          <PrimaryButton label="Book a consultation" href={BOOK_CONSULTATION_URL} bg="#0c0e1c" color="#ffffff" />
+          <a href="/privacy" class="legal-ghost-link">View Privacy Policy →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  /* =========================================================
+     LEGAL PAGE STYLES — Aligned with Rakebig Visual System
+     ========================================================= */
+
+  .legal-page {
+    background: #ffffff;
+    color: var(--color-ink);
+  }
+
+  /* ---------- HERO ---------- */
+  .legal-hero {
+    padding: 48px 0 64px;
+    background: radial-gradient(85% 120% at 100% 0%, #e9e4f5 0%, transparent 60%),
+                linear-gradient(180deg, #f4f3f8 0%, #ffffff 100%);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .legal-hero__inner {
+    max-width: 920px;
+  }
+
+  .legal-crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    font-size: 13px;
+    color: rgba(12, 14, 28, 0.55);
+  }
+  .legal-crumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .legal-crumbs li + li::before {
+    content: "/";
+    color: rgba(12, 14, 28, 0.3);
+  }
+  .legal-crumbs a {
+    color: rgba(12, 14, 28, 0.65);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .legal-crumbs a:hover {
+    color: var(--color-ink);
+  }
+  .legal-crumbs li[aria-current] {
+    color: rgba(12, 14, 28, 0.9);
+    font-weight: 500;
+  }
+
+  .legal-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .legal-chip {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #4f3b9b;
+    background: rgba(127, 82, 191, 0.1);
+    border: 1px solid rgba(127, 82, 191, 0.28);
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+
+  .legal-badge-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #659cff;
+  }
+
+  .legal-meta-text {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #3b4256;
+  }
+
+  .legal-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.5vw, 54px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+    margin: 0 0 18px;
+  }
+
+  .legal-hero__lead {
+    font-size: clamp(16px, 1.8vw, 18.5px);
+    line-height: 1.6;
+    color: #4b5568;
+    margin: 0 0 32px;
+    max-width: 760px;
+  }
+
+  .legal-hero__lead strong {
+    color: var(--color-ink);
+  }
+
+  .legal-meta-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 16px;
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(12, 14, 28, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px -8px rgba(12, 14, 28, 0.05);
+  }
+
+  .legal-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .legal-meta-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #718096;
+  }
+
+  .legal-meta-value {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  /* ---------- CONTENT & LAYOUT ---------- */
+  .legal-content {
+    padding: 72px 0 96px;
+  }
+
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 56px;
+    align-items: flex-start;
+  }
+
+  /* Sticky Sidebar */
+  .legal-sidebar {
+    position: sticky;
+    top: 96px;
+  }
+
+  .legal-toc-card {
+    background: #fafafc;
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .legal-toc-title {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #64748b;
+    margin: 0 0 16px;
+  }
+
+  .legal-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .legal-toc-link {
+    font-size: 13.5px;
+    color: #4a5568;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    line-height: 1.4;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .legal-toc-link:hover {
+    color: #2f6bff;
+    transform: translateX(3px);
+  }
+
+  .legal-toc-cta {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .legal-toc-cta p {
+    font-size: 12.5px;
+    color: #64748b;
+    line-height: 1.5;
+    margin: 0 0 12px;
+  }
+
+  .legal-toc-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #2f6bff;
+    background: #eef3ff;
+    border: 1px solid rgba(47, 107, 255, 0.25);
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .legal-toc-btn:hover {
+    background: #2f6bff;
+    color: #ffffff;
+  }
+
+  /* Main Prose */
+  .legal-prose {
+    max-width: 820px;
+  }
+
+  .legal-section {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--color-line);
+    scroll-margin-top: 110px;
+  }
+
+  .legal-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .legal-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 2.6vw, 30px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0 0 18px;
+  }
+
+  .legal-section h3 {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 24px 0 12px;
+  }
+
+  .legal-prose p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #3f4756;
+    margin: 0 0 18px;
+  }
+
+  .legal-prose a {
+    color: #2f6bff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+
+  .legal-prose a:hover {
+    color: #1948b8;
+  }
+
+  .legal-prose ul {
+    margin: 0 0 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .legal-prose li {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #3f4756;
+  }
+
+  .legal-prose li strong {
+    color: var(--color-ink);
+  }
+
+  /* Services Grid */
+  .legal-services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0 24px;
+  }
+
+  .legal-service-item {
+    padding: 18px 20px;
+    background: #fbfbfd;
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+  }
+
+  .legal-service-item h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a202c;
+  }
+
+  .legal-service-item p {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #556277;
+  }
+
+  /* Callout Boxes */
+  .legal-callout {
+    display: flex;
+    gap: 16px;
+    padding: 20px 22px;
+    border-radius: 14px;
+    margin: 24px 0;
+  }
+
+  .legal-callout--blue {
+    background: #f0f5ff;
+    border: 1px solid #c7dcff;
+    color: #1a365d;
+  }
+
+  .legal-callout--purple {
+    background: #f7f3ff;
+    border: 1px solid #dec7ff;
+    color: #321d5a;
+  }
+
+  .legal-callout__icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+  .legal-callout--blue .legal-callout__icon { color: #2f6bff; }
+  .legal-callout--purple .legal-callout__icon { color: #7f52bf; }
+
+  .legal-callout__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .legal-callout__body {
+    display: grid;
+    gap: 6px;
+  }
+
+  .legal-callout__body strong {
+    font-size: 14.5px;
+    font-weight: 700;
+  }
+
+  .legal-callout__body p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0;
+    color: inherit;
+    opacity: 0.9;
+  }
+
+  .legal-callout-list {
+    margin: 6px 0 0 !important;
+    padding-left: 18px !important;
+    gap: 4px !important;
+  }
+
+  .legal-callout-list li {
+    font-size: 13px !important;
+    color: inherit !important;
+    opacity: 0.9;
+  }
+
+  /* Contact Card */
+  .legal-contact-card {
+    display: grid;
+    gap: 10px;
+    padding: 22px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-top: 18px;
+  }
+
+  .legal-contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    font-size: 14.5px;
+  }
+
+  .legal-contact-k {
+    font-weight: 600;
+    color: #475569;
+    min-width: 170px;
+  }
+
+  .legal-contact-v {
+    color: var(--color-ink);
+  }
+
+  /* ---------- BOTTOM CTA ---------- */
+  .legal-bottom-cta {
+    padding: 80px 0;
+    background: #fbfafc;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .legal-bottom-cta__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .legal-bottom-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 40px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--color-ink);
+  }
+
+  .legal-bottom-cta p {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0 0 10px;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  .legal-bottom-cta__actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .legal-ghost-link {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .legal-ghost-link:hover {
+    background: #ebebeb;
+    color: #000;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 990px) {
+    .legal-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .legal-sidebar {
+      position: static;
+    }
+    .legal-toc-card {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .legal-hero { padding: 32px 0 48px; }
+    .legal-services-grid { grid-template-columns: 1fr; }
+    .legal-contact-k { min-width: 100%; }
+    .legal-meta-bar { grid-template-columns: 1fr 1fr; }
+  }
+</style>

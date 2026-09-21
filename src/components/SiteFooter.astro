@@ -5,7 +5,7 @@
 //   - contact.email / contact.phone / contact.whatsapp  -> shown only if non-empty
 //   - socials                                            -> icon row shown only if non-empty
 // Leave a field "" (or the array []) and that block is hidden.
-import { BOOK_CONSULTATION_URL } from "../consts";
+import { BOOK_CONSULTATION_URL, SUPPORT_EMAIL } from "../consts";
 
 const year = new Date().getFullYear();
 
@@ -18,7 +18,7 @@ const brand = {
 };
 
 const contact = {
-  email: "",
+  email: SUPPORT_EMAIL,
   phone: "",
   whatsapp: "",
   // e.g. { label: "Sales", href: "https://wa.me/91XXXXXXXXXX" }
@@ -43,12 +43,10 @@ const serviceLinks = [
 ];
 
 const policyLinks = [
-  { label: "Terms & Conditions", href: "#" },
-  { label: "Refund Policy", href: "#" },
-  { label: "Privacy Policy", href: "#" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Refund Policy", href: "/refund" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
-
-// Keep T&C/Refund/Privacy above pointing at real policy pages once they exist.
 ---
 
 <footer class="site-footer">
