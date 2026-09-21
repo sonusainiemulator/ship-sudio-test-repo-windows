@@ -10,6 +10,7 @@ import {
   SUPPORT_EMAIL,
   SUPPORT_PHONE,
   BOOK_CONSULTATION_URL,
+  SOCIAL_LINKS,
 } from '../consts';
 
 interface Props {
@@ -68,7 +69,13 @@ const defaultSchemas: Record<string, unknown>[] = [
     "sameAs": [
       BOOK_CONSULTATION_URL,
       "https://crm.rakebig.com",
-      "https://aiwidget.rakebig.com"
+      "https://aiwidget.rakebig.com",
+      SOCIAL_LINKS.facebook,
+      SOCIAL_LINKS.instagram,
+      SOCIAL_LINKS.linkedin,
+      SOCIAL_LINKS.youtube,
+      SOCIAL_LINKS.twitter,
+      SOCIAL_LINKS.github
     ]
   },
   {
@@ -132,8 +139,8 @@ const allSchemas = [...defaultSchemas, ...jsonLd];
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@rakebig" />
-    <meta name="twitter:creator" content="@rakebig" />
+    <meta name="twitter:site" content="@rakebigservices" />
+    <meta name="twitter:creator" content="@rakebigservices" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />

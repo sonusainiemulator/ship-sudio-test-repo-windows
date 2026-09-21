@@ -20,3 +20,14 @@ export const BOOK_CONSULTATION_URL = "https://cal.com/rakebigservices";
 export const SUPPORT_EMAIL = "support@rakebig.com";
 export const SUPPORT_PHONE = "+91 97722 34567";
 export const TECH_SUPPORT_PHONE = "+91 97722 34568";
+
+// Official social media links (username: rakebigservices across all platforms)
+export const SOCIAL_LINKS = {
+  facebook: "https://facebook.com/rakebigservices",
+  instagram: "https://instagram.com/rakebigservices",
+  linkedin: "https://linkedin.com/company/rakebigservices",
+  youtube: "https://youtube.com/@rakebigservices",
+  twitter: "https://x.com/rakebigservices",
+  github: "https://github.com/rakebigservices",
+};
+

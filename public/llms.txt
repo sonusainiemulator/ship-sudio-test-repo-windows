@@ -9,6 +9,13 @@
 - Support Email: support@rakebig.com
 - Consultation Booking: https://cal.com/rakebigservices
 - Direct Phone: +91 97722 34567
+- Official Social Media (@rakebigservices):
+  - Facebook: https://facebook.com/rakebigservices
+  - Instagram: https://instagram.com/rakebigservices
+  - LinkedIn: https://linkedin.com/company/rakebigservices
+  - YouTube: https://youtube.com/@rakebigservices
+  - X (Twitter): https://x.com/rakebigservices
+  - GitHub: https://github.com/rakebigservices
 
 ## Overview
 Rakebig Services (https://www.rakebig.com) is an engineering and AI automation agency. We design, build, customize, and support Perfex CRM systems, SaaS platforms, web applications (Laravel/Vue), mobile applications (Flutter), and practical AI workflow automations for growing companies worldwide.
