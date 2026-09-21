@@ -244,7 +244,7 @@ const company = [
         </div>
       </li>
 
-      <li class="site-header__item site-header__item--products" data-align="right" data-menu="solutions">
+      <li class="site-header__item site-header__item--products" data-menu="solutions">
         <button
           type="button"
           class="site-header__trigger"
@@ -523,7 +523,7 @@ const company = [
       });
       item.addEventListener("mouseleave", () => {
         if (mq.matches) return;
-        closeTimer = window.setTimeout(closeAll, 120);
+        closeTimer = window.setTimeout(closeAll, 280);
       });
     });
 
@@ -734,6 +734,17 @@ const company = [
     top: calc(100% + 8px);
     transform: translateX(-50%);
     z-index: 90;
+  }
+
+  /* Invisible hover bridge to eliminate gap between button and dropdown panel */
+  .site-header__panel::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: transparent;
   }
 
   .site-header__panel--simple {
@@ -1064,22 +1075,15 @@ const company = [
   }
 
   .site-header__panel--products {
-    left: 0;
-    top: calc(100% + 14px);
-    transform: none;
+    left: 50%;
+    top: calc(100% + 10px);
+    transform: translateX(-50%);
     width: min(672px, calc(100vw - 48px));
     background: #fff;
     border: 1px solid #e8edf3;
     border-radius: 18px;
     box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
     padding: 14px;
-  }
-
-  /* Right-hand tabs (e.g. Solutions) open the same panel leftward instead of
-     overhanging the viewport's right edge. */
-  .site-header__item--products[data-align="right"] .site-header__panel--products {
-    left: auto;
-    right: 0;
   }
 
   .pm {
