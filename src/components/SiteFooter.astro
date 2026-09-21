@@ -1,192 +1,322 @@
 ---
-// Shared site footer — design follows the razinsoft.com dark footer (navy
-// gradient, brand + link columns + contact/support area + bottom policy bar).
-// Content is Rakebig's. Edit the FIELDS below when you have real details:
-//   - contact.email / contact.phone / contact.whatsapp  -> shown only if non-empty
-//   - socials                                            -> icon row shown only if non-empty
-// Leave a field "" (or the array []) and that block is hidden.
+// Shared site footer — exact design matched to the modern dark enterprise footer
+// (navy background, brand + contact details, Company, Cloud & Domains, Quick Links,
+// Global Offices cards, payment methods & affiliation strip, and bottom copyright/policy bar).
 import { BOOK_CONSULTATION_URL, SUPPORT_EMAIL } from "../consts";
 
 const year = new Date().getFullYear();
 
-// ---- Rakebig footer content (edit here) ----
 const brand = {
-  name: "Rakebig Services",
-  tag: "AI Automation Agency",
-  blurb:
-    "An AI automation agency that designs, builds, and supports Perfex CRM, web & mobile apps, SaaS platforms, and practical AI workflows for growing teams.",
+  name: "Rakebig",
+  tagline:
+    "Elevate Your Business with Innovative Web, App, and Software Solutions. Partner for Excellence in Tech.",
 };
 
-const contact = {
+const contacts = {
   email: SUPPORT_EMAIL,
-  phone: "",
-  whatsapp: "",
-  // e.g. { label: "Sales", href: "https://wa.me/91XXXXXXXXXX" }
-  lines: [] as { label: string; href: string; value: string }[],
+  phone: "+91 97722 34567",
+  supportPhone: "+91 97722 34568",
+  supportTiming: "Tech support · Mon–Sat, 10–7 (GMT+5:30)",
 };
-
-const socials = [] as { label: string; href: string }[];
 
 const companyLinks = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/product" },
-  { label: "Solutions", href: "/solutions" },
+  { label: "About Us", href: "/#about" },
   { label: "Contact Us", href: "/#contact" },
+  { label: "Career & Positions", href: "/#careers" },
+  { label: "Terms & Conditions", href: "/terms" },
 ];
 
-const serviceLinks = [
-  { label: "Perfex CRM Solutions", href: "/services/perfex-crm-solutions" },
-  { label: "App Clone Development", href: "/services/app-clone-development" },
-  { label: "AI Business Automation", href: "/services/ai-business-automation" },
-  { label: "Cloud Deployment & DevOps", href: "/services/cloud-deployment-devops" },
-  { label: "Maintenance & Support", href: "/services/maintenance-support" },
+const cloudLinks = [
+  { label: "Domain Registration", href: "/services/cloud-deployment-devops" },
+  { label: "VPS Hosting", href: "/services/cloud-deployment-devops" },
+  { label: "Shared Hosting", href: "/services/cloud-deployment-devops" },
+  { label: "Business Email", href: "/services/cloud-deployment-devops" },
+];
+
+const quickLinks = [
+  { label: "Login", href: BOOK_CONSULTATION_URL },
+  { label: "Software", href: "/product" },
+  { label: "Services", href: "/product" },
+  { label: "Blogs", href: "/solutions" },
+  { label: "Get Support", href: "/#contact" },
+];
+
+const offices = [
+  {
+    country: "India",
+    isHQ: true,
+    address: "1st Floor, Tech Park, Malviya Nagar, Jaipur, Rajasthan 302017",
+  },
+  {
+    country: "Rakebig LTD (UK)",
+    isHQ: false,
+    address: "7 Barnard Road, Enfield EN1 3QA",
+  },
 ];
 
 const policyLinks = [
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Refund Policy", href: "/refund" },
   { label: "Privacy Policy", href: "/privacy" },
+  { label: "Installation Policy", href: "/terms#electronic-delivery" },
 ];
 ---
 
 <footer class="site-footer">
-  <div class="container site-footer__grid">
-    <!-- Brand -->
-    <div class="site-footer__brand">
-      <a href="/" class="site-footer__logo" aria-label="Rakebig Services home">
-        <svg class="site-footer__mark" viewBox="0 0 22 22" aria-hidden="true">
-          <rect width="22" height="22" rx="6" fill="#2F6BFF" />
-          <text x="11" y="12" text-anchor="middle" dominant-baseline="central" font-family="var(--font-body)" font-size="13" font-weight="700" fill="#ffffff">R</text>
-        </svg>
-        <span class="site-footer__brand-name">
-          <strong>{brand.name}</strong>
-          <span class="site-footer__tag">{brand.tag}</span>
-        </span>
-      </a>
-      <p class="site-footer__about">{brand.blurb}</p>
+  <div class="site-footer__container">
+    <!-- Top 5-Column Grid -->
+    <div class="site-footer__grid">
+      <!-- Column 1: Brand & Contact Info -->
+      <div class="site-footer__col-brand">
+        <a href="/" class="site-footer__logo" aria-label="Rakebig Home">
+          <!-- Tech Circuit Logo Mark -->
+          <svg class="site-footer__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="9" cy="18" r="4.5" stroke="#3b82f6" stroke-width="2.2" fill="#1e3a8a" />
+            <circle cx="9" cy="18" r="2" fill="#60a5fa" />
+            <circle cx="27" cy="9" r="3.5" stroke="#3b82f6" stroke-width="2" fill="#1e3a8a" />
+            <circle cx="27" cy="9" r="1.5" fill="#60a5fa" />
+            <circle cx="27" cy="27" r="3.5" stroke="#3b82f6" stroke-width="2" fill="#1e3a8a" />
+            <circle cx="27" cy="27" r="1.5" fill="#60a5fa" />
+            <path d="M13.5 18H19C20.5 18 22 17 22.5 15.5L24 11" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M13.5 18H19C20.5 18 22 19 22.5 20.5L24 25" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="19" cy="18" r="1.5" fill="#93c5fd" />
+          </svg>
+          <span class="site-footer__logo-text">Rakebig</span>
+        </a>
 
-      <!-- Contact rows: rendered only when contact.* has a value -->
-      {(contact.email || contact.phone || contact.whatsapp || contact.lines.length > 0) && (
-        <div class="site-footer__contact">
-          {contact.email && (
-            <a href={`mailto:${contact.email}`} class="site-footer__contact-row">
-              <span class="site-footer__cicon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5" stroke="currentColor" stroke-width="1.7" /><path d="M4.5 7.5 12 13l7.5-5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              </span>
-              <span>{contact.email}</span>
-            </a>
-          )}
-          {contact.phone && (
-            <a href={`tel:${contact.phone}`} class="site-footer__contact-row">
-              <span class="site-footer__cicon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l1.5 4.5L8 10a11 11 0 0 0 6 6l1.5-2.5L20 15v4a1.5 1.5 0 0 1-1.7 1.5C10.4 19.6 4.4 13.6 3.5 5.7A1.5 1.5 0 0 1 5 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /></svg>
-              </span>
-              <span>{contact.phone}</span>
-            </a>
-          )}
-          {contact.whatsapp && (
-            <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" class="site-footer__contact-row">
-              <span class="site-footer__cicon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L4 20l3.8-1A8.5 8.5 0 1 0 12 3.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" /><path d="M9 8.5c.4 2.3 2.2 4.1 4.5 4.5l1.3-1.3 2 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              </span>
-              <span>{contact.whatsapp}</span>
-            </a>
-          )}
-          {contact.lines.map((l) => (
-            <a href={l.href} target={/^https?:/.test(l.href) ? "_blank" : undefined} rel={/^https?:/.test(l.href) ? "noopener noreferrer" : undefined} class="site-footer__contact-row">
-              <span class="site-footer__cicon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0v3a2.5 2.5 0 0 1-2.5 2.5H15M4 12v3.5A2.5 2.5 0 0 0 6.5 18H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
-              </span>
-              <span><strong>{l.label}:</strong> {l.value}</span>
-            </a>
-          ))}
-        </div>
-      )}
+        <p class="site-footer__tagline">{brand.tagline}</p>
 
-      {socials.length > 0 && (
-        <ul class="site-footer__socials">
-          {socials.map((s) => (
-            <li>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" /><path d="M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5C9.5 6.1 9.5 17.9 12 20.5M3.5 12h17" stroke="currentColor" stroke-width="1.6" /></svg>
-                <span>{s.label}</span>
+        <!-- Direct Contact Items -->
+        <div class="site-footer__contact-list">
+          <!-- Email -->
+          <a href={`mailto:${contacts.email}`} class="site-footer__contact-item">
+            <div class="site-footer__icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="3" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </div>
+            <span class="site-footer__contact-text">{contacts.email}</span>
+          </a>
+
+          <!-- Phone -->
+          <a href={`tel:${contacts.phone.replace(/[^0-9+]/g, '')}`} class="site-footer__contact-item">
+            <div class="site-footer__icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </div>
+            <span class="site-footer__contact-text">{contacts.phone}</span>
+          </a>
+
+          <!-- Tech Support -->
+          <div class="site-footer__contact-item site-footer__contact-item--support">
+            <div class="site-footer__icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                <path d="M18 19v1a2 2 0 0 1-2 2h-4" />
+              </svg>
+            </div>
+            <div class="site-footer__support-text">
+              <a href={`tel:${contacts.supportPhone.replace(/[^0-9+]/g, '')}`} class="site-footer__support-num">
+                {contacts.supportPhone}
               </a>
-            </li>
+              <span class="site-footer__support-note">{contacts.supportTiming}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media Buttons -->
+        <div class="site-footer__social-row">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z" /></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.87 0-1.57.7-1.57 1.57s.7 1.57 1.57 1.57 1.57-.7 1.57-1.57-.7-1.57-1.57-1.57z" /></svg>
+          </a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Company -->
+      <div class="site-footer__col">
+        <h3 class="site-footer__col-title">Company</h3>
+        <ul class="site-footer__links">
+          {companyLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
           ))}
         </ul>
-      )}
-    </div>
+      </div>
 
-    <!-- Company links -->
-    <nav class="site-footer__col" aria-label="Company">
-      <h2 class="site-footer__title">Company</h2>
-      <ul>
-        {companyLinks.map((l) => (
-          <li><a href={l.href}>{l.label}</a></li>
-        ))}
-      </ul>
-    </nav>
+      <!-- Column 3: Cloud & Domains -->
+      <div class="site-footer__col">
+        <h3 class="site-footer__col-title">Cloud & Domains</h3>
+        <ul class="site-footer__links">
+          {cloudLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
 
-    <!-- Services links -->
-    <nav class="site-footer__col" aria-label="Services">
-      <h2 class="site-footer__title">Services</h2>
-      <ul>
-        {serviceLinks.map((l) => (
-          <li><a href={l.href}>{l.label}</a></li>
-        ))}
-      </ul>
-    </nav>
+      <!-- Column 4: Quick Links -->
+      <div class="site-footer__col">
+        <h3 class="site-footer__col-title">Quick Links</h3>
+        <ul class="site-footer__links">
+          {quickLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
 
-    <!-- Get in touch / cards -->
-    <div class="site-footer__touch">
-      <h2 class="site-footer__title">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0v3.5a2.5 2.5 0 0 1-2.5 2.5H15M4 12v3.5A2.5 2.5 0 0 0 6.5 18H9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /><path d="M9 21h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
-        Get in Touch
-      </h2>
-      <div class="site-footer__cards">
-        <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="site-footer__card">
-          <strong>Start a project</strong>
-          <span>Book a free consultation and get a scoped, fixed-price quote.</span>
-          <em>Book a Consultation →</em>
-        </a>
-        <a href="https://aiwidget.rakebig.com/" target="_blank" rel="noopener noreferrer" class="site-footer__card">
-          <strong>AI Widget</strong>
-          <span>Try our ready-made AI assistant you can embed on any site.</span>
-          <em>Explore AI Widget →</em>
-        </a>
+      <!-- Column 5: Global Offices -->
+      <div class="site-footer__col site-footer__col--offices">
+        <h3 class="site-footer__col-title site-footer__title--globe">
+          <svg class="site-footer__globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          <span>Global Offices</span>
+        </h3>
+
+        <div class="site-footer__offices-cards">
+          {offices.map((office) => (
+            <div class="site-footer__office-card">
+              <div class="site-footer__pin-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div class="site-footer__office-content">
+                <div class="site-footer__office-head">
+                  <span class="site-footer__office-title">{office.country}</span>
+                  {office.isHQ && <span class="site-footer__hq-badge">HQ</span>}
+                </div>
+                <p class="site-footer__office-address">{office.address}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="container site-footer__bottom">
-    <p>© {year} {brand.name}. All rights reserved.</p>
-    <ul>
-      {policyLinks.map((l) => (
-        <li><a href={l.href}>{l.label}</a></li>
-      ))}
-    </ul>
+    <!-- Middle Divider Strip: Accepted Payment Methods & Affiliation -->
+    <div class="site-footer__payments-bar">
+      <div class="site-footer__payments-left">
+        <span class="site-footer__strip-label">ACCEPTED PAYMENT METHODS</span>
+        <div class="site-footer__payment-badges">
+          <!-- PayPal -->
+          <div class="site-footer__badge-card" title="PayPal">
+            <svg class="site-footer__badge-svg" viewBox="0 0 100 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.8 8.5h-5.2c-.4 0-.8.3-.9.8L10.3 23c-.1.3.1.6.4.6h3.1c.4 0 .7-.3.8-.7l.7-4.3c.1-.4.4-.7.8-.7h2.1c4.2 0 6.6-2 7.2-6 .3-1.8 0-3.1-.9-3.9-.9-.9-2.5-1.2-4.7-1.2h-1z" fill="#003087" />
+              <path d="M30.4 12.8c-.3 1.8-.9 3.2-2 4.1-1.1.9-2.7 1.3-4.7 1.3h-1.5c-.3 0-.6.3-.7.6l-1 6.2c-.1.3.2.6.5.6h2.7c.3 0 .6-.3.7-.6l.7-4.2c.1-.3.4-.6.7-.6h1.7c3.5 0 5.6-1.7 6.1-5 .3-1.5 0-2.6-.7-3.3-.8-.8-2.1-1.1-4-1.1h-5.5c-.3 0-.6.3-.7.6l-3.3 20.4c-.1.3.2.6.5.6h3.2c.3 0 .6-.3.7-.6l.8-4.9c.1-.3.4-.6.7-.6h1.5c4.7 0 7.4-2.3 8.1-6.8.4-2.1 0-3.6-1-4.6-1.1-.9-2.9-1.3-5.3-1.3h-6.2c-.4 0-.8.3-.9.7l-2.6 16.4c0 .3.2.5.5.5h2.5c.3 0 .6-.3.7-.6l.6-4c.1-.4.4-.7.8-.7h1.4c3.4 0 5.4-1.6 5.9-4.8z" fill="#0079C1" />
+              <text x="36" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-style="italic" font-size="14.5" fill="#003087">Pay</text>
+              <text x="61" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-style="italic" font-size="14.5" fill="#0079C1">Pal</text>
+            </svg>
+          </div>
+
+          <!-- VISA -->
+          <div class="site-footer__badge-card" title="Visa">
+            <svg class="site-footer__badge-svg" viewBox="0 0 68 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="5" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-style="italic" font-size="20" fill="#1434CB" letter-spacing="1">VISA</text>
+            </svg>
+          </div>
+
+          <!-- Mastercard -->
+          <div class="site-footer__badge-card" title="Mastercard">
+            <svg class="site-footer__badge-svg" viewBox="0 0 54 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="16" r="12" fill="#EB001B" />
+              <circle cx="34" cy="16" r="12" fill="#F79E1B" fill-opacity="0.9" />
+              <path d="M27 7.7a11.97 11.97 0 0 1 0 16.6 11.97 11.97 0 0 1 0-16.6z" fill="#FF5F00" />
+            </svg>
+          </div>
+
+          <!-- American Express -->
+          <div class="site-footer__badge-card site-footer__badge-card--amex" title="American Express">
+            <svg class="site-footer__badge-svg" viewBox="0 0 105 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="1" width="105" height="22" rx="3" fill="#006FCF" />
+              <text x="52.5" y="16" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="9" fill="#ffffff" letter-spacing="0.5">AMERICAN EXPRESS</text>
+            </svg>
+          </div>
+
+          <!-- Discover -->
+          <div class="site-footer__badge-card" title="Discover">
+            <svg class="site-footer__badge-svg" viewBox="0 0 85 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="4" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="14.5" fill="#231F20" letter-spacing="0.5">DISC</text>
+              <circle cx="49" cy="13" r="6.2" fill="#F47216" />
+              <text x="57" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="14.5" fill="#231F20" letter-spacing="0.5">VER</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Affiliated With -->
+      <div class="site-footer__payments-right">
+        <span class="site-footer__strip-label">AFFILIATED WITH</span>
+        <div class="site-footer__affiliated-box">
+          <svg class="site-footer__codecanyon-leaf" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.98 2.02c-.37-.02-.87.21-1.6.72-2.12 1.48-5.32 4.45-6.84 8.76-.7-1.34-1.63-2.61-2.82-3.69-.99-.91-2.13-1.64-3.41-2.02-.38-.11-.71.18-.62.56.77 3.25 2.61 6.13 5.16 8.16 1.4 1.11 3.01 1.95 4.75 2.45.19.06.39-.08.39-.28v-.15c0-1.84.44-3.77 1.48-5.5 1.54-2.58 3.51-4.79 5.25-6.93.59-.72.93-1.4.73-1.8-.13-.18-.3-.27-.47-.28z" fill="#82b440" />
+            <path d="M12 16.5c-3.1 0-6.1-1.5-7.8-4-.2-.3-.6-.3-.8 0-.3.3-.2.8.1 1.1 2 2.8 5.3 4.5 8.8 4.5 1.1 0 2.2-.2 3.2-.5.3-.1.5-.4.4-.7s-.4-.5-.7-.4c-1 .3-2.1.5-3.2.5z" fill="#82b440" opacity="0.6" />
+          </svg>
+          <span class="site-footer__codecanyon-text">CodeCanyon</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar: Copyright & Policies -->
+    <div class="site-footer__bottom-bar">
+      <p class="site-footer__copyright">
+        © {year} {brand.name}. All rights reserved.
+      </p>
+      <nav class="site-footer__policy-nav" aria-label="Footer Legal Links">
+        {policyLinks.map((p) => (
+          <a href={p.href} class="site-footer__policy-link">{p.label}</a>
+        ))}
+      </nav>
+    </div>
   </div>
 </footer>
 
 <style>
+  /* Base Container & Background */
   .site-footer {
-    background: linear-gradient(180deg, #0e1c33 0%, #0a1120 100%);
-    color: #aab8ca;
-    padding: 72px 0 0;
+    background-color: #0b1322;
+    background-image: linear-gradient(180deg, #0d1728 0%, #080e1a 100%);
+    color: #94a3b8;
+    padding: 70px 0 30px;
+    font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 
+  .site-footer__container {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+
+  /* 5-Column Grid */
   .site-footer__grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 44px 36px;
+    grid-template-columns: 2.3fr 1.1fr 1.25fr 1.1fr 2.4fr;
+    gap: 40px;
+    align-items: flex-start;
   }
 
-  .site-footer__brand {
-    grid-column: span 4;
+  /* Column 1: Brand & Contacts */
+  .site-footer__col-brand {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 16px;
   }
 
   .site-footer__logo {
@@ -194,205 +324,458 @@ const policyLinks = [
     align-items: center;
     gap: 12px;
     text-decoration: none;
+    color: #ffffff;
+    transition: opacity 0.2s ease;
   }
-  .site-footer__mark { width: 34px; height: 34px; flex-shrink: 0; }
-  .site-footer__brand-name {
-    display: grid;
-    gap: 3px;
+  .site-footer__logo:hover {
+    opacity: 0.92;
+  }
+
+  .site-footer__logo-mark {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+
+  .site-footer__logo-text {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.03em;
     line-height: 1;
   }
-  .site-footer__brand-name strong {
-    font-family: var(--font-body);
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #fff;
-  }
-  .site-footer__tag {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #64748b;
-  }
 
-  .site-footer__about {
+  .site-footer__tagline {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #94a3b8;
     margin: 0;
-    max-width: 34ch;
-    font-size: 14px;
-    line-height: 1.65;
-    color: #8b98ab;
+    max-width: 320px;
   }
 
-  .site-footer__contact {
-    display: grid;
-    gap: 10px;
-    width: 100%;
-  }
-  .site-footer__contact-row {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #c7d2e0;
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  .site-footer__contact-row:hover { color: #fff; }
-  .site-footer__contact-row strong { color: #fff; font-weight: 600; }
-  .site-footer__cicon {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9px;
-    background: rgba(255, 255, 255, 0.06);
-    color: #6f9bff;
-  }
-  .site-footer__cicon svg { width: 16px; height: 16px; }
-
-  .site-footer__socials {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 8px;
-  }
-  .site-footer__socials a {
-    width: 36px;
-    height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.06);
-    color: #c7d2e0;
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-  .site-footer__socials a svg { width: 17px; height: 17px; }
-  .site-footer__socials a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  .site-footer__socials a:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
-
-  .site-footer__col {
-    grid-column: span 2;
-  }
-  .site-footer__col h2,
-  .site-footer__touch h2 {
-    margin: 0 0 18px;
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: #fff;
-  }
-  .site-footer__col ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 12px;
-  }
-  .site-footer__col a {
-    font-size: 14px;
-    color: #8b98ab;
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  .site-footer__col a:hover { color: #fff; }
-
-  .site-footer__touch {
-    grid-column: span 4;
-  }
-  .site-footer__touch h2 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .site-footer__touch h2 svg { width: 18px; height: 18px; color: #6f9bff; }
-
-  .site-footer__cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .site-footer__card {
+  .site-footer__contact-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 16px;
-    text-decoration: none;
-    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-  }
-  .site-footer__card:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(111, 155, 255, 0.5);
-    transform: translateY(-2px);
-  }
-  .site-footer__card strong {
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-  }
-  .site-footer__card span {
-    font-size: 12.5px;
-    line-height: 1.5;
-    color: #8b98ab;
-  }
-  .site-footer__card em {
+    gap: 13px;
+    width: 100%;
     margin-top: 4px;
-    font-style: normal;
-    font-size: 13px;
-    font-weight: 600;
-    color: #6f9bff;
   }
 
-  .site-footer__bottom {
-    margin-top: 56px;
-    padding: 22px 20px;
+  .site-footer__contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #cbd5e1;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .site-footer__contact-item:hover {
+    color: #ffffff;
+  }
+
+  .site-footer__icon-box {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(30, 58, 138, 0.35);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #60a5fa;
+    transition: all 0.2s ease;
+  }
+  .site-footer__contact-item:hover .site-footer__icon-box {
+    background: rgba(37, 99, 235, 0.5);
+    border-color: #3b82f6;
+    color: #ffffff;
+  }
+  .site-footer__icon-box svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .site-footer__contact-text {
+    word-break: break-all;
+  }
+
+  .site-footer__contact-item--support {
+    align-items: flex-start;
+  }
+
+  .site-footer__support-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .site-footer__support-num {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .site-footer__support-num:hover {
+    color: #ffffff;
+  }
+
+  .site-footer__support-note {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+  }
+
+  /* Social Icons */
+  .site-footer__social-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .site-footer__social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .site-footer__social-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+  .site-footer__social-btn:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* Link Columns (Company, Cloud & Domains, Quick Links) */
+  .site-footer__col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-footer__col-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin: 0 0 20px;
+    line-height: 1.2;
+  }
+
+  .site-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .site-footer__links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.15s ease, transform 0.15s ease;
+    display: inline-block;
+  }
+  .site-footer__links a:hover {
+    color: #ffffff;
+    transform: translateX(2px);
+  }
+
+  /* Global Offices Column */
+  .site-footer__col--offices {
+    width: 100%;
+  }
+
+  .site-footer__title--globe {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .site-footer__globe-icon {
+    width: 18px;
+    height: 18px;
+    color: #60a5fa;
+    flex-shrink: 0;
+  }
+
+  .site-footer__offices-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .site-footer__office-card {
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.2s ease;
+  }
+  .site-footer__office-card:hover {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(59, 130, 246, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .site-footer__pin-box {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(30, 58, 138, 0.35);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #60a5fa;
+    margin-top: 2px;
+  }
+  .site-footer__pin-box svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .site-footer__office-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .site-footer__office-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .site-footer__office-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+
+  .site-footer__hq-badge {
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .site-footer__office-address {
+    font-size: 12.5px;
+    color: #94a3b8;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Middle Divider Bar: Payment Methods & Affiliation */
+  .site-footer__payments-bar {
+    margin-top: 48px;
+    padding: 26px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 32px;
     flex-wrap: wrap;
   }
-  .site-footer__bottom p {
-    margin: 0;
-    font-size: 13px;
-    color: #6b7890;
+
+  .site-footer__strip-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 12px;
   }
-  .site-footer__bottom ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+  .site-footer__payments-left {
     display: flex;
-    gap: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-footer__payment-badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     flex-wrap: wrap;
   }
-  .site-footer__bottom a {
+
+  .site-footer__badge-card {
+    height: 34px;
+    padding: 0 12px;
+    background: #ffffff;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .site-footer__badge-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+  }
+  .site-footer__badge-svg {
+    height: 22px;
+    width: auto;
+    display: block;
+  }
+  .site-footer__badge-card--amex {
+    padding: 0 8px;
+  }
+
+  /* Affiliated With */
+  .site-footer__payments-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-footer__affiliated-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    height: 34px;
+  }
+
+  .site-footer__codecanyon-leaf {
+    width: 22px;
+    height: 22px;
+  }
+
+  .site-footer__codecanyon-text {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* Bottom Copyright & Policy Bar */
+  .site-footer__bottom-bar {
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__copyright {
     font-size: 13px;
-    color: #6b7890;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .site-footer__policy-nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__policy-link {
+    font-size: 13px;
+    color: #94a3b8;
     text-decoration: none;
+    transition: color 0.15s ease;
   }
-  .site-footer__bottom a:hover { color: #fff; }
-
-  @media (max-width: 1000px) {
-    .site-footer__brand { grid-column: span 7; }
-    .site-footer__col { grid-column: span 2; }
-    .site-footer__touch { grid-column: span 5; }
+  .site-footer__policy-link:hover {
+    color: #ffffff;
   }
 
-  @media (max-width: 720px) {
-    .site-footer { padding: 56px 0 0; }
-    .site-footer__grid { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
-    .site-footer__brand { grid-column: 1 / -1; }
-    .site-footer__col { grid-column: span 1; }
-    .site-footer__touch { grid-column: 1 / -1; }
-    .site-footer__cards { grid-template-columns: 1fr; }
+  /* Responsive Breakpoints */
+  @media (max-width: 1200px) {
+    .site-footer__grid {
+      grid-template-columns: 2.5fr 1fr 1.2fr 1fr;
+    }
+    .site-footer__col--offices {
+      grid-column: 1 / -1;
+      margin-top: 10px;
+    }
+    .site-footer__offices-cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .site-footer__office-card {
+      flex: 1;
+      min-width: 280px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .site-footer {
+      padding: 50px 0 24px;
+    }
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 36px 24px;
+    }
+    .site-footer__col-brand {
+      grid-column: 1 / -1;
+    }
+    .site-footer__col--offices {
+      grid-column: 1 / -1;
+    }
+    .site-footer__offices-cards {
+      flex-direction: column;
+    }
+    .site-footer__office-card {
+      width: 100%;
+    }
+    .site-footer__payments-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .site-footer__bottom-bar {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .site-footer__policy-nav {
+      gap: 14px 18px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .site-footer__payment-badges {
+      gap: 8px;
+    }
   }
 </style>
