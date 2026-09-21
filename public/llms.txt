@@ -118,8 +118,42 @@ Hub: https://www.rakebig.com/clones
 10. Video Conferencing Clone (https://www.rakebig.com/clones/video-conferencing-clone)
     - Zoom and Google Meet-style WebRTC SFU video meetings with HD screen sharing, cloud recording, and waiting rooms.
 
+## Open Source & Self-Hosted Solutions
+Hub: https://www.rakebig.com/open-source
+
+1. Open Source Consultation & Installation (https://www.rakebig.com/open-source/consultation-installation)
+   - Architecture discovery, server sizing, hardened turn-key OS & Docker container installation on bare metal or cloud.
+
+2. White-Labeling & UI Customization (https://www.rakebig.com/open-source/whitelabel-customization)
+   - Brand customization, custom UI/UX themes, corporate domain mapping, SSO/SAML integrations, and tailored feature modules.
+
+3. Zero-Downtime Server Migrations (https://www.rakebig.com/open-source/server-migrations)
+   - Safe migration of databases, multi-TB file assets, and services across cloud providers with zero downtime and rollbacks.
+
+4. SecOps & AIOps (https://www.rakebig.com/open-source/secops-aiops)
+   - Automated vulnerability scanning, CrowdSec WAF, Prometheus & Grafana alerting, and self-healing cluster operations.
+
+5. 24/7 Managed Maintenance & Support (https://www.rakebig.com/open-source/managed-maintenance)
+   - Proactive security patching, database optimization, encrypted backup verification, and 15-minute incident response SLA.
+
+6. Nextcloud Enterprise (https://www.rakebig.com/open-source/nextcloud)
+   - Self-hosted alternative to Google Drive & Dropbox with OnlyOffice/Collabora suite, end-to-end encryption, and file syncing.
+
+7. Rocket.Chat Enterprise (https://www.rakebig.com/open-source/rocket-chat)
+   - Air-gapped self-hosted team communication, omnichannel live website chat widgets, matrix federation, and regulatory compliance.
+
+8. Mattermost DevOps Collaboration (https://www.rakebig.com/open-source/mattermost)
+   - High-trust developer chat, incident playbooks, Git CI/CD toolchain integrations, and air-gapped security for tech teams.
+
+9. Jitsi Meet & Video Matrix (https://www.rakebig.com/open-source/jitsi-meet)
+   - Unlimited HD WebRTC video conferencing, private room token authentication, SIP telephony bridge, and Matrix messaging federation.
+
+10. Coolify & aaPanel PaaS (https://www.rakebig.com/open-source/coolify-aapanel)
+    - Self-hosted Heroku and cPanel alternative for automated Git push-to-deploy, Docker container management, and Nginx reverse proxies.
+
 ## Official Policies & Compliance
 - Terms & Conditions: https://www.rakebig.com/terms
 - Privacy Policy: https://www.rakebig.com/privacy
 - Refund & Cancellation Policy: https://www.rakebig.com/refund
 - XML Sitemap: https://www.rakebig.com/sitemap.xml
+

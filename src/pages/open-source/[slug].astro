@@ -1,0 +1,974 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import PrimaryButton from "../../components/PrimaryButton.astro";
+import { openSourceItems } from "../../data/opensource";
+import { BOOK_CONSULTATION_URL, SITE_NAME, SITE_URL, SUPPORT_PHONE, TECH_SUPPORT_PHONE } from "../../consts";
+import type { OpenSourceItem } from "../../data/opensource";
+
+export function getStaticPaths() {
+  return openSourceItems.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: OpenSourceItem;
+}
+
+const { item } = Astro.props;
+const canonical = `/open-source/${item.slug}`;
+const pageTitle = `${item.name} — Open Source & Self-Hosted Solutions | ${SITE_NAME}`;
+
+const schemaBase = { "@context": "https://schema.org" };
+const crumbs = [
+  { name: "Home", item: "/" },
+  { name: "Open Source", item: "/open-source" },
+  { name: item.name, item: canonical },
+];
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    ...schemaBase,
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.item, SITE_URL).toString(),
+    })),
+  },
+  {
+    ...schemaBase,
+    "@type": "Service",
+    name: item.name,
+    description: item.metaDescription,
+    url: new URL(canonical, SITE_URL).toString(),
+    serviceType: "Open Source & Self-Hosted Infrastructure",
+    provider: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  },
+  {
+    ...schemaBase,
+    "@type": "FAQPage",
+    mainEntity: item.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  },
+];
+
+const relatedItems = openSourceItems.filter((o) => item.related.includes(o.slug));
+---
+
+<Layout
+  title={pageTitle}
+  description={item.metaDescription}
+  canonicalPath={canonical}
+  jsonLd={jsonLd}
+>
+  <SiteHeader current="opensource" />
+
+  <main class="os-page">
+    <!-- ============ HERO ============ -->
+    <header class="os-hero">
+      <div class="os-hero__bg" aria-hidden="true">
+        <span class="os-hero__blob" style={`--os-tint:${item.tintColor}; --os-accent:${item.accentColor}`}></span>
+      </div>
+
+      <div class="container os-hero__inner">
+        <nav class="os-crumbs" aria-label="Breadcrumb">
+          <ol>
+            {crumbs.map((c, i) => (
+              <li>
+                {i < crumbs.length - 1 ? (
+                  <a href={c.item}>{c.name}</a>
+                ) : (
+                  <span aria-current="page">{c.name}</span>
+                )}
+                {i < crumbs.length - 1 && <span class="os-crumbs__sep">/</span>}
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div class="os-badge" style={`--os-tint:${item.tintColor}; --os-accent:${item.accentColor}`}>
+          <span class="os-badge__dot"></span>
+          <span>{item.category} · 100% Self-Hosted</span>
+        </div>
+
+        <h1 class="os-hero__title">{item.heroTitle}</h1>
+        <p class="os-hero__lead">{item.heroLead}</p>
+
+        <div class="os-hero__actions">
+          <PrimaryButton label="Book Architecture Consultation" href={BOOK_CONSULTATION_URL} bg="#0c0e1c" color="#ffffff" />
+          <a href="/open-source" class="os-btn os-btn--ghost">
+            Explore All Open Source Solutions
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <!-- Software Stack Tags -->
+        <div class="os-stack-pills">
+          <span class="os-stack-label">Software Technologies:</span>
+          {item.softwareStack.map((tech) => (
+            <span class="os-stack-pill">{tech}</span>
+          ))}
+        </div>
+
+        <!-- Key Benefits Strip -->
+        <div class="os-stats-strip">
+          {item.keyBenefits.map((b) => (
+            <div class="os-stat-card">
+              <span class="os-stat-card__val" style={`color:${item.accentColor}`}>{b.stat}</span>
+              <span class="os-stat-card__lbl">{b.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ FEATURES GRID ============ -->
+    <section class="os-sec os-sec--alt">
+      <div class="container">
+        <div class="os-sec__header">
+          <span class="os-sec__eyebrow">Production Capabilities</span>
+          <h2 class="os-sec__title">Enterprise-grade features & operational standards</h2>
+          <p class="os-sec__sub">
+            We don’t just install default packages; we engineer production-hardened deployments tuned for performance, privacy, and continuous uptime.
+          </p>
+        </div>
+
+        <div class="os-caps-grid">
+          {item.features.map((feat) => (
+            <article class="os-cap-card">
+              <div class="os-cap-card__head">
+                <div class="os-cap-card__icon" style={`background:${item.tintColor}; color:${item.accentColor}`}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                {feat.badge && <span class="os-cap-card__badge">{feat.badge}</span>}
+              </div>
+              <h3 class="os-cap-card__title">{feat.title}</h3>
+              <p class="os-cap-card__body">{feat.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ARCHITECTURE PIPELINE ============ -->
+    <section class="os-sec">
+      <div class="container">
+        <div class="os-sec__header">
+          <span class="os-sec__eyebrow">Deployment Blueprint</span>
+          <h2 class="os-sec__title">How our deployment & operational flow works</h2>
+          <p class="os-sec__sub">
+            From initial requirements assessment to live production orchestration, backup verification, and continuous defense.
+          </p>
+        </div>
+
+        <div class="os-arch-flow">
+          {item.architecture.map((step, idx) => (
+            <div class="os-arch-step">
+              <div class="os-arch-step__marker" style={`border-color:${item.accentColor}; color:${item.accentColor}`}>
+                {step.step}
+              </div>
+              <div class="os-arch-step__content">
+                <h3 class="os-arch-step__title">{step.title}</h3>
+                <p class="os-arch-step__desc">{step.desc}</p>
+              </div>
+              {idx < item.architecture.length - 1 && (
+                <div class="os-arch-step__connector" aria-hidden="true">
+                  <span></span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECH STACK SPECIFICATIONS ============ -->
+    <section class="os-sec os-sec--alt">
+      <div class="container">
+        <div class="os-sec__header">
+          <span class="os-sec__eyebrow">Technical Architecture</span>
+          <h2 class="os-sec__title">Supported infrastructure & technologies</h2>
+          <p class="os-sec__sub">
+            Proven open-source tools and container runtimes deployed on reliable cloud or bare-metal Linux servers.
+          </p>
+        </div>
+
+        <div class="os-stack-grid">
+          {item.techStack.map((stk) => (
+            <div class="os-stack-card">
+              <h3 class="os-stack-card__cat">{stk.category}</h3>
+              <div class="os-stack-card__items">
+                {stk.items.map((techItem) => (
+                  <span class="os-stack-badge">{techItem}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ IMPLEMENTATION ROADMAP ============ -->
+    <section class="os-sec">
+      <div class="container">
+        <div class="os-sec__header">
+          <span class="os-sec__eyebrow">Delivery Process</span>
+          <h2 class="os-sec__title">Step-by-step rollout roadmap</h2>
+          <p class="os-sec__sub">
+            A clear 4-stage deployment methodology ensuring seamless migration, zero data loss, and thorough team handover.
+          </p>
+        </div>
+
+        <div class="os-steps-grid">
+          {item.steps.map((st, i) => (
+            <div class="os-step-card">
+              <div class="os-step-card__num" style={`color:${item.accentColor}`}>
+                Phase 0{i + 1}
+              </div>
+              <h3 class="os-step-card__title">{st.title}</h3>
+              <p class="os-step-card__body">{st.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MEASURABLE OUTCOMES ============ -->
+    <section class="os-sec os-sec--alt">
+      <div class="container">
+        <div class="os-sec__header">
+          <span class="os-sec__eyebrow">Measurable ROI</span>
+          <h2 class="os-sec__title">Real business impact of self-hosting</h2>
+          <p class="os-sec__sub">
+            Eliminate recurring licensing overhead, achieve complete data sovereignty, and enjoy fast private performance.
+          </p>
+        </div>
+
+        <div class="os-outcomes-grid">
+          {item.outcomes.map((out) => (
+            <div class="os-outcome-card">
+              <span class="os-outcome-card__metric" style={`color:${item.accentColor}`}>{out.metric}</span>
+              <h3 class="os-outcome-card__label">{out.label}</h3>
+              <p class="os-outcome-card__desc">{out.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQS ============ -->
+    <section class="os-sec">
+      <div class="container os-faq-container">
+        <div class="os-sec__header">
+          <span class="os-sec__eyebrow">Clear Answers</span>
+          <h2 class="os-sec__title">Frequently asked questions</h2>
+          <p class="os-sec__sub">
+            Common questions regarding server requirements, data privacy, migration, and ongoing SLA maintenance.
+          </p>
+        </div>
+
+        <div class="os-faqs">
+          {item.faqs.map((faq) => (
+            <details class="os-faq-item">
+              <summary class="os-faq-item__q">
+                <span>{faq.q}</span>
+                <span class="os-faq-item__chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </summary>
+              <div class="os-faq-item__a">
+                <p>{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RELATED SOLUTIONS ============ -->
+    {relatedItems.length > 0 && (
+      <section class="os-sec os-sec--alt">
+        <div class="container">
+          <div class="os-sec__header">
+            <span class="os-sec__eyebrow">Complementary Offerings</span>
+            <h2 class="os-sec__title">Related open-source services & platforms</h2>
+            <p class="os-sec__sub">Explore other ways we help growing teams take control of their digital infrastructure.</p>
+          </div>
+
+          <div class="os-related-grid">
+            {relatedItems.map((rel) => (
+              <a href={`/open-source/${rel.slug}`} class="os-related-card">
+                <div class="os-related-card__top">
+                  <span class="os-related-card__tag" style={`background:${rel.tintColor}; color:${rel.accentColor}`}>{rel.category}</span>
+                  <span class="os-related-card__arrow">→</span>
+                </div>
+                <h3 class="os-related-card__title">{rel.name}</h3>
+                <p class="os-related-card__summary">{rel.shortSummary}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============ BOTTOM CTA ============ -->
+    <section class="os-cta">
+      <div class="container os-cta__inner reveal">
+        <span class="os-cta__pill">Take Control of Your Data</span>
+        <h2 class="os-cta__title">Ready to deploy your private {item.name}?</h2>
+        <p class="os-cta__lead">
+          Schedule a 30-minute architectural consultation with our DevOps leads. We’ll calculate your exact server requirements, plan your data migration, and provide a fixed-price deployment quote.
+        </p>
+        <div class="os-cta__actions">
+          <PrimaryButton label="Book an Architecture Call" href={BOOK_CONSULTATION_URL} bg="#ffffff" color="#0c0e1c" />
+          <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`} class="os-btn os-btn--white-ghost">
+            Call: {SUPPORT_PHONE}
+          </a>
+        </div>
+        <p class="os-cta__note">
+          Have an urgent server outage or migration deadline? Call our priority tech support desk at <a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{TECH_SUPPORT_PHONE}</a> (Mon–Sat, 10–7 IST).
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .os-page {
+    background: #ffffff;
+    color: #0c0e1c;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* HERO */
+  .os-hero {
+    position: relative;
+    padding: 7rem 0 4rem;
+    overflow: hidden;
+  }
+
+  .os-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .os-hero__blob {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--os-tint, #eff6ff) 0%, rgba(255,255,255,0) 70%);
+    filter: blur(50px);
+    opacity: 0.8;
+  }
+
+  .os-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+  }
+
+  .os-crumbs ol {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .os-crumbs a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .os-crumbs a:hover {
+    color: #0c0e1c;
+  }
+
+  .os-crumbs__sep {
+    margin: 0 0.5rem;
+    color: #cbd5e1;
+  }
+
+  .os-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    background: var(--os-tint, #eff6ff);
+    color: var(--os-accent, #2563eb);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .os-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .os-hero__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.15;
+    font-weight: 400;
+    color: #0c0e1c;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .os-hero__lead {
+    font-size: clamp(1.0625rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 2rem;
+  }
+
+  .os-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .os-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .os-btn--ghost {
+    background: #f1f5f9;
+    color: #0c0e1c;
+    border: 1px solid #e2e8f0;
+  }
+
+  .os-btn--ghost:hover {
+    background: #e2e8f0;
+  }
+
+  .os-stack-pills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .os-stack-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .os-stack-pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    color: #334155;
+  }
+
+  .os-stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+  }
+
+  .os-stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .os-stat-card__val {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .os-stat-card__lbl {
+    font-size: 0.8125rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  /* SECTIONS COMMON */
+  .os-sec {
+    padding: 5rem 0;
+    position: relative;
+  }
+
+  .os-sec--alt {
+    background: #f8fafc;
+    border-top: 1px solid #edf2f7;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .os-sec__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .os-sec__eyebrow {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin-bottom: 0.625rem;
+  }
+
+  .os-sec__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(1.875rem, 3.2vw, 2.5rem);
+    line-height: 1.2;
+    color: #0c0e1c;
+    margin-bottom: 1rem;
+  }
+
+  .os-sec__sub {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* CAPABILITIES GRID */
+  .os-caps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .os-cap-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .os-cap-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+
+  .os-cap-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .os-cap-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .os-cap-card__badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+  }
+
+  .os-cap-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .os-cap-card__body {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* ARCHITECTURE FLOW */
+  .os-arch-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .os-arch-step {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .os-arch-step__marker {
+    display: inline-block;
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-bottom: 2px solid;
+    margin-bottom: 1rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .os-arch-step__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .os-arch-step__desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* TECH STACK */
+  .os-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .os-stack-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .os-stack-card__cat {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0c0e1c;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .os-stack-card__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .os-stack-badge {
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+  }
+
+  /* ROADMAP STEPS */
+  .os-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .os-step-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .os-step-card__num {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .os-step-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .os-step-card__body {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* OUTCOMES */
+  .os-outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .os-outcome-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .os-outcome-card__metric {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .os-outcome-card__label {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #0c0e1c;
+  }
+
+  .os-outcome-card__desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #64748b;
+  }
+
+  /* FAQS */
+  .os-faq-container {
+    max-width: 800px;
+  }
+
+  .os-faqs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .os-faq-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .os-faq-item__q {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    user-select: none;
+  }
+
+  .os-faq-item__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .os-faq-item__chevron {
+    transition: transform 0.2s ease;
+    color: #64748b;
+  }
+
+  .os-faq-item[open] .os-faq-item__chevron {
+    transform: rotate(180deg);
+  }
+
+  .os-faq-item__a {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #475569;
+  }
+
+  /* RELATED */
+  .os-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .os-related-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .os-related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+
+  .os-related-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .os-related-card__tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.55rem;
+    border-radius: 9999px;
+  }
+
+  .os-related-card__arrow {
+    font-size: 1.25rem;
+    color: #94a3b8;
+  }
+
+  .os-related-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .os-related-card__summary {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #64748b;
+  }
+
+  /* CTA */
+  .os-cta {
+    background: #0c0e1c;
+    color: #ffffff;
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .os-cta__inner {
+    max-width: 760px;
+  }
+
+  .os-cta__pill {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255,255,255,0.1);
+    color: #93c5fd;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .os-cta__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+
+  .os-cta__lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 2.25rem;
+  }
+
+  .os-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .os-btn--white-ghost {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .os-btn--white-ghost:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #ffffff;
+  }
+
+  .os-cta__note {
+    font-size: 0.875rem;
+    color: #94a3b8;
+  }
+
+  .os-cta__note a {
+    color: #38bdf8;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .os-hero {
+      padding: 5rem 0 3rem;
+    }
+    .os-sec {
+      padding: 3.5rem 0;
+    }
+  }
+</style>
