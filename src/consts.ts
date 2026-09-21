@@ -16,10 +16,9 @@ export const DEFAULT_OG_IMAGE = "/assets/preview.png";
 // Cal.com scheduling page). Import and reuse this — don't hardcode the URL.
 export const BOOK_CONSULTATION_URL = "https://cal.com/rakebigservices";
 
-// Official contact & support email used across legal pages and footer
 export const SUPPORT_EMAIL = "support@rakebig.com";
-export const SUPPORT_PHONE = "+91 7827408866";
-export const TECH_SUPPORT_PHONE = "+91 9782533298";
+export const SUPPORT_PHONE = "+91 78274 08866";
+export const TECH_SUPPORT_PHONE = "+91 97825 33298";
 
 // Official social media links (username: rakebigservices across all platforms)
 export const SOCIAL_LINKS = {

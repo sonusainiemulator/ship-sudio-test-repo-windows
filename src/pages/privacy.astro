@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import PrimaryButton from "../components/PrimaryButton.astro";
-import { SITE_NAME, SITE_URL, SUPPORT_EMAIL, BOOK_CONSULTATION_URL } from "../consts";
+import { SITE_NAME, SITE_URL, SUPPORT_EMAIL, SUPPORT_PHONE, TECH_SUPPORT_PHONE, BOOK_CONSULTATION_URL } from "../consts";
 
 const lastUpdated = "March 21, 2026";
 const effectiveDate = "January 1, 2026";
@@ -355,6 +355,8 @@ const sections = [
                   <strong>Entity:</strong> {SITE_NAME} (rakebig.com)<br />
                   <strong>Attention:</strong> Grievance Redressal Desk<br />
                   <strong>Official Grievance Email:</strong> <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a><br />
+                  <strong>Direct Telephone:</strong> <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{SUPPORT_PHONE}</a><br />
+                  <strong>Tech Support Helpline:</strong> <a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{TECH_SUPPORT_PHONE}</a> (Mon–Sat, 10–7 IST)<br />
                   <strong>Alternate Contact:</strong> <a href="mailto:contact@rakebig.in">contact@rakebig.in</a><br />
                   <strong>Response Timeline:</strong> Grievance acknowledgement within 48 hours; resolution within thirty (30) days from receipt.
                 </p>

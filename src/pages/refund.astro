@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import PrimaryButton from "../components/PrimaryButton.astro";
-import { SITE_NAME, SITE_URL, SUPPORT_EMAIL, BOOK_CONSULTATION_URL } from "../consts";
+import { SITE_NAME, SITE_URL, SUPPORT_EMAIL, SUPPORT_PHONE, TECH_SUPPORT_PHONE, BOOK_CONSULTATION_URL } from "../consts";
 
 const lastUpdated = "March 21, 2026";
 const effectiveDate = "January 1, 2026";
@@ -271,6 +271,14 @@ const sections = [
               <div class="legal-contact-row">
                 <span class="legal-contact-k">Billing & Refund Email:</span>
                 <span class="legal-contact-v"><a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a></span>
+              </div>
+              <div class="legal-contact-row">
+                <span class="legal-contact-k">Direct Telephone:</span>
+                <span class="legal-contact-v"><a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{SUPPORT_PHONE}</a></span>
+              </div>
+              <div class="legal-contact-row">
+                <span class="legal-contact-k">Tech Support Helpline:</span>
+                <span class="legal-contact-v"><a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{TECH_SUPPORT_PHONE}</a> (Mon–Sat, 10–7 IST)</span>
               </div>
               <div class="legal-contact-row">
                 <span class="legal-contact-k">Response Guarantee:</span>

@@ -9,6 +9,7 @@ import {
   DEFAULT_OG_IMAGE,
   SUPPORT_EMAIL,
   SUPPORT_PHONE,
+  TECH_SUPPORT_PHONE,
   BOOK_CONSULTATION_URL,
   SOCIAL_LINKS,
 } from '../consts';
@@ -55,6 +56,20 @@ const defaultSchemas: Record<string, unknown>[] = [
     "image": ogImageUrl,
     "description": DEFAULT_DESCRIPTION,
     "telephone": SUPPORT_PHONE,
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": SUPPORT_PHONE,
+        "contactType": "sales",
+        "areaServed": "Global"
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": TECH_SUPPORT_PHONE,
+        "contactType": "technical support",
+        "areaServed": "Global"
+      }
+    ],
     "email": SUPPORT_EMAIL,
     "priceRange": "$$",
     "address": {
