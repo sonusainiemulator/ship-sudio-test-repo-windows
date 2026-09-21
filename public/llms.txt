@@ -82,6 +82,39 @@ Hub: https://www.rakebig.com/solutions
 7. AI Strategy & Consulting (https://www.rakebig.com/solutions/ai-strategy-consulting)
    - Pragmatic AI feasibility audits, ROI calculations, vendor benchmarking, and technical roadmaps.
 
+## Pre-Engineered App Clones (100% Source Code Ownership)
+Hub: https://www.rakebig.com/clones
+
+1. Zepto Clone (https://www.rakebig.com/clones/zepto-clone)
+   - Sub-10-minute quick-commerce grocery delivery platform with customer apps, dark-store pickers, and fleet dispatch.
+
+2. Blinkit Clone (https://www.rakebig.com/clones/blinkit-clone)
+   - Hyperlocal quick-commerce super-app for groceries, electronics, and multi-hub dark-store inventory pooling.
+
+3. Food App Clone (https://www.rakebig.com/clones/food-app-clone)
+   - Swiggy and Zomato-style multi-restaurant food delivery marketplace with live kitchen POS tablets and rider routing.
+
+4. Taxi App Clone (https://www.rakebig.com/clones/taxi-app-clone)
+   - Uber and Ola-style on-demand ride-hailing with upfront fares, driver radar broadcast, SOS, and fleet management.
+
+5. On-Demand Services Clone (https://www.rakebig.com/clones/on-demand-services-clone)
+   - Urban Company-style home repairs, cleaning, salon, and professional services booking with slot calendars and OTP verification.
+
+6. WhatsApp Clone (https://www.rakebig.com/clones/whatsapp-clone)
+   - Signal-protocol end-to-end encrypted messaging, WebRTC voice/video calls, status stories, and multi-device sync.
+
+7. TikTok Clone (https://www.rakebig.com/clones/tiktok-clone)
+   - Short-video discovery app with algorithmic For You feed, in-app video recording studio, audio track library, and live gifting.
+
+8. Dating App Clone (https://www.rakebig.com/clones/dating-app-clone)
+   - Tinder and Bumble-style swipe matching, geolocation radius discovery, AI selfie verification, and VIP subscriptions.
+
+9. Streaming App Clone (https://www.rakebig.com/clones/streaming-app-clone)
+   - Netflix and YouTube-style OTT video-on-demand and live broadcasting with adaptive bitrate HLS and DRM protection.
+
+10. Video Conferencing Clone (https://www.rakebig.com/clones/video-conferencing-clone)
+    - Zoom and Google Meet-style WebRTC SFU video meetings with HD screen sharing, cloud recording, and waiting rooms.
+
 ## Official Policies & Compliance
 - Terms & Conditions: https://www.rakebig.com/terms
 - Privacy Policy: https://www.rakebig.com/privacy

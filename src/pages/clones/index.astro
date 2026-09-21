@@ -1,0 +1,670 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import PrimaryButton from "../../components/PrimaryButton.astro";
+import { clones } from "../../data/clones";
+import { BOOK_CONSULTATION_URL, SITE_NAME, SITE_URL, SUPPORT_PHONE, TECH_SUPPORT_PHONE } from "../../consts";
+
+const onDemandClones = clones.filter((c) => c.category === "On-Demand & Delivery");
+const socialClones = clones.filter((c) => c.category === "Chat, Social & Streaming");
+
+const pageTitle = `Pre-Engineered App Clones — 100% Source Code Ownership | ${SITE_NAME}`;
+const pageDesc = "Launch your own Zepto, Blinkit, Uber, WhatsApp, TikTok, or Zoom clone. Turn-key white-label solutions with Flutter apps, admin dashboards, and 100% source code ownership.";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonicalPath="/clones"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Pre-Engineered App Clones",
+      "description": pageDesc,
+      "url": `${SITE_URL}/clones`
+    }
+  ]}
+>
+  <SiteHeader current="products" />
+
+  <main class="clones-hub">
+    <!-- ============ HERO ============ -->
+    <section class="clones-hero">
+      <div class="clones-hero__bg" aria-hidden="true">
+        <span class="clones-hero__blob clones-hero__blob--1"></span>
+        <span class="clones-hero__blob clones-hero__blob--2"></span>
+      </div>
+
+      <div class="container clones-hero__inner">
+        <div class="clones-hero__badge">
+          <span class="clones-hero__badge-dot"></span>
+          <span>Turn-Key Mobile & Web Architectures</span>
+        </div>
+        <h1 class="clones-hero__title">
+          Your own version of the apps<br />users already love.
+        </h1>
+        <p class="clones-hero__lead">
+          Skip the 12-month development cycle and $150k+ build costs. We recreate the proven mechanics of market-leading apps — quick commerce, ride-hailing, encrypted chat, short video, and video conferencing — as clean, original code you own outright.
+        </p>
+
+        <div class="clones-hero__actions">
+          <PrimaryButton label="Book an Architecture Call" href={BOOK_CONSULTATION_URL} bg="#0c0e1c" color="#ffffff" />
+          <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`} class="clones-btn clones-btn--ghost">
+            Call: {SUPPORT_PHONE}
+          </a>
+        </div>
+
+        <div class="clones-hero__pills">
+          <span class="clones-pill">✓ 100% Source Code Ownership</span>
+          <span class="clones-pill">✓ Zero Recurring Monthly Royalties</span>
+          <span class="clones-pill">✓ Native Flutter (iOS & Android)</span>
+          <span class="clones-pill">✓ Complete Admin & Dispatch Portals</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CATALOG SECTION ============ -->
+    <section class="clones-catalog-sec">
+      <div class="container">
+        <!-- Section 1: On-Demand & Delivery -->
+        <div class="clones-group">
+          <div class="clones-group__header">
+            <span class="clones-group__tag">Category 01</span>
+            <h2 class="clones-group__title">On-Demand, Quick-Commerce & Delivery</h2>
+            <p class="clones-group__sub">
+              Micro-fulfillment dark stores, restaurant multi-vendor ordering, ride-hailing dispatch, and home professional booking.
+            </p>
+          </div>
+
+          <div class="clones-grid">
+            {onDemandClones.map((c) => (
+              <article class="clone-card">
+                <div class="clone-card__header">
+                  <div class="clone-card__icon" style={`background:${c.tintColor}; color:${c.accentColor}`}>
+                    {c.icon === "bag" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    )}
+                    {c.icon === "car" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    )}
+                    {c.icon === "home" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    )}
+                  </div>
+                  <span class="clone-card__model">{c.model}</span>
+                </div>
+
+                <h3 class="clone-card__title">
+                  <a href={`/clones/${c.slug}`}>{c.name}</a>
+                </h3>
+                <p class="clone-card__summary">{c.shortSummary}</p>
+
+                <div class="clone-card__stats">
+                  {c.marketStats.slice(0, 2).map((st) => (
+                    <div class="clone-card__stat">
+                      <span class="clone-card__stat-val" style={`color:${c.accentColor}`}>{st.stat}</span>
+                      <span class="clone-card__stat-lbl">{st.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="clone-card__footer">
+                  <span class="clone-card__apps-count">{c.ecosystem.length} Integrated Apps</span>
+                  <a href={`/clones/${c.slug}`} class="clone-card__link">
+                    View Specs
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <!-- Section 2: Chat, Social & Streaming -->
+        <div class="clones-group clones-group--spaced">
+          <div class="clones-group__header">
+            <span class="clones-group__tag">Category 02</span>
+            <h2 class="clones-group__title">Chat, Social, Dating & Media Streaming</h2>
+            <p class="clones-group__sub">
+              Encrypted messaging, algorithmic short-video discovery, swipe-matching dating, OTT video, and HD WebRTC conferencing.
+            </p>
+          </div>
+
+          <div class="clones-grid">
+            {socialClones.map((c) => (
+              <article class="clone-card">
+                <div class="clone-card__header">
+                  <div class="clone-card__icon" style={`background:${c.tintColor}; color:${c.accentColor}`}>
+                    {c.icon === "chat" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    )}
+                    {c.icon === "note" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    )}
+                    {c.icon === "heart" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    )}
+                    {c.icon === "screen" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    )}
+                    {c.icon === "cam" && (
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                    )}
+                  </div>
+                  <span class="clone-card__model">{c.model}</span>
+                </div>
+
+                <h3 class="clone-card__title">
+                  <a href={`/clones/${c.slug}`}>{c.name}</a>
+                </h3>
+                <p class="clone-card__summary">{c.shortSummary}</p>
+
+                <div class="clone-card__stats">
+                  {c.marketStats.slice(0, 2).map((st) => (
+                    <div class="clone-card__stat">
+                      <span class="clone-card__stat-val" style={`color:${c.accentColor}`}>{st.stat}</span>
+                      <span class="clone-card__stat-lbl">{st.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="clone-card__footer">
+                  <span class="clone-card__apps-count">{c.ecosystem.length} Integrated Apps</span>
+                  <a href={`/clones/${c.slug}`} class="clone-card__link">
+                    View Specs
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ADVANTAGES SECTION ============ -->
+    <section class="clones-adv-sec">
+      <div class="container">
+        <div class="clones-adv-sec__header">
+          <span class="clones-group__tag">The Rakebig Advantage</span>
+          <h2 class="clones-adv-sec__title">Why founders launch with our clone architectures</h2>
+          <p class="clones-adv-sec__sub">
+            The difference between renting an un-customizable white-label script and owning enterprise-grade software.
+          </p>
+        </div>
+
+        <div class="clones-adv-grid">
+          <div class="clones-adv-card">
+            <div class="clones-adv-card__icon">🏆</div>
+            <h3>100% Source Code Ownership</h3>
+            <p>Everything we build is delivered to your private GitHub repository. You own all IP, database schemas, and custom code with zero vendor lock-in.</p>
+          </div>
+          <div class="clones-adv-card">
+            <div class="clones-adv-card__icon">⚡</div>
+            <h3>Single Flutter Codebase</h3>
+            <p>One unified codebase that compiles to native iOS, native Android, and responsive web. Cuts maintenance overhead and feature rollout time in half.</p>
+          </div>
+          <div class="clones-adv-card">
+            <div class="clones-adv-card__icon">🔒</div>
+            <h3>Complete Data Sovereignty</h3>
+            <p>Host on your private cloud (AWS, GCP, Hetzner, or on-prem). Your customer data, order history, and chat messages stay 100% under your control.</p>
+          </div>
+          <div class="clones-adv-card">
+            <div class="clones-adv-card__icon">🚀</div>
+            <h3>App Store & Play Store Guarantee</h3>
+            <p>We handle production build signing, compliance auditing, guideline verification, and submission to Apple and Google until your app is live.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOTTOM CTA ============ -->
+    <section class="clones-bottom-cta">
+      <div class="container clones-bottom-cta__inner">
+        <span class="clones-cta__pill">Launch Ready</span>
+        <h2 class="clones-bottom-cta__title">Ready to launch your marketplace?</h2>
+        <p class="clones-bottom-cta__lead">
+          Connect with our technical architects to scope your custom features, inspect demo applications, and receive a transparent fixed-price estimate.
+        </p>
+        <div class="clones-bottom-cta__actions">
+          <PrimaryButton label="Schedule Strategy Call" href={BOOK_CONSULTATION_URL} bg="#ffffff" color="#0c0e1c" />
+          <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`} class="clones-btn clones-btn--white-ghost">
+            Call: {SUPPORT_PHONE}
+          </a>
+        </div>
+        <p class="clones-bottom-cta__phone">
+          Technical desk: <a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{TECH_SUPPORT_PHONE}</a> · Mon–Sat, 10–7 IST
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .clones-hub {
+    background: #ffffff;
+    color: #0c0e1c;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* HERO */
+  .clones-hero {
+    position: relative;
+    padding: 7rem 0 4.5rem;
+    background: radial-gradient(circle at 50% 10%, #f8fafc 0%, #ffffff 100%);
+    text-align: center;
+  }
+
+  .clones-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .clones-hero__blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+  }
+
+  .clones-hero__blob--1 {
+    top: -10%;
+    left: 10%;
+    background: #e0f2fe;
+  }
+
+  .clones-hero__blob--2 {
+    top: -10%;
+    right: 10%;
+    background: #fdf2f8;
+  }
+
+  .clones-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+  }
+
+  .clones-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .clones-hero__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3b82f6;
+  }
+
+  .clones-hero__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2.35rem, 5vw, 3.75rem);
+    line-height: 1.15;
+    font-weight: 400;
+    color: #0c0e1c;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .clones-hero__lead {
+    font-size: clamp(1.0625rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 2.25rem;
+  }
+
+  .clones-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .clones-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .clones-btn--ghost {
+    background: #f1f5f9;
+    color: #0c0e1c;
+    border: 1px solid #e2e8f0;
+  }
+
+  .clones-btn--ghost:hover {
+    background: #e2e8f0;
+  }
+
+  .clones-hero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .clones-pill {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #475569;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+
+  /* CATALOG */
+  .clones-catalog-sec {
+    padding: 4rem 0 6rem;
+  }
+
+  .clones-group--spaced {
+    margin-top: 5rem;
+  }
+
+  .clones-group__header {
+    margin-bottom: 2.5rem;
+  }
+
+  .clones-group__tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+
+  .clones-group__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .clones-group__sub {
+    font-size: 1rem;
+    color: #64748b;
+  }
+
+  .clones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clone-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .clone-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    border-color: #cbd5e1;
+  }
+
+  .clone-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .clone-card__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .clone-card__model {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+  }
+
+  .clone-card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .clone-card__title a {
+    color: #0c0e1c;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .clone-card__title a:hover {
+    color: #2563eb;
+  }
+
+  .clone-card__summary {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .clone-card__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    padding: 0.85rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .clone-card__stat-val {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: block;
+    line-height: 1.1;
+  }
+
+  .clone-card__stat-lbl {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  .clone-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .clone-card__apps-count {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .clone-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+
+  .clone-card__link:hover {
+    gap: 0.55rem;
+  }
+
+  /* ADVANTAGES */
+  .clones-adv-sec {
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 6rem 0;
+  }
+
+  .clones-adv-sec__header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .clones-adv-sec__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: #0c0e1c;
+    margin-bottom: 0.75rem;
+  }
+
+  .clones-adv-sec__sub {
+    font-size: 1.0625rem;
+    color: #475569;
+  }
+
+  .clones-adv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clones-adv-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .clones-adv-card__icon {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .clones-adv-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .clones-adv-card p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* BOTTOM CTA */
+  .clones-bottom-cta {
+    background: #0c0e1c;
+    color: #ffffff;
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .clones-bottom-cta__inner {
+    max-width: 760px;
+  }
+
+  .clones-cta__pill {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255,255,255,0.1);
+    color: #93c5fd;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .clones-bottom-cta__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+
+  .clones-bottom-cta__lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 2.25rem;
+  }
+
+  .clones-bottom-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .clones-btn--white-ghost {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .clones-btn--white-ghost:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #ffffff;
+  }
+
+  .clones-bottom-cta__phone {
+    font-size: 0.875rem;
+    color: #94a3b8;
+  }
+
+  .clones-bottom-cta__phone a {
+    color: #38bdf8;
+    text-decoration: underline;
+  }
+</style>

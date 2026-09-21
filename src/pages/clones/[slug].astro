@@ -1,0 +1,1127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import PrimaryButton from "../../components/PrimaryButton.astro";
+import { clones } from "../../data/clones";
+import { BOOK_CONSULTATION_URL, SITE_NAME, SITE_URL, SUPPORT_PHONE, TECH_SUPPORT_PHONE } from "../../consts";
+import type { CloneItem } from "../../data/clones";
+
+export function getStaticPaths() {
+  return clones.map((clone) => ({
+    params: { slug: clone.slug },
+    props: { clone },
+  }));
+}
+
+interface Props {
+  clone: CloneItem;
+}
+
+const { clone } = Astro.props;
+const canonical = `/clones/${clone.slug}`;
+const pageTitle = `${clone.name} — White-Label App Clone Development | ${SITE_NAME}`;
+
+const schemaBase = { "@context": "https://schema.org" };
+const crumbs = [
+  { name: "Home", item: "/" },
+  { name: "Clone Apps", item: "/clones" },
+  { name: clone.name, item: canonical },
+];
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    ...schemaBase,
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((c, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.item, SITE_URL).toString(),
+    })),
+  },
+  {
+    ...schemaBase,
+    "@type": "SoftwareApplication",
+    name: clone.name,
+    description: clone.metaDescription,
+    url: new URL(canonical, SITE_URL).toString(),
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "iOS, Android, Web",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+    },
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+  },
+  {
+    ...schemaBase,
+    "@type": "FAQPage",
+    mainEntity: clone.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  },
+];
+
+const relatedClones = clones.filter((c) => clone.related.includes(c.slug));
+---
+
+<Layout
+  title={pageTitle}
+  description={clone.metaDescription}
+  canonicalPath={canonical}
+  jsonLd={jsonLd}
+>
+  <SiteHeader current="products" />
+
+  <main class="clone-page">
+    <!-- ============ HERO ============ -->
+    <header class="clone-hero">
+      <div class="clone-hero__bg" aria-hidden="true">
+        <span class="clone-hero__blob" style={`--clone-tint:${clone.tintColor}; --clone-accent:${clone.accentColor}`}></span>
+      </div>
+
+      <div class="container clone-hero__inner">
+        <nav class="clone-crumbs" aria-label="Breadcrumb">
+          <ol>
+            {crumbs.map((c, i) => (
+              <li>
+                {i < crumbs.length - 1 ? (
+                  <a href={c.item}>{c.name}</a>
+                ) : (
+                  <span aria-current="page">{c.name}</span>
+                )}
+                {i < crumbs.length - 1 && <span class="clone-crumbs__sep">/</span>}
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div class="clone-badge" style={`--clone-tint:${clone.tintColor}; --clone-accent:${clone.accentColor}`}>
+          <span class="clone-badge__dot"></span>
+          <span>{clone.category} · Inspired by {clone.model}</span>
+        </div>
+
+        <h1 class="clone-hero__title">{clone.heroTitle}</h1>
+        <p class="clone-hero__lead">{clone.heroLead}</p>
+
+        <div class="clone-hero__actions">
+          <PrimaryButton label="Book Live Demo & Scope" href={BOOK_CONSULTATION_URL} bg="#0c0e1c" color="#ffffff" />
+          <a href="/clones" class="clone-btn clone-btn--ghost">
+            Explore All Clone Apps
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="clone-trust-pills">
+          <div class="clone-trust-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>100% Original Source Code Ownership</span>
+          </div>
+          <div class="clone-trust-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <span>Native iOS, Android & Web Apps</span>
+          </div>
+          <div class="clone-trust-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Zero Recurring Royalties or SaaS Fees</span>
+          </div>
+          <div class="clone-trust-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Production Launch in 8–10 Weeks</span>
+          </div>
+        </div>
+
+        <!-- Market Stats Strip -->
+        <div class="clone-stats-strip">
+          {clone.marketStats.map((st) => (
+            <div class="clone-stat-card">
+              <span class="clone-stat-card__val" style={`color:${clone.accentColor}`}>{st.stat}</span>
+              <span class="clone-stat-card__lbl">{st.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ COMPLETE ECOSYSTEM (4 APPS) ============ -->
+    <section class="clone-sec clone-sec--ecosystem">
+      <div class="container">
+        <div class="clone-sec__header">
+          <span class="clone-sec__eyebrow">Full Turn-Key Suite</span>
+          <h2 class="clone-sec__title">What’s included in the {clone.name} ecosystem</h2>
+          <p class="clone-sec__sub">
+            You don't just get a buyer app; we deliver the entire operational ecosystem so your business can run on day one.
+          </p>
+        </div>
+
+        <div class="clone-ecosystem-grid">
+          {clone.ecosystem.map((eco, idx) => (
+            <div class="clone-eco-card">
+              <div class="clone-eco-card__top">
+                <span class="clone-eco-card__num">0{idx + 1}</span>
+                <span class="clone-eco-card__role">{eco.role}</span>
+              </div>
+              <h3 class="clone-eco-card__name">{eco.name}</h3>
+              <p class="clone-eco-card__desc">{eco.desc}</p>
+              <div class="clone-eco-card__platforms">
+                {eco.platforms.map((p) => (
+                  <span class="clone-platform-tag">{p}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CORE FEATURES MATRIX ============ -->
+    <section class="clone-sec clone-sec--alt">
+      <div class="container">
+        <div class="clone-sec__header">
+          <span class="clone-sec__eyebrow">High-Performance Modules</span>
+          <h2 class="clone-sec__title">Engineered with competitive enterprise capabilities</h2>
+          <p class="clone-sec__sub">
+            Built from scratch on clean architectures designed for high concurrency, sub-second latency, and frictionless UX.
+          </p>
+        </div>
+
+        <div class="clone-caps-grid">
+          {clone.features.map((feat) => (
+            <article class="clone-cap-card">
+              <div class="clone-cap-card__head">
+                <div class="clone-cap-card__icon" style={`background:${clone.tintColor}; color:${clone.accentColor}`}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+                {feat.badge && <span class="clone-cap-card__badge">{feat.badge}</span>}
+              </div>
+              <h3 class="clone-cap-card__title">{feat.title}</h3>
+              <p class="clone-cap-card__body">{feat.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECHNICAL ARCHITECTURE ============ -->
+    <section class="clone-sec">
+      <div class="container">
+        <div class="clone-sec__header">
+          <span class="clone-sec__eyebrow">Under The Hood</span>
+          <h2 class="clone-sec__title">Production architecture & data flow</h2>
+          <p class="clone-sec__sub">
+            How requests move through our fault-tolerant microservices, geospatial caches, and realtime socket clusters.
+          </p>
+        </div>
+
+        <div class="clone-arch-flow">
+          {clone.architecture.map((step, idx) => (
+            <div class="clone-arch-step">
+              <div class="clone-arch-step__marker" style={`border-color:${clone.accentColor}; color:${clone.accentColor}`}>
+                {step.step}
+              </div>
+              <div class="clone-arch-step__content">
+                <h3 class="clone-arch-step__title">{step.title}</h3>
+                <p class="clone-arch-step__desc">{step.desc}</p>
+              </div>
+              {idx < clone.architecture.length - 1 && (
+                <div class="clone-arch-step__connector" aria-hidden="true">
+                  <span></span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TECH STACK MATRIX ============ -->
+    <section class="clone-sec clone-sec--alt">
+      <div class="container">
+        <div class="clone-sec__header">
+          <span class="clone-sec__eyebrow">Enterprise Technologies</span>
+          <h2 class="clone-sec__title">Modern, battle-tested tech stack</h2>
+          <p class="clone-sec__sub">
+            We use industry-standard languages and frameworks that any engineering team can scale and maintain.
+          </p>
+        </div>
+
+        <div class="clone-stack-grid">
+          {clone.techStack.map((stk) => (
+            <div class="clone-stack-card">
+              <h3 class="clone-stack-card__cat">{stk.category}</h3>
+              <div class="clone-stack-card__items">
+                {stk.items.map((item) => (
+                  <span class="clone-stack-badge">{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DELIVERY ROADMAP ============ -->
+    <section class="clone-sec">
+      <div class="container">
+        <div class="clone-sec__header">
+          <span class="clone-sec__eyebrow">Execution Timeline</span>
+          <h2 class="clone-sec__title">From initial kickoff to App Store launch</h2>
+          <p class="clone-sec__sub">
+            Our structured 4-phase delivery process takes your platform from scope to production in 8–10 weeks.
+          </p>
+        </div>
+
+        <div class="clone-steps-grid">
+          {clone.steps.map((st, i) => (
+            <div class="clone-step-card">
+              <div class="clone-step-card__num" style={`color:${clone.accentColor}`}>
+                Phase {i + 1}
+              </div>
+              <h3 class="clone-step-card__title">{st.title}</h3>
+              <p class="clone-step-card__body">{st.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MEASURABLE OUTCOMES ============ -->
+    <section class="clone-sec clone-sec--alt">
+      <div class="container">
+        <div class="clone-sec__header">
+          <span class="clone-sec__eyebrow">Proven Benchmarks</span>
+          <h2 class="clone-sec__title">Designed for scale, reliability, and growth</h2>
+          <p class="clone-sec__sub">
+            Architectural standards you can trust when scaling to tens of thousands of active daily users.
+          </p>
+        </div>
+
+        <div class="clone-outcomes-grid">
+          {clone.outcomes.map((out) => (
+            <div class="clone-outcome-card">
+              <span class="clone-outcome-card__metric" style={`color:${clone.accentColor}`}>{out.metric}</span>
+              <h3 class="clone-outcome-card__label">{out.label}</h3>
+              <p class="clone-outcome-card__desc">{out.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQS ============ -->
+    <section class="clone-sec">
+      <div class="container clone-faq-container">
+        <div class="clone-sec__header">
+          <span class="clone-sec__eyebrow">Clear Answers</span>
+          <h2 class="clone-sec__title">Frequently asked questions</h2>
+          <p class="clone-sec__sub">
+            Everything you need to know about code ownership, store publishing, and custom features.
+          </p>
+        </div>
+
+        <div class="clone-faqs">
+          {clone.faqs.map((faq) => (
+            <details class="clone-faq-item">
+              <summary class="clone-faq-item__q">
+                <span>{faq.q}</span>
+                <span class="clone-faq-item__chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </summary>
+              <div class="clone-faq-item__a">
+                <p>{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RELATED CLONES ============ -->
+    {relatedClones.length > 0 && (
+      <section class="clone-sec clone-sec--alt">
+        <div class="container">
+          <div class="clone-sec__header">
+            <span class="clone-sec__eyebrow">Explore More</span>
+            <h2 class="clone-sec__title">Other pre-engineered clone platforms</h2>
+            <p class="clone-sec__sub">Discover other high-demand market apps we build for startup founders and enterprise operators.</p>
+          </div>
+
+          <div class="clone-related-grid">
+            {relatedClones.map((rc) => (
+              <a href={`/clones/${rc.slug}`} class="clone-related-card">
+                <div class="clone-related-card__top">
+                  <span class="clone-related-card__tag" style={`background:${rc.tintColor}; color:${rc.accentColor}`}>{rc.category}</span>
+                  <span class="clone-related-card__arrow">→</span>
+                </div>
+                <h3 class="clone-related-card__title">{rc.name}</h3>
+                <p class="clone-related-card__summary">{rc.shortSummary}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============ BOTTOM CONVERSION CTA ============ -->
+    <section class="clone-cta">
+      <div class="container clone-cta__inner reveal">
+        <span class="clone-cta__pill">Launch With Confidence</span>
+        <h2 class="clone-cta__title">Ready to build your {clone.name}?</h2>
+        <p class="clone-cta__lead">
+          Schedule a live architectural walkthrough with our tech leads. We’ll review your target market, demonstrate live working builds, and provide a fixed-price delivery roadmap.
+        </p>
+        <div class="clone-cta__actions">
+          <PrimaryButton label="Book an Architecture Call" href={BOOK_CONSULTATION_URL} bg="#ffffff" color="#0c0e1c" />
+          <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`} class="clone-btn clone-btn--white-ghost">
+            Call: {SUPPORT_PHONE}
+          </a>
+        </div>
+        <p class="clone-cta__note">
+          Have immediate technical questions? Contact tech support at <a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{TECH_SUPPORT_PHONE}</a> (Mon–Sat, 10–7 IST).
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .clone-page {
+    background: #ffffff;
+    color: #0c0e1c;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* HERO */
+  .clone-hero {
+    position: relative;
+    padding: 7rem 0 4rem;
+    overflow: hidden;
+  }
+
+  .clone-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .clone-hero__blob {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--clone-tint, #E8F1FF) 0%, rgba(255,255,255,0) 70%);
+    filter: blur(40px);
+    opacity: 0.8;
+  }
+
+  .clone-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+  }
+
+  .clone-crumbs ol {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .clone-crumbs a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .clone-crumbs a:hover {
+    color: #0c0e1c;
+  }
+
+  .clone-crumbs__sep {
+    margin: 0 0.5rem;
+    color: #cbd5e1;
+  }
+
+  .clone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    background: var(--clone-tint, #e0e7ff);
+    color: var(--clone-accent, #3730a3);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .clone-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .clone-hero__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.15;
+    font-weight: 400;
+    color: #0c0e1c;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+
+  .clone-hero__lead {
+    font-size: clamp(1.0625rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 2rem;
+  }
+
+  .clone-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .clone-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .clone-btn--ghost {
+    background: #f1f5f9;
+    color: #0c0e1c;
+    border: 1px solid #e2e8f0;
+  }
+
+  .clone-btn--ghost:hover {
+    background: #e2e8f0;
+    color: #0c0e1c;
+  }
+
+  .clone-trust-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .clone-trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.75rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #475569;
+  }
+
+  .clone-trust-pill svg {
+    width: 15px;
+    height: 15px;
+    color: #0ea5e9;
+    flex-shrink: 0;
+  }
+
+  .clone-stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+  }
+
+  .clone-stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .clone-stat-card__val {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .clone-stat-card__lbl {
+    font-size: 0.8125rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  /* SECTIONS COMMON */
+  .clone-sec {
+    padding: 5rem 0;
+    position: relative;
+  }
+
+  .clone-sec--alt {
+    background: #f8fafc;
+    border-top: 1px solid #edf2f7;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .clone-sec__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .clone-sec__eyebrow {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin-bottom: 0.625rem;
+  }
+
+  .clone-sec__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(1.875rem, 3.2vw, 2.5rem);
+    line-height: 1.2;
+    color: #0c0e1c;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .clone-sec__sub {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* ECOSYSTEM GRID */
+  .clone-ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clone-eco-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .clone-eco-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    border-color: #cbd5e1;
+  }
+
+  .clone-eco-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .clone-eco-card__num {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #94a3b8;
+    background: #f1f5f9;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .clone-eco-card__role {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #3b82f6;
+  }
+
+  .clone-eco-card__name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .clone-eco-card__desc {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .clone-eco-card__platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .clone-platform-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* CAPABILITIES GRID */
+  .clone-caps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clone-cap-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .clone-cap-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+
+  .clone-cap-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .clone-cap-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .clone-cap-card__badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+  }
+
+  .clone-cap-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .clone-cap-card__body {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* ARCHITECTURE FLOW */
+  .clone-arch-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .clone-arch-step {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    position: relative;
+  }
+
+  .clone-arch-step__marker {
+    display: inline-block;
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-bottom: 2px solid;
+    margin-bottom: 1rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .clone-arch-step__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .clone-arch-step__desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* TECH STACK */
+  .clone-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clone-stack-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .clone-stack-card__cat {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0c0e1c;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .clone-stack-card__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .clone-stack-badge {
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+  }
+
+  /* ROADMAP STEPS */
+  .clone-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clone-step-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .clone-step-card__num {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .clone-step-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .clone-step-card__body {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #475569;
+  }
+
+  /* OUTCOMES */
+  .clone-outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clone-outcome-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .clone-outcome-card__metric {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .clone-outcome-card__label {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #0c0e1c;
+  }
+
+  .clone-outcome-card__desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #64748b;
+  }
+
+  /* FAQS */
+  .clone-faq-container {
+    max-width: 800px;
+  }
+
+  .clone-faqs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .clone-faq-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .clone-faq-item[open] {
+    border-color: #cbd5e1;
+  }
+
+  .clone-faq-item__q {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    user-select: none;
+  }
+
+  .clone-faq-item__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .clone-faq-item__chevron {
+    transition: transform 0.2s ease;
+    color: #64748b;
+  }
+
+  .clone-faq-item[open] .clone-faq-item__chevron {
+    transform: rotate(180deg);
+  }
+
+  .clone-faq-item__a {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #475569;
+  }
+
+  /* RELATED */
+  .clone-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .clone-related-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.75rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .clone-related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    border-color: #cbd5e1;
+  }
+
+  .clone-related-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .clone-related-card__tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.55rem;
+    border-radius: 9999px;
+  }
+
+  .clone-related-card__arrow {
+    font-size: 1.25rem;
+    color: #94a3b8;
+    transition: transform 0.2s;
+  }
+
+  .clone-related-card:hover .clone-related-card__arrow {
+    transform: translateX(4px);
+    color: #0c0e1c;
+  }
+
+  .clone-related-card__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .clone-related-card__summary {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #64748b;
+  }
+
+  /* CTA */
+  .clone-cta {
+    background: #0c0e1c;
+    color: #ffffff;
+    padding: 6rem 0;
+    text-align: center;
+  }
+
+  .clone-cta__inner {
+    max-width: 760px;
+  }
+
+  .clone-cta__pill {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255,255,255,0.1);
+    color: #93c5fd;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .clone-cta__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+
+  .clone-cta__lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 2.25rem;
+  }
+
+  .clone-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .clone-btn--white-ghost {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .clone-btn--white-ghost:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #ffffff;
+  }
+
+  .clone-cta__note {
+    font-size: 0.875rem;
+    color: #94a3b8;
+  }
+
+  .clone-cta__note a {
+    color: #38bdf8;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .clone-hero {
+      padding: 5rem 0 3rem;
+    }
+    .clone-sec {
+      padding: 3.5rem 0;
+    }
+    .clone-caps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
