@@ -1,8 +1,6 @@
-// Site-wide constants used by Layout.astro for SEO (canonical URLs, Open Graph).
+// Site-wide constants used by Layout.astro for SEO (canonical URLs, Open Graph, Sitemap).
 
-// Site-wide constants used by Layout.astro for SEO (canonical URLs, Open Graph).
-
-export const SITE_URL = "https://rakebig.com";
+export const SITE_URL = "https://www.rakebig.com";
 
 export const SITE_NAME = "Rakebig Services";
 
@@ -20,4 +18,5 @@ export const BOOK_CONSULTATION_URL = "https://cal.com/rakebigservices";
 
 // Official contact & support email used across legal pages and footer
 export const SUPPORT_EMAIL = "support@rakebig.com";
-
+export const SUPPORT_PHONE = "+91 97722 34567";
+export const TECH_SUPPORT_PHONE = "+91 97722 34568";

@@ -23,7 +23,20 @@ const footerCols = [
 ];
 ---
 
-<Layout title="Rakebig — Perfex CRM & SaaS Solutions">
+<Layout
+  title="AI & Business Automation Solutions | Rakebig Services"
+  description="Discover practical AI automation workflows, Perfex CRM automations, and custom software solutions designed to streamline business operations."
+  canonicalPath="/solutions"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "AI & Business Automation Solutions",
+      "description": "Practical AI automation workflows, Perfex CRM automations, and custom software solutions designed to streamline business operations.",
+      "url": "https://www.rakebig.com/solutions"
+    }
+  ]}
+>
   <SiteHeader current="solutions" />
 
   <main>
@@ -34,7 +47,7 @@ const footerCols = [
           <span class="shero__blob shero__blob--1"></span>
           <span class="shero__blob shero__blob--2"></span>
           <span class="shero__blob shero__blob--3"></span>
-          <img class="shero__noise" src="/assets/cymatic-pattern-1757619368429-1920x1438-3.png" alt="" />
+          <img class="shero__noise" src="/assets/cymatic-pattern-1757619368429-1920x1438-3.png" alt="" width="1920" height="1438" fetchpriority="high" decoding="async" />
         </div>
         <div class="shero__card reveal">
           <AiCard />

@@ -24,7 +24,7 @@ const crumbs = [
   { name: offering.name, item: canonical },
 ];
 
-const jsonLd = [
+const jsonLd: Record<string, unknown>[] = [
   {
     ...schemaBase,
     "@type": "BreadcrumbList",
@@ -44,6 +44,21 @@ const jsonLd = [
     provider: { "@type": "Organization", name: SITE_NAME },
   },
 ];
+
+if (offering.faqs && offering.faqs.length > 0) {
+  jsonLd.push({
+    ...schemaBase,
+    "@type": "FAQPage",
+    mainEntity: offering.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  });
+}
 ---
 
 <Layout

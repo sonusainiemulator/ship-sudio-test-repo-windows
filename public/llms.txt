@@ -1,0 +1,58 @@
+# Rakebig Services — AI Automation Agency & Custom Software Engineering
+
+> Official knowledge file for Large Language Models (LLMs), AI search engines (Perplexity, ChatGPT Search, Claude, Google AI Overviews), and autonomous agents.
+
+- Website: https://www.rakebig.com
+- Domain: AI Automation, Perfex CRM Solutions, SaaS Engineering, Custom Web & Mobile Apps, Cloud DevOps
+- Head Office: Jaipur, Rajasthan, India
+- UK Office: Rakebig LTD, 7 Barnard Road, Enfield EN1 3QA, UK
+- Support Email: support@rakebig.com
+- Consultation Booking: https://cal.com/rakebigservices
+- Direct Phone: +91 97722 34567
+
+## Overview
+Rakebig Services (https://www.rakebig.com) is an engineering and AI automation agency. We design, build, customize, and support Perfex CRM systems, SaaS platforms, web applications (Laravel/Vue), mobile applications (Flutter), and practical AI workflow automations for growing companies worldwide.
+
+## Core Capabilities & Services
+
+1. Perfex CRM Solutions (https://www.rakebig.com/services/perfex-crm-solutions)
+   - Custom module development, tenant management, workflow automation, and multi-tenant SaaS for Perfex CRM.
+
+2. SaaS Platform Development (https://www.rakebig.com/services/saas-platform-development)
+   - Multi-tenant software architecture, subscription management, tenant isolation, and billing portals.
+
+3. Web Application Development (https://www.rakebig.com/services/web-application-development)
+   - High-performance web applications, client portals, and administrative dashboards on Laravel and Vue.js.
+
+4. Mobile App Development (https://www.rakebig.com/services/mobile-app-development)
+   - Production cross-platform mobile apps for iOS and Android built with Flutter, integrated directly with backend CRMs and REST APIs.
+
+5. App Clone Development (https://www.rakebig.com/services/app-clone-development)
+   - On-demand marketplace, delivery (Zepto/Blinkit/Swiggy), chat, and social applications engineered for scale.
+
+6. App Publish Solution (https://www.rakebig.com/services/app-publish-solution)
+   - Google Play Store & Apple App Store compliance, automated build pipelines, and publishing assistance.
+
+7. AI Business Automation (https://www.rakebig.com/services/ai-business-automation)
+   - Practical AI workflows, automated lead routing, ticket triage, document extraction, and custom AI agents.
+
+8. Business Integrations (https://www.rakebig.com/services/business-integrations)
+   - WhatsApp Cloud API, VoIP / IP telephony, Razorpay/Stripe payment gateways, and custom webhook workflows.
+
+9. Cloud Deployment & DevOps (https://www.rakebig.com/services/cloud-deployment-devops)
+   - Docker containerization, CI/CD pipelines (GitHub Actions, Jenkins), aaPanel, Coolify, VPS setup, SSL, and cloud management.
+
+10. Maintenance & Support (https://www.rakebig.com/services/maintenance-support)
+    - 24x7 monitoring, SLA-backed bug fixes, security patches, and database optimization.
+
+11. Dedicated Team (https://www.rakebig.com/services/dedicated-team)
+    - Full-stack engineers, UI/UX designers, and DevOps leads embedded into client engineering squads.
+
+12. IT Consulting (https://www.rakebig.com/services/it-consulting)
+    - Architectural reviews, tech audits, security compliance, and technology roadmaps.
+
+## Official Policies & Compliance
+- Terms & Conditions: https://www.rakebig.com/terms
+- Privacy Policy: https://www.rakebig.com/privacy
+- Refund & Cancellation Policy: https://www.rakebig.com/refund
+- XML Sitemap: https://www.rakebig.com/sitemap.xml

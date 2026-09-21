@@ -27,7 +27,7 @@ const {
     <span class="pp-blob pp-blob--1"></span>
     <span class="pp-blob pp-blob--2"></span>
     <span class="pp-blob pp-blob--3"></span>
-    <img class="pp-pattern" src={pattern} alt="" />
+    <img class="pp-pattern" src={pattern} alt="" loading="lazy" decoding="async" width="1920" height="1438" />
   </div>
   <div class="pp-card">
     <video
@@ -37,7 +37,7 @@ const {
       muted
       loop
       playsinline
-      preload="auto"
+      preload="metadata"
       aria-label="AI analysis product demo"
     ></video>
   </div>

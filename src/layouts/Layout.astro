@@ -7,6 +7,9 @@ import {
   SITE_TAGLINE,
   DEFAULT_DESCRIPTION,
   DEFAULT_OG_IMAGE,
+  SUPPORT_EMAIL,
+  SUPPORT_PHONE,
+  BOOK_CONSULTATION_URL,
 } from '../consts';
 
 interface Props {
@@ -21,7 +24,7 @@ interface Props {
 }
 
 const {
-  title = `${SITE_NAME} — ${SITE_TAGLINE}`,
+  title = `${SITE_NAME} — ${SITE_TAGLINE} | Perfex CRM & SaaS Solutions`,
   description = DEFAULT_DESCRIPTION,
   canonicalPath = Astro.url.pathname,
   ogImage = DEFAULT_OG_IMAGE,
@@ -29,40 +32,133 @@ const {
   jsonLd = [],
 } = Astro.props;
 
-const canonicalUrl = new URL(canonicalPath, SITE_URL).toString();
-const ogImageUrl = new URL(ogImage, SITE_URL).toString();
+// Normalizing canonical URL without trailing slash (unless root)
+const normalizedPath = canonicalPath === '/' ? '' : canonicalPath.replace(/\/+$/, '');
+const canonicalUrl = `${SITE_URL}${normalizedPath}`;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
+
+const defaultSchemas: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#organization`,
+    "name": SITE_NAME,
+    "alternateName": ["Rakebig", "Rakebig Technologies", "Rakebig Services AI"],
+    "url": SITE_URL,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/favicon.svg`,
+      "width": "512",
+      "height": "512"
+    },
+    "image": ogImageUrl,
+    "description": DEFAULT_DESCRIPTION,
+    "telephone": SUPPORT_PHONE,
+    "email": SUPPORT_EMAIL,
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1st Floor, Tech Park, Malviya Nagar",
+      "addressLocality": "Jaipur",
+      "addressRegion": "Rajasthan",
+      "postalCode": "302017",
+      "addressCountry": "IN"
+    },
+    "areaServed": ["Global", "India", "United States", "United Kingdom", "United Arab Emirates", "Europe"],
+    "sameAs": [
+      BOOK_CONSULTATION_URL,
+      "https://crm.rakebig.com",
+      "https://aiwidget.rakebig.com"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    "url": SITE_URL,
+    "name": SITE_NAME,
+    "description": DEFAULT_DESCRIPTION,
+    "publisher": {
+      "@id": `${SITE_URL}/#organization`
+    },
+    "inLanguage": "en-US"
+  }
+];
+
+const allSchemas = [...defaultSchemas, ...jsonLd];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
+    <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Rakebig Services" />
+    <meta name="publisher" content="Rakebig Services" />
+    <meta name="theme-color" content="#080e1a" />
+    <meta name="color-scheme" content="dark light" />
+    
+    <!-- Crawlers & AI Indexing Directives -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    
+    <!-- Canonical & Sitemap -->
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <link rel="help" type="text/plain" title="LLMs & AI Context" href="/llms.txt" />
 
-    <!-- Open Graph -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rakebig" />
+    <meta name="twitter:creator" content="@rakebig" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    {jsonLd.map((block) => (
+    <!-- JSON-LD Structured Data for Google & AI Overviews -->
+    {allSchemas.map((block) => (
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}
+
+    <!-- Performance & Font Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="/fonts/tobias-trial-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <script is:inline>
       // Gate scroll-reveal styles on JS + motion preference so content is never
@@ -71,12 +167,6 @@ const ogImageUrl = new URL(ogImage, SITE_URL).toString();
         document.documentElement.classList.add("js-reveal");
       }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body class="bg-background text-foreground font-body antialiased">
     <slot />
@@ -97,9 +187,7 @@ const ogImageUrl = new URL(ogImage, SITE_URL).toString();
 </script>
 
 <script>
-  // Reusable cursor-follow glow. Wires every `.glow-follow` element on the page:
-  // the `.glow-follow__blob` inside eases toward the pointer and returns to its
-  // rest edge (data-glow-rest="left|center|right") when the pointer leaves.
+  // Reusable cursor-follow glow.
   const initGlowFollow = () => {
     document.querySelectorAll<HTMLElement>(".glow-follow").forEach((el) => {
       if (el.dataset.glowReady) return;
@@ -141,8 +229,7 @@ const ogImageUrl = new URL(ogImage, SITE_URL).toString();
 </script>
 
 <script>
-  // Scroll reveal: fade + rise elements as they enter the viewport. Elements
-  // opt in with `.reveal`; `.reveal-stagger` cascades its direct children.
+  // Scroll reveal: fade + rise elements as they enter the viewport.
   const initReveal = () => {
     if (!document.documentElement.classList.contains("js-reveal")) return;
     const targets = Array.from(
@@ -151,7 +238,6 @@ const ogImageUrl = new URL(ogImage, SITE_URL).toString();
 
     if (!targets.length) return;
 
-    // Stagger the children of each grouped container.
     targets.forEach((el) => {
       el.dataset.revealReady = "true";
       if (el.classList.contains("reveal-stagger")) {

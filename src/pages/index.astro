@@ -88,19 +88,47 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
 
 <Layout
   title="Rakebig Services — AI Automation Agency | Perfex CRM & Software"
+  description="Rakebig Services is an AI automation agency designing, building, and supporting Perfex CRM, web apps, Flutter mobile apps, SaaS platforms, and AI workflows for growing teams."
+  canonicalPath="/"
   jsonLd={[
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What services does Rakebig Services provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rakebig Services is an AI automation agency that specializes in custom Perfex CRM solutions, SaaS platform development, Laravel & Vue web applications, Flutter mobile apps, clone apps, and cloud DevOps infrastructure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I hire Rakebig for Perfex CRM customization?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can book a free consultation at https://cal.com/rakebigservices or email support@rakebig.com with your project scope to get a fixed-price quote and timeline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Rakebig provide ongoing maintenance and support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we provide ongoing maintenance, 24x7 server monitoring, bug fixes, database optimization, and security updates under dedicated SLA agreements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment methods are supported for client invoices?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We accept payments through Razorpay, PayPal, Visa, Mastercard, American Express, Discover, and direct bank transfers with automated invoicing."
+          }
+        }
+      ]
+    }
   ]}
 >
   <SiteHeader current="home" />
@@ -113,7 +141,7 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
         <span class="hero-bg__blob hero-bg__blob--2"></span>
         <span class="hero-bg__blob hero-bg__blob--3"></span>
         <span class="hero-bg__blob hero-bg__blob--4"></span>
-        <img class="hero-bg__noise" src="/assets/cymatic-pattern-1757619368429-1920x1438-3.png" alt="" />
+        <img class="hero-bg__noise" src="/assets/cymatic-pattern-1757619368429-1920x1438-3.png" alt="" width="1920" height="1438" fetchpriority="high" decoding="async" />
       </div>
       <div class="container hero-inner reveal-stagger">
         <span class="hero-badge">
@@ -319,7 +347,7 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
         <span class="stories__blob stories__blob--beige"></span>
         <span class="stories__blob stories__blob--teal"></span>
         <span class="stories__blob stories__blob--blue"></span>
-        <img class="stories__noise" src="/assets/cymatic-pattern-1757560466832-1920x1438.png" alt="" />
+        <img class="stories__noise" src="/assets/cymatic-pattern-1757560466832-1920x1438.png" alt="" loading="lazy" decoding="async" width="1920" height="1438" />
       </div>
 
       <div class="container stories__inner">
@@ -336,7 +364,7 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
           {testimonials.map((t, i) => (
             <button class={`ctab ${i === 0 ? "is-open" : ""}`} type="button" data-i={i} aria-expanded={i === 0 ? "true" : "false"}>
               <span class="ctab__bg" aria-hidden="true">
-                <img class="ctab__noise" src="/assets/cymatic-pattern-1757560466832-1920x1438.png" alt="" />
+                <img class="ctab__noise" src="/assets/cymatic-pattern-1757560466832-1920x1438.png" alt="" loading="lazy" decoding="async" width="1920" height="1438" />
               </span>
               <span class="ctab__collapsed">
                 <svg class="ctab__icon" viewBox="0 0 32 24" fill="currentColor" aria-hidden="true">
@@ -359,7 +387,7 @@ const trustedCells = [3, 0, 4, 1, 2, 2, 4, 0, 3, 1].map((i) => baseLogos[i]);
                       <span class="ctab__role">{t.role}</span>
                     </div>
                     {t.avatar ? (
-                      <img class="ctab__avatar" src={t.avatar} alt={t.name} />
+                      <img class="ctab__avatar" src={t.avatar} alt={t.name} loading="lazy" decoding="async" width="48" height="48" />
                     ) : (
                       <span class="ctab__avatar ctab__avatar--ph">{t.name.split(" ").map((n) => n[0]).join("")}</span>
                     )}
