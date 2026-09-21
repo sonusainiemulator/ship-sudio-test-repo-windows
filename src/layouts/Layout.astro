@@ -11,6 +11,7 @@ import {
   SUPPORT_PHONE,
   TECH_SUPPORT_PHONE,
   BOOK_CONSULTATION_URL,
+  HEAD_OFFICE,
   SOCIAL_LINKS,
 } from '../consts';
 
@@ -74,12 +75,13 @@ const defaultSchemas: Record<string, unknown>[] = [
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "1st Floor, Tech Park, Malviya Nagar",
-      "addressLocality": "Jaipur",
-      "addressRegion": "Rajasthan",
-      "postalCode": "302017",
-      "addressCountry": "IN"
+      "streetAddress": HEAD_OFFICE.street,
+      "addressLocality": HEAD_OFFICE.locality,
+      "addressRegion": HEAD_OFFICE.region,
+      "postalCode": HEAD_OFFICE.postalCode,
+      "addressCountry": HEAD_OFFICE.countryCode
     },
+    "hasMap": HEAD_OFFICE.googleMapsUrl,
     "areaServed": ["Global", "India", "United States", "United Kingdom", "United Arab Emirates", "Europe"],
     "sameAs": [
       BOOK_CONSULTATION_URL,

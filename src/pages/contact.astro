@@ -1,0 +1,1145 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PrimaryButton from "../components/PrimaryButton.astro";
+import {
+  SITE_NAME,
+  SITE_URL,
+  SUPPORT_EMAIL,
+  SUPPORT_PHONE,
+  TECH_SUPPORT_PHONE,
+  BOOK_CONSULTATION_URL,
+  HEAD_OFFICE,
+  UK_OFFICE,
+  SOCIAL_LINKS,
+} from "../consts";
+
+const pageTitle = `Contact Us & Visit Our Office | ${SITE_NAME}`;
+const pageDescription =
+  "Get in touch with Rakebig Services. Visit our head office in Bhadra, Rajasthan, call our direct line, chat on WhatsApp, or book a technical consultation.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: pageTitle,
+    description: pageDescription,
+    url: `${SITE_URL}/contact`,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Rakebig Services",
+    alternateName: "Rakebig advertisement agency",
+    image: `${SITE_URL}/assets/preview.png`,
+    url: SITE_URL,
+    telephone: SUPPORT_PHONE,
+    email: SUPPORT_EMAIL,
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: HEAD_OFFICE.street,
+      addressLocality: HEAD_OFFICE.locality,
+      addressRegion: HEAD_OFFICE.region,
+      postalCode: HEAD_OFFICE.postalCode,
+      addressCountry: HEAD_OFFICE.countryCode,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 29.1121,
+      longitude: 75.1713,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "00:00",
+        closes: "23:59",
+      },
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      reviewCount: "10",
+    },
+    hasMap: HEAD_OFFICE.googleMapsUrl,
+    sameAs: [
+      HEAD_OFFICE.googleMapsUrl,
+      SOCIAL_LINKS.facebook,
+      SOCIAL_LINKS.instagram,
+      SOCIAL_LINKS.linkedin,
+      SOCIAL_LINKS.youtube,
+      SOCIAL_LINKS.twitter,
+      SOCIAL_LINKS.github,
+    ],
+  },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/contact"
+  jsonLd={jsonLd}
+>
+  <SiteHeader current="contact" />
+
+  <main class="contact-page">
+    <!-- ============ HERO ============ -->
+    <header class="contact-hero">
+      <div class="contact-hero__bg" aria-hidden="true">
+        <span class="contact-hero__blob contact-hero__blob--1"></span>
+        <span class="contact-hero__blob contact-hero__blob--2"></span>
+      </div>
+
+      <div class="container contact-hero__inner">
+        <nav class="contact-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a><span class="contact-crumbs__sep">/</span></li>
+            <li><span aria-current="page">Contact Us</span></li>
+          </ol>
+        </nav>
+
+        <div class="contact-badge">
+          <span class="contact-badge__dot"></span>
+          <span>We're Here to Help · 24/7 Available</span>
+        </div>
+
+        <h1 class="contact-hero__title">
+          Let’s discuss your project.<br />We’re ready when you are.
+        </h1>
+        <p class="contact-hero__lead">
+          Have an AI workflow to automate, a Perfex CRM deployment to customize, or a turn-key app clone to launch? Speak directly with our engineering architects or visit our head office in Rajasthan.
+        </p>
+
+        <!-- Rapid Contact Cards Grid -->
+        <div class="contact-cards-grid">
+          <!-- Card 1: Direct Call -->
+          <a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`} class="contact-card">
+            <div class="contact-card__icon contact-card__icon--phone">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="contact-card__info">
+              <span class="contact-card__k">Direct Phone / Sales</span>
+              <strong class="contact-card__v">{SUPPORT_PHONE}</strong>
+              <span class="contact-card__sub">Immediate response · Available 24x7</span>
+            </div>
+          </a>
+
+          <!-- Card 2: WhatsApp Chat -->
+          <a href={`https://wa.me/${SUPPORT_PHONE.replace(/[^0-9]/g, '')}?text=Hi%20Rakebig%20Services,%20I'd%20like%20to%20discuss%20a%20project`} target="_blank" rel="noopener noreferrer" class="contact-card">
+            <div class="contact-card__icon contact-card__icon--whatsapp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <div class="contact-card__info">
+              <span class="contact-card__k">WhatsApp Quick Chat</span>
+              <strong class="contact-card__v">{SUPPORT_PHONE}</strong>
+              <span class="contact-card__sub">Fast messaging with an engineer</span>
+            </div>
+          </a>
+
+          <!-- Card 3: Tech Support -->
+          <a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`} class="contact-card">
+            <div class="contact-card__icon contact-card__icon--support">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                <path d="M18 19v1a2 2 0 0 1-2 2h-4"/>
+              </svg>
+            </div>
+            <div class="contact-card__info">
+              <span class="contact-card__k">Dedicated Tech Support</span>
+              <strong class="contact-card__v">{TECH_SUPPORT_PHONE}</strong>
+              <span class="contact-card__sub">Mon–Sat, 10–7 (GMT+5:30)</span>
+            </div>
+          </a>
+
+          <!-- Card 4: Official Email -->
+          <a href={`mailto:${SUPPORT_EMAIL}`} class="contact-card">
+            <div class="contact-card__icon contact-card__icon--email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </div>
+            <div class="contact-card__info">
+              <span class="contact-card__k">Email Inquiries</span>
+              <strong class="contact-card__v">{SUPPORT_EMAIL}</strong>
+              <span class="contact-card__sub">Formal quotes & billing queries</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ GOOGLE MAP & OFFICE LOCATION ============ -->
+    <section class="contact-map-sec">
+      <div class="container">
+        <div class="contact-map-sec__header">
+          <span class="contact-sec-tag">Physical Location & Verification</span>
+          <h2 class="contact-map-sec__title">Visit Our Head Office</h2>
+          <p class="contact-map-sec__sub">
+            Verified business presence in Bhadra, Rajasthan with active in-person development teams.
+          </p>
+        </div>
+
+        <div class="contact-map-layout">
+          <!-- Left: Google Business Card & Office Info -->
+          <div class="contact-biz-card">
+            <div class="contact-biz-card__badge">
+              <span class="contact-biz-card__star">★</span>
+              <strong>5.0 / 5.0 Rating</strong>
+              <span class="contact-biz-card__reviews">(Google & Facebook Verified)</span>
+            </div>
+
+            <h3 class="contact-biz-card__name">Rakebig advertisement agency / Rakebig Services</h3>
+            <p class="contact-biz-card__cat">Advertising Agency · Software & Web Development Company</p>
+
+            <div class="contact-biz-details">
+              <div class="contact-biz-row">
+                <div class="contact-biz-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="contact-biz-text">
+                  <strong>Registered Address</strong>
+                  <span>{HEAD_OFFICE.fullAddress}</span>
+                </div>
+              </div>
+
+              <div class="contact-biz-row">
+                <div class="contact-biz-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="contact-biz-text">
+                  <strong>Operating Hours</strong>
+                  <span>Open 24 hours · Monday through Sunday</span>
+                </div>
+              </div>
+
+              <div class="contact-biz-row">
+                <div class="contact-biz-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-biz-text">
+                  <strong>Direct Telephone</strong>
+                  <span><a href={`tel:${SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`}>{SUPPORT_PHONE}</a></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-biz-actions">
+              <a href={HEAD_OFFICE.googleMapsUrl} target="_blank" rel="noopener noreferrer" class="contact-map-btn contact-map-btn--primary">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                View on Google Maps
+              </a>
+              <a href={HEAD_OFFICE.googleMapsUrl} target="_blank" rel="noopener noreferrer" class="contact-map-btn contact-map-btn--ghost">
+                Get Directions
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Responsive Embedded Google Map -->
+          <div class="contact-map-frame-wrapper">
+            <iframe
+              title="Rakebig Services Google Map Location"
+              src={HEAD_OFFICE.googleMapsEmbed}
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GLOBAL OFFICES SHOWCASE ============ -->
+    <section class="contact-offices-sec">
+      <div class="container">
+        <div class="contact-map-sec__header">
+          <span class="contact-sec-tag">Worldwide Presence</span>
+          <h2 class="contact-map-sec__title">Global Delivery Centers</h2>
+          <p class="contact-map-sec__sub">
+            Serving startups and mid-market enterprises across India, the UK, Europe, and the Americas.
+          </p>
+        </div>
+
+        <div class="contact-offices-grid">
+          <!-- Office 1: Bhadra HQ -->
+          <div class="contact-office-card contact-office-card--hq">
+            <div class="contact-office-card__badge">HQ & Engineering Center</div>
+            <h3>Bhadra, Rajasthan (India)</h3>
+            <p class="contact-office-card__addr">{HEAD_OFFICE.fullAddress}</p>
+            <div class="contact-office-card__meta">
+              <span><strong>Phone:</strong> {SUPPORT_PHONE}</span>
+              <span><strong>Email:</strong> {SUPPORT_EMAIL}</span>
+              <span><strong>Status:</strong> Active Operations Hub</span>
+            </div>
+            <a href={HEAD_OFFICE.googleMapsUrl} target="_blank" rel="noopener noreferrer" class="contact-office-link">
+              Open in Google Maps →
+            </a>
+          </div>
+
+          <!-- Office 2: Jaipur Regional -->
+          <div class="contact-office-card">
+            <div class="contact-office-card__badge contact-office-card__badge--branch">Branch Office</div>
+            <h3>Jaipur, Rajasthan (India)</h3>
+            <p class="contact-office-card__addr">1st Floor, Tech Park, Malviya Nagar, Jaipur, Rajasthan 302017</p>
+            <div class="contact-office-card__meta">
+              <span><strong>Phone:</strong> {SUPPORT_PHONE}</span>
+              <span><strong>Role:</strong> Client Relations & Enterprise Sales</span>
+              <span><strong>Status:</strong> Regional Hub</span>
+            </div>
+            <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="contact-office-link">
+              Schedule Visit →
+            </a>
+          </div>
+
+          <!-- Office 3: UK Corporate -->
+          <div class="contact-office-card">
+            <div class="contact-office-card__badge contact-office-card__badge--uk">UK Entity</div>
+            <h3>Rakebig LTD (United Kingdom)</h3>
+            <p class="contact-office-card__addr">{UK_OFFICE.fullAddress}</p>
+            <div class="contact-office-card__meta">
+              <span><strong>Entity:</strong> Rakebig LTD</span>
+              <span><strong>Email:</strong> {SUPPORT_EMAIL}</span>
+              <span><strong>Role:</strong> European Contracts & Billing</span>
+            </div>
+            <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="contact-office-link">
+              Connect with UK Team →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INQUIRY FORM & SCHEDULE ============ -->
+    <section class="contact-form-sec">
+      <div class="container contact-form-sec__inner">
+        <!-- Left: Form -->
+        <div class="contact-form-box">
+          <span class="contact-sec-tag">Fast Inquiries</span>
+          <h2 class="contact-form-box__title">Send us a project brief</h2>
+          <p class="contact-form-box__desc">
+            Tell us about your requirements. An engineering lead will review your message and reply within 24 hours.
+          </p>
+
+          <form class="contact-form" action={`mailto:${SUPPORT_EMAIL}`} method="POST" enctype="text/plain">
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="contact-name">Your Name *</label>
+                <input type="text" id="contact-name" name="name" placeholder="John Doe" required />
+              </div>
+              <div class="contact-form__field">
+                <label for="contact-email">Work Email *</label>
+                <input type="email" id="contact-email" name="email" placeholder="john@company.com" required />
+              </div>
+            </div>
+
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="contact-phone">Phone / WhatsApp Number *</label>
+                <input type="tel" id="contact-phone" name="phone" placeholder="+91 98765 43210" required />
+              </div>
+              <div class="contact-form__field">
+                <label for="contact-service">Service of Interest *</label>
+                <select id="contact-service" name="service" required>
+                  <option value="" disabled selected>Select a service</option>
+                  <option value="AI Business Automation">AI Business Automation & Agents</option>
+                  <option value="Perfex CRM Solutions">Perfex CRM Solutions & Modules</option>
+                  <option value="App Clone Development">App Clone Development (Zepto, Uber, WhatsApp etc.)</option>
+                  <option value="Mobile App Development">Custom Flutter Mobile App</option>
+                  <option value="SaaS Platform Development">SaaS Platform Engineering</option>
+                  <option value="Cloud Deployment & DevOps">Cloud Deployment & DevOps</option>
+                  <option value="Other Inquiries">Other / General Inquiry</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-message">Project Description & Scope *</label>
+              <textarea id="contact-message" name="message" rows="5" placeholder="Outline your requirements, target launch timeline, or specific integrations..." required></textarea>
+            </div>
+
+            <button type="submit" class="contact-submit-btn">
+              Submit Inquiry
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="contact-form__disclaimer">🔒 We treat all conversations with strict confidentiality. Non-Disclosure Agreements (NDAs) signed upon request.</span>
+          </form>
+        </div>
+
+        <!-- Right: Fast Booking Panel -->
+        <aside class="contact-booking-aside">
+          <div class="contact-booking-card">
+            <span class="contact-booking-card__pill">Instant Scheduling</span>
+            <h3>Need an immediate technical consultation?</h3>
+            <p>
+              Skip the email back-and-forth. Pick a 30-minute time slot directly on our architects' calendar.
+            </p>
+            <div class="contact-booking-card__features">
+              <div class="contact-b-feat">
+                <span class="contact-b-check">✓</span>
+                <span>Direct 1-on-1 with a senior technical architect</span>
+              </div>
+              <div class="contact-b-feat">
+                <span class="contact-b-check">✓</span>
+                <span>Live demo of working codebases and admin panels</span>
+              </div>
+              <div class="contact-b-feat">
+                <span class="contact-b-check">✓</span>
+                <span>Fixed-scope timeline & cost breakdown</span>
+              </div>
+            </div>
+            <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="contact-booking-btn">
+              Schedule Video Call on Cal.com
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <div class="contact-support-highlight">
+            <h4>Existing Client or Urgent Issue?</h4>
+            <p>Direct priority helpline for SLA support:</p>
+            <a href={`tel:${TECH_SUPPORT_PHONE.replace(/[^0-9+]/g, '')}`} class="contact-support-highlight__link">
+              📞 {TECH_SUPPORT_PHONE}
+            </a>
+            <span class="contact-support-highlight__note">Mon–Sat, 10:00 AM – 7:00 PM IST</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .contact-page {
+    background: #ffffff;
+    color: #0c0e1c;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* HERO */
+  .contact-hero {
+    position: relative;
+    padding: 7rem 0 4.5rem;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 0%, #f8fafc 0%, #ffffff 100%);
+  }
+
+  .contact-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .contact-hero__blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+  }
+
+  .contact-hero__blob--1 {
+    top: -10%;
+    left: -10%;
+    background: #e0f2fe;
+  }
+
+  .contact-hero__blob--2 {
+    top: -10%;
+    right: -10%;
+    background: #fdf2f8;
+  }
+
+  .contact-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .contact-crumbs ol {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .contact-crumbs a {
+    color: #64748b;
+    text-decoration: none;
+  }
+
+  .contact-crumbs a:hover {
+    color: #0c0e1c;
+  }
+
+  .contact-crumbs__sep {
+    margin: 0 0.5rem;
+    color: #cbd5e1;
+  }
+
+  .contact-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+  }
+
+  .contact-hero__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2.35rem, 5vw, 3.75rem);
+    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: #0c0e1c;
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-hero__lead {
+    font-size: clamp(1.0625rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 3rem;
+  }
+
+  /* RAPID CARDS GRID */
+  .contact-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .contact-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    border-color: #cbd5e1;
+  }
+
+  .contact-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .contact-card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .contact-card__icon--phone {
+    background: #e0f2fe;
+    color: #0284c7;
+  }
+
+  .contact-card__icon--whatsapp {
+    background: #dcfce7;
+    color: #16a34a;
+  }
+
+  .contact-card__icon--support {
+    background: #ede9fe;
+    color: #7c3aed;
+  }
+
+  .contact-card__icon--email {
+    background: #fce7f3;
+    color: #db2777;
+  }
+
+  .contact-card__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-card__k {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-card__v {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0c0e1c;
+    margin-bottom: 0.25rem;
+    word-break: break-all;
+  }
+
+  .contact-card__sub {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  /* SECTION TAGS */
+  .contact-sec-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+
+  /* MAP SECTION */
+  .contact-map-sec {
+    padding: 5rem 0;
+    background: #f8fafc;
+    border-top: 1px solid #edf2f7;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .contact-map-sec__header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .contact-map-sec__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: #0c0e1c;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-map-sec__sub {
+    font-size: 1.0625rem;
+    color: #475569;
+  }
+
+  .contact-map-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 2rem;
+    align-items: stretch;
+  }
+
+  .contact-biz-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+  }
+
+  .contact-biz-card__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.75rem;
+    background: #fef9c3;
+    color: #854d0e;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    margin-bottom: 1.25rem;
+    align-self: flex-start;
+  }
+
+  .contact-biz-card__star {
+    color: #eab308;
+    font-size: 1rem;
+  }
+
+  .contact-biz-card__reviews {
+    color: #a16207;
+  }
+
+  .contact-biz-card__name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0c0e1c;
+    line-height: 1.3;
+    margin-bottom: 0.35rem;
+  }
+
+  .contact-biz-card__cat {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 1.75rem;
+  }
+
+  .contact-biz-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+
+  .contact-biz-row {
+    display: flex;
+    gap: 0.875rem;
+    align-items: flex-start;
+  }
+
+  .contact-biz-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-biz-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .contact-biz-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .contact-biz-text strong {
+    font-size: 0.8125rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .contact-biz-text span {
+    color: #1e293b;
+  }
+
+  .contact-biz-text a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+
+  .contact-biz-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .contact-map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-map-btn--primary {
+    background: #0c0e1c;
+    color: #ffffff;
+  }
+
+  .contact-map-btn--primary:hover {
+    background: #2563eb;
+  }
+
+  .contact-map-btn--ghost {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+  }
+
+  .contact-map-btn--ghost:hover {
+    background: #e2e8f0;
+  }
+
+  .contact-map-frame-wrapper {
+    min-height: 420px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    background: #e2e8f0;
+  }
+
+  /* OFFICES GRID */
+  .contact-offices-sec {
+    padding: 6rem 0;
+  }
+
+  .contact-offices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .contact-office-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .contact-office-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+  }
+
+  .contact-office-card--hq {
+    border-color: #bfdbfe;
+    background: #f8fbff;
+  }
+
+  .contact-office-card__badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.25rem 0.65rem;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .contact-office-card__badge--branch {
+    background: #f1f5f9;
+    color: #475569;
+  }
+
+  .contact-office-card__badge--uk {
+    background: #fce7f3;
+    color: #be185d;
+  }
+
+  .contact-office-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-office-card__addr {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #475569;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-office-card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.8125rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .contact-office-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+  }
+
+  .contact-office-link:hover {
+    text-decoration: underline;
+  }
+
+  /* FORM SECTION */
+  .contact-form-sec {
+    padding: 6rem 0;
+    background: #f8fafc;
+    border-top: 1px solid #edf2f7;
+  }
+
+  .contact-form-sec__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-form-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+
+  .contact-form-box__title {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 2rem;
+    color: #0c0e1c;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-form-box__desc {
+    font-size: 0.9375rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .contact-form__field label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .contact-form__field input,
+  .contact-form__field select,
+  .contact-form__field textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    color: #0c0e1c;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+  }
+
+  .contact-form__field input:focus,
+  .contact-form__field select:focus,
+  .contact-form__field textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  .contact-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: #0c0e1c;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .contact-submit-btn:hover {
+    background: #2563eb;
+  }
+
+  .contact-form__disclaimer {
+    font-size: 0.75rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+  }
+
+  /* BOOKING ASIDE */
+  .contact-booking-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-booking-card {
+    background: #0c0e1c;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 2.25rem;
+  }
+
+  .contact-booking-card__pill {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    background: rgba(255,255,255,0.12);
+    color: #93c5fd;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .contact-booking-card h3 {
+    font-family: var(--font-display, "Tobias TRIAL", Georgia, serif);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-booking-card p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-booking-card__features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-b-feat {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #e2e8f0;
+  }
+
+  .contact-b-check {
+    color: #38bdf8;
+    font-weight: 700;
+  }
+
+  .contact-booking-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    background: #ffffff;
+    color: #0c0e1c;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .contact-booking-btn:hover {
+    background: #f1f5f9;
+  }
+
+  .contact-support-highlight {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+
+  .contact-support-highlight h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0c0e1c;
+    margin-bottom: 0.35rem;
+  }
+
+  .contact-support-highlight p {
+    font-size: 0.8125rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-support-highlight__link {
+    display: inline-block;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #2563eb;
+    text-decoration: none;
+    margin-bottom: 0.35rem;
+  }
+
+  .contact-support-highlight__note {
+    display: block;
+    font-size: 0.75rem;
+    color: #94a3b8;
+  }
+
+  @media (max-width: 900px) {
+    .contact-map-layout {
+      grid-template-columns: 1fr;
+    }
+    .contact-form-sec__inner {
+      grid-template-columns: 1fr;
+    }
+    .contact-form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
