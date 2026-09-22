@@ -1,0 +1,511 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { MAILPURSE_FEATURES, MAILPURSE_PLANS, MAILPURSE_INDUSTRIES, MAILPURSE_STATS } from "../data/mailpurse";
+
+const pageTitle = "MailPurse — Self-Hosted Email Marketing & Automation SaaS";
+const pageDesc = "Say goodbye to expensive email tools. MailPurse gives you enterprise-grade email marketing on your own server — unlimited subscribers, automation flows, multi-SMTP, and white-label SaaS mode.";
+
+function getIcon(icon: string) {
+  const icons: Record<string, string> = {
+    design: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 21l3-4 3 4"/></svg>`,
+    flow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 12h5a2 2 0 012 2v3m0-10v3a2 2 0 01-2 2H7"/></svg>`,
+    server: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="3" width="20" height="5" rx="1.5"/><rect x="2" y="10" width="20" height="5" rx="1.5"/><rect x="2" y="17" width="20" height="5" rx="1.5"/><circle cx="18" cy="5.5" r="1"/><circle cx="18" cy="12.5" r="1"/><circle cx="18" cy="19.5" r="1"/></svg>`,
+    users: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M19 21v-2a3 3 0 00-2-2.8"/></svg>`,
+    chart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    building: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4"/><path d="M9 7v2M15 7v2M9 13v2M15 13v2"/></svg>`,
+  };
+  return icons[icon] || icons.design;
+}
+---
+
+<Layout title={pageTitle} description={pageDesc}>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section class="mp-hero">
+  <div class="mp-hero__glow mp-hero__glow--l"></div>
+  <div class="mp-hero__glow mp-hero__glow--r"></div>
+  <div class="mp-container">
+    <div class="mp-hero__badge">
+      <span class="mp-hero__badge-dot"></span>
+      Self-Hosted Email Marketing SaaS — emailpro.rakebig.com
+    </div>
+    <h1 class="mp-hero__title">The email platform<br><span class="mp-hero__title-accent">you own forever.</span></h1>
+    <p class="mp-hero__sub">
+      Say goodbye to expensive email tools and per-contact fees. <strong>MailPurse</strong> gives you enterprise-grade email marketing on <em>your own server</em> — unlimited subscribers, drag-and-drop automation, multi-SMTP, and a full white-label SaaS mode to run your own ESP business.
+    </p>
+    <div class="mp-hero__actions">
+      <a href="https://emailpro.rakebig.com/register" class="mp-btn mp-btn--primary" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        Start Free — No Credit Card
+      </a>
+      <a href="#pricing" class="mp-btn mp-btn--ghost">See Pricing</a>
+      <a href="/contact" class="mp-btn mp-btn--ghost">Self-Host License</a>
+    </div>
+    <div class="mp-hero__stats">
+      {MAILPURSE_STATS.map(s => (
+        <div class="mp-hero__stat">
+          <span class="mp-hero__stat-val">{s.value}</span>
+          <span class="mp-hero__stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+    <!-- Email preview mockup -->
+    <div class="mp-hero__mockup" aria-hidden="true">
+      <div class="mp-email-preview">
+        <div class="mp-email-preview__bar">
+          <span class="mp-dot mp-dot--red"></span>
+          <span class="mp-dot mp-dot--yellow"></span>
+          <span class="mp-dot mp-dot--green"></span>
+          <span class="mp-email-preview__title">📧 Summer Sale — Your exclusive 30% off</span>
+        </div>
+        <div class="mp-email-preview__body">
+          <div class="mp-email-preview__header-img">
+            <div class="mp-email-preview__img-placeholder">🎉 SUMMER SALE 2025</div>
+          </div>
+          <div class="mp-email-preview__content">
+            <p class="mp-email-preview__greeting">Hey <span class="mp-email-preview__token">{"{{first_name}}"}</span> 👋</p>
+            <p class="mp-email-preview__text">You left something in your cart. Come back and use code <strong>SUMMER30</strong> for 30% off — expires in 24 hours.</p>
+            <div class="mp-email-preview__cta">Claim My 30% Off →</div>
+          </div>
+          <div class="mp-email-preview__stats-bar">
+            <span>📬 Open Rate: <strong>38.4%</strong></span>
+            <span>🔗 CTR: <strong>12.1%</strong></span>
+            <span>💰 Revenue: <strong>₹48,200</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST BAR ──────────────────────────────────────────── -->
+<section class="mp-trust">
+  <div class="mp-container">
+    <p class="mp-trust__label">Trusted by businesses across</p>
+    <div class="mp-trust__logos">
+      {["E-Commerce", "SaaS Companies", "Digital Agencies", "EdTech Platforms", "Real Estate", "Healthcare"].map(n => (
+        <span class="mp-trust__logo-item">{n}</span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY MAILPURSE ─────────────────────────────────────── -->
+<section class="mp-why">
+  <div class="mp-container">
+    <div class="mp-section-label">Why MailPurse?</div>
+    <h2 class="mp-section-title">Your data. Your server. <span class="mp-accent">Your rules.</span></h2>
+    <p class="mp-section-sub">MailPurse is built for businesses that are tired of paying $0.001 per email, getting locked into vendor limits, and worrying about data sovereignty. Take full control.</p>
+    <div class="mp-why__grid">
+      {[
+        { icon: "🚫", title: "No Per-Contact Fees", body: "Import unlimited subscribers. We don't charge more as you grow — pay once and own the platform." },
+        { icon: "🔒", title: "Your Data, Your Server", body: "Deploy on your VPS, cloud, or dedicated server. Full data sovereignty — no third-party data access." },
+        { icon: "🏢", title: "Run Your Own ESP", body: "White-label mode lets you sell email marketing as a service under your own brand with Stripe billing." },
+        { icon: "📡", title: "Bring Your Own SMTP", body: "Connect SES, SendGrid, Mailgun, or custom SMTP. Route campaigns per sender for maximum deliverability." },
+        { icon: "⚡", title: "Zero Sending Limits", body: "No daily/monthly throttles on your own server. Send millions of emails based only on your SMTP capacity." },
+        { icon: "♾️", title: "One License, Forever", body: "Buy once, use forever. No recurring SaaS fees. Includes 1 year of free updates and priority support." },
+      ].map(w => (
+        <div class="mp-why__card">
+          <span class="mp-why__icon">{w.icon}</span>
+          <h3 class="mp-why__title">{w.title}</h3>
+          <p class="mp-why__body">{w.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ───────────────────────────────────────────── -->
+<section class="mp-features" id="features">
+  <div class="mp-container">
+    <div class="mp-section-label">Platform Features</div>
+    <h2 class="mp-section-title">Everything you need to<br><span class="mp-accent">dominate email marketing.</span></h2>
+    {MAILPURSE_FEATURES.map((f, i) => (
+      <div class={`mp-feature-row ${i % 2 === 1 ? "mp-feature-row--reverse" : ""}`}>
+        <div class="mp-feature-row__text">
+          <div class="mp-feature-row__icon-wrap" style={`background:${f.tint};color:${f.color}`}>
+            <Fragment set:html={getIcon(f.icon)} />
+          </div>
+          <h3 class="mp-feature-row__title">{f.title}</h3>
+          <p class="mp-feature-row__sub">{f.subtitle}</p>
+          <p class="mp-feature-row__desc">{f.description}</p>
+          <ul class="mp-feature-row__bullets">
+            {f.bullets.map(b => (
+              <li class="mp-feature-row__bullet" style={`--dot:${f.color}`}>
+                <span class="mp-feature-row__check" style={`color:${f.color}`}>✓</span>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="mp-feature-row__visual" style={`background:${f.tint}`}>
+          <div class="mp-feature-row__visual-inner" style={`border-color:${f.color}22`}>
+            <div class="mp-feature-visual-icon" style={`color:${f.color};background:${f.color}18`}>
+              <Fragment set:html={getIcon(f.icon)} />
+            </div>
+            <div class="mp-feature-visual-title" style={`color:${f.color}`}>{f.title.split(" ").slice(0,3).join(" ")}</div>
+            <div class="mp-feature-visual-bullets">
+              {f.bullets.slice(0, 3).map(b => (
+                <div class="mp-feature-visual-bullet">
+                  <span style={`color:${f.color}`}>→</span> {b}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- ── INDUSTRY SOLUTIONS ─────────────────────────────────── -->
+<section class="mp-industries" id="solutions">
+  <div class="mp-container">
+    <div class="mp-section-label">Industry Solutions</div>
+    <h2 class="mp-section-title">MailPurse works for <span class="mp-accent">every industry.</span></h2>
+    <p class="mp-section-sub">Explore how businesses across verticals use MailPurse to automate their email marketing and drive measurable results.</p>
+    <div class="mp-industry-tabs">
+      <div class="mp-industry-tabs__nav" role="tablist">
+        {MAILPURSE_INDUSTRIES.map((ind, i) => (
+          <button
+            class={`mp-industry-tabs__tab ${i === 0 ? "is-active" : ""}`}
+            role="tab"
+            data-tab={ind.id}
+            aria-selected={i === 0 ? "true" : "false"}
+            id={`mp-tab-${ind.id}`}
+          >
+            <span class="mp-industry-tabs__tab-icon">{ind.icon}</span>
+            {ind.name}
+          </button>
+        ))}
+      </div>
+      <div class="mp-industry-tabs__panels">
+        {MAILPURSE_INDUSTRIES.map((ind, i) => (
+          <div
+            class={`mp-industry-tabs__panel ${i === 0 ? "is-active" : ""}`}
+            role="tabpanel"
+            data-panel={ind.id}
+            aria-labelledby={`mp-tab-${ind.id}`}
+          >
+            <div class="mp-industry-panel">
+              <div class="mp-industry-panel__left">
+                <div class="mp-industry-panel__emoji">{ind.icon}</div>
+                <h3 class="mp-industry-panel__name">{ind.name}</h3>
+                <p class="mp-industry-panel__tagline">{ind.tagline}</p>
+                <div class="mp-industry-panel__metrics">
+                  {ind.metrics.map(m => (
+                    <div class="mp-industry-panel__metric">
+                      <span class="mp-industry-panel__metric-val">{m.value}</span>
+                      <span class="mp-industry-panel__metric-label">{m.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <p class="mp-industry-panel__results">✅ {ind.results}</p>
+              </div>
+              <div class="mp-industry-panel__right">
+                <div class="mp-industry-panel__use-case">
+                  <p class="mp-industry-panel__use-case-text">{ind.useCase}</p>
+                </div>
+                <div class="mp-industry-panel__flow">
+                  <div class="mp-industry-panel__flow-title">📧 Automation Flow</div>
+                  {ind.automationSteps.map((step, si) => (
+                    <div class="mp-industry-panel__flow-step">
+                      <span class="mp-industry-panel__flow-num">{si + 1}</span>
+                      <span class="mp-industry-panel__flow-text">{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ───────────────────────────────────────────── -->
+<section class="mp-pricing" id="pricing">
+  <div class="mp-container">
+    <div class="mp-section-label">Pricing</div>
+    <h2 class="mp-section-title">Choose your plan.<br><span class="mp-accent">Own your growth.</span></h2>
+    <p class="mp-section-sub">Every plan includes unlimited campaigns, drag-and-drop editor, automation, and real-time analytics. Scale up only when you need to.</p>
+    <div class="mp-pricing__toggle" id="mp-billing-toggle">
+      <button class="mp-pricing__toggle-btn is-active" data-billing="monthly" id="mp-monthly-btn">Monthly</button>
+      <button class="mp-pricing__toggle-btn" data-billing="yearly" id="mp-yearly-btn">Yearly <span class="mp-pricing__save-badge">Save 30%</span></button>
+    </div>
+    <div class="mp-pricing__grid">
+      {MAILPURSE_PLANS.map(plan => (
+        <div class={`mp-pricing__card ${plan.popular ? "mp-pricing__card--popular" : ""}`}>
+          {plan.badge && <div class="mp-pricing__badge">{plan.badge}</div>}
+          <div class="mp-pricing__plan-name">{plan.name}</div>
+          <div class="mp-pricing__tagline">{plan.tagline}</div>
+          <div class="mp-pricing__price">
+            <span class="mp-pricing__amount mp-price-monthly">{plan.priceMonthly}</span>
+            <span class="mp-pricing__amount mp-price-yearly" style="display:none">{plan.priceYearly}</span>
+            {plan.id !== "starter" && plan.id !== "selfhosted" && <span class="mp-pricing__period mp-price-monthly-label">/ month</span>}
+            {plan.id === "selfhosted" && <span class="mp-pricing__period">one-time</span>}
+          </div>
+          <div class="mp-pricing__meta-grid">
+            <div class="mp-pricing__meta-row"><span class="mp-pricing__meta-label">Subscribers</span><span class="mp-pricing__meta-val">{plan.subscribers}</span></div>
+            <div class="mp-pricing__meta-row"><span class="mp-pricing__meta-label">Emails</span><span class="mp-pricing__meta-val">{plan.emails}</span></div>
+            <div class="mp-pricing__meta-row"><span class="mp-pricing__meta-label">Automations</span><span class="mp-pricing__meta-val">{plan.automations}</span></div>
+            <div class="mp-pricing__meta-row"><span class="mp-pricing__meta-label">Users</span><span class="mp-pricing__meta-val">{plan.users}</span></div>
+            <div class="mp-pricing__meta-row"><span class="mp-pricing__meta-label">SMTP Servers</span><span class="mp-pricing__meta-val">{plan.smtpServers}</span></div>
+            <div class="mp-pricing__meta-row"><span class="mp-pricing__meta-label">Domains</span><span class="mp-pricing__meta-val">{plan.domains}</span></div>
+          </div>
+          <ul class="mp-pricing__highlights">
+            {plan.highlights.map(h => (
+              <li class="mp-pricing__highlight">
+                <svg class="mp-pricing__check" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#22c55e20"/><path d="M5 8l2 2 4-4" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {h}
+              </li>
+            ))}
+          </ul>
+          <a href={plan.ctaUrl} class={`mp-pricing__cta ${plan.popular ? "mp-pricing__cta--primary" : "mp-pricing__cta--outline"}`} target={plan.ctaUrl.startsWith("http") ? "_blank" : "_self"} rel="noopener">
+            {plan.ctaLabel}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── SMTP INTEGRATIONS ──────────────────────────────────── -->
+<section class="mp-smtp">
+  <div class="mp-container">
+    <h2 class="mp-section-title" style="text-align:center">Plug in any SMTP <span class="mp-accent">you already use.</span></h2>
+    <div class="mp-smtp__grid">
+      {["Amazon SES", "SendGrid", "Mailgun", "Postmark", "Brevo", "Sparkpost", "Mailjet", "Your Custom SMTP"].map(s => (
+        <div class="mp-smtp__chip">{s}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────────────────── -->
+<section class="mp-cta">
+  <div class="mp-container">
+    <div class="mp-cta__card">
+      <h2 class="mp-cta__title">Ready to own your email stack?</h2>
+      <p class="mp-cta__sub">Get started free in 60 seconds — or talk to us about a self-hosted license for your team or agency.</p>
+      <div class="mp-cta__actions">
+        <a href="https://emailpro.rakebig.com/register" class="mp-btn mp-btn--white" target="_blank" rel="noopener">Start Free Account</a>
+        <a href="/contact" class="mp-btn mp-btn--outline-white">Get Self-Host License</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<script>
+// Industry tabs
+document.querySelectorAll<HTMLButtonElement>(".mp-industry-tabs__tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = btn.dataset.tab!;
+    document.querySelectorAll(".mp-industry-tabs__tab").forEach(t => { t.classList.remove("is-active"); t.setAttribute("aria-selected","false"); });
+    document.querySelectorAll(".mp-industry-tabs__panel").forEach(p => p.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    btn.setAttribute("aria-selected","true");
+    document.querySelector<HTMLElement>(`[data-panel="${target}"]`)?.classList.add("is-active");
+  });
+});
+
+// Billing toggle
+document.querySelectorAll<HTMLButtonElement>(".mp-pricing__toggle-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const billing = btn.dataset.billing!;
+    document.querySelectorAll(".mp-pricing__toggle-btn").forEach(b => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    document.querySelectorAll<HTMLElement>(".mp-price-monthly").forEach(el => el.style.display = billing === "monthly" ? "" : "none");
+    document.querySelectorAll<HTMLElement>(".mp-price-yearly").forEach(el => el.style.display = billing === "yearly" ? "" : "none");
+    document.querySelectorAll<HTMLElement>(".mp-price-monthly-label").forEach(el => el.textContent = billing === "monthly" ? "/ month" : "/ year");
+  });
+});
+</script>
+
+<style>
+/* ── Tokens ── */
+:root {
+  --mp-bg: #f8fafc;
+  --mp-surface: #ffffff;
+  --mp-border: #e2e8f0;
+  --mp-text: #0f172a;
+  --mp-muted: #64748b;
+  --mp-indigo: #6366f1;
+  --mp-radius: 18px;
+  --mp-font: 'Inter', system-ui, sans-serif;
+}
+
+.mp-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.mp-section-label { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--mp-indigo); background:#EEF2FF; border-radius:99px; padding:4px 14px; margin-bottom:16px; }
+.mp-section-title { font-size:clamp(26px,4vw,42px); font-weight:800; color:var(--mp-text); line-height:1.2; margin:0 0 16px; }
+.mp-section-sub { font-size:17px; color:var(--mp-muted); max-width:640px; line-height:1.7; margin:0 0 52px; }
+.mp-accent { background:linear-gradient(135deg,#6366f1,#0284c7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+/* Buttons */
+.mp-btn { display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:12px; font-weight:600; font-size:15px; text-decoration:none; transition:all .2s; cursor:pointer; border:none; }
+.mp-btn--primary { background:linear-gradient(135deg,#6366f1,#0284c7); color:#fff; box-shadow:0 4px 20px #6366f140; }
+.mp-btn--primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px #6366f150; }
+.mp-btn--ghost { background:#fff; color:#334155; border:1.5px solid #e2e8f0; }
+.mp-btn--ghost:hover { border-color:#6366f1; color:#6366f1; }
+.mp-btn--white { background:#fff; color:#6366f1; font-weight:700; }
+.mp-btn--white:hover { transform:translateY(-2px); }
+.mp-btn--outline-white { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.45); }
+.mp-btn--outline-white:hover { background:rgba(255,255,255,.12); }
+
+/* ── Hero ── */
+.mp-hero { position:relative; background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 50%,#0c1445 100%); padding:100px 0 80px; overflow:hidden; }
+.mp-hero__glow { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; }
+.mp-hero__glow--l { width:500px; height:500px; background:#6366f130; top:-100px; left:-150px; }
+.mp-hero__glow--r { width:400px; height:400px; background:#0284c720; top:0; right:-100px; }
+.mp-hero__badge { display:inline-flex; align-items:center; gap:8px; background:rgba(99,102,241,.15); border:1px solid rgba(99,102,241,.3); border-radius:99px; padding:6px 16px; font-size:12px; color:#a5b4fc; margin-bottom:24px; font-weight:500; }
+.mp-hero__badge-dot { width:6px; height:6px; border-radius:50%; background:#6ee7b7; box-shadow:0 0 6px #6ee7b7; }
+.mp-hero__title { font-size:clamp(36px,5.5vw,68px); font-weight:900; color:#fff; line-height:1.1; margin:0 0 20px; letter-spacing:-.02em; }
+.mp-hero__title-accent { background:linear-gradient(135deg,#818cf8,#38bdf8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.mp-hero__sub { font-size:18px; color:#94a3b8; line-height:1.75; max-width:640px; margin:0 0 40px; }
+.mp-hero__sub strong { color:#fff; }
+.mp-hero__sub em { color:#818cf8; font-style:normal; }
+.mp-hero__actions { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:52px; }
+.mp-hero__stats { display:flex; flex-wrap:wrap; gap:32px; margin-bottom:52px; }
+.mp-hero__stat { display:flex; flex-direction:column; gap:2px; }
+.mp-hero__stat-val { font-size:26px; font-weight:800; color:#fff; }
+.mp-hero__stat-label { font-size:12px; color:#64748b; }
+
+/* Email Preview Mockup */
+.mp-hero__mockup { max-width:640px; margin:0 auto; }
+.mp-email-preview { background:#1e293b; border-radius:16px; border:1px solid #334155; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+.mp-email-preview__bar { display:flex; align-items:center; gap:8px; padding:12px 16px; background:#0f172a; border-bottom:1px solid #334155; }
+.mp-dot { width:10px; height:10px; border-radius:50%; }
+.mp-dot--red { background:#ef4444; }
+.mp-dot--yellow { background:#f59e0b; }
+.mp-dot--green { background:#22c55e; }
+.mp-email-preview__title { font-size:12px; color:#94a3b8; margin-left:8px; }
+.mp-email-preview__body { background:#fff; }
+.mp-email-preview__header-img { background:linear-gradient(135deg,#6366f1,#0284c7); padding:32px; text-align:center; }
+.mp-email-preview__img-placeholder { font-size:20px; font-weight:900; color:#fff; letter-spacing:.05em; }
+.mp-email-preview__content { padding:24px 28px; }
+.mp-email-preview__greeting { font-size:16px; margin:0 0 10px; color:#0f172a; }
+.mp-email-preview__token { background:#EEF2FF; color:#6366f1; border-radius:4px; padding:1px 6px; font-size:13px; font-family:monospace; }
+.mp-email-preview__text { color:#475569; font-size:14px; line-height:1.6; margin:0 0 20px; }
+.mp-email-preview__cta { display:inline-block; background:linear-gradient(135deg,#6366f1,#0284c7); color:#fff; padding:12px 24px; border-radius:8px; font-weight:700; font-size:14px; }
+.mp-email-preview__stats-bar { display:flex; gap:24px; padding:12px 28px; background:#f8fafc; border-top:1px solid #e2e8f0; font-size:12px; color:#475569; flex-wrap:wrap; }
+.mp-email-preview__stats-bar strong { color:#0f172a; }
+
+/* ── Trust ── */
+.mp-trust { padding:28px 0; background:#fff; border-bottom:1px solid #e2e8f0; }
+.mp-trust__label { text-align:center; font-size:12px; color:#94a3b8; text-transform:uppercase; letter-spacing:.1em; margin-bottom:16px; }
+.mp-trust__logos { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.mp-trust__logo-item { padding:6px 18px; background:#f1f5f9; border-radius:99px; font-size:13px; font-weight:600; color:#475569; border:1px solid #e2e8f0; }
+
+/* ── Why ── */
+.mp-why { padding:80px 0; background:var(--mp-bg); }
+.mp-why__grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+.mp-why__card { background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:28px; transition:all .2s; }
+.mp-why__card:hover { transform:translateY(-4px); box-shadow:0 12px 40px #6366f115; border-color:#6366f130; }
+.mp-why__icon { font-size:32px; display:block; margin-bottom:16px; }
+.mp-why__title { font-size:17px; font-weight:700; color:#0f172a; margin:0 0 8px; }
+.mp-why__body { font-size:14px; color:#64748b; line-height:1.65; margin:0; }
+
+/* ── Features ── */
+.mp-features { padding:80px 0; background:#fff; }
+.mp-feature-row { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; margin-bottom:80px; }
+.mp-feature-row:last-child { margin-bottom:0; }
+.mp-feature-row--reverse { direction:rtl; }
+.mp-feature-row--reverse > * { direction:ltr; }
+.mp-feature-row__icon-wrap { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+.mp-feature-row__icon-wrap svg { width:26px; height:26px; }
+.mp-feature-row__title { font-size:24px; font-weight:800; color:#0f172a; margin:0 0 10px; }
+.mp-feature-row__sub { font-size:15px; font-weight:600; color:#475569; margin:0 0 14px; }
+.mp-feature-row__desc { font-size:15px; color:#64748b; line-height:1.75; margin:0 0 24px; }
+.mp-feature-row__bullets { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+.mp-feature-row__bullet { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:#475569; line-height:1.5; }
+.mp-feature-row__check { font-size:16px; flex-shrink:0; font-style:normal; }
+.mp-feature-row__visual { border-radius:20px; padding:40px; min-height:300px; display:flex; align-items:center; justify-content:center; }
+.mp-feature-row__visual-inner { background:#fff; border-radius:14px; border:1.5px solid; padding:28px; width:100%; }
+.mp-feature-visual-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+.mp-feature-visual-icon svg { width:24px; height:24px; }
+.mp-feature-visual-title { font-size:16px; font-weight:700; margin-bottom:16px; }
+.mp-feature-visual-bullets { display:flex; flex-direction:column; gap:8px; }
+.mp-feature-visual-bullet { font-size:13px; color:#475569; display:flex; align-items:flex-start; gap:8px; }
+
+/* ── Industries ── */
+.mp-industries { padding:80px 0; background:linear-gradient(180deg,#f8fafc 0%,#fff 100%); }
+.mp-industry-tabs__nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
+.mp-industry-tabs__tab { display:flex; align-items:center; gap:8px; padding:10px 18px; border-radius:10px; border:1.5px solid #e2e8f0; background:#fff; font-size:14px; font-weight:600; color:#64748b; cursor:pointer; transition:all .2s; }
+.mp-industry-tabs__tab.is-active { background:var(--mp-indigo); border-color:var(--mp-indigo); color:#fff; }
+.mp-industry-tabs__tab:hover:not(.is-active) { border-color:var(--mp-indigo); color:var(--mp-indigo); }
+.mp-industry-tabs__tab-icon { font-size:18px; }
+.mp-industry-tabs__panel { display:none; }
+.mp-industry-tabs__panel.is-active { display:block; }
+.mp-industry-panel { display:grid; grid-template-columns:1fr 1.4fr; gap:40px; background:#fff; border:1px solid #e2e8f0; border-radius:20px; padding:36px; align-items:start; }
+.mp-industry-panel__left { }
+.mp-industry-panel__emoji { font-size:48px; display:block; margin-bottom:12px; }
+.mp-industry-panel__name { font-size:22px; font-weight:800; color:#0f172a; margin:0 0 8px; }
+.mp-industry-panel__tagline { font-size:15px; color:#64748b; line-height:1.6; margin:0 0 24px; }
+.mp-industry-panel__metrics { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:24px; }
+.mp-industry-panel__metric { text-align:center; }
+.mp-industry-panel__metric-val { display:block; font-size:26px; font-weight:900; background:linear-gradient(135deg,#6366f1,#0284c7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.mp-industry-panel__metric-label { font-size:11px; color:#94a3b8; text-transform:uppercase; letter-spacing:.06em; }
+.mp-industry-panel__results { font-size:13px; color:#059669; font-weight:600; background:#ECFDF5; border-radius:8px; padding:8px 14px; margin:0; }
+.mp-industry-panel__right { }
+.mp-industry-panel__use-case { background:#f8fafc; border-radius:12px; padding:18px; margin-bottom:20px; border-left:3px solid var(--mp-indigo); }
+.mp-industry-panel__use-case-text { font-size:14px; color:#475569; line-height:1.7; margin:0; }
+.mp-industry-panel__flow { }
+.mp-industry-panel__flow-title { font-size:13px; font-weight:700; color:#0f172a; margin-bottom:12px; }
+.mp-industry-panel__flow-step { display:flex; align-items:flex-start; gap:12px; margin-bottom:10px; }
+.mp-industry-panel__flow-num { width:22px; height:22px; border-radius:50%; background:var(--mp-indigo); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+.mp-industry-panel__flow-text { font-size:13px; color:#475569; line-height:1.5; }
+
+/* ── Pricing ── */
+.mp-pricing { padding:80px 0; background:var(--mp-bg); }
+.mp-pricing__toggle { display:flex; align-items:center; gap:4px; background:#fff; border:1.5px solid #e2e8f0; border-radius:12px; padding:4px; margin-bottom:48px; width:fit-content; }
+.mp-pricing__toggle-btn { padding:8px 20px; border-radius:9px; border:0; background:transparent; font-size:14px; font-weight:600; color:#64748b; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:8px; }
+.mp-pricing__toggle-btn.is-active { background:var(--mp-indigo); color:#fff; }
+.mp-pricing__save-badge { background:#22c55e; color:#fff; font-size:10px; padding:2px 7px; border-radius:99px; font-weight:700; }
+.mp-pricing__grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; align-items:start; }
+.mp-pricing__card { background:#fff; border:1.5px solid #e2e8f0; border-radius:20px; padding:28px; position:relative; transition:all .2s; }
+.mp-pricing__card:hover { transform:translateY(-4px); box-shadow:0 16px 40px #6366f115; }
+.mp-pricing__card--popular { border-color:var(--mp-indigo); box-shadow:0 8px 40px #6366f120; }
+.mp-pricing__badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#6366f1,#0284c7); color:#fff; font-size:11px; font-weight:700; padding:4px 14px; border-radius:99px; white-space:nowrap; }
+.mp-pricing__plan-name { font-size:20px; font-weight:800; color:#0f172a; margin-bottom:6px; }
+.mp-pricing__tagline { font-size:13px; color:#64748b; margin-bottom:20px; min-height:36px; }
+.mp-pricing__price { margin-bottom:24px; }
+.mp-pricing__amount { font-size:32px; font-weight:900; color:#0f172a; }
+.mp-pricing__period { font-size:13px; color:#94a3b8; margin-left:4px; }
+.mp-pricing__meta-grid { border:1px solid #f1f5f9; border-radius:12px; overflow:hidden; margin-bottom:24px; }
+.mp-pricing__meta-row { display:flex; justify-content:space-between; align-items:center; padding:8px 14px; border-bottom:1px solid #f1f5f9; font-size:13px; }
+.mp-pricing__meta-row:last-child { border-bottom:0; }
+.mp-pricing__meta-label { color:#64748b; }
+.mp-pricing__meta-val { font-weight:700; color:#0f172a; }
+.mp-pricing__highlights { list-style:none; margin:0 0 24px; padding:0; display:flex; flex-direction:column; gap:8px; }
+.mp-pricing__highlight { display:flex; align-items:flex-start; gap:8px; font-size:13px; color:#475569; line-height:1.4; }
+.mp-pricing__check { width:16px; height:16px; flex-shrink:0; margin-top:1px; }
+.mp-pricing__cta { display:block; text-align:center; padding:12px 20px; border-radius:10px; font-weight:700; font-size:14px; text-decoration:none; transition:all .2s; cursor:pointer; }
+.mp-pricing__cta--primary { background:linear-gradient(135deg,#6366f1,#0284c7); color:#fff; }
+.mp-pricing__cta--primary:hover { opacity:.9; }
+.mp-pricing__cta--outline { border:1.5px solid #e2e8f0; color:#334155; }
+.mp-pricing__cta--outline:hover { border-color:var(--mp-indigo); color:var(--mp-indigo); }
+
+/* ── SMTP ── */
+.mp-smtp { padding:60px 0; background:#fff; }
+.mp-smtp__grid { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:32px; }
+.mp-smtp__chip { padding:10px 22px; background:#f8fafc; border:1.5px solid #e2e8f0; border-radius:99px; font-size:14px; font-weight:600; color:#334155; transition:all .2s; }
+.mp-smtp__chip:hover { border-color:#6366f1; color:#6366f1; background:#EEF2FF; }
+
+/* ── CTA ── */
+.mp-cta { padding:80px 0; background:var(--mp-bg); }
+.mp-cta__card { background:linear-gradient(135deg,#1e1b4b,#0c1445); border-radius:24px; padding:64px 48px; text-align:center; }
+.mp-cta__title { font-size:clamp(24px,3.5vw,40px); font-weight:900; color:#fff; margin:0 0 16px; }
+.mp-cta__sub { font-size:17px; color:#94a3b8; line-height:1.7; margin:0 0 36px; }
+.mp-cta__actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+
+@media (max-width:768px) {
+  .mp-feature-row { grid-template-columns:1fr; gap:32px; }
+  .mp-feature-row--reverse { direction:ltr; }
+  .mp-industry-panel { grid-template-columns:1fr; }
+  .mp-pricing__grid { grid-template-columns:1fr; }
+  .mp-hero__mockup { display:none; }
+}
+</style>

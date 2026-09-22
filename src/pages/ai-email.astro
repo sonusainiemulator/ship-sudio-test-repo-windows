@@ -1,0 +1,425 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { AIEMAIL_FEATURES, AIEMAIL_PLANS, AIEMAIL_MCP_TOOLS, AIEMAIL_STATS } from "../data/aiEmail";
+
+const pageTitle = "AI Email — AI-Powered Email Automation with MCP Support";
+const pageDesc = "The world's first email marketing platform with native MCP (Model Context Protocol) support. Let AI agents write, send, and optimise your campaigns autonomously — powered by email.ttinfotechs.com";
+
+function getFeatureIcon(icon: string) {
+  const icons: Record<string, string> = {
+    mcp: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    pen: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>`,
+    users: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="8" r="2.5"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M19 21v-2a3 3 0 00-2-2.8"/></svg>`,
+    agent: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/><path d="M9 8h.01M15 8h.01"/><path d="M9 12s1 2 3 2 3-2 3-2"/></svg>`,
+    chart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  };
+  return icons[icon] || icons.mcp;
+}
+---
+
+<Layout title={pageTitle} description={pageDesc}>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section class="ae-hero">
+  <div class="ae-hero__grid-bg" aria-hidden="true"></div>
+  <div class="ae-hero__glow ae-hero__glow--purple"></div>
+  <div class="ae-hero__glow ae-hero__glow--blue"></div>
+  <div class="ae-container">
+    <div class="ae-hero__badge">
+      <span class="ae-badge-new">NEW</span>
+      <span>Model Context Protocol (MCP) Native Support</span>
+    </div>
+    <h1 class="ae-hero__title">
+      Email marketing,<br>
+      <span class="ae-hero__title-gradient">powered by AI agents.</span>
+    </h1>
+    <p class="ae-hero__sub">
+      The world's first email platform with native <strong>MCP support</strong>. Connect Claude, GPT-4, or any AI agent to write campaigns, segment audiences, and analyse results — all through a standardised tool interface. Your email stack, now AI-native.
+    </p>
+    <div class="ae-hero__actions">
+      <a href="https://email.ttinfotechs.com/register" class="ae-btn ae-btn--primary" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Try AI Email Free
+      </a>
+      <a href="#mcp-tools" class="ae-btn ae-btn--ghost">Explore MCP Tools</a>
+      <a href="#pricing" class="ae-btn ae-btn--ghost">View Pricing</a>
+    </div>
+    <div class="ae-hero__stats">
+      {AIEMAIL_STATS.map(s => (
+        <div class="ae-hero__stat">
+          <span class="ae-hero__stat-val">{s.value}</span>
+          <span class="ae-hero__stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- MCP Terminal Demo -->
+    <div class="ae-terminal" aria-label="MCP integration demo">
+      <div class="ae-terminal__bar">
+        <div class="ae-terminal__dots">
+          <span class="ae-tdot ae-tdot--red"></span>
+          <span class="ae-tdot ae-tdot--yellow"></span>
+          <span class="ae-tdot ae-tdot--green"></span>
+        </div>
+        <span class="ae-terminal__title">claude desktop — MCP: ai-email</span>
+      </div>
+      <div class="ae-terminal__body">
+        <div class="ae-terminal__prompt">
+          <span class="ae-t-user">Claude:</span>
+          <span class="ae-t-text"> Create a cart abandonment email campaign for VIP customers who haven't purchased in 30 days. Use a 20% discount and urgency tone.</span>
+        </div>
+        <div class="ae-terminal__response">
+          <span class="ae-t-mcp">MCP → ai-email/create_campaign</span>
+          <div class="ae-t-json">
+<pre>{`{
+  "tool": "create_campaign",
+  "params": {
+    "name": "VIP Cart Recovery — 20% Off",
+    "segment": "vip_inactive_30d",
+    "tone": "urgency",
+    "discount_code": "VIP20",
+    "subject": "{{first_name}}, your cart misses you 🛒"
+  },
+  "result": {
+    "campaign_id": "cmp_82xk9",
+    "predicted_open_rate": "41.2%",
+    "predicted_revenue": "₹92,400",
+    "status": "draft — awaiting approval"
+  }
+}`}</pre>
+          </div>
+        </div>
+        <div class="ae-terminal__cursor">█</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MCP TOOLS EXPLORER ─────────────────────────────────── -->
+<section class="ae-mcp" id="mcp-tools">
+  <div class="ae-container">
+    <div class="ae-section-label">MCP Tool Registry</div>
+    <h2 class="ae-section-title">8 native tools your AI agents<br><span class="ae-accent">can call right now.</span></h2>
+    <p class="ae-section-sub">Every tool follows the MCP spec — works out-of-the-box with Claude Desktop, Cursor, Windsurf, and any MCP-compatible client. No custom integrations needed.</p>
+    <div class="ae-mcp__integration-badge">
+      <span>Works with:</span>
+      {["Claude Desktop", "Cursor IDE", "Windsurf", "Zed Editor", "Continue.dev", "Custom MCP Clients"].map(c => (
+        <span class="ae-mcp__client-chip">{c}</span>
+      ))}
+    </div>
+    <div class="ae-mcp__grid">
+      {AIEMAIL_MCP_TOOLS.map(tool => (
+        <div class="ae-mcp__tool" style={`border-left-color:${tool.color}`}>
+          <div class="ae-mcp__tool-header">
+            <code class="ae-mcp__tool-name" style={`color:${tool.color}`}>{tool.name}()</code>
+            <span class="ae-mcp__tool-cat" style={`background:${tool.color}18;color:${tool.color}`}>{tool.category}</span>
+          </div>
+          <p class="ae-mcp__tool-desc">{tool.description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="ae-mcp__config">
+      <div class="ae-mcp__config-title">📋 Add to your MCP config in 60 seconds</div>
+      <div class="ae-code-block">
+<pre><code>{`// claude_desktop_config.json
+{
+  "mcpServers": {
+    "ai-email": {
+      "command": "npx",
+      "args": ["-y", "@ttinfotechs/ai-email-mcp"],
+      "env": {
+        "AI_EMAIL_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}`}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ───────────────────────────────────────────── -->
+<section class="ae-features" id="features">
+  <div class="ae-container">
+    <div class="ae-section-label">Platform Features</div>
+    <h2 class="ae-section-title">AI that works <span class="ae-accent">for your inbox.</span></h2>
+    <div class="ae-features__grid">
+      {AIEMAIL_FEATURES.map(f => (
+        <div class={`ae-feature-card ${f.isNew ? "ae-feature-card--new" : ""}`} style={`--fc:${f.color};--ft:${f.tint}`}>
+          {f.isNew && <span class="ae-feature-card__new-badge">NEW</span>}
+          <div class="ae-feature-card__icon" style={`background:${f.tint};color:${f.color}`}>
+            <Fragment set:html={getFeatureIcon(f.icon)} />
+          </div>
+          <h3 class="ae-feature-card__title">{f.title}</h3>
+          <p class="ae-feature-card__sub">{f.subtitle}</p>
+          <p class="ae-feature-card__desc">{f.description}</p>
+          <ul class="ae-feature-card__bullets">
+            {f.bullets.map(b => (
+              <li class="ae-feature-card__bullet">
+                <span class="ae-feature-card__check" style={`color:${f.color}`}>✓</span>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────────── -->
+<section class="ae-how">
+  <div class="ae-container">
+    <div class="ae-section-label">How It Works</div>
+    <h2 class="ae-section-title">From prompt to sent campaign<br><span class="ae-accent">in under 30 seconds.</span></h2>
+    <div class="ae-how__steps">
+      {[
+        { step: "01", title: "Connect AI Agent", body: "Add the AI Email MCP server to Claude Desktop, Cursor, or any MCP client with a single config entry.", icon: "🔌" },
+        { step: "02", title: "Give a Prompt", body: "Tell your AI: 'Draft a re-engagement campaign for inactive users with a free shipping offer and urgency tone.'", icon: "💬" },
+        { step: "03", title: "AI Calls MCP Tools", body: "The AI agent queries your subscriber data, generates copy, selects segments, and creates the campaign draft.", icon: "⚙️" },
+        { step: "04", title: "Review & Approve", body: "You review the AI-generated campaign in your dashboard. One click to approve, schedule, or ask for revisions.", icon: "✅" },
+        { step: "05", title: "Send & Optimise", body: "Campaign is sent. AI monitors performance, suggests improvements, and auto-optimises send times for future sends.", icon: "🚀" },
+      ].map(s => (
+        <div class="ae-how__step">
+          <div class="ae-how__step-num">{s.step}</div>
+          <div class="ae-how__step-icon">{s.icon}</div>
+          <h3 class="ae-how__step-title">{s.title}</h3>
+          <p class="ae-how__step-body">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ───────────────────────────────────────────── -->
+<section class="ae-pricing" id="pricing">
+  <div class="ae-container">
+    <div class="ae-section-label">Pricing</div>
+    <h2 class="ae-section-title">Start free.<br><span class="ae-accent">Scale with AI.</span></h2>
+    <p class="ae-section-sub">Every plan includes MCP server access, AI copywriter, and smart segmentation. Upgrade for more AI credits, contacts, and autonomous agents.</p>
+    <div class="ae-pricing__toggle" id="ae-billing-toggle">
+      <button class="ae-pricing__toggle-btn is-active" data-billing="monthly">Monthly</button>
+      <button class="ae-pricing__toggle-btn" data-billing="yearly">Yearly <span class="ae-pricing__save">Save 33%</span></button>
+    </div>
+    <div class="ae-pricing__grid">
+      {AIEMAIL_PLANS.map(plan => (
+        <div class={`ae-pricing__card ${plan.popular ? "ae-pricing__card--popular" : ""}`}>
+          {plan.badge && <div class="ae-pricing__badge">{plan.badge}</div>}
+          <div class="ae-pricing__plan-name">{plan.name}</div>
+          <div class="ae-pricing__tagline">{plan.tagline}</div>
+          <div class="ae-pricing__price">
+            <span class="ae-price-monthly">{plan.priceMonthly}</span>
+            <span class="ae-price-yearly" style="display:none">{plan.priceYearly}</span>
+            {plan.id !== "free" && <span class="ae-price-period ae-price-monthly-label"> / month</span>}
+          </div>
+          <div class="ae-pricing__meta">
+            <div class="ae-pricing__meta-row"><span>AI Credits</span><strong>{plan.aiCredits}</strong></div>
+            <div class="ae-pricing__meta-row"><span>Contacts</span><strong>{plan.contacts}</strong></div>
+            <div class="ae-pricing__meta-row"><span>Emails / mo</span><strong>{plan.emails}</strong></div>
+            <div class="ae-pricing__meta-row"><span>MCP Tools</span><strong>{plan.mcpTools}</strong></div>
+            <div class="ae-pricing__meta-row"><span>AI Agents</span><strong>{plan.agents}</strong></div>
+          </div>
+          <ul class="ae-pricing__list">
+            {plan.highlights.map(h => (
+              <li>
+                <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="8" cy="8" r="7" fill="#a855f720"/><path d="M5 8l2 2 4-4" stroke="#a855f7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {h}
+              </li>
+            ))}
+          </ul>
+          <a href={plan.ctaUrl} class={`ae-pricing__cta ${plan.popular ? "ae-pricing__cta--primary" : "ae-pricing__cta--outline"}`} target={plan.ctaUrl.startsWith("http") ? "_blank" : "_self"} rel="noopener">
+            {plan.ctaLabel}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────────────────── -->
+<section class="ae-cta">
+  <div class="ae-container">
+    <div class="ae-cta__inner">
+      <div class="ae-cta__orb ae-cta__orb--1"></div>
+      <div class="ae-cta__orb ae-cta__orb--2"></div>
+      <h2 class="ae-cta__title">Ready to let AI run<br>your email marketing?</h2>
+      <p class="ae-cta__sub">Connect your AI agent to your email platform today. Start free — no credit card required.</p>
+      <div class="ae-cta__actions">
+        <a href="https://email.ttinfotechs.com/register" class="ae-btn ae-btn--white" target="_blank" rel="noopener">Start Free with AI Email</a>
+        <a href="/contact" class="ae-btn ae-btn--outline-white">Enterprise & Custom MCP</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<script>
+document.querySelectorAll<HTMLButtonElement>(".ae-pricing__toggle-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const billing = btn.dataset.billing!;
+    document.querySelectorAll(".ae-pricing__toggle-btn").forEach(b => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    document.querySelectorAll<HTMLElement>(".ae-price-monthly").forEach(el => el.style.display = billing === "monthly" ? "" : "none");
+    document.querySelectorAll<HTMLElement>(".ae-price-yearly").forEach(el => el.style.display = billing === "yearly" ? "" : "none");
+    document.querySelectorAll<HTMLElement>(".ae-price-monthly-label").forEach(el => el.textContent = billing === "monthly" ? " / month" : " / year");
+  });
+});
+
+// Cursor blink
+const cursor = document.querySelector<HTMLElement>(".ae-terminal__cursor");
+if (cursor) {
+  setInterval(() => { cursor.style.opacity = cursor.style.opacity === "0" ? "1" : "0"; }, 500);
+}
+</script>
+
+<style>
+:root {
+  --ae-purple: #7c3aed;
+  --ae-blue: #0284c7;
+  --ae-dark: #0f172a;
+  --ae-surface: #ffffff;
+  --ae-bg: #f8fafc;
+  --ae-border: #e2e8f0;
+}
+.ae-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.ae-section-label { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ae-purple); background:#F5F3FF; border-radius:99px; padding:4px 14px; margin-bottom:16px; }
+.ae-section-title { font-size:clamp(26px,4vw,42px); font-weight:800; color:#0f172a; line-height:1.2; margin:0 0 16px; }
+.ae-section-sub { font-size:17px; color:#64748b; max-width:640px; line-height:1.7; margin:0 0 48px; }
+.ae-accent { background:linear-gradient(135deg,#7c3aed,#0284c7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+/* Buttons */
+.ae-btn { display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:12px; font-weight:600; font-size:15px; text-decoration:none; transition:all .2s; }
+.ae-btn--primary { background:linear-gradient(135deg,#7c3aed,#0284c7); color:#fff; box-shadow:0 4px 20px #7c3aed40; }
+.ae-btn--primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px #7c3aed55; }
+.ae-btn--ghost { background:#fff; color:#334155; border:1.5px solid #e2e8f0; }
+.ae-btn--ghost:hover { border-color:#7c3aed; color:#7c3aed; }
+.ae-btn--white { background:#fff; color:#7c3aed; font-weight:700; }
+.ae-btn--white:hover { transform:translateY(-2px); }
+.ae-btn--outline-white { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.45); }
+.ae-btn--outline-white:hover { background:rgba(255,255,255,.12); }
+
+/* ── Hero ── */
+.ae-hero { position:relative; background:linear-gradient(160deg,#0f172a 0%,#1a0533 55%,#0c1a2e 100%); padding:100px 0 80px; overflow:hidden; }
+.ae-hero__grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(124,58,237,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.08) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; }
+.ae-hero__glow { position:absolute; border-radius:50%; filter:blur(100px); pointer-events:none; }
+.ae-hero__glow--purple { width:600px; height:600px; background:#7c3aed25; top:-200px; left:-200px; }
+.ae-hero__glow--blue { width:400px; height:400px; background:#0284c720; top:0; right:-100px; }
+.ae-hero__badge { display:inline-flex; align-items:center; gap:10px; background:rgba(124,58,237,.2); border:1px solid rgba(124,58,237,.4); border-radius:99px; padding:6px 16px; font-size:12px; color:#c4b5fd; margin-bottom:24px; font-weight:500; }
+.ae-badge-new { background:#7c3aed; color:#fff; font-size:10px; font-weight:800; padding:2px 8px; border-radius:99px; letter-spacing:.05em; }
+.ae-hero__title { font-size:clamp(38px,6vw,72px); font-weight:900; color:#fff; line-height:1.08; margin:0 0 20px; letter-spacing:-.03em; }
+.ae-hero__title-gradient { background:linear-gradient(135deg,#c084fc,#38bdf8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.ae-hero__sub { font-size:18px; color:#94a3b8; line-height:1.75; max-width:640px; margin:0 0 40px; }
+.ae-hero__sub strong { color:#c4b5fd; }
+.ae-hero__actions { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:52px; }
+.ae-hero__stats { display:flex; flex-wrap:wrap; gap:36px; margin-bottom:52px; }
+.ae-hero__stat { display:flex; flex-direction:column; gap:2px; }
+.ae-hero__stat-val { font-size:26px; font-weight:800; color:#fff; }
+.ae-hero__stat-label { font-size:12px; color:#64748b; }
+
+/* ── Terminal ── */
+.ae-terminal { background:#0d1117; border:1px solid #30363d; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.6); max-width:700px; }
+.ae-terminal__bar { display:flex; align-items:center; gap:8px; padding:12px 16px; background:#161b22; border-bottom:1px solid #30363d; }
+.ae-terminal__dots { display:flex; gap:6px; }
+.ae-tdot { width:10px; height:10px; border-radius:50%; }
+.ae-tdot--red { background:#ff5f57; }
+.ae-tdot--yellow { background:#ffbd2e; }
+.ae-tdot--green { background:#28c840; }
+.ae-terminal__title { font-size:12px; color:#8b949e; margin-left:8px; font-family:monospace; }
+.ae-terminal__body { padding:20px 20px 14px; font-family:'Fira Code',monospace; font-size:13px; }
+.ae-terminal__prompt { margin-bottom:16px; line-height:1.6; }
+.ae-t-user { color:#7c3aed; font-weight:700; }
+.ae-t-text { color:#94a3b8; }
+.ae-terminal__response { }
+.ae-t-mcp { display:block; color:#22d3ee; font-size:11px; margin-bottom:8px; }
+.ae-t-json pre { color:#a3e635; font-size:12px; line-height:1.5; margin:0; white-space:pre; }
+.ae-terminal__cursor { color:#7c3aed; font-size:18px; margin-top:10px; }
+
+/* ── MCP ── */
+.ae-mcp { padding:80px 0; background:#fff; }
+.ae-mcp__integration-badge { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:40px; font-size:13px; color:#64748b; font-weight:600; }
+.ae-mcp__client-chip { padding:4px 12px; background:#f5f3ff; border:1px solid #ddd6fe; border-radius:99px; font-size:12px; color:#7c3aed; font-weight:600; }
+.ae-mcp__grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-bottom:48px; }
+.ae-mcp__tool { background:#f8fafc; border:1px solid #e2e8f0; border-left:3px solid; border-radius:12px; padding:18px 20px; transition:all .2s; }
+.ae-mcp__tool:hover { background:#fff; box-shadow:0 4px 20px rgba(0,0,0,.08); }
+.ae-mcp__tool-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.ae-mcp__tool-name { font-size:14px; font-weight:700; font-family:monospace; }
+.ae-mcp__tool-cat { font-size:10px; font-weight:700; padding:2px 8px; border-radius:99px; letter-spacing:.05em; text-transform:uppercase; }
+.ae-mcp__tool-desc { font-size:13px; color:#64748b; margin:0; line-height:1.5; }
+.ae-mcp__config { background:#0d1117; border-radius:14px; overflow:hidden; }
+.ae-mcp__config-title { padding:14px 20px; background:#161b22; font-size:13px; color:#8b949e; border-bottom:1px solid #30363d; font-family:monospace; }
+.ae-code-block pre { padding:20px; margin:0; }
+.ae-code-block code { font-family:'Fira Code',monospace; font-size:13px; color:#a3e635; line-height:1.7; }
+
+/* ── Features ── */
+.ae-features { padding:80px 0; background:var(--ae-bg); }
+.ae-features__grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:24px; }
+.ae-feature-card { background:#fff; border:1.5px solid #e2e8f0; border-radius:20px; padding:28px; position:relative; transition:all .2s; }
+.ae-feature-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px var(--fc,#7c3aed)15; border-color:var(--fc,#7c3aed)30; }
+.ae-feature-card--new { border-color:#7c3aed40; }
+.ae-feature-card__new-badge { position:absolute; top:16px; right:16px; background:linear-gradient(135deg,#7c3aed,#0284c7); color:#fff; font-size:10px; font-weight:800; padding:3px 10px; border-radius:99px; }
+.ae-feature-card__icon { width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+.ae-feature-card__icon svg { width:24px; height:24px; }
+.ae-feature-card__title { font-size:18px; font-weight:800; color:#0f172a; margin:0 0 8px; }
+.ae-feature-card__sub { font-size:14px; font-weight:600; color:#7c3aed; margin:0 0 12px; }
+.ae-feature-card__desc { font-size:14px; color:#64748b; line-height:1.7; margin:0 0 20px; }
+.ae-feature-card__bullets { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.ae-feature-card__bullet { display:flex; align-items:flex-start; gap:8px; font-size:13px; color:#475569; line-height:1.4; }
+.ae-feature-card__check { font-size:14px; flex-shrink:0; }
+
+/* ── How It Works ── */
+.ae-how { padding:80px 0; background:#fff; }
+.ae-how__steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0; counter-reset:steps; }
+.ae-how__step { text-align:center; padding:32px 20px; position:relative; }
+.ae-how__step:not(:last-child)::after { content:"→"; position:absolute; right:-10px; top:50%; transform:translateY(-100%); font-size:24px; color:#ddd6fe; }
+.ae-how__step-num { display:inline-block; font-size:11px; font-weight:800; color:#7c3aed; background:#f5f3ff; border-radius:99px; padding:3px 10px; margin-bottom:12px; letter-spacing:.1em; }
+.ae-how__step-icon { font-size:36px; display:block; margin-bottom:12px; }
+.ae-how__step-title { font-size:16px; font-weight:700; color:#0f172a; margin:0 0 8px; }
+.ae-how__step-body { font-size:13px; color:#64748b; line-height:1.6; margin:0; }
+
+/* ── Pricing ── */
+.ae-pricing { padding:80px 0; background:var(--ae-bg); }
+.ae-pricing__toggle { display:flex; align-items:center; gap:4px; background:#fff; border:1.5px solid #e2e8f0; border-radius:12px; padding:4px; margin-bottom:48px; width:fit-content; }
+.ae-pricing__toggle-btn { padding:8px 20px; border-radius:9px; border:0; background:transparent; font-size:14px; font-weight:600; color:#64748b; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:8px; }
+.ae-pricing__toggle-btn.is-active { background:var(--ae-purple); color:#fff; }
+.ae-pricing__save { background:#22c55e; color:#fff; font-size:10px; padding:2px 7px; border-radius:99px; font-weight:700; }
+.ae-pricing__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.ae-pricing__card { background:#fff; border:1.5px solid #e2e8f0; border-radius:20px; padding:32px; position:relative; transition:all .2s; }
+.ae-pricing__card:hover { transform:translateY(-4px); }
+.ae-pricing__card--popular { border-color:#7c3aed; box-shadow:0 8px 40px #7c3aed25; }
+.ae-pricing__badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7c3aed,#0284c7); color:#fff; font-size:11px; font-weight:700; padding:4px 14px; border-radius:99px; white-space:nowrap; }
+.ae-pricing__plan-name { font-size:20px; font-weight:800; color:#0f172a; margin-bottom:6px; }
+.ae-pricing__tagline { font-size:13px; color:#64748b; margin-bottom:20px; }
+.ae-pricing__price { font-size:36px; font-weight:900; color:#0f172a; margin-bottom:4px; }
+.ae-price-period { font-size:14px; color:#94a3b8; }
+.ae-pricing__meta { border:1px solid #f1f5f9; border-radius:12px; overflow:hidden; margin:20px 0; }
+.ae-pricing__meta-row { display:flex; justify-content:space-between; padding:8px 14px; border-bottom:1px solid #f1f5f9; font-size:13px; color:#64748b; }
+.ae-pricing__meta-row:last-child { border-bottom:0; }
+.ae-pricing__meta-row strong { color:#0f172a; }
+.ae-pricing__list { list-style:none; margin:0 0 24px; padding:0; display:flex; flex-direction:column; gap:8px; }
+.ae-pricing__list li { display:flex; align-items:flex-start; gap:8px; font-size:13px; color:#475569; }
+.ae-pricing__cta { display:block; text-align:center; padding:12px 20px; border-radius:10px; font-weight:700; font-size:14px; text-decoration:none; transition:all .2s; }
+.ae-pricing__cta--primary { background:linear-gradient(135deg,#7c3aed,#0284c7); color:#fff; }
+.ae-pricing__cta--outline { border:1.5px solid #e2e8f0; color:#334155; }
+.ae-pricing__cta--outline:hover { border-color:#7c3aed; color:#7c3aed; }
+
+/* ── CTA ── */
+.ae-cta { padding:80px 0; background:var(--ae-dark); }
+.ae-cta__inner { position:relative; background:linear-gradient(135deg,#1a0533,#0c1a2e); border:1px solid rgba(124,58,237,.3); border-radius:24px; padding:80px 48px; text-align:center; overflow:hidden; }
+.ae-cta__orb { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; }
+.ae-cta__orb--1 { width:400px; height:400px; background:#7c3aed30; top:-100px; left:-100px; }
+.ae-cta__orb--2 { width:300px; height:300px; background:#0284c720; bottom:-80px; right:-80px; }
+.ae-cta__title { font-size:clamp(26px,4vw,44px); font-weight:900; color:#fff; margin:0 0 16px; position:relative; z-index:1; }
+.ae-cta__sub { font-size:17px; color:#94a3b8; margin:0 0 36px; position:relative; z-index:1; }
+.ae-cta__actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; position:relative; z-index:1; }
+
+@media (max-width:900px) {
+  .ae-pricing__grid { grid-template-columns:1fr; }
+  .ae-features__grid { grid-template-columns:1fr; }
+}
+@media (max-width:640px) {
+  .ae-how__steps { grid-template-columns:1fr 1fr; }
+  .ae-how__step::after { display:none; }
+}
+</style>
