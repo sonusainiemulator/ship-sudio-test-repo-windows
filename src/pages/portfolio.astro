@@ -1,0 +1,489 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import PrimaryButton from "../components/PrimaryButton.astro";
+import { PORTFOLIO_PROJECTS } from "../data/portfolio";
+import { SITE_NAME, SITE_URL, BOOK_CONSULTATION_URL } from "../consts";
+
+const pageTitle = `Engineering Portfolio & Completed Client Works | ${SITE_NAME}`;
+const pageDescription =
+  "Explore Rakebig's portfolio of mission-critical engineering projects: WhatsApp AI bots, Perfex CRM modules, SaaS platforms, Flutter mobile apps, and enterprise open-source clusters.";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/portfolio"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: pageTitle,
+      description: pageDescription,
+      url: `${SITE_URL}/portfolio`,
+    },
+  ]}
+>
+  <SiteHeader />
+
+  <main class="port-main">
+    <!-- Hero Header -->
+    <section class="port-hero">
+      <div class="container port-hero__container reveal">
+        <span class="eyebrow">Proven Engineering Outcomes</span>
+        <h1 class="port-title">Our Work in the Real World</h1>
+        <p class="port-lead">
+          Explore how Rakebig builds production-grade software: from AI-powered WhatsApp commerce funnels and multi-tenant Perfex CRM SaaS to high-throughput mobile apps and air-gapped private cloud clusters.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="port-filters">
+          <button type="button" class="port-filter-btn port-filter-btn--active" data-port-cat="all">
+            All Projects ({PORTFOLIO_PROJECTS.length})
+          </button>
+          <button type="button" class="port-filter-btn" data-port-cat="whatsapp-ai">
+            WhatsApp &amp; AI Bots
+          </button>
+          <button type="button" class="port-filter-btn" data-port-cat="perfex-crm">
+            Perfex CRM &amp; SaaS
+          </button>
+          <button type="button" class="port-filter-btn" data-port-cat="web-saas">
+            Web Apps &amp; MVP
+          </button>
+          <button type="button" class="port-filter-btn" data-port-cat="mobile-apps">
+            Mobile Apps
+          </button>
+          <button type="button" class="port-filter-btn" data-port-cat="opensource-cloud">
+            Open-Source &amp; Cloud
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="port-grid-sec">
+      <div class="container">
+        <div class="port-grid" id="port-grid">
+          {PORTFOLIO_PROJECTS.map((project) => (
+            <article class="port-card reveal" data-port-item data-cat={project.category}>
+              <!-- Media / Visual Preview -->
+              <div class="port-card__media">
+                <img src={project.image} alt={project.title} loading="lazy" width="600" height="340" />
+                <span class="port-card__cat-badge">{project.categoryLabel}</span>
+                {project.featured && <span class="port-card__feat-badge">FEATURED</span>}
+              </div>
+
+              <!-- Body -->
+              <div class="port-card__body">
+                <div class="port-card__client-meta">
+                  <span class="port-client">{project.client}</span>
+                  <span class="port-loc">• {project.location}</span>
+                </div>
+
+                <h3 class="port-card__title">{project.title}</h3>
+                <p class="port-card__summary">{project.summary}</p>
+
+                <!-- Impact Metrics Grid -->
+                <div class="port-card__metrics">
+                  {project.results.map((r) => (
+                    <div class="port-metric-item">
+                      <strong>{r.metric}</strong>
+                      <span>{r.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Tech Stack Tags -->
+                <div class="port-card__tags">
+                  {project.tags.map((t) => (
+                    <span class="port-tag">{t}</span>
+                  ))}
+                </div>
+
+                <!-- Footer Links -->
+                <div class="port-card__footer">
+                  {project.slug === "whatsapp-ai-ecommerce-funnel" ? (
+                    <a href="/case-studies/whatsapp-marketing-automation" class="port-link">
+                      <span>Read Full Deep-Dive Case Study</span>
+                      <svg viewBox="0 0 16 16" fill="currentColor">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                      </svg>
+                    </a>
+                  ) : (
+                    <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="port-link">
+                      <span>Request Architecture Consultation</span>
+                      <svg viewBox="0 0 16 16" fill="currentColor">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Banner -->
+    <section class="port-cta-sec">
+      <div class="container">
+        <div class="port-cta-card reveal">
+          <h2>Have an ambitious project in mind?</h2>
+          <p>
+            Whether you need a custom WhatsApp marketing engine, Perfex CRM multi-tenant SaaS, or dedicated full-stack developers, our engineering squads are ready to ship.
+          </p>
+          <div class="port-cta-actions">
+            <a href="/gigs" class="port-btn port-btn--secondary">
+              Browse Ready-to-Buy Gigs
+            </a>
+            <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="port-btn port-btn--primary">
+              Book a Free Discovery Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<script is:inline>
+  const filterBtns = document.querySelectorAll('[data-port-cat]');
+  const items = document.querySelectorAll('[data-port-item]');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-port-cat');
+
+      filterBtns.forEach(b => b.classList.remove('port-filter-btn--active'));
+      btn.classList.add('port-filter-btn--active');
+
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-cat');
+        if (cat === 'all' || itemCat === cat) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .port-main {
+    background: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+  }
+
+  .port-hero {
+    padding: 90px 0 60px 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: radial-gradient(circle at top center, rgba(47, 107, 255, 0.08) 0%, transparent 60%);
+  }
+
+  .port-hero__container {
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .port-title {
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin: 12px 0 16px 0;
+  }
+
+  .port-lead {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #94a3b8;
+    margin: 0 0 36px 0;
+  }
+
+  /* Filter Buttons */
+  .port-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .port-filter-btn {
+    padding: 9px 18px;
+    background: #161b22;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #8b949e;
+    font-size: 0.86rem;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .port-filter-btn:hover {
+    border-color: #2f6bff;
+    color: #ffffff;
+  }
+
+  .port-filter-btn--active {
+    background: #2f6bff;
+    border-color: #2f6bff;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(47, 107, 255, 0.35);
+  }
+
+  /* Projects Grid */
+  .port-grid-sec {
+    padding: 70px 0;
+  }
+
+  .port-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 30px;
+  }
+
+  .port-card {
+    background: #161b22;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .port-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(47, 107, 255, 0.4);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  }
+
+  .port-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #090d12;
+  }
+
+  .port-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .port-card__cat-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(6px);
+    color: #38bdf8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  .port-card__feat-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: #25D366;
+    color: #0b141a;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .port-card__body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .port-card__client-meta {
+    font-size: 0.8rem;
+    color: #8b949e;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .port-client {
+    font-weight: 600;
+    color: #c9d1d9;
+  }
+
+  .port-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+  }
+
+  .port-card__summary {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #8b949e;
+    margin: 0 0 20px 0;
+  }
+
+  /* Metrics Grid */
+  .port-card__metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    background: #0d1117;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 12px 10px;
+    margin-bottom: 20px;
+  }
+
+  .port-metric-item {
+    text-align: center;
+  }
+
+  .port-metric-item strong {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #25D366;
+  }
+
+  .port-metric-item span {
+    font-size: 0.68rem;
+    color: #8b949e;
+    display: block;
+    line-height: 1.2;
+    margin-top: 2px;
+  }
+
+  /* Tags */
+  .port-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .port-tag {
+    font-size: 0.72rem;
+    color: #c9d1d9;
+    background: #21262d;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* Footer */
+  .port-card__footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .port-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #38bdf8;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .port-link:hover {
+    color: #25D366;
+    transform: translateX(3px);
+  }
+
+  .port-link svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* CTA */
+  .port-cta-sec {
+    padding: 60px 0 90px 0;
+  }
+
+  .port-cta-card {
+    background: #161b22;
+    border: 1px solid rgba(47, 107, 255, 0.3);
+    border-radius: 20px;
+    padding: 50px 30px;
+    text-align: center;
+  }
+
+  .port-cta-card h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+  }
+
+  .port-cta-card p {
+    font-size: 1.05rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto 28px auto;
+    line-height: 1.6;
+  }
+
+  .port-cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .port-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .port-btn--primary {
+    background: #2f6bff;
+    color: #ffffff;
+  }
+
+  .port-btn--primary:hover {
+    background: #1d4ed8;
+  }
+
+  .port-btn--secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+  }
+
+  .port-btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    .port-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

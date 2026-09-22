@@ -1,0 +1,597 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import PrimaryButton from "../../components/PrimaryButton.astro";
+import { SITE_NAME, SITE_URL, BOOK_CONSULTATION_URL } from "../../consts";
+
+const pageTitle = `Case Study: $1.2M Scale with WhatsApp AI Marketing Automation | ${SITE_NAME}`;
+const pageDescription =
+  "How Zenith Retail recovered 68% of abandoned checkouts, slashed customer support ticket response time by 85%, and drove $185,000+ in incremental revenue using Rakebig's WhatsApp AI Suite.";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/case-studies/whatsapp-marketing-automation"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: pageTitle,
+      description: pageDescription,
+      url: `${SITE_URL}/case-studies/whatsapp-marketing-automation`,
+      publisher: {
+        "@type": "Organization",
+        name: SITE_NAME,
+      },
+    },
+  ]}
+>
+  <SiteHeader />
+
+  <main class="cs-article">
+    <!-- Hero Section -->
+    <header class="cs-hero">
+      <div class="container cs-hero__container reveal">
+        <div class="cs-hero__meta">
+          <a href="/case-studies" class="cs-back-link">
+            <svg viewBox="0 0 16 16" fill="currentColor">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            <span>Back to All Case Studies</span>
+          </a>
+          <span class="cs-tag">E-Commerce &amp; WhatsApp AI</span>
+        </div>
+
+        <h1 class="cs-title">
+          How Zenith Retail Recovered 68% of Abandoned Carts &amp; Scaled to $1.2M with WhatsApp AI Marketing
+        </h1>
+
+        <p class="cs-lead">
+          By replacing dead email flows with official Meta WhatsApp Cloud API webhooks, personal AI knowledge agents, and 1-click Cash-on-Delivery confirmation, Zenith turned WhatsApp into their #1 revenue channel in 90 days.
+        </p>
+
+        <!-- KPI Metrics Ribbon -->
+        <div class="cs-metrics-grid">
+          <div class="cs-metric-card">
+            <strong>68%</strong>
+            <span>Cart Recovery Rate</span>
+            <em>(vs 11% industry email avg)</em>
+          </div>
+          <div class="cs-metric-card">
+            <strong>$185,400+</strong>
+            <span>Recovered GMV</span>
+            <em>(first 90 days of deployment)</em>
+          </div>
+          <div class="cs-metric-card">
+            <strong>&lt; 15 sec</strong>
+            <span>AI Response Latency</span>
+            <em>(down from 4.5 hours human queue)</em>
+          </div>
+          <div class="cs-metric-card">
+            <strong>-42%</strong>
+            <span>RTO Return Reduction</span>
+            <em>(via 1-click address verification)</em>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Story Content -->
+    <article class="container cs-content-wrap">
+      <div class="cs-grid">
+        <!-- Main Column -->
+        <div class="cs-body">
+          <section class="cs-section">
+            <span class="cs-section__num">01</span>
+            <h2>The Challenge: High Ad Spend, 72% Cart Drop-Off</h2>
+            <p>
+              Zenith Retail, a rapidly scaling direct-to-consumer apparel brand, was spending over $35,000 monthly across Meta and Google ads. While top-of-funnel traffic was surging, their checkout analytics revealed a major revenue leak: <strong>72% of shoppers added items to cart but dropped off before completing payment</strong>.
+            </p>
+            <p>
+              Their legacy abandoned cart recovery relied on Klaviyo automated emails. However, open rates had plummeted to under 12%, and promotional inbox filters meant high-intent buyers never even saw recovery discount codes. Furthermore, COD orders suffered from an alarming 34% Return-to-Origin (RTO) rate due to impulse orders and misspelled shipping addresses.
+            </p>
+          </section>
+
+          <section class="cs-section">
+            <span class="cs-section__num">02</span>
+            <h2>The Solution: Rakebig WhatsApp AI Marketing Suite</h2>
+            <p>
+              Rakebig Services integrated our <strong>WhatsApp AI Marketing Suite</strong> (<a href="https://whatsappai.rakebig.com/" target="_blank" rel="noopener noreferrer">whatsappai.rakebig.com</a>) directly into Zenith's Shopify Plus store and Perfex CRM infrastructure using official Meta Cloud APIs.
+            </p>
+            
+            <div class="cs-highlight-box">
+              <h3>Key System Components Deployed:</h3>
+              <ul>
+                <li>
+                  <strong>Shopify Real-Time Webhook Engine:</strong> Captured cart abandonment events in under 60 seconds and triggered an automated 3-stage WhatsApp sequence (15 min, 4 hours, and 24 hours).
+                </li>
+                <li>
+                  <strong>Personal AI Sizing &amp; FAQ Assistant:</strong> Ingested Zenith's full product catalog, return policies, and sizing charts to resolve customer fit hesitation right inside the chat.
+                </li>
+                <li>
+                  <strong>1-Click Cash-on-Delivery Confirmation:</strong> Automated button prompts requiring buyers to confirm their shipping pin code, eliminating bogus orders.
+                </li>
+                <li>
+                  <strong>Multi-Agent Unified Inbox:</strong> Routed complex styling consultations to live brand stylists with full previous browsing history attached.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="cs-section">
+            <span class="cs-section__num">03</span>
+            <h2>Architecture &amp; Workflow Pipeline</h2>
+            <div class="cs-arch-diagram">
+              <div class="cs-arch-step">
+                <span class="cs-arch-icon">🛒</span>
+                <strong>1. Customer Drop-off</strong>
+                <p>User leaves checkout on Shopify</p>
+              </div>
+              <div class="cs-arch-arrow">→</div>
+              <div class="cs-arch-step">
+                <span class="cs-arch-icon">⚡</span>
+                <strong>2. Webhook Ingestion</strong>
+                <p>FastAPI parses items &amp; cart URL</p>
+              </div>
+              <div class="cs-arch-arrow">→</div>
+              <div class="cs-arch-step">
+                <span class="cs-arch-icon">🤖</span>
+                <strong>3. WhatsApp AI Bot</strong>
+                <p>Meta API sends interactive cart card</p>
+              </div>
+              <div class="cs-arch-arrow">→</div>
+              <div class="cs-arch-step">
+                <span class="cs-arch-icon">💳</span>
+                <strong>4. Instant Checkout</strong>
+                <p>Pre-filled coupon applied &amp; CRM updated</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="cs-section">
+            <span class="cs-section__num">04</span>
+            <h2>The Outcome: $185,400+ Recovered in 90 Days</h2>
+            <p>
+              Within the first week of going live, WhatsApp message open rates skyrocketed to 98.4%, with a click-through rate of 46.2% on interactive recovery buttons. Over the 90-day trial period:
+            </p>
+            <ul class="cs-outcome-list">
+              <li><strong>68% of all abandoned checkouts</strong> were successfully recovered.</li>
+              <li><strong>$185,400 in incremental revenue</strong> was generated with zero additional ad spend.</li>
+              <li><strong>RTO returns dropped by 42%</strong>, saving over $18,000 in courier reverse-logistics penalties.</li>
+              <li><strong>Customer support wait times</strong> fell from 4.5 hours to under 15 seconds for 85% of incoming inquiries.</li>
+            </ul>
+
+            <blockquote class="cs-quote">
+              <p>
+                “Rakebig's WhatsApp AI system completely transformed our unit economics. What used to take hours of manual customer follow-ups now happens seamlessly on autopilot. It paid for itself within the first 48 hours.”
+              </p>
+              <cite>
+                <strong>Vikramaditya Mehta</strong>
+                <span>VP of Growth &amp; E-Commerce, Zenith Retail</span>
+              </cite>
+            </blockquote>
+          </section>
+
+          <!-- CTA Box inside case study -->
+          <div class="cs-cta-box">
+            <h3>Want similar outcomes for your business?</h3>
+            <p>Deploy our WhatsApp AI Suite or schedule a consultation with our marketing automation engineers.</p>
+            <div class="cs-cta-box__buttons">
+              <a href="/whatsapp-marketing" class="wapp-btn wapp-btn--primary">
+                Explore WhatsApp AI Suite
+              </a>
+              <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="wapp-btn wapp-btn--secondary">
+                Book Free Consultation
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Sticky Summary -->
+        <aside class="cs-sidebar">
+          <div class="cs-sidebar-card">
+            <h4>Case Study Summary</h4>
+            <dl class="cs-sidebar-dl">
+              <dt>Client</dt>
+              <dd>Zenith Retail Apparel</dd>
+              <dt>Industry</dt>
+              <dd>E-Commerce &amp; Fashion</dd>
+              <dt>Primary Stack</dt>
+              <dd>WhatsApp Cloud API, Shopify, OpenAI GPT-4o, Node.js, Perfex CRM</dd>
+              <dt>Timeline</dt>
+              <dd>10-Day Implementation</dd>
+              <dt>Outcome</dt>
+              <dd class="highlight">+$185k Recovered GMV</dd>
+            </dl>
+            <a href="https://whatsappai.rakebig.com/register" target="_blank" rel="noopener noreferrer" class="cs-sidebar-btn">
+              Start Free Trial on WhatsappAi →
+            </a>
+          </div>
+        </aside>
+      </div>
+    </article>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<style>
+  .cs-article {
+    background: #ffffff;
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  .cs-hero {
+    background: #0d1117;
+    color: #ffffff;
+    padding: 90px 0 70px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .cs-hero__meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cs-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #8b949e;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .cs-back-link:hover {
+    color: #25D366;
+  }
+
+  .cs-back-link svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .cs-tag {
+    font-size: 0.74rem;
+    font-weight: 700;
+    background: rgba(0, 168, 132, 0.15);
+    color: #25D366;
+    border: 1px solid rgba(0, 168, 132, 0.3);
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  .cs-title {
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    margin: 0 0 20px 0;
+    color: #ffffff;
+  }
+
+  .cs-lead {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #94a3b8;
+    max-width: 820px;
+    margin: 0 0 40px 0;
+  }
+
+  .cs-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .cs-metric-card {
+    background: #161b22;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .cs-metric-card strong {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #25D366;
+    letter-spacing: -0.02em;
+  }
+
+  .cs-metric-card span {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 4px 0 2px 0;
+  }
+
+  .cs-metric-card em {
+    font-size: 0.72rem;
+    font-style: normal;
+    color: #8b949e;
+  }
+
+  /* Content Body */
+  .cs-content-wrap {
+    padding: 70px 20px;
+  }
+
+  .cs-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    align-items: flex-start;
+  }
+
+  .cs-body {
+    min-width: 0;
+  }
+
+  .cs-section {
+    margin-bottom: 50px;
+    position: relative;
+  }
+
+  .cs-section__num {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #00A884;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .cs-section h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 18px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .cs-section p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #374151;
+    margin: 0 0 18px 0;
+  }
+
+  .cs-highlight-box {
+    background: #f0fdf4;
+    border-left: 4px solid #00A884;
+    border-radius: 0 8px 8px 0;
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .cs-highlight-box h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #065f46;
+    margin: 0 0 14px 0;
+  }
+
+  .cs-highlight-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cs-highlight-box li {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #1f2937;
+  }
+
+  /* Arch Diagram */
+  .cs-arch-diagram {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+
+  .cs-arch-step {
+    flex: 1;
+    min-width: 140px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .cs-arch-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .cs-arch-step strong {
+    display: block;
+    font-size: 0.84rem;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+
+  .cs-arch-step p {
+    font-size: 0.74rem;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .cs-arch-arrow {
+    font-size: 1.3rem;
+    color: #00A884;
+    font-weight: bold;
+  }
+
+  .cs-outcome-list {
+    margin: 0 0 32px 20px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #374151;
+  }
+
+  .cs-quote {
+    background: #f8fafc;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 12px 12px 0;
+    padding: 28px;
+    margin: 36px 0;
+  }
+
+  .cs-quote p {
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #1e293b;
+    margin: 0 0 16px 0;
+  }
+
+  .cs-quote cite {
+    font-style: normal;
+    display: block;
+  }
+
+  .cs-quote cite strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #0f172a;
+  }
+
+  .cs-quote cite span {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  /* CTA Box */
+  .cs-cta-box {
+    background: #0d1117;
+    border-radius: 16px;
+    padding: 40px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .cs-cta-box h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+  }
+
+  .cs-cta-box p {
+    font-size: 1rem;
+    color: #94a3b8;
+    max-width: 500px;
+    margin: 0 auto 24px auto;
+  }
+
+  .cs-cta-box__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  /* Sidebar */
+  .cs-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  .cs-sidebar-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .cs-sidebar-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .cs-sidebar-dl {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 12px 8px;
+    font-size: 0.86rem;
+    margin: 0 0 20px 0;
+  }
+
+  .cs-sidebar-dl dt {
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .cs-sidebar-dl dd {
+    color: #111827;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .cs-sidebar-dl dd.highlight {
+    color: #00A884;
+    font-weight: 800;
+  }
+
+  .cs-sidebar-btn {
+    display: block;
+    text-align: center;
+    padding: 10px 14px;
+    background: #00A884;
+    color: #ffffff;
+    font-size: 0.86rem;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .cs-sidebar-btn:hover {
+    background: #25D366;
+  }
+
+  @media (max-width: 900px) {
+    .cs-grid {
+      grid-template-columns: 1fr;
+    }
+    .cs-metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .cs-arch-diagram {
+      flex-direction: column;
+    }
+    .cs-arch-arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>

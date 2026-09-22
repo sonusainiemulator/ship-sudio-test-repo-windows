@@ -1,0 +1,334 @@
+---
+import type { GigItem } from "../data/gigs";
+
+interface Props {
+  gig: GigItem;
+}
+
+const { gig } = Astro.props;
+---
+
+<article class="gc-card" data-gig-card data-gig-id={gig.id} data-category={gig.category}>
+  <!-- Card Media / Thumbnail -->
+  <div class="gc-media">
+    <img
+      src={gig.thumbnail}
+      alt={gig.title}
+      class="gc-img"
+      loading="lazy"
+      width="600"
+      height="360"
+    />
+    {gig.badge && (
+      <span class={`gc-badge gc-badge--${gig.badge.toLowerCase().replace(/\s+/g, "-")}`}>
+        {gig.badge}
+      </span>
+    )}
+    <button type="button" class="gc-fav-btn" aria-label="Save to favorites">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Card Body -->
+  <div class="gc-body">
+    <!-- Seller Info Header -->
+    <div class="gc-seller">
+      <img src={gig.seller.avatar} alt={gig.seller.name} class="gc-seller__avatar" width="32" height="32" />
+      <div class="gc-seller__info">
+        <span class="gc-seller__name">{gig.seller.name}</span>
+        <span class="gc-seller__level">{gig.seller.badge}</span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h3 class="gc-title">
+      <button type="button" class="gc-title__link" data-open-gig-modal={gig.id}>
+        {gig.title}
+      </button>
+    </h3>
+
+    <!-- Rating & Queue -->
+    <div class="gc-rating">
+      <span class="gc-star">★</span>
+      <strong>{gig.rating.toFixed(1)}</strong>
+      <span class="gc-reviews">({gig.reviewsCount})</span>
+      <span class="gc-queue">• {gig.ordersInQueue} in queue</span>
+    </div>
+
+    <!-- Technologies -->
+    <div class="gc-tags">
+      {gig.technologies.slice(0, 3).map((tech) => (
+        <span class="gc-tag">{tech}</span>
+      ))}
+    </div>
+
+    <!-- Card Footer: Pricing & Action -->
+    <div class="gc-footer">
+      <div class="gc-price">
+        <span class="gc-price__label">From</span>
+        <span class="gc-price__amount">₹{gig.packages.basic.priceInr.toLocaleString()}</span>
+        <span class="gc-price__usd">(${gig.packages.basic.priceUsd})</span>
+      </div>
+      <button
+        type="button"
+        class="gc-order-btn"
+        data-open-gig-modal={gig.id}
+      >
+        Select Tier
+      </button>
+    </div>
+  </div>
+</article>
+
+<style>
+  .gc-card {
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .gc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border-color: #b5b6ba;
+  }
+
+  .gc-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #1e293b;
+  }
+
+  .gc-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gc-card:hover .gc-img {
+    transform: scale(1.04);
+  }
+
+  .gc-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .gc-badge--bestseller {
+    background: #ff7640;
+  }
+
+  .gc-badge--top-rated {
+    background: #1dbf73;
+  }
+
+  .gc-badge--pro-squad {
+    background: #1040e3;
+  }
+
+  .gc-badge--trending {
+    background: #9333ea;
+  }
+
+  .gc-fav-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    border: none;
+    color: #95979d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .gc-fav-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gc-fav-btn:hover {
+    background: #ffffff;
+    color: #f43f5e;
+  }
+
+  .gc-body {
+    padding: 14px 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .gc-seller {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .gc-seller__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .gc-seller__info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .gc-seller__name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #222325;
+  }
+
+  .gc-seller__level {
+    font-size: 0.68rem;
+    color: #74767e;
+    font-weight: 500;
+  }
+
+  .gc-title {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    color: #222325;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .gc-title__link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .gc-title__link:hover {
+    color: #1dbf73;
+  }
+
+  .gc-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.82rem;
+    color: #222325;
+    margin-bottom: 10px;
+  }
+
+  .gc-star {
+    color: #222325;
+    font-weight: bold;
+  }
+
+  .gc-reviews {
+    color: #74767e;
+    font-weight: 400;
+  }
+
+  .gc-queue {
+    font-size: 0.74rem;
+    color: #95979d;
+    margin-left: 2px;
+  }
+
+  .gc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+
+  .gc-tag {
+    font-size: 0.68rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #f7f7f8;
+    color: #62646a;
+    font-weight: 500;
+  }
+
+  .gc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #f1f2f4;
+  }
+
+  .gc-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .gc-price__label {
+    font-size: 0.72rem;
+    color: #74767e;
+    text-transform: uppercase;
+  }
+
+  .gc-price__amount {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222325;
+  }
+
+  .gc-price__usd {
+    font-size: 0.75rem;
+    color: #95979d;
+  }
+
+  .gc-order-btn {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1dbf73;
+    background: rgba(29, 191, 115, 0.08);
+    border: 1px solid rgba(29, 191, 115, 0.25);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .gc-order-btn:hover {
+    background: #1dbf73;
+    color: #ffffff;
+    border-color: #1dbf73;
+  }
+</style>

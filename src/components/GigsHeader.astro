@@ -1,0 +1,703 @@
+---
+import { FIVERR_MEGA_MENU_GROUPS } from "../data/gigs";
+import { BOOK_CONSULTATION_URL, SUPPORT_PHONE } from "../consts";
+
+interface Props {
+  activeCategory?: string;
+}
+
+const { activeCategory = "all" } = Astro.props;
+
+// Group columns into 4 visible mega-columns for clean desktop layout
+const col1 = FIVERR_MEGA_MENU_GROUPS.slice(0, 3);
+const col2 = FIVERR_MEGA_MENU_GROUPS.slice(3, 5);
+const col3 = FIVERR_MEGA_MENU_GROUPS.slice(5, 7);
+const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
+---
+
+<header class="gh-wrapper" data-gigs-header>
+  <!-- Top Primary Bar -->
+  <div class="gh-topbar">
+    <div class="container gh-topbar__inner">
+      <div class="gh-topbar__brand-wrap">
+        <a href="/" class="gh-topbar__back-home" title="Back to Rakebig Main Site">
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+          </svg>
+          <span>Rakebig.com</span>
+        </a>
+        <a href="/gigs" class="gh-brand" aria-label="Rakebig Gigs Marketplace">
+          <span class="gh-brand__logo">rakebig</span>
+          <span class="gh-brand__dot">.</span>
+          <span class="gh-brand__sub">gigs</span>
+        </a>
+      </div>
+
+      <!-- Search bar matching Fiverr -->
+      <div class="gh-search">
+        <div class="gh-search__box">
+          <span class="gh-search__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="gigs-search-input"
+            class="gh-search__input"
+            placeholder="What service are you looking for today?"
+            aria-label="Search services or gigs"
+            autocomplete="off"
+          />
+        </div>
+        <button type="button" class="gh-search__submit" id="gigs-search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Actions -->
+      <div class="gh-topbar__actions">
+        <a href="/whatsapp-marketing" class="gh-pill-highlight">
+          <span class="gh-pill-pulse"></span>
+          <span>WhatsApp AI</span>
+        </a>
+        <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gh-action-link">
+          Rakebig Pro
+        </a>
+        <a href={`https://wa.me/${SUPPORT_PHONE.replace(/[^0-9]/g, "")}?text=Hi%20Rakebig,%20I%20want%20to%20request%20a%20custom%20gig`} target="_blank" rel="noopener noreferrer" class="gh-btn-request">
+          Request Custom Offer
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secondary Category Sub-Nav with Fiverr Style Mega Menu -->
+  <nav class="gh-catnav" aria-label="Gigs Categories">
+    <div class="container gh-catnav__inner">
+      <ul class="gh-catnav__list">
+        <li class="gh-catnav__item">
+          <a href="#gigs-grid" data-category-filter="trending" class="gh-catnav__link gh-catnav__link--trending">
+            <span>Trending 🔥</span>
+          </a>
+        </li>
+
+        <!-- Active Mega Menu Item: Programming & Tech matching user's image -->
+        <li class="gh-catnav__item gh-catnav__item--has-mega" data-mega-trigger>
+          <a href="#gigs-grid" data-category-filter="programming-tech" class="gh-catnav__link gh-catnav__link--active">
+            <span>Programming &amp; Tech</span>
+            <svg class="gh-catnav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2.5 4.5L6 8l3.5-3.5"/>
+            </svg>
+          </a>
+
+          <!-- Fiverr-style Multi-Column Mega Menu Container -->
+          <div class="gh-mega-menu" data-mega-dropdown>
+            <div class="gh-mega-menu__content">
+              <div class="gh-mega-columns">
+                <!-- Column 1 -->
+                <div class="gh-mega-col">
+                  {col1.map((group) => (
+                    <div class="gh-mega-group">
+                      <h4 class="gh-mega-group__title">{group.title}</h4>
+                      <ul class="gh-mega-group__list">
+                        {group.items.map((item) => (
+                          <li>
+                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
+                              <span>{item.name}</span>
+                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Column 2 -->
+                <div class="gh-mega-col">
+                  {col2.map((group) => (
+                    <div class="gh-mega-group">
+                      <h4 class="gh-mega-group__title">{group.title}</h4>
+                      <ul class="gh-mega-group__list">
+                        {group.items.map((item) => (
+                          <li>
+                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
+                              <span>{item.name}</span>
+                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Column 3 -->
+                <div class="gh-mega-col">
+                  {col3.map((group) => (
+                    <div class="gh-mega-group">
+                      <h4 class="gh-mega-group__title">{group.title}</h4>
+                      <ul class="gh-mega-group__list">
+                        {group.items.map((item) => (
+                          <li>
+                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
+                              <span>{item.name}</span>
+                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Column 4 -->
+                <div class="gh-mega-col">
+                  {col4.map((group) => (
+                    <div class="gh-mega-group">
+                      <h4 class="gh-mega-group__title">{group.title}</h4>
+                      <ul class="gh-mega-group__list">
+                        {group.items.map((item) => (
+                          <li>
+                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
+                              <span>{item.name}</span>
+                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Mega Menu Bottom Banner matching screenshot -->
+              <div class="gh-mega-banner">
+                <div class="gh-mega-banner__left">
+                  <span class="gh-mega-banner__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>Looking for dedicated tech experts?</strong>
+                    <p>Find app developers, Perfex CRM engineers, and AI specialists to manage your project end-to-end.</p>
+                  </div>
+                </div>
+                <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gh-mega-banner__btn">
+                  Consult an Expert
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="gh-catnav__item">
+          <a href="#gigs-grid" data-category-filter="ai-services" class="gh-catnav__link">
+            <span>AI Services &amp; Bots</span>
+          </a>
+        </li>
+        <li class="gh-catnav__item">
+          <a href="#gigs-grid" data-category-filter="digital-marketing" class="gh-catnav__link">
+            <span>WhatsApp Marketing</span>
+          </a>
+        </li>
+        <li class="gh-catnav__item">
+          <a href="#gigs-grid" data-category-filter="perfex-crm" class="gh-catnav__link">
+            <span>Perfex CRM</span>
+          </a>
+        </li>
+        <li class="gh-catnav__item">
+          <a href="#gigs-grid" data-category-filter="mobile-apps" class="gh-catnav__link">
+            <span>Mobile Apps</span>
+          </a>
+        </li>
+        <li class="gh-catnav__item">
+          <a href="#gigs-grid" data-category-filter="cloud-devops" class="gh-catnav__link">
+            <span>Cloud &amp; Open Source</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  // Filter events when clicking category links
+  document.querySelectorAll('[data-category-filter]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const cat = link.getAttribute('data-category-filter');
+      window.dispatchEvent(new CustomEvent('gigCategoryFilter', { detail: { category: cat } }));
+    });
+  });
+
+  // Search input handler
+  const searchInput = document.getElementById('gigs-search-input');
+  const searchBtn = document.getElementById('gigs-search-btn');
+  const triggerSearch = () => {
+    const q = searchInput ? searchInput.value.trim() : '';
+    window.dispatchEvent(new CustomEvent('gigSearchQuery', { detail: { query: q } }));
+  };
+  if (searchInput) {
+    searchInput.addEventListener('input', triggerSearch);
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') triggerSearch();
+    });
+  }
+  if (searchBtn) {
+    searchBtn.addEventListener('click', triggerSearch);
+  }
+</script>
+
+<style>
+  .gh-wrapper {
+    background: #ffffff;
+    border-bottom: 1px solid #e4e5e7;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    font-family: inherit;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  }
+
+  .gh-topbar {
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f2f4;
+  }
+
+  .gh-topbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .gh-topbar__brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .gh-topbar__back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #62646a;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #f7f7f8;
+    transition: all 0.2s ease;
+  }
+
+  .gh-topbar__back-home svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .gh-topbar__back-home:hover {
+    color: #1dbf73;
+    background: #edfbf4;
+  }
+
+  .gh-brand {
+    display: inline-flex;
+    align-items: baseline;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .gh-brand__logo {
+    font-size: 1.65rem;
+    font-weight: 900;
+    color: #222325;
+    letter-spacing: -0.04em;
+  }
+
+  .gh-brand__dot {
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: #1dbf73;
+  }
+
+  .gh-brand__sub {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1dbf73;
+    background: rgba(29, 191, 115, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Fiverr Search Bar */
+  .gh-search {
+    flex: 1;
+    max-width: 580px;
+    display: flex;
+    align-items: center;
+  }
+
+  .gh-search__box {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .gh-search__icon {
+    position: absolute;
+    left: 14px;
+    color: #95979d;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .gh-search__icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .gh-search__input {
+    width: 100%;
+    height: 42px;
+    padding: 0 16px 0 42px;
+    border: 1px solid #b5b6ba;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 0.92rem;
+    color: #222325;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .gh-search__input:focus {
+    border-color: #222325;
+  }
+
+  .gh-search__submit {
+    height: 42px;
+    width: 50px;
+    background: #222325;
+    border: 1px solid #222325;
+    border-radius: 0 4px 4px 0;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .gh-search__submit:hover {
+    background: #1dbf73;
+    border-color: #1dbf73;
+  }
+
+  .gh-search__submit svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gh-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .gh-pill-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #00875A;
+    background: #E3FCEF;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .gh-pill-pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00A884;
+    animation: pillPulse 1.8s infinite;
+  }
+
+  @keyframes pillPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  .gh-action-link {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #62646a;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .gh-action-link:hover {
+    color: #1dbf73;
+  }
+
+  .gh-btn-request {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #1dbf73;
+    background: transparent;
+    border: 1px solid #1dbf73;
+    padding: 7px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .gh-btn-request:hover {
+    background: #1dbf73;
+    color: #ffffff;
+  }
+
+  /* Category Sub-nav */
+  .gh-catnav {
+    background: #ffffff;
+  }
+
+  .gh-catnav__inner {
+    position: relative;
+  }
+
+  .gh-catnav__list {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .gh-catnav__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gh-catnav__item {
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .gh-catnav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 0 10px 0;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #62646a;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .gh-catnav__link:hover {
+    color: #1dbf73;
+    border-bottom-color: #1dbf73;
+  }
+
+  .gh-catnav__link--active {
+    color: #1dbf73;
+    font-weight: 600;
+    border-bottom-color: #1dbf73;
+  }
+
+  .gh-catnav__link--trending {
+    color: #e65100;
+    font-weight: 600;
+  }
+
+  .gh-catnav__caret {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Fiverr-style Mega Menu */
+  .gh-catnav__item--has-mega:hover .gh-mega-menu,
+  .gh-catnav__item--has-mega:focus-within .gh-mega-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .gh-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    width: 1080px;
+    max-width: 95vw;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .gh-mega-menu__content {
+    padding: 24px 28px 16px 28px;
+  }
+
+  .gh-mega-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .gh-mega-col {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .gh-mega-group__title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #222325;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .gh-mega-group__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .gh-mega-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.82rem;
+    color: #62646a;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .gh-mega-item:hover {
+    color: #1dbf73;
+  }
+
+  .gh-mega-tag {
+    font-size: 0.64rem;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: #ff7640;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+  }
+
+  /* Mega Menu Bottom Banner matching screenshot */
+  .gh-mega-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f2f4;
+    background: #fafafa;
+    padding: 14px 18px;
+    border-radius: 6px;
+  }
+
+  .gh-mega-banner__left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .gh-mega-banner__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #eaf8f1;
+    color: #1dbf73;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .gh-mega-banner__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .gh-mega-banner__left strong {
+    display: block;
+    font-size: 0.86rem;
+    color: #222325;
+  }
+
+  .gh-mega-banner__left p {
+    margin: 2px 0 0 0;
+    font-size: 0.78rem;
+    color: #74767e;
+  }
+
+  .gh-mega-banner__btn {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #222325;
+    background: #ffffff;
+    border: 1px solid #b5b6ba;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .gh-mega-banner__btn:hover {
+    border-color: #222325;
+    background: #222325;
+    color: #ffffff;
+  }
+
+  @media (max-width: 900px) {
+    .gh-topbar__actions {
+      display: none;
+    }
+    .gh-search {
+      max-width: 100%;
+    }
+  }
+</style>

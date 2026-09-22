@@ -1,0 +1,546 @@
+---
+import type { IndustrySolution } from "../data/whatsappMarketing";
+
+interface Props {
+  activeSolution: IndustrySolution;
+  allSolutions?: IndustrySolution[];
+}
+
+const { activeSolution, allSolutions = [] } = Astro.props;
+---
+
+<div class="wa-sim-wrap" data-chat-simulator>
+  <div class="wa-sim-phone">
+    <!-- Speaker notch & camera -->
+    <div class="wa-sim-notch">
+      <span class="wa-sim-camera"></span>
+      <span class="wa-sim-speaker"></span>
+    </div>
+
+    <!-- WhatsApp top app bar -->
+    <div class="wa-sim-topbar">
+      <div class="wa-sim-topbar__left">
+        <button type="button" class="wa-sim-back-btn" aria-label="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <div class="wa-sim-avatar" data-chat-avatar>{activeSolution.chatUser.avatar}</div>
+        <div class="wa-sim-userinfo">
+          <div class="wa-sim-username">
+            <span data-chat-name>{activeSolution.chatUser.name}</span>
+            <svg class="wa-sim-verified" viewBox="0 0 24 24" fill="#25D366" aria-label="Verified">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z" />
+            </svg>
+          </div>
+          <span class="wa-sim-status" data-chat-status>{activeSolution.chatUser.status}</span>
+        </div>
+      </div>
+      <div class="wa-sim-topbar__actions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="23 7 16 12 23 17 23 7"></polygon>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="5" r="1.5"></circle>
+          <circle cx="12" cy="12" r="1.5"></circle>
+          <circle cx="12" cy="19" r="1.5"></circle>
+        </svg>
+      </div>
+    </div>
+
+    <!-- WhatsApp chat bubble body with doodle background -->
+    <div class="wa-sim-body" data-chat-body>
+      <div class="wa-sim-date-badge">
+        <span>TODAY</span>
+      </div>
+
+      <div class="wa-sim-security-notice">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.4 0 2.5 1.1 2.5 2.5V11h1c.6 0 1 .4 1 1v6c0 .6-.4 1-1 1H8.5c-.6 0-1-.4-1-1v-6c0-.6.4-1 1-1h1V9.5C9.5 8.1 10.6 7 12 7zm0 2c-.6 0-1 .4-1 1v1h2v-1c0-.6-.4-1-1-1z"/>
+        </svg>
+        <span>Messages are end-to-end encrypted. Official Meta Cloud API verified.</span>
+      </div>
+
+      <!-- Messages container dynamically re-rendered via JS when switching industry tabs -->
+      <div class="wa-sim-messages" data-chat-messages-container>
+        {activeSolution.chatMessages.map((msg) => (
+          <div class={`wa-sim-bubble wa-sim-bubble--${msg.from}`}>
+            <div class="wa-sim-bubble__text">
+              {msg.text.split("\n").map((line) => (
+                <p>{line}</p>
+              ))}
+            </div>
+            {msg.buttons && (
+              <div class="wa-sim-bubble__actions">
+                {msg.buttons.map((btn) => (
+                  <button type="button" class="wa-sim-action-btn">
+                    <span>{btn}</span>
+                    <svg viewBox="0 0 16 16" fill="currentColor">
+                      <path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                ))}
+              </div>
+            )}
+            <div class="wa-sim-bubble__meta">
+              <span class="wa-sim-bubble__time">{msg.time}</span>
+              {msg.from === "bot" && (
+                <span class="wa-sim-checks wa-sim-checks--read">
+                  <svg viewBox="0 0 18 18" fill="currentColor">
+                    <path d="M17.3 4.7a1 1 0 0 0-1.4 0l-7.9 7.9-3.9-3.9a1 1 0 1 0-1.4 1.4l4.6 4.6a1 1 0 0 0 1.4 0l8.6-8.6a1 1 0 0 0 0-1.4z" />
+                    <path d="M12.3 4.7a1 1 0 0 0-1.4 0l-5.9 5.9-1.9-1.9a1 1 0 1 0-1.4 1.4l2.6 2.6a1 1 0 0 0 1.4 0l6.6-6.6a1 1 0 0 0 0-1.4z" />
+                  </svg>
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- WhatsApp simulated bottom input bar -->
+    <div class="wa-sim-inputbar">
+      <span class="wa-sim-icon-btn">😊</span>
+      <div class="wa-sim-input-box">
+        <span class="wa-sim-placeholder">Type a message...</span>
+      </div>
+      <span class="wa-sim-icon-btn">📎</span>
+      <span class="wa-sim-icon-btn">📷</span>
+      <div class="wa-sim-mic-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+          <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative blur glows -->
+  <div class="wa-sim-glow wa-sim-glow--1" aria-hidden="true"></div>
+  <div class="wa-sim-glow wa-sim-glow--2" aria-hidden="true"></div>
+</div>
+
+<script is:inline define:vars={{ allSolutions }}>
+  // Wire up client-side reactivity when industry tabs are clicked
+  window.__allIndustrySolutions = allSolutions;
+  window.updateWhatsAppSimulator = function(solutionId) {
+    if (!window.__allIndustrySolutions || !window.__allIndustrySolutions.length) return;
+    const target = window.__allIndustrySolutions.find(s => s.id === solutionId);
+    if (!target) return;
+
+    const nameEl = document.querySelector('[data-chat-name]');
+    const avatarEl = document.querySelector('[data-chat-avatar]');
+    const statusEl = document.querySelector('[data-chat-status]');
+    const container = document.querySelector('[data-chat-messages-container]');
+
+    if (nameEl) nameEl.textContent = target.chatUser.name;
+    if (avatarEl) avatarEl.textContent = target.chatUser.avatar;
+    if (statusEl) statusEl.textContent = target.chatUser.status;
+
+    if (container) {
+      container.innerHTML = target.chatMessages.map(msg => `
+        <div class="wa-sim-bubble wa-sim-bubble--${msg.from} wa-sim-bubble--fadein">
+          <div class="wa-sim-bubble__text">
+            ${msg.text.split("\n").map(l => `<p>${l}</p>`).join("")}
+          </div>
+          ${msg.buttons ? `
+            <div class="wa-sim-bubble__actions">
+              ${msg.buttons.map(b => `
+                <button type="button" class="wa-sim-action-btn">
+                  <span>${b}</span>
+                  <svg viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              `).join("")}
+            </div>
+          ` : ""}
+          <div class="wa-sim-bubble__meta">
+            <span class="wa-sim-bubble__time">${msg.time}</span>
+            ${msg.from === "bot" ? `
+              <span class="wa-sim-checks wa-sim-checks--read">
+                <svg viewBox="0 0 18 18" fill="currentColor">
+                  <path d="M17.3 4.7a1 1 0 0 0-1.4 0l-7.9 7.9-3.9-3.9a1 1 0 1 0-1.4 1.4l4.6 4.6a1 1 0 0 0 1.4 0l8.6-8.6a1 1 0 0 0 0-1.4z" />
+                </svg>
+              </span>
+            ` : ""}
+          </div>
+        </div>
+      `).join("");
+    }
+  };
+</script>
+
+<style>
+  .wa-sim-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 410px;
+    margin: 0 auto;
+  }
+
+  .wa-sim-phone {
+    position: relative;
+    z-index: 2;
+    background: #0B141A;
+    border-radius: 40px;
+    border: 9px solid #1E293B;
+    box-shadow:
+      0 25px 60px -15px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 640px;
+  }
+
+  .wa-sim-notch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 10px;
+    padding-bottom: 6px;
+    background: #111B21;
+  }
+
+  .wa-sim-camera {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0f172a;
+    border: 1px solid #334155;
+  }
+
+  .wa-sim-speaker {
+    width: 50px;
+    height: 4px;
+    border-radius: 4px;
+    background: #334155;
+  }
+
+  .wa-sim-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #1F2C34;
+    color: #E9EDEF;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .wa-sim-topbar__left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .wa-sim-back-btn {
+    background: none;
+    border: none;
+    color: #AEBAC1;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+  }
+
+  .wa-sim-back-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .wa-sim-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #00A884;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .wa-sim-userinfo {
+    min-width: 0;
+  }
+
+  .wa-sim-username {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .wa-sim-verified {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  .wa-sim-status {
+    display: block;
+    font-size: 0.68rem;
+    color: #8696A0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .wa-sim-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #AEBAC1;
+  }
+
+  .wa-sim-topbar__actions svg {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+  }
+
+  .wa-sim-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    background-color: #0B141A;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+  }
+
+  .wa-sim-date-badge {
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .wa-sim-date-badge span {
+    display: inline-block;
+    background: #182229;
+    color: #8696A0;
+    font-size: 0.66rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.03em;
+  }
+
+  .wa-sim-security-notice {
+    background: #182229;
+    color: #F8D57E;
+    font-size: 0.68rem;
+    line-height: 1.35;
+    padding: 8px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .wa-sim-security-notice svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #F8D57E;
+  }
+
+  .wa-sim-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .wa-sim-bubble {
+    max-width: 84%;
+    padding: 9px 12px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    position: relative;
+    word-break: break-word;
+  }
+
+  .wa-sim-bubble--fadein {
+    animation: fadeInBubble 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeInBubble {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .wa-sim-bubble--bot {
+    align-self: flex-start;
+    background: #202C33;
+    color: #E9EDEF;
+    border-top-left-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  }
+
+  .wa-sim-bubble--user {
+    align-self: flex-end;
+    background: #005C4B;
+    color: #E9EDEF;
+    border-top-right-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  }
+
+  .wa-sim-bubble__text p {
+    margin: 0 0 4px 0;
+  }
+
+  .wa-sim-bubble__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .wa-sim-bubble__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .wa-sim-action-btn {
+    background: rgba(0, 168, 132, 0.15);
+    border: 1px solid rgba(0, 168, 132, 0.35);
+    color: #00A884;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .wa-sim-action-btn:hover {
+    background: rgba(0, 168, 132, 0.28);
+    border-color: #00A884;
+    color: #25D366;
+  }
+
+  .wa-sim-action-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .wa-sim-bubble__meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+    margin-top: 4px;
+  }
+
+  .wa-sim-bubble__time {
+    font-size: 0.62rem;
+    color: #8696A0;
+  }
+
+  .wa-sim-checks {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .wa-sim-checks svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .wa-sim-checks--read {
+    color: #53BDEB;
+  }
+
+  .wa-sim-inputbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: #1F2C34;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .wa-sim-icon-btn {
+    font-size: 1.1rem;
+    color: #8696A0;
+    cursor: pointer;
+  }
+
+  .wa-sim-input-box {
+    flex: 1;
+    background: #2A3942;
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 0.78rem;
+    color: #8696A0;
+  }
+
+  .wa-sim-mic-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #00A884;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .wa-sim-mic-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .wa-sim-glow {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .wa-sim-glow--1 {
+    top: 10%;
+    left: -20%;
+    background: #00A884;
+  }
+
+  .wa-sim-glow--2 {
+    bottom: 10%;
+    right: -20%;
+    background: #25D366;
+  }
+</style>

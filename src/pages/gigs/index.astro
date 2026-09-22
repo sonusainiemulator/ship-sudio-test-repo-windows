@@ -1,0 +1,956 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GigsHeader from "../../components/GigsHeader.astro";
+import GigCard from "../../components/GigCard.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { GIGS_CATALOG, GIG_CATEGORIES } from "../../data/gigs";
+import { SITE_NAME, SITE_URL, SUPPORT_PHONE, BOOK_CONSULTATION_URL } from "../../consts";
+
+const pageTitle = `Gigs Marketplace — Buy Verified AI & Software Services | ${SITE_NAME}`;
+const pageDescription =
+  "Browse and buy vetted engineering gigs from Rakebig. Fixed prices, transparent delivery times, and verified senior engineers across WhatsApp AI, Perfex CRM, SaaS MVP, and Cloud DevOps.";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/gigs"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: pageTitle,
+      description: pageDescription,
+      url: `${SITE_URL}/gigs`,
+    },
+  ]}
+>
+  <!-- Dedicated Fiverr-style Header with Category Mega Menu -->
+  <GigsHeader />
+
+  <main class="gigs-page">
+    <div class="container gigs-page__container">
+      <!-- Breadcrumbs -->
+      <nav class="gigs-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/gigs">Gigs Marketplace</a>
+        <span>/</span>
+        <span class="current">All Services</span>
+      </nav>
+
+      <!-- Page Title & Header Info -->
+      <header class="gigs-header-sec">
+        <div class="gigs-header-sec__left">
+          <h1 class="gigs-title">Verified Software &amp; AI Gigs</h1>
+          <p class="gigs-subtitle">
+            Order production-ready solutions directly from Rakebig's senior engineering squads. Clear pricing, milestone delivery, and 100% source code ownership.
+          </p>
+        </div>
+        <div class="gigs-header-sec__badges">
+          <div class="gigs-trust-badge">
+            <span class="gigs-trust-icon">🛡️</span>
+            <div>
+              <strong>100% Satisfaction</strong>
+              <span>Milestone warranty on all gigs</span>
+            </div>
+          </div>
+          <div class="gigs-trust-badge">
+            <span class="gigs-trust-icon">⚡</span>
+            <div>
+              <strong>Fast Turnaround</strong>
+              <span>24h to 7-day express delivery</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Filter Controls Bar -->
+      <div class="gigs-filters-bar">
+        <div class="gigs-filters-scroll">
+          <button type="button" class="gigs-filter-pill gigs-filter-pill--active" data-cat-pill="all">
+            All Gigs
+          </button>
+          <button type="button" class="gigs-filter-pill" data-cat-pill="digital-marketing">
+            WhatsApp &amp; Marketing
+          </button>
+          <button type="button" class="gigs-filter-pill" data-cat-pill="perfex-crm">
+            Perfex CRM
+          </button>
+          <button type="button" class="gigs-filter-pill" data-cat-pill="cloud-devops">
+            Cloud &amp; DevOps
+          </button>
+          <button type="button" class="gigs-filter-pill" data-cat-pill="programming-tech">
+            Full-Stack SaaS
+          </button>
+          <button type="button" class="gigs-filter-pill" data-cat-pill="mobile-apps">
+            Mobile Apps
+          </button>
+        </div>
+
+        <div class="gigs-controls-right">
+          <span class="gigs-results-count" id="gigs-count-display">
+            Showing <strong>{GIGS_CATALOG.length}</strong> available gigs
+          </span>
+
+          <select class="gigs-sort-select" id="gigs-sort-select" aria-label="Sort Gigs">
+            <option value="recommended">Sort by: Recommended</option>
+            <option value="rating">Highest Rated</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Gigs Cards Grid -->
+      <div class="gigs-grid" id="gigs-grid">
+        {GIGS_CATALOG.map((gig) => (
+          <GigCard gig={gig} />
+        ))}
+      </div>
+
+      <!-- Custom Project Promo Banner -->
+      <section class="gigs-custom-banner">
+        <div class="gigs-custom-banner__left">
+          <span class="gigs-custom-badge">NEED A BESPOKE SCOPE?</span>
+          <h2>Can't find an exact gig match for your requirements?</h2>
+          <p>
+            Share your technical requirements with our solutions architect. We'll prepare a custom milestone proposal within 4 hours.
+          </p>
+        </div>
+        <div class="gigs-custom-banner__actions">
+          <a
+            href={`https://wa.me/${SUPPORT_PHONE.replace(/[^0-9]/g, "")}?text=Hi%20Rakebig,%20I%20need%20a%20custom%20software%20gig%20quote`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="gigs-custom-btn gigs-custom-btn--wa"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+            </svg>
+            <span>Order via WhatsApp</span>
+          </a>
+          <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gigs-custom-btn gigs-custom-btn--consult">
+            Schedule Video Call
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Interactive Package Drawer / Modal for Buying Gigs -->
+  <div class="gig-modal" id="gig-modal" aria-hidden="true">
+    <div class="gig-modal__backdrop" id="gig-modal-backdrop"></div>
+    <div class="gig-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-gig-title">
+      <button type="button" class="gig-modal__close" id="gig-modal-close" aria-label="Close modal">
+        &times;
+      </button>
+
+      <div class="gig-modal__header">
+        <span class="gig-modal__badge" id="modal-gig-badge">VERIFIED GIG</span>
+        <h3 class="gig-modal__title" id="modal-gig-title">Gig Title</h3>
+        <div class="gig-modal__seller" id="modal-gig-seller">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- 3 Tier Tabs (Basic / Standard / Premium) -->
+      <div class="gig-tier-tabs" role="tablist">
+        <button type="button" role="tab" class="gig-tier-tab gig-tier-tab--active" data-tier="basic" id="tab-basic">
+          <span>Basic</span>
+          <strong id="tab-price-basic">₹2,999</strong>
+        </button>
+        <button type="button" role="tab" class="gig-tier-tab" data-tier="standard" id="tab-standard">
+          <span>Standard</span>
+          <strong id="tab-price-standard">₹7,999</strong>
+        </button>
+        <button type="button" role="tab" class="gig-tier-tab" data-tier="premium" id="tab-premium">
+          <span>Premium</span>
+          <strong id="tab-price-premium">₹18,999</strong>
+        </button>
+      </div>
+
+      <!-- Tier Details Content Body -->
+      <div class="gig-tier-content">
+        <div class="gig-tier-headline">
+          <h4 id="tier-content-title">Package Name</h4>
+          <div class="gig-tier-price-box">
+            <span class="gig-tier-price-inr" id="tier-content-price-inr">₹2,999</span>
+            <span class="gig-tier-price-usd" id="tier-content-price-usd">($39)</span>
+          </div>
+        </div>
+
+        <p class="gig-tier-desc" id="tier-content-desc">Package description goes here.</p>
+
+        <div class="gig-tier-meta">
+          <div class="gig-tier-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="tier-content-delivery">2 Days Delivery</span>
+          </div>
+          <div class="gig-tier-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span id="tier-content-revisions">3 Revisions</span>
+          </div>
+        </div>
+
+        <div class="gig-tier-features">
+          <h5>What's Included:</h5>
+          <ul id="tier-content-features-list">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal Footer / Order Action -->
+      <div class="gig-modal__footer">
+        <button type="button" class="gig-order-submit-btn" id="gig-order-submit-btn">
+          <span>Continue to Order &amp; Place Request</span>
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+          </svg>
+        </button>
+        <p class="gig-order-guarantee">
+          🔒 Secure Checkout • No spam • Official Rakebig Engineering Squad SLA
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <SiteFooter />
+</Layout>
+
+<script is:inline define:vars={{ GIGS_CATALOG, SUPPORT_PHONE }}>
+  // Client-side state
+  let currentGig = GIGS_CATALOG[0];
+  let activeTier = 'basic';
+  let activeCategory = 'all';
+  let activeSearchQuery = '';
+
+  const modal = document.getElementById('gig-modal');
+  const backdrop = document.getElementById('gig-modal-backdrop');
+  const closeBtn = document.getElementById('gig-modal-close');
+  const tierTabs = document.querySelectorAll('.gig-tier-tab');
+  const catPills = document.querySelectorAll('[data-cat-pill]');
+  const countDisplay = document.getElementById('gigs-count-display');
+  const sortSelect = document.getElementById('gigs-sort-select');
+  const orderSubmitBtn = document.getElementById('gig-order-submit-btn');
+
+  function openGigModal(gigId) {
+    const gig = GIGS_CATALOG.find(g => g.id === gigId);
+    if (!gig) return;
+    currentGig = gig;
+    activeTier = 'basic';
+
+    document.getElementById('modal-gig-title').textContent = gig.title;
+    document.getElementById('modal-gig-badge').textContent = gig.badge || 'VERIFIED GIG';
+    document.getElementById('modal-gig-seller').innerHTML = `
+      <img src="${gig.seller.avatar}" alt="${gig.seller.name}" width="24" height="24" style="border-radius:50%;" />
+      <span>${gig.seller.name} • <strong>${gig.seller.badge}</strong></span>
+    `;
+
+    document.getElementById('tab-price-basic').textContent = `₹${gig.packages.basic.priceInr.toLocaleString()}`;
+    document.getElementById('tab-price-standard').textContent = `₹${gig.packages.standard.priceInr.toLocaleString()}`;
+    document.getElementById('tab-price-premium').textContent = `₹${gig.packages.premium.priceInr.toLocaleString()}`;
+
+    renderTierContent(gig, 'basic');
+
+    tierTabs.forEach(t => t.classList.remove('gig-tier-tab--active'));
+    document.getElementById('tab-basic')?.classList.add('gig-tier-tab--active');
+
+    modal?.classList.add('gig-modal--open');
+    modal?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderTierContent(gig, tierName) {
+    const pkg = gig.packages[tierName];
+    if (!pkg) return;
+
+    document.getElementById('tier-content-title').textContent = pkg.title;
+    document.getElementById('tier-content-price-inr').textContent = `₹${pkg.priceInr.toLocaleString()}`;
+    document.getElementById('tier-content-price-usd').textContent = `($${pkg.priceUsd})`;
+    document.getElementById('tier-content-desc').textContent = pkg.description;
+    document.getElementById('tier-content-delivery').textContent = `${pkg.deliveryDays} Days Delivery`;
+    document.getElementById('tier-content-revisions').textContent = pkg.revisions;
+
+    const list = document.getElementById('tier-content-features-list');
+    if (list) {
+      list.innerHTML = pkg.features.map(f => `
+        <li>
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+          </svg>
+          <span>${f}</span>
+        </li>
+      `).join('');
+    }
+  }
+
+  function closeModal() {
+    modal?.classList.remove('gig-modal--open');
+    modal?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Tier tab clicks
+  tierTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tier = tab.getAttribute('data-tier');
+      activeTier = tier;
+      tierTabs.forEach(t => t.classList.remove('gig-tier-tab--active'));
+      tab.classList.add('gig-tier-tab--active');
+      renderTierContent(currentGig, tier);
+    });
+  });
+
+  // Modal open triggers on cards
+  document.querySelectorAll('[data-open-gig-modal]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const gigId = btn.getAttribute('data-open-gig-modal');
+      openGigModal(gigId);
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  // Submit order via WhatsApp link
+  orderSubmitBtn?.addEventListener('click', () => {
+    const pkg = currentGig.packages[activeTier];
+    const text = `Hi Rakebig Squad! I want to order the Gig:\n"${currentGig.title}"\n• Package: ${pkg.name} (${pkg.title})\n• Price: ₹${pkg.priceInr} ($${pkg.priceUsd})\n• Delivery: ${pkg.deliveryDays} Days\nPlease confirm next steps.`;
+    const cleanPhone = SUPPORT_PHONE.replace(/[^0-9]/g, '');
+    const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  });
+
+  // Filter cards by category & search query
+  function filterCards() {
+    const cards = document.querySelectorAll('[data-gig-card]');
+    let count = 0;
+
+    cards.forEach(card => {
+      const cat = card.getAttribute('data-category');
+      const text = card.textContent.toLowerCase();
+
+      const matchesCat = (activeCategory === 'all' || cat === activeCategory);
+      const matchesSearch = (!activeSearchQuery || text.includes(activeSearchQuery.toLowerCase()));
+
+      if (matchesCat && matchesSearch) {
+        card.style.display = '';
+        count++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (countDisplay) {
+      countDisplay.innerHTML = `Showing <strong>${count}</strong> available gigs`;
+    }
+  }
+
+  // Category filter pills
+  catPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      activeCategory = pill.getAttribute('data-cat-pill');
+      catPills.forEach(p => p.classList.remove('gigs-filter-pill--active'));
+      pill.classList.add('gigs-filter-pill--active');
+      filterCards();
+    });
+  });
+
+  // Custom events from GigsHeader
+  window.addEventListener('gigCategoryFilter', (e) => {
+    activeCategory = e.detail.category;
+    catPills.forEach(p => {
+      p.classList.toggle('gigs-filter-pill--active', p.getAttribute('data-cat-pill') === activeCategory);
+    });
+    filterCards();
+  });
+
+  window.addEventListener('gigSearchQuery', (e) => {
+    activeSearchQuery = e.detail.query;
+    filterCards();
+  });
+
+  // Sorting
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      const val = sortSelect.value;
+      const grid = document.getElementById('gigs-grid');
+      const cards = Array.from(document.querySelectorAll('[data-gig-card]'));
+
+      cards.sort((a, b) => {
+        const idA = a.getAttribute('data-gig-id');
+        const idB = b.getAttribute('data-gig-id');
+        const gigA = GIGS_CATALOG.find(g => g.id === idA);
+        const gigB = GIGS_CATALOG.find(g => g.id === idB);
+        if (!gigA || !gigB) return 0;
+
+        if (val === 'rating') return gigB.rating - gigA.rating;
+        if (val === 'price-asc') return gigA.packages.basic.priceInr - gigB.packages.basic.priceInr;
+        if (val === 'price-desc') return gigB.packages.basic.priceInr - gigA.packages.basic.priceInr;
+        return 0;
+      });
+
+      cards.forEach(c => grid?.appendChild(c));
+    });
+  }
+</script>
+
+<style>
+  .gigs-page {
+    background: #f7f7f8;
+    min-height: 80vh;
+    padding: 30px 0 80px 0;
+    color: #222325;
+  }
+
+  .gigs-page__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Breadcrumbs */
+  .gigs-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: #74767e;
+    margin-bottom: 20px;
+  }
+
+  .gigs-breadcrumbs a {
+    color: #74767e;
+    text-decoration: none;
+  }
+
+  .gigs-breadcrumbs a:hover {
+    color: #1dbf73;
+    text-decoration: underline;
+  }
+
+  .gigs-breadcrumbs .current {
+    color: #222325;
+    font-weight: 600;
+  }
+
+  /* Header Section */
+  .gigs-header-sec {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e4e5e7;
+  }
+
+  .gigs-title {
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #222325;
+    margin: 0 0 10px 0;
+  }
+
+  .gigs-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: #62646a;
+    max-width: 640px;
+    margin: 0;
+  }
+
+  .gigs-header-sec__badges {
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .gigs-trust-badge {
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .gigs-trust-icon {
+    font-size: 1.4rem;
+  }
+
+  .gigs-trust-badge strong {
+    display: block;
+    font-size: 0.82rem;
+    color: #222325;
+  }
+
+  .gigs-trust-badge span {
+    font-size: 0.72rem;
+    color: #74767e;
+  }
+
+  /* Filters Bar */
+  .gigs-filters-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+
+  .gigs-filters-scroll {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .gigs-filters-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gigs-filter-pill {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid #b5b6ba;
+    color: #62646a;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .gigs-filter-pill:hover {
+    border-color: #222325;
+    color: #222325;
+  }
+
+  .gigs-filter-pill--active {
+    background: #222325;
+    border-color: #222325;
+    color: #ffffff;
+  }
+
+  .gigs-controls-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .gigs-results-count {
+    font-size: 0.86rem;
+    color: #74767e;
+  }
+
+  .gigs-sort-select {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid #b5b6ba;
+    background: #ffffff;
+    font-size: 0.84rem;
+    color: #222325;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+  }
+
+  /* Gigs Grid */
+  .gigs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  /* Custom Project Promo Banner */
+  .gigs-custom-banner {
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    border-radius: 12px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .gigs-custom-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #1dbf73;
+    background: rgba(29, 191, 115, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .gigs-custom-banner h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #222325;
+    margin: 0 0 8px 0;
+  }
+
+  .gigs-custom-banner p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #62646a;
+    margin: 0;
+    max-width: 580px;
+  }
+
+  .gigs-custom-banner__actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .gigs-custom-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .gigs-custom-btn--wa {
+    background: #1dbf73;
+    color: #ffffff;
+  }
+
+  .gigs-custom-btn--wa:hover {
+    background: #19a463;
+  }
+
+  .gigs-custom-btn--wa svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gigs-custom-btn--consult {
+    background: #ffffff;
+    color: #222325;
+    border: 1px solid #b5b6ba;
+  }
+
+  .gigs-custom-btn--consult:hover {
+    background: #f7f7f8;
+    border-color: #222325;
+  }
+
+  /* ============ GIG MODAL / ORDER DRAWER ============ */
+  .gig-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  .gig-modal--open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .gig-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .gig-modal__dialog {
+    position: relative;
+    z-index: 2;
+    background: #ffffff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 580px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    padding: 28px;
+    animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes modalSlide {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .gig-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f7f7f8;
+    border: none;
+    font-size: 1.4rem;
+    color: #62646a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .gig-modal__close:hover {
+    background: #e4e5e7;
+    color: #222325;
+  }
+
+  .gig-modal__badge {
+    display: inline-block;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: #ff7640;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .gig-modal__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #222325;
+    line-height: 1.35;
+    margin: 0 0 10px 0;
+    padding-right: 30px;
+  }
+
+  .gig-modal__seller {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #62646a;
+    margin-bottom: 20px;
+  }
+
+  /* 3 Tier Tab Switcher */
+  .gig-tier-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #f7f7f8;
+    border: 1px solid #e4e5e7;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .gig-tier-tab {
+    padding: 10px 8px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+  }
+
+  .gig-tier-tab span {
+    display: block;
+    font-size: 0.78rem;
+    color: #74767e;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .gig-tier-tab strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #222325;
+  }
+
+  .gig-tier-tab--active {
+    background: #ffffff;
+    border-bottom-color: #1dbf73;
+  }
+
+  .gig-tier-tab--active span {
+    color: #1dbf73;
+  }
+
+  /* Tier Content */
+  .gig-tier-content {
+    background: #fafafa;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .gig-tier-headline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .gig-tier-headline h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222325;
+    margin: 0;
+  }
+
+  .gig-tier-price-inr {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #222325;
+  }
+
+  .gig-tier-price-usd {
+    font-size: 0.85rem;
+    color: #74767e;
+    margin-left: 4px;
+  }
+
+  .gig-tier-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #62646a;
+    margin: 0 0 16px 0;
+  }
+
+  .gig-tier-meta {
+    display: flex;
+    gap: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #e4e5e7;
+    border-bottom: 1px solid #e4e5e7;
+    margin-bottom: 16px;
+  }
+
+  .gig-tier-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #222325;
+  }
+
+  .gig-tier-meta-item svg {
+    width: 16px;
+    height: 16px;
+    color: #74767e;
+  }
+
+  .gig-tier-features h5 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #74767e;
+    text-transform: uppercase;
+    margin: 0 0 8px 0;
+  }
+
+  .gig-tier-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .gig-tier-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: #404145;
+  }
+
+  .gig-tier-features svg {
+    width: 14px;
+    height: 14px;
+    color: #1dbf73;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Order Button */
+  .gig-order-submit-btn {
+    width: 100%;
+    padding: 14px 20px;
+    background: #1dbf73;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .gig-order-submit-btn:hover {
+    background: #19a463;
+    transform: translateY(-1px);
+  }
+
+  .gig-order-submit-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gig-order-guarantee {
+    text-align: center;
+    font-size: 0.74rem;
+    color: #74767e;
+    margin: 10px 0 0 0;
+  }
+
+  @media (max-width: 900px) {
+    .gigs-header-sec,
+    .gigs-custom-banner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
