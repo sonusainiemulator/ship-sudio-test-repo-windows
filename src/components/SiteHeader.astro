@@ -59,34 +59,47 @@ const services = [
   },
 ];
 
-// ---- Products mega menu content (edit here) ----
-// Structure mirrors the LobeHub reference: labeled groups of icon + title + description rows.
+// ---- Products mega menu content (5-column full width) ----
 const productGroups = [
   {
-    label: "Perfex CRM",
+    label: "Perfex CRM & Apps",
     items: [
-      { title: "Perfex CRM Solutions", body: "Custom modules, multi-tenant SaaS, and workflow automation.", href: "/services/perfex-crm-solutions", icon: "crm", tint: "#E8F1FF", color: "#2F6BFF" },
-      { title: "Web Applications", body: "Laravel & Vue platforms, portals, and dashboards.", href: "/services/web-application-development", icon: "web", tint: "#E8F8EF", color: "#22A06B" },
-      { title: "Mobile Apps", body: "Flutter apps for Android and iOS tied to your CRM.", href: "/services/mobile-app-development", icon: "mobile", tint: "#F3E8FF", color: "#8B5CF6" },
+      { title: "Perfex CRM Solutions", body: "Custom modules, multi-tenant SaaS & workflow automation.", href: "/services/perfex-crm-solutions", icon: "crm", tint: "#E8F1FF", color: "#2F6BFF" },
+      { title: "Web Applications", body: "Laravel & Vue platforms, custom portals & dashboards.", href: "/services/web-application-development", icon: "web", tint: "#E8F8EF", color: "#22A06B" },
+      { title: "Mobile Apps", body: "Flutter & native apps for iOS & Android tied to CRM.", href: "/services/mobile-app-development", icon: "mobile", tint: "#F3E8FF", color: "#8B5CF6" },
     ],
   },
   {
-    label: "Platform & Cloud",
+    label: "Messaging & SMS",
     items: [
-      { title: "AI Widget", body: "Drop-in AI assistant that answers your customers on any site.", href: "https://aiwidget.rakebig.com/", external: true, icon: "ai", tint: "#E8F1FF", color: "#2F6BFF" },
-      { title: "Cloud Deployment", body: "Docker, CI/CD, and infrastructure from staging to production.", href: "/services/cloud-deployment-devops", icon: "cloud", tint: "#E8F1FF", color: "#3B82F6" },
-      { title: "AI Business Automation", body: "Automate handoffs, tickets, and reporting with practical AI.", href: "/services/ai-business-automation", icon: "ai", tint: "#FFE8F3", color: "#E11D8C" },
-      { title: "Dedicated Team", body: "An engineering squad embedded with your product and ops leads.", href: "/services/dedicated-team", icon: "team", tint: "#FFF3E8", color: "#E67E22" },
+      { title: "WhatsApp AI Marketing", body: "Official Meta Cloud API chatbots & broadcast engine.", href: "/whatsapp-marketing", icon: "chat", tint: "#E8F8EF", color: "#00A884", isNew: true },
+      { title: "SMS Panel SaaS", body: "Multi-gateway bulk SMS platform, OTP & auto-replies.", href: "/sms-panel", icon: "bolt", tint: "#FFF3E8", color: "#F59E0B", badge: "SOON" },
+      { title: "MailPurse — Email SaaS", body: "Self-hosted email platform with multi-SMTP automation.", href: "/email-marketing", icon: "mail", tint: "#EEF2FF", color: "#6366f1" },
+      { title: "AI Email with MCP", body: "AI email assistant powered by Claude & GPT-4 MCP.", href: "/ai-email", icon: "ai", tint: "#F5F3FF", color: "#7c3aed", isNew: true },
     ],
   },
   {
-    label: "WhatsApp AI Marketing",
+    label: "AI & Builders",
     items: [
-      { title: "WhatsApp AI Marketing Suite", body: "Official Meta Cloud API chatbots, bulk broadcasts & cart recovery.", href: "/whatsapp-marketing", icon: "chat", tint: "#E8F8EF", color: "#00A884", isNew: true },
-      { title: "MailPurse — Email Marketing SaaS", body: "Self-hosted email platform with automation, multi-SMTP & white-label mode.", href: "/email-marketing", icon: "mail", tint: "#EEF2FF", color: "#6366f1" },
-      { title: "AI Email with MCP Support", body: "AI-powered email automation — connect Claude or GPT-4 via MCP.", href: "/ai-email", icon: "ai", tint: "#F5F3FF", color: "#7c3aed", isNew: true },
+      { title: "AI Website Builder", body: "Prompt-based instant site generator platform.", href: "/ai-website-builder", icon: "launch", tint: "#E8F1FF", color: "#2563EB", badge: "SOON" },
+      { title: "AI Widget", body: "Drop-in AI assistant that answers visitors on any site.", href: "https://aiwidget.rakebig.com/", external: true, icon: "ai", tint: "#E8F1FF", color: "#2F6BFF" },
+      { title: "AI Business Automation", body: "Automate tickets, leads, handoffs & ops with AI.", href: "/services/ai-business-automation", icon: "workflow", tint: "#FFE8F3", color: "#E11D8C" },
+    ],
+  },
+  {
+    label: "Bio Links & Growth",
+    items: [
+      { title: "Bio Links Platform", body: "Smart link-in-bio builder for creators & SaaS.", href: "/bio-links", icon: "link", tint: "#F3E8FF", color: "#9333EA", badge: "SOON" },
       { title: "Gigs Marketplace", body: "Buy verified AI, CRM, and DevOps gigs at fixed prices.", href: "/gigs", icon: "bolt", tint: "#E8F1FF", color: "#1dbf73" },
-      { title: "Portfolio", body: "Completed engineering projects with proven metrics and outcomes.", href: "/portfolio", icon: "launch", tint: "#F3E8FF", color: "#8B5CF6" },
+      { title: "Cloud Deployment", body: "Docker, CI/CD, and server infrastructure setup.", href: "/services/cloud-deployment-devops", icon: "cloud", tint: "#E8F1FF", color: "#3B82F6" },
+    ],
+  },
+  {
+    label: "Squads & Proof",
+    items: [
+      { title: "Dedicated Team", body: "Engineering squad embedded with your product team.", href: "/services/dedicated-team", icon: "team", tint: "#FFF3E8", color: "#E67E22" },
+      { title: "Portfolio & Proof", body: "Completed engineering projects with proven metrics.", href: "/portfolio", icon: "launch", tint: "#F3E8FF", color: "#8B5CF6" },
+      { title: "Open Source Apps", body: "Turn-key self-hosted platform installations & SLA.", href: "/open-source", icon: "code", tint: "#EEF2FF", color: "#4F46E5" },
     ],
   },
 ];
@@ -196,81 +209,7 @@ const openSourceGroups = [
           </svg>
         </button>
         <div class="site-header__panel site-header__panel--products" id="menu-products" data-menu-panel hidden>
-          <div class="pm">
-            <div class="pm__groups">
-              {productGroups.map((group) => (
-                <div class="pm__group">
-                  <p class="pm__label">{group.label}</p>
-                  <ul class="pm__list">
-                    {group.items.map((item) => (
-                      <li>
-                        <a
-                          href={item.href}
-                          class="pm__row"
-                          target={item.external ? "_blank" : undefined}
-                          rel={item.external ? "noopener noreferrer" : undefined}
-                        >
-                          <span class="pm__icon" style={`background:${item.tint};color:${item.color}`}>
-                            {item.icon === "crm" && (
-                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M12 3.5l7.5 4.25L12 12 4.5 7.75 12 3.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-                                <path d="M4.5 12L12 16.25 19.5 12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-                                <path d="M4.5 16.25L12 20.5l7.5-4.25" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-                              </svg>
-                            )}
-                            {item.icon === "web" && (
-                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <rect x="3.5" y="4.5" width="17" height="15" rx="2.5" stroke="currentColor" stroke-width="1.6" />
-                                <path d="M3.5 9.5h17M7 7h.01M10 7h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                              </svg>
-                            )}
-                            {item.icon === "mobile" && (
-                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <rect x="7" y="3.5" width="10" height="17" rx="2.5" stroke="currentColor" stroke-width="1.6" />
-                                <path d="M11 18h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                              </svg>
-                            )}
-                            {item.icon === "cloud" && (
-                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M7.5 18h9a4 4 0 00.4-8 5.5 5.5 0 00-10.7 1.6A3.5 3.5 0 007.5 18z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-                              </svg>
-                            )}
-                            {item.icon === "ai" && (
-                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M12 3l1.2 4.2L17.5 8.5 13.2 9.8 12 14l-1.2-4.2L6.5 8.5l4.3-1.3L12 3zM18.5 14l.7 2.3 2.3.7-2.3.7-.7 2.3-.7-2.3-2.3-.7 2.3-.7.7-2.3zM6 15.5l.5 1.7 1.7.5-1.7.5L6 20l-.5-1.8-1.7-.5 1.7-.5L6 15.5z" fill="currentColor" />
-                              </svg>
-                            )}
-                            {item.icon === "team" && (
-                              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M16 19v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 17.5V19M17.5 11a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM9 11a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-                              </svg>
-                            )}
-                          </span>
-                          <span class="pm__copy">
-                            <strong>
-                              {item.title}
-                              {item.external && (
-                                <svg class="pm__ext" viewBox="0 0 16 16" aria-hidden="true">
-                                  <path d="M6 3h7v7M13 3L5 11M10 13H3V6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                              )}
-                            </strong>
-                            <span>{item.body}</span>
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            <a href="/solutions" class="pm__footer">
-              <span>See everything Rakebig builds</span>
-              <svg viewBox="0 0 16 16" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
-          </div>
+          <MegaMenuList groups={productGroups} footerLabel="Explore all products and ecosystem solutions" footerHref="/solutions" cols={5} />
         </div>
       </li>
 
@@ -287,7 +226,7 @@ const openSourceGroups = [
             <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <div class="site-header__panel site-header__panel--products" id="menu-solutions" data-menu-panel hidden>
+        <div class="site-header__panel site-header__panel--2cols" id="menu-solutions" data-menu-panel hidden>
           <MegaMenuList groups={aiSolutionGroups} footerLabel="Explore AI & automation services" footerHref="/solutions" />
         </div>
       </li>
@@ -305,7 +244,7 @@ const openSourceGroups = [
             <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <div class="site-header__panel site-header__panel--products" id="menu-clone-apps" data-menu-panel hidden>
+        <div class="site-header__panel site-header__panel--2cols" id="menu-clone-apps" data-menu-panel hidden>
           <MegaMenuList groups={cloneGroups} footerLabel="Explore App Clone Development" footerHref={cloneOverviewHref} />
         </div>
       </li>
@@ -323,7 +262,7 @@ const openSourceGroups = [
             <path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <div class="site-header__panel site-header__panel--products" id="menu-opensource" data-menu-panel hidden>
+        <div class="site-header__panel site-header__panel--2cols" id="menu-opensource" data-menu-panel hidden>
           <MegaMenuList groups={openSourceGroups} footerLabel="Explore All Open Source Solutions" footerHref="/open-source" />
         </div>
       </li>
@@ -1125,6 +1064,18 @@ const openSourceGroups = [
     left: 50%;
     top: calc(100% + 10px);
     transform: translateX(-50%);
+    width: min(1380px, calc(100vw - 32px));
+    background: #fff;
+    border: 1px solid #e8edf3;
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+    padding: 16px 18px 14px;
+  }
+
+  .site-header__panel--2cols {
+    left: 50%;
+    top: calc(100% + 10px);
+    transform: translateX(-50%);
     width: min(672px, calc(100vw - 48px));
     background: #fff;
     border: 1px solid #e8edf3;
@@ -1316,6 +1267,7 @@ const openSourceGroups = [
 
     .site-header__panel--mega,
     .site-header__panel--simple,
+    .site-header__panel--2cols,
     .site-header__panel--products {
       width: 100%;
       box-shadow: none;
