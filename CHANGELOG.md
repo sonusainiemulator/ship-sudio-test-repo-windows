@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-09-22
+
+### Added
+- **Mobile Slide-In Navigation Drawer**: Replaced the floating card dropdown with a proper full-height right-side slide-in drawer for mobile users (`≤960px`).
+  - Smooth `translateX` CSS transition (300ms cubic-bezier) for drawer slide animation.
+  - Dimmed backdrop overlay with `backdrop-filter: blur(3px)` — tap-to-close supported.
+  - **Body scroll lock** when drawer is open (`overflow: hidden` on `<body>`).
+  - Drawer auto-closes on nav link click, Escape key, and backdrop tap.
+- **Animated Hamburger → X**: Three `.burger__line` spans animate smoothly into an X when the menu is open (top/bottom bars cross, middle bar fades out).
+
+### Changed
+- **Mobile Menu UX**: Nav trigger items now span full drawer width with `justify-content: space-between`, larger touch targets (`16px vertical padding`), and divider borders between items.
+- **Mobile Accordion Panels**: Sub-menus render with a light `#f8fafc` background inside the drawer with no box-shadow or border-radius to feel native and flat.
+- **Mobile Product Group Labels**: Smaller `10px` uppercase labels and hidden description text in mobile view to keep the drawer compact and scannable.
+
+---
+
 ## [1.2.0] - 2026-09-22
 
 ### Added

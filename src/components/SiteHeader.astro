@@ -429,11 +429,16 @@ const openSourceGroups = [
         </svg>
       </a>
       <button type="button" class="site-header__burger" aria-label="Open menu" aria-expanded="false" data-burger>
-        <span></span><span></span><span></span>
+        <span class="burger__line burger__line--top"></span>
+        <span class="burger__line burger__line--mid"></span>
+        <span class="burger__line burger__line--bot"></span>
       </button>
     </div>
   </nav>
 </header>
+
+<!-- Mobile drawer backdrop -->
+<div class="site-header__backdrop" data-drawer-backdrop aria-hidden="true"></div>
 
 <script>
   function initSiteHeader() {
@@ -443,7 +448,8 @@ const openSourceGroups = [
 
     const items = Array.from(root.querySelectorAll<HTMLElement>("[data-menu]"));
     const burger = root.querySelector<HTMLButtonElement>("[data-burger]");
-    const links = root.querySelector<HTMLElement>("[data-nav-links]");
+    const drawer = root.querySelector<HTMLElement>("[data-nav-links]");
+    const backdrop = document.querySelector<HTMLElement>("[data-drawer-backdrop]");
     const mq = window.matchMedia("(max-width: 960px)");
     let closeTimer: number | undefined;
 
@@ -466,6 +472,25 @@ const openSourceGroups = [
       if (panel) panel.hidden = false;
     };
 
+    const openDrawer = () => {
+      root.classList.add("is-mobile-open");
+      burger?.setAttribute("aria-expanded", "true");
+      burger?.setAttribute("aria-label", "Close menu");
+      drawer?.setAttribute("data-open", "");
+      backdrop?.classList.add("is-visible");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeDrawer = () => {
+      root.classList.remove("is-mobile-open");
+      burger?.setAttribute("aria-expanded", "false");
+      burger?.setAttribute("aria-label", "Open menu");
+      drawer?.removeAttribute("data-open");
+      backdrop?.classList.remove("is-visible");
+      document.body.style.overflow = "";
+      closeAll();
+    };
+
     items.forEach((item) => {
       const trigger = item.querySelector<HTMLButtonElement>("[data-menu-trigger]");
       trigger?.addEventListener("click", (e) => {
@@ -486,23 +511,33 @@ const openSourceGroups = [
     });
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeAll();
+      if (e.key === "Escape") {
+        if (mq.matches && root.classList.contains("is-mobile-open")) closeDrawer();
+        else closeAll();
+      }
     });
     document.addEventListener("click", (e) => {
-      if (!root.contains(e.target as Node)) closeAll();
+      if (!mq.matches && !root.contains(e.target as Node)) closeAll();
     });
 
+    backdrop?.addEventListener("click", closeDrawer);
+
     burger?.addEventListener("click", () => {
-      const open = root.classList.toggle("is-mobile-open");
-      burger.setAttribute("aria-expanded", String(open));
-      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      if (links) links.toggleAttribute("data-open", open);
-      if (!open) closeAll();
+      if (root.classList.contains("is-mobile-open")) closeDrawer();
+      else openDrawer();
+    });
+
+    // Close drawer on nav link click (non-trigger links)
+    drawer?.querySelectorAll<HTMLAnchorElement>("a:not([data-menu-trigger])").forEach((a) => {
+      a.addEventListener("click", () => {
+        if (mq.matches) closeDrawer();
+      });
     });
   }
 
   initSiteHeader();
   document.addEventListener("astro:after-swap", () => {
+    document.body.style.overflow = "";
     const prev = document.querySelector<HTMLElement>("[data-site-header]");
     if (prev) delete prev.dataset.bound;
     initSiteHeader();
@@ -683,14 +718,6 @@ const openSourceGroups = [
     justify-content: center;
     gap: 5px;
     cursor: pointer;
-  }
-
-  .site-header__burger span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    background: #0f172a;
-    border-radius: 2px;
   }
 
   .site-header__panel {
@@ -1205,31 +1232,62 @@ const openSourceGroups = [
     }
   }
 
+  /* ===== Backdrop overlay ===== */
+  .site-header__backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(3px);
+    z-index: 75;
+    opacity: 0;
+    transition: opacity 0.28s ease;
+  }
+
   @media (max-width: 960px) {
-    .site-header__links {
-      display: none;
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      top: calc(100% + 8px);
-      flex-direction: column;
-      align-items: stretch;
-      gap: 4px;
-      padding: 12px;
-      background: #fff;
-      border: 1px solid #e8edf3;
-      border-radius: 16px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-      max-height: min(78vh, 720px);
-      overflow: auto;
+    /* Show backdrop when drawer is open */
+    .site-header__backdrop.is-visible {
+      display: block;
+      opacity: 1;
     }
 
-    .site-header__links[data-open] {
-      display: flex;
-    }
-
+    /* ===== Hamburger → X animation ===== */
     .site-header__burger {
       display: inline-flex;
+      position: relative;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      width: 42px;
+      height: 42px;
+    }
+
+    .burger__line {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #0f172a;
+      border-radius: 2px;
+      position: absolute;
+      transition: transform 0.25s ease, opacity 0.18s ease, top 0.25s ease;
+    }
+
+    .burger__line--top { top: 14px; }
+    .burger__line--mid { top: 20px; }
+    .burger__line--bot { top: 26px; }
+
+    .is-mobile-open .burger__line--top {
+      top: 20px;
+      transform: rotate(45deg);
+    }
+    .is-mobile-open .burger__line--mid {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .is-mobile-open .burger__line--bot {
+      top: 20px;
+      transform: rotate(-45deg);
     }
 
     .site-header__icon-btn[aria-label="Cart"],
@@ -1237,11 +1295,81 @@ const openSourceGroups = [
       display: none;
     }
 
+    /* ===== Slide-in drawer ===== */
+    .site-header__links {
+      /* Full-height panel sliding from the right */
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(340px, 88vw);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0;
+      background: #fff;
+      border-left: 1px solid #e8edf3;
+      box-shadow: -12px 0 48px rgba(15, 23, 42, 0.16);
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 80;
+      /* Hidden by default — slides off-screen right */
+      display: flex;
+      transform: translateX(110%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .site-header__links[data-open] {
+      transform: translateX(0);
+    }
+
+    /* Drawer header row: branding + close button */
+    .site-header__links::before {
+      content: "";
+      display: block;
+      height: 68px;
+      border-bottom: 1px solid #eef2f7;
+      flex-shrink: 0;
+    }
+
+    /* Each nav item becomes a bordered row */
+    .site-header__item {
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .site-header__trigger,
+    .site-header__link,
+    .site-header__trigger--link {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 0;
+      justify-content: space-between;
+    }
+
+    .site-header__trigger:hover,
+    .site-header__link:hover {
+      background: #f8fafc;
+    }
+
+    .site-header__caret {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Accordion panel inside drawer */
     .site-header__panel {
       position: static;
       transform: none;
       width: 100%;
-      margin-top: 6px;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: #f8fafc;
+      border: 0;
+      border-top: 1px solid #eef2f7;
     }
 
     .site-header__panel--mega,
@@ -1250,6 +1378,7 @@ const openSourceGroups = [
     .site-header__panel--products {
       width: 100%;
       box-shadow: none;
+      border-radius: 0;
     }
 
     .site-header__item--products {
@@ -1258,18 +1387,47 @@ const openSourceGroups = [
 
     .pm__groups {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 0;
+      padding: 8px 0;
+    }
+
+    .pm__group {
+      padding: 8px 16px 4px;
     }
 
     .pm__group + .pm__group {
       border-left: 0;
-      padding-left: 0;
-      padding-top: 14px;
+      padding-left: 16px;
+      padding-top: 8px;
       border-top: 1px solid #eef2f7;
+    }
+
+    .pm__label {
+      font-size: 10px;
+      padding: 6px 0 4px;
+    }
+
+    .pm__row {
+      padding: 8px 6px;
+      border-radius: 8px;
+    }
+
+    .pm__copy span {
+      display: none;
+    }
+
+    .pm__footer {
+      margin: 4px 8px 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: #f1f5f9;
     }
 
     .mega {
       grid-template-columns: 1fr;
+      border-radius: 0;
+      border: 0;
+      box-shadow: none;
     }
 
     .mega__aside {
@@ -1287,6 +1445,19 @@ const openSourceGroups = [
 
     .mega__title {
       max-width: none;
+      font-size: 18px;
+    }
+
+    .mega__main {
+      padding: 16px 16px 12px;
+    }
+
+    /* Drawer CTA footer */
+    .site-header__links::after {
+      content: "";
+      display: block;
+      height: 80px;
+      flex-shrink: 0;
     }
   }
 
