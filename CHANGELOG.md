@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - **Navigation Structure**: Grouped Products into 5 distinct categories (*Perfex CRM & Apps*, *Messaging & SMS*, *AI & Builders*, *Bio Links & Growth*, *Squads & Proof*).
+- **Core Package Upgrades**: Upgraded core project dependencies to latest versions: `astro` v7.3.3, `tailwindcss` & `@tailwindcss/vite` v4.3.3, and `lenis` v1.3.26.
 - **Header Dropdown Styling**: Configured `.site-header__panel--products` for full-width layout (`max-width: 1380px`), while maintaining 2-column menu width (`672px`) for *Solutions*, *Clone Apps*, and *Open Source*.
 
 ### Removed
