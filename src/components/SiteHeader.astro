@@ -551,6 +551,7 @@ const openSourceGroups = [
     z-index: 80;
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid #eceff3;
   }
 
@@ -1063,7 +1064,7 @@ const openSourceGroups = [
 
   /* ---- Products mega menu (LobeHub-style) ---- */
   .site-header__item--products {
-    position: relative;
+    position: static;
   }
 
   .site-header__panel--products {
@@ -1071,6 +1072,7 @@ const openSourceGroups = [
     top: calc(100% + 10px);
     transform: translateX(-50%);
     width: min(1380px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
     background: #fff;
     border: 1px solid #e8edf3;
     border-radius: 20px;
@@ -1083,6 +1085,7 @@ const openSourceGroups = [
     top: calc(100% + 10px);
     transform: translateX(-50%);
     width: min(672px, calc(100vw - 48px));
+    max-width: calc(100vw - 32px);
     background: #fff;
     border: 1px solid #e8edf3;
     border-radius: 18px;
