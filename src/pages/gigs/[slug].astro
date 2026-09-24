@@ -1,0 +1,1048 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GigsHeader from "../../components/GigsHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { GIGS_CATALOG, type GigItem } from "../../data/gigs";
+import { SITE_NAME, SITE_URL, SUPPORT_PHONE, BOOK_CONSULTATION_URL } from "../../consts";
+
+export function getStaticPaths() {
+  return GIGS_CATALOG.map((gig) => ({
+    params: { slug: gig.slug },
+    props: { gig },
+  }));
+}
+
+interface Props {
+  gig: GigItem;
+}
+
+const { gig } = Astro.props;
+
+const cleanPhone = SUPPORT_PHONE.replace(/[^0-9]/g, "");
+const whatsappMessage = (pkgName: string, priceInr: number) =>
+  encodeURIComponent(
+    `Hi Rakebig, I want to order the "${pkgName}" package (₹${priceInr.toLocaleString()}) for Gig: "${gig.title}". Please confirm details.`
+  );
+
+const pageTitle = `${gig.title} | ${SITE_NAME} Gigs`;
+const pageDescription = gig.shortDescription;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath={`/gigs/${gig.slug}`}
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: gig.title,
+      image: `${SITE_URL}${gig.thumbnail}`,
+      description: gig.shortDescription,
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: gig.rating.toString(),
+        reviewCount: gig.reviewsCount.toString(),
+      },
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "INR",
+        lowPrice: gig.packages.basic.priceInr.toString(),
+        highPrice: gig.packages.premium.priceInr.toString(),
+        offerCount: "3",
+      },
+    },
+  ]}
+>
+  <!-- Font Awesome CDN for Fiverr Action Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Fiverr-style Header & Subnav -->
+  <GigsHeader activeCategory={gig.category} />
+
+  <main class="gd-main">
+    <div class="container gd-container">
+      
+      <!-- Top Breadcrumbs Row with Action Icons -->
+      <div class="gd-top-nav">
+        <nav class="gd-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/"><i class="fa-solid fa-house"></i></a>
+          <span>/</span>
+          <a href="/gigs">Gigs</a>
+          <span>/</span>
+          <a href={`/gigs?cat=${gig.category}`}>{gig.category.replace("-", " ").toUpperCase()}</a>
+          <span>/</span>
+          <span class="gd-breadcrumbs__current">{gig.subcategory}</span>
+        </nav>
+
+        <div class="gd-top-actions">
+          <button type="button" class="gd-icon-btn" title="Save to Wishlist">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button type="button" class="gd-icon-btn" title="Share Gig">
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          </button>
+          <button type="button" class="gd-icon-btn" title="More Options">
+            <i class="fa-solid fa-ellipsis"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main 2-Column Fiverr Gig Detail Layout -->
+      <div class="gd-grid">
+        
+        <!-- LEFT COLUMN: Content, Gallery, Description, Reviews -->
+        <div class="gd-left">
+          
+          <!-- Gig Main Title -->
+          <h1 class="gd-title">{gig.title}</h1>
+
+          <!-- Seller Header Line -->
+          <div class="gd-seller-bar">
+            <img src={gig.seller.avatar} alt={gig.seller.name} class="gd-seller-avatar" width="48" height="48" />
+            <div class="gd-seller-meta">
+              <div class="gd-seller-name-row">
+                <span class="gd-seller-name">{gig.seller.name}</span>
+                <span class="gd-seller-badge">{gig.seller.badge}</span>
+              </div>
+              <div class="gd-seller-rating">
+                <span class="gd-star">★</span>
+                <strong>{gig.rating.toFixed(1)}</strong>
+                <span class="gd-reviews">({gig.reviewsCount} reviews)</span>
+                <span class="gd-queue-tag"><i class="fa-solid fa-bolt text-amber-500 mr-1"></i>{gig.ordersInQueue} orders in queue</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Image Gallery Display -->
+          <div class="gd-gallery">
+            <div class="gd-gallery__main">
+              <img id="main-gig-image" src={gig.thumbnail} alt={gig.title} class="gd-gallery__img" />
+              {gig.badge && <span class="gd-gallery__badge">{gig.badge}</span>}
+            </div>
+            <div class="gd-gallery__thumbs">
+              <button type="button" class="gd-thumb gd-thumb--active" onclick={`document.getElementById('main-gig-image').src='${gig.thumbnail}'`}>
+                <img src={gig.thumbnail} alt="Thumbnail 1" />
+              </button>
+              <button type="button" class="gd-thumb" onclick={`document.getElementById('main-gig-image').src='${gig.thumbnail}'`}>
+                <img src={gig.thumbnail} alt="Thumbnail 2" />
+              </button>
+            </div>
+          </div>
+
+          <!-- About This Gig Section -->
+          <section class="gd-section">
+            <h2 class="gd-section-title">About This Gig</h2>
+            <div class="gd-prose">
+              <p class="gd-lead-text">{gig.shortDescription}</p>
+              
+              <h3 class="gd-subtitle">Why Choose Rakebig Engineering Squad?</h3>
+              <ul class="gd-check-list">
+                <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> <strong>Production-Grade Quality:</strong> Built according to core platform standards with clean, maintainable code.</li>
+                <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> <strong>100% Source Code Ownership:</strong> You get full repository access and IP rights.</li>
+                <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> <strong>Dedicated Support & SLA:</strong> Guaranteed post-delivery warranty and bug-fix SLA.</li>
+                <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> <strong>Direct Developer Communication:</strong> Work directly with senior software architects and project leads.</li>
+              </ul>
+
+              <h3 class="gd-subtitle">Technologies &amp; Frameworks Included</h3>
+              <div class="gd-tech-pills">
+                {gig.technologies.map((tech) => (
+                  <span class="gd-tech-pill"><i class="fa-solid fa-code text-blue-500 mr-1.5"></i>{tech}</span>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- Compare Packages Matrix Table -->
+          <section class="gd-section">
+            <h2 class="gd-section-title">Compare Packages</h2>
+            <div class="gd-matrix-table-wrap">
+              <table class="gd-matrix-table">
+                <thead>
+                  <tr>
+                    <th class="gd-matrix-th-label">Package</th>
+                    <th>
+                      <div class="gd-matrix-pkg-title">Basic</div>
+                      <div class="gd-matrix-pkg-price">₹{gig.packages.basic.priceInr.toLocaleString()}</div>
+                      <div class="gd-matrix-pkg-usd">(${gig.packages.basic.priceUsd})</div>
+                    </th>
+                    <th class="gd-matrix-highlight">
+                      <div class="gd-matrix-popular-badge">RECOMMENDED</div>
+                      <div class="gd-matrix-pkg-title">Standard</div>
+                      <div class="gd-matrix-pkg-price">₹{gig.packages.standard.priceInr.toLocaleString()}</div>
+                      <div class="gd-matrix-pkg-usd">(${gig.packages.standard.priceUsd})</div>
+                    </th>
+                    <th>
+                      <div class="gd-matrix-pkg-title">Premium</div>
+                      <div class="gd-matrix-pkg-price">₹{gig.packages.premium.priceInr.toLocaleString()}</div>
+                      <div class="gd-matrix-pkg-usd">(${gig.packages.premium.priceUsd})</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="gd-matrix-label">Package Name</td>
+                    <td>{gig.packages.basic.title}</td>
+                    <td class="gd-matrix-highlight"><strong>{gig.packages.standard.title}</strong></td>
+                    <td>{gig.packages.premium.title}</td>
+                  </tr>
+                  <tr>
+                    <td class="gd-matrix-label">Description</td>
+                    <td>{gig.packages.basic.description}</td>
+                    <td class="gd-matrix-highlight">{gig.packages.standard.description}</td>
+                    <td>{gig.packages.premium.description}</td>
+                  </tr>
+                  <tr>
+                    <td class="gd-matrix-label">Delivery Time</td>
+                    <td><i class="fa-regular fa-clock mr-1"></i>{gig.packages.basic.deliveryDays} Days</td>
+                    <td class="gd-matrix-highlight"><strong><i class="fa-regular fa-clock mr-1"></i>{gig.packages.standard.deliveryDays} Days</strong></td>
+                    <td><i class="fa-regular fa-clock mr-1"></i>{gig.packages.premium.deliveryDays} Days</td>
+                  </tr>
+                  <tr>
+                    <td class="gd-matrix-label">Revisions</td>
+                    <td>{gig.packages.basic.revisions}</td>
+                    <td class="gd-matrix-highlight"><strong>{gig.packages.standard.revisions}</strong></td>
+                    <td>{gig.packages.premium.revisions}</td>
+                  </tr>
+                  <tr>
+                    <td class="gd-matrix-label">Select Tier</td>
+                    <td>
+                      <a href={`https://wa.me/${cleanPhone}?text=${whatsappMessage("Basic", gig.packages.basic.priceInr)}`} target="_blank" class="gd-btn-tier-select">Select Basic</a>
+                    </td>
+                    <td class="gd-matrix-highlight">
+                      <a href={`https://wa.me/${cleanPhone}?text=${whatsappMessage("Standard", gig.packages.standard.priceInr)}`} target="_blank" class="gd-btn-tier-select gd-btn-tier-select--primary">Select Standard</a>
+                    </td>
+                    <td>
+                      <a href={`https://wa.me/${cleanPhone}?text=${whatsappMessage("Premium", gig.packages.premium.priceInr)}`} target="_blank" class="gd-btn-tier-select">Select Premium</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Seller Profile Card -->
+          <section class="gd-section gd-seller-profile-card">
+            <h2 class="gd-section-title">Get to Know the Developer</h2>
+            <div class="gd-seller-card-inner">
+              <img src={gig.seller.avatar} alt={gig.seller.name} class="gd-seller-card-avatar" width="72" height="72" />
+              <div class="gd-seller-card-info">
+                <h3>{gig.seller.name}</h3>
+                <p class="gd-seller-card-role">{gig.seller.role}</p>
+                <div class="gd-seller-card-stats">
+                  <div><strong>From:</strong> India</div>
+                  <div><strong>Avg. Response:</strong> 1 hour</div>
+                  <div><strong>Member since:</strong> 2021</div>
+                  <div><strong>Last Delivery:</strong> 4 hours ago</div>
+                </div>
+                <a href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hi ${gig.seller.name}, I have a question regarding your gig "${gig.title}".`)}`} target="_blank" class="gd-btn-contact-seller">
+                  <i class="fa-brands fa-whatsapp text-emerald-500 mr-2 text-base"></i> Contact Seller
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- FAQ Accordions -->
+          <section class="gd-section">
+            <h2 class="gd-section-title">Frequently Asked Questions</h2>
+            <div class="gd-faq-list">
+              <details class="gd-faq-item">
+                <summary>How does the ordering process work?</summary>
+                <p>After selecting your desired package tier (Basic, Standard, or Premium), you can submit your project requirements. Our engineering team will review your specifications and begin development immediately.</p>
+              </details>
+              <details class="gd-faq-item">
+                <summary>Do I get full source code access?</summary>
+                <p>Yes! 100% full source code ownership, repository commit access, and deployment playbooks are provided upon delivery.</p>
+              </details>
+              <details class="gd-faq-item">
+                <summary>What if I need custom modifications beyond the package?</summary>
+                <p>You can contact our lead developers directly on WhatsApp or phone to request a custom tailored offer for bespoke enterprise features.</p>
+              </details>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Sticky Fiverr Order Box -->
+        <div class="gd-right">
+          <div class="gd-sticky-box" id="fiverr-order-box">
+            
+            <!-- Package Tabs (Basic | Standard | Premium) -->
+            <div class="gd-tabs">
+              <button type="button" class="gd-tab gd-tab--active" data-target-tab="basic">Basic</button>
+              <button type="button" class="gd-tab" data-target-tab="standard">Standard</button>
+              <button type="button" class="gd-tab" data-target-tab="premium">Premium</button>
+            </div>
+
+            <!-- Basic Tab Panel -->
+            <div class="gd-tab-panel" id="panel-basic">
+              <div class="gd-pkg-header">
+                <div class="gd-pkg-title-row">
+                  <span class="gd-pkg-title">{gig.packages.basic.title}</span>
+                  <span class="gd-pkg-price">₹{gig.packages.basic.priceInr.toLocaleString()}</span>
+                </div>
+                <span class="gd-pkg-usd">(${gig.packages.basic.priceUsd} USD)</span>
+              </div>
+              <p class="gd-pkg-desc">{gig.packages.basic.description}</p>
+
+              <div class="gd-pkg-meta">
+                <span><i class="fa-regular fa-clock mr-1.5 text-gray-700"></i><strong>{gig.packages.basic.deliveryDays}-day delivery</strong></span>
+                <span><i class="fa-solid fa-rotate-right mr-1.5 text-gray-700"></i><strong>{gig.packages.basic.revisions}</strong></span>
+              </div>
+
+              <div class="gd-pkg-features">
+                <strong>What's Included:</strong>
+                <ul>
+                  {gig.packages.basic.features.map((feat) => (
+                    <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>{feat}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href={`https://wa.me/${cleanPhone}?text=${whatsappMessage("Basic", gig.packages.basic.priceInr)}`}
+                target="_blank"
+                class="gd-btn-continue"
+              >
+                <span>Continue</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+
+              <a
+                href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hi, I want to discuss custom requirements for "${gig.title}".`)}`}
+                target="_blank"
+                class="gd-btn-contact"
+              >
+                <span>Contact Me</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+              </a>
+            </div>
+
+            <!-- Standard Tab Panel -->
+            <div class="gd-tab-panel" id="panel-standard" style="display: none;">
+              <div class="gd-pkg-badge">CUSTOMIZED FOR YOU</div>
+              <div class="gd-pkg-header">
+                <div class="gd-pkg-title-row">
+                  <span class="gd-pkg-title">{gig.packages.standard.title}</span>
+                  <span class="gd-pkg-price">₹{gig.packages.standard.priceInr.toLocaleString()}</span>
+                </div>
+                <span class="gd-pkg-usd">(${gig.packages.standard.priceUsd} USD)</span>
+              </div>
+              <p class="gd-pkg-desc">{gig.packages.standard.description}</p>
+
+              <div class="gd-pkg-meta">
+                <span><i class="fa-regular fa-clock mr-1.5 text-gray-700"></i><strong>{gig.packages.standard.deliveryDays}-day delivery</strong></span>
+                <span><i class="fa-solid fa-rotate-right mr-1.5 text-gray-700"></i><strong>{gig.packages.standard.revisions}</strong></span>
+              </div>
+
+              <div class="gd-pkg-features">
+                <strong>What's Included:</strong>
+                <ul>
+                  {gig.packages.standard.features.map((feat) => (
+                    <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>{feat}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href={`https://wa.me/${cleanPhone}?text=${whatsappMessage("Standard", gig.packages.standard.priceInr)}`}
+                target="_blank"
+                class="gd-btn-continue"
+              >
+                <span>Continue</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+
+              <a
+                href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hi, I want to discuss custom requirements for "${gig.title}".`)}`}
+                target="_blank"
+                class="gd-btn-contact"
+              >
+                <span>Contact Me</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+              </a>
+            </div>
+
+            <!-- Premium Tab Panel -->
+            <div class="gd-tab-panel" id="panel-premium" style="display: none;">
+              <div class="gd-pkg-badge gd-pkg-badge--purple">ENTERPRISE TIER</div>
+              <div class="gd-pkg-header">
+                <div class="gd-pkg-title-row">
+                  <span class="gd-pkg-title">{gig.packages.premium.title}</span>
+                  <span class="gd-pkg-price">₹{gig.packages.premium.priceInr.toLocaleString()}</span>
+                </div>
+                <span class="gd-pkg-usd">(${gig.packages.premium.priceUsd} USD)</span>
+              </div>
+              <p class="gd-pkg-desc">{gig.packages.premium.description}</p>
+
+              <div class="gd-pkg-meta">
+                <span><i class="fa-regular fa-clock mr-1.5 text-gray-700"></i><strong>{gig.packages.premium.deliveryDays}-day delivery</strong></span>
+                <span><i class="fa-solid fa-rotate-right mr-1.5 text-gray-700"></i><strong>{gig.packages.premium.revisions}</strong></span>
+              </div>
+
+              <div class="gd-pkg-features">
+                <strong>What's Included:</strong>
+                <ul>
+                  {gig.packages.premium.features.map((feat) => (
+                    <li><i class="fa-solid fa-check text-emerald-600 mr-2"></i>{feat}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href={`https://wa.me/${cleanPhone}?text=${whatsappMessage("Premium", gig.packages.premium.priceInr)}`}
+                target="_blank"
+                class="gd-btn-continue"
+              >
+                <span>Continue</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+
+              <a
+                href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hi, I want to discuss custom requirements for "${gig.title}".`)}`}
+                target="_blank"
+                class="gd-btn-contact"
+              >
+                <span>Contact Me</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<script is:inline>
+  // Tab Switcher Logic for Right Order Card
+  const tabs = document.querySelectorAll('.gd-tab');
+  const panels = {
+    basic: document.getElementById('panel-basic'),
+    standard: document.getElementById('panel-standard'),
+    premium: document.getElementById('panel-premium'),
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-target-tab');
+      tabs.forEach(t => t.classList.remove('gd-tab--active'));
+      tab.classList.add('gd-tab--active');
+
+      Object.keys(panels).forEach(key => {
+        if (panels[key]) {
+          panels[key].style.display = key === target ? 'block' : 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .gd-main {
+    background: #ffffff;
+    color: #222325;
+    font-family: Macan, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-bottom: 60px;
+  }
+
+  .gd-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .gd-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #efeff0;
+    margin-bottom: 24px;
+  }
+
+  .gd-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #74767e;
+  }
+
+  .gd-breadcrumbs a {
+    color: #74767e;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .gd-breadcrumbs a:hover {
+    color: #1dbf73;
+  }
+
+  .gd-breadcrumbs__current {
+    color: #222325;
+    font-weight: 600;
+  }
+
+  .gd-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gd-icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e4e5e7;
+    background: #ffffff;
+    color: #62646a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .gd-icon-btn:hover {
+    background: #f7f7f8;
+    color: #222325;
+    border-color: #b5b6ba;
+  }
+
+  .gd-grid {
+    display: grid;
+    grid-template-columns: 1fr 410px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .gd-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gd-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #222325;
+    margin: 0 0 16px 0;
+  }
+
+  .gd-seller-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .gd-seller-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .gd-seller-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .gd-seller-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gd-seller-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #222325;
+  }
+
+  .gd-seller-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #f7f7f8;
+    border: 1px solid #e4e5e7;
+    color: #62646a;
+  }
+
+  .gd-seller-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+  }
+
+  .gd-star {
+    color: #ffb800;
+  }
+
+  .gd-reviews {
+    color: #74767e;
+  }
+
+  .gd-queue-tag {
+    font-size: 0.78rem;
+    color: #62646a;
+    margin-left: 8px;
+  }
+
+  .gd-gallery {
+    margin-bottom: 32px;
+  }
+
+  .gd-gallery__main {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .gd-gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gd-gallery__badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #ff7640;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .gd-gallery__thumbs {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .gd-thumb {
+    width: 80px;
+    height: 50px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 2px solid #e4e5e7;
+    padding: 0;
+    cursor: pointer;
+    background: #0f172a;
+  }
+
+  .gd-thumb--active,
+  .gd-thumb:hover {
+    border-color: #1dbf73;
+  }
+
+  .gd-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gd-section {
+    padding-top: 32px;
+    border-top: 1px solid #efeff0;
+    margin-top: 32px;
+  }
+
+  .gd-section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #222325;
+    margin: 0 0 20px 0;
+  }
+
+  .gd-lead-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #404145;
+    margin-bottom: 20px;
+  }
+
+  .gd-subtitle {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222325;
+    margin: 24px 0 12px 0;
+  }
+
+  .gd-check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: grid;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #404145;
+  }
+
+  .gd-tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gd-tech-pill {
+    background: #f4f6f8;
+    border: 1px solid #e4e5e7;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #222325;
+  }
+
+  /* Matrix Table */
+  .gd-matrix-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+  }
+
+  .gd-matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.88rem;
+  }
+
+  .gd-matrix-table th,
+  .gd-matrix-table td {
+    padding: 16px;
+    border: 1px solid #e4e5e7;
+    vertical-align: top;
+  }
+
+  .gd-matrix-th-label {
+    background: #f7f7f8;
+    width: 20%;
+  }
+
+  .gd-matrix-highlight {
+    background: #f0fdf4;
+  }
+
+  .gd-matrix-popular-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #1dbf73;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .gd-matrix-pkg-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #222325;
+  }
+
+  .gd-matrix-pkg-price {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #222325;
+
+  }
+
+  .gd-matrix-pkg-usd {
+    font-size: 0.75rem;
+    color: #74767e;
+  }
+
+  .gd-btn-tier-select {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #222325;
+    background: #ffffff;
+    color: #222325;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.15s ease;
+  }
+
+  .gd-btn-tier-select--primary {
+    background: #1dbf73;
+    border-color: #1dbf73;
+    color: #ffffff;
+  }
+
+  .gd-btn-tier-select:hover {
+    background: #222325;
+    color: #ffffff;
+  }
+
+  .gd-btn-tier-select--primary:hover {
+    background: #19a463;
+  }
+
+  /* Seller Profile Card */
+  .gd-seller-card-inner {
+    display: flex;
+    gap: 20px;
+    background: #f7f7f8;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #e4e5e7;
+  }
+
+  .gd-seller-card-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .gd-seller-card-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .gd-seller-card-role {
+    font-size: 0.85rem;
+    color: #62646a;
+    margin-bottom: 14px;
+  }
+
+  .gd-seller-card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    font-size: 0.82rem;
+    color: #62646a;
+    margin-bottom: 18px;
+  }
+
+  .gd-btn-contact-seller {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border-radius: 4px;
+    border: 1px solid #222325;
+    background: #ffffff;
+    color: #222325;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .gd-btn-contact-seller:hover {
+    background: #222325;
+    color: #ffffff;
+  }
+
+  /* FAQ Items */
+  .gd-faq-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .gd-faq-item {
+    border: 1px solid #e4e5e7;
+    border-radius: 6px;
+    padding: 14px 18px;
+    background: #ffffff;
+  }
+
+  .gd-faq-item summary {
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: #222325;
+  }
+
+  .gd-faq-item p {
+    margin: 10px 0 0 0;
+    font-size: 0.88rem;
+    color: #62646a;
+    line-height: 1.5;
+  }
+
+  /* RIGHT STICKY ORDER BOX */
+  .gd-sticky-box {
+    position: sticky;
+    top: 90px;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+
+  .gd-tabs {
+    display: flex;
+    background: #fafafa;
+    border-bottom: 1px solid #e4e5e7;
+  }
+
+  .gd-tab {
+    flex: 1;
+    padding: 14px 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #74767e;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .gd-tab--active {
+    color: #222325;
+    border-bottom-color: #1dbf73;
+    background: #ffffff;
+  }
+
+  .gd-tab-panel {
+    padding: 24px;
+  }
+
+  .gd-pkg-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: #1dbf73;
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .gd-pkg-badge--purple {
+    background: #9333ea;
+  }
+
+  .gd-pkg-header {
+    margin-bottom: 14px;
+  }
+
+  .gd-pkg-title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .gd-pkg-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222325;
+  }
+
+  .gd-pkg-price {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #222325;
+  }
+
+  .gd-pkg-usd {
+    font-size: 0.78rem;
+    color: #74767e;
+  }
+
+  .gd-pkg-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #62646a;
+    margin-bottom: 16px;
+  }
+
+  .gd-pkg-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: #222325;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #efeff0;
+    margin-bottom: 16px;
+  }
+
+  .gd-pkg-features {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .gd-pkg-features strong {
+    display: block;
+    color: #222325;
+    margin-bottom: 10px;
+  }
+
+  .gd-pkg-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+    color: #62646a;
+  }
+
+  .gd-btn-continue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 0;
+    border-radius: 4px;
+    background: #000000;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.15s ease;
+    margin-bottom: 10px;
+  }
+
+  .gd-btn-continue:hover {
+    background: #222325;
+  }
+
+  .gd-btn-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #222325;
+    background: #ffffff;
+    color: #222325;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .gd-btn-contact:hover {
+    background: #f7f7f8;
+  }
+</style>
