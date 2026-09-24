@@ -23,6 +23,37 @@ const pageDescription =
       description: pageDescription,
       url: `${SITE_URL}/gigs`,
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Gigs Marketplace",
+          item: `${SITE_URL}/gigs`,
+        },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Rakebig Verified Engineering Gigs Catalog",
+      numberOfItems: GIGS_CATALOG.length,
+      itemListElement: GIGS_CATALOG.map((gig, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        name: gig.title,
+        url: `${SITE_URL}/gigs/${gig.slug}`,
+        image: `${SITE_URL}${gig.thumbnail}`,
+      })),
+    },
   ]}
 >
   <!-- Dedicated Fiverr-style Header with Category Mega Menu -->

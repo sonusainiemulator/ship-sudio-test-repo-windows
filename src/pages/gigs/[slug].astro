@@ -32,6 +32,7 @@ const pageDescription = gig.shortDescription;
   title={pageTitle}
   description={pageDescription}
   canonicalPath={`/gigs/${gig.slug}`}
+  ogImage={gig.thumbnail}
   jsonLd={[
     {
       "@context": "https://schema.org",
@@ -39,18 +40,98 @@ const pageDescription = gig.shortDescription;
       name: gig.title,
       image: `${SITE_URL}${gig.thumbnail}`,
       description: gig.shortDescription,
+      brand: {
+        "@type": "Brand",
+        name: SITE_NAME,
+      },
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: gig.rating.toString(),
         reviewCount: gig.reviewsCount.toString(),
+        bestRating: "5",
+        worstRating: "1",
       },
-      offers: {
-        "@type": "AggregateOffer",
-        priceCurrency: "INR",
-        lowPrice: gig.packages.basic.priceInr.toString(),
-        highPrice: gig.packages.premium.priceInr.toString(),
-        offerCount: "3",
+      offers: [
+        {
+          "@type": "Offer",
+          name: `${gig.packages.basic.title} (Basic)`,
+          price: gig.packages.basic.priceInr.toString(),
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: `${SITE_URL}/gigs/${gig.slug}`,
+          seller: {
+            "@type": "Organization",
+            name: SITE_NAME,
+          },
+        },
+        {
+          "@type": "Offer",
+          name: `${gig.packages.standard.title} (Standard)`,
+          price: gig.packages.standard.priceInr.toString(),
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: `${SITE_URL}/gigs/${gig.slug}`,
+          seller: {
+            "@type": "Organization",
+            name: SITE_NAME,
+          },
+        },
+        {
+          "@type": "Offer",
+          name: `${gig.packages.premium.title} (Premium)`,
+          price: gig.packages.premium.priceInr.toString(),
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+          url: `${SITE_URL}/gigs/${gig.slug}`,
+          seller: {
+            "@type": "Organization",
+            name: SITE_NAME,
+          },
+        },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: gig.title,
+      serviceType: gig.subcategory,
+      provider: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
       },
+      areaServed: "Global",
+      description: gig.shortDescription,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Gigs Marketplace",
+          item: `${SITE_URL}/gigs`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: gig.subcategory,
+          item: `${SITE_URL}/gigs?cat=${gig.category}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 4,
+          name: gig.title,
+          item: `${SITE_URL}/gigs/${gig.slug}`,
+        },
+      ],
     },
   ]}
 >

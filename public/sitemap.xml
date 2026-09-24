@@ -4,311 +4,447 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.rakebig.com/</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.rakebig.com/assets/preview.png</image:loc>
-      <image:title>Rakebig Services — AI Automation Agency</image:title>
+      <image:title>Rakebig Services — AI Automation Agency &amp; Software Marketplace</image:title>
     </image:image>
   </url>
   <url>
+    <loc>https://www.rakebig.com/gigs</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- GIGS MARKETPLACE CATALOG -->
+  <url>
+    <loc>https://www.rakebig.com/gigs/build-ai-whatsapp-marketing-chatbot</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_whatsapp_ai_bot.jpg</image:loc>
+      <image:title>Build AI WhatsApp Marketing Chatbot &amp; Multi-Agent Workflows</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/customize-perfex-crm-modules-development</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_perfex_crm_modules.jpg</image:loc>
+      <image:title>Customize Perfex CRM Modules Development &amp; Custom PHP Addons</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/customize-develop-and-fix-perfex-crm-modules</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_perfex_crm_fix_custom.jpg</image:loc>
+      <image:title>Customize Develop and Fix Perfex CRM Modules Professionally</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/setup-perfex-crm-customization-automation-workflow</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_perfex_crm_workflow.jpg</image:loc>
+      <image:title>Setup Perfex CRM Customization Custom Module Development Automation and Workflow</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/design-lucrative-black-friday-shopify-store-dropshipping</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_shopify_dropshipping.jpg</image:loc>
+      <image:title>Design Lucrative Black Friday Shopify Store &amp; Dropshipping Website</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/deploy-nextcloud-rocketchat-enterprise-vps</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_nextcloud_devops.jpg</image:loc>
+      <image:title>Deploy Nextcloud RocketChat &amp; Enterprise Open-Source on VPS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/build-full-stack-saas-mvp-nextjs-laravel</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_saas_mvp_web.jpg</image:loc>
+      <image:title>Build Full-Stack SaaS MVP in 14 Days with Next.js &amp; Laravel</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/develop-flutter-mobile-app-clone-android-ios</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_flutter_mobile_app.jpg</image:loc>
+      <image:title>Develop Cross-Platform Flutter Mobile App &amp; App Store Publishing</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/setup-klaviyo-whatsapp-ecommerce-marketing-flows</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/images/gigs/gig_klaviyo_ecommerce.jpg</image:loc>
+      <image:title>Setup Klaviyo &amp; WhatsApp E-commerce Marketing Automation Flows</image:title>
+    </image:image>
+  </url>
+
+  <!-- SPECIAL PACKAGES & LANDING PAGES -->
+  <url>
+    <loc>https://www.rakebig.com/digital-business-package</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/whatsapp-marketing</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/email-marketing</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/ai-email</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- MAIN NAVIGATION & CORE PAGES -->
+  <url>
     <loc>https://www.rakebig.com/product</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/solutions</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/contact</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/about</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/case-studies</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/careers</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- SERVICES -->
   <url>
     <loc>https://www.rakebig.com/services/perfex-crm-solutions</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/saas-platform-development</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/web-application-development</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/mobile-app-development</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/app-clone-development</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/app-publish-solution</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/ai-business-automation</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/business-integrations</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/cloud-deployment-devops</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/maintenance-support</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/dedicated-team</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/services/it-consulting</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- SOLUTIONS -->
   <url>
     <loc>https://www.rakebig.com/solutions/ai-assistants-chatbots</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/solutions/document-data-extraction</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/solutions/custom-ai-integrations</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/solutions/ai-workflow-automation</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/solutions/ai-strategy-consulting</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/solutions/app-publish-solution</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/solutions/ai-business-automation</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- CLONES -->
   <url>
     <loc>https://www.rakebig.com/clones</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/zepto-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/blinkit-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/food-app-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/taxi-app-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/on-demand-services-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/whatsapp-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/tiktok-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/dating-app-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/streaming-app-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/clones/video-conferencing-clone</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-  <url>
-    <loc>https://www.rakebig.com/terms</loc>
-    <lastmod>2026-03-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.rakebig.com/privacy</loc>
-    <lastmod>2026-03-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
+
+  <!-- OPEN SOURCE -->
   <url>
     <loc>https://www.rakebig.com/open-source</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/consultation-installation</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/whitelabel-customization</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/server-migrations</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/secops-aiops</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/managed-maintenance</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/nextcloud</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/rocket-chat</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/mattermost</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/jitsi-meet</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rakebig.com/open-source/coolify-aapanel</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- LEGAL & FOOTER -->
+  <url>
+    <loc>https://www.rakebig.com/terms</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/privacy</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
     <loc>https://www.rakebig.com/refund</loc>
-    <lastmod>2026-03-21</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
