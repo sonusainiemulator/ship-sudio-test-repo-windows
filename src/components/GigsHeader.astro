@@ -1,5 +1,5 @@
 ---
-import { FIVERR_MEGA_MENU_GROUPS } from "../data/gigs";
+import { GIGS_NAVIGATION_CATEGORIES, type GigsCategoryConfig } from "../data/gigs";
 import { BOOK_CONSULTATION_URL, SUPPORT_PHONE } from "../consts";
 
 interface Props {
@@ -8,20 +8,18 @@ interface Props {
 
 const { activeCategory = "all" } = Astro.props;
 
-// Group columns into 4 visible mega-columns for clean desktop layout
-const col1 = FIVERR_MEGA_MENU_GROUPS.slice(0, 3);
-const col2 = FIVERR_MEGA_MENU_GROUPS.slice(3, 5);
-const col3 = FIVERR_MEGA_MENU_GROUPS.slice(5, 7);
-const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
+const categories = GIGS_NAVIGATION_CATEGORIES;
+const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 ---
 
 <header class="gh-wrapper" data-gigs-header>
   <!-- Top Primary Bar -->
   <div class="gh-topbar">
     <div class="container gh-topbar__inner">
+      <!-- Desktop & Mobile Row 1 Brand / Home / Actions -->
       <div class="gh-topbar__brand-wrap">
         <a href="/" class="gh-topbar__back-home" title="Back to Rakebig Main Site">
-          <svg viewBox="0 0 16 16" fill="currentColor">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
           </svg>
           <span>Rakebig.com</span>
@@ -33,10 +31,10 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
         </a>
       </div>
 
-      <!-- Search bar matching Fiverr -->
-      <div class="gh-search">
+      <!-- Search bar matching Fiverr (Desktop & Mobile) -->
+      <div class="gh-search" role="search">
         <div class="gh-search__box">
-          <span class="gh-search__icon">
+          <span class="gh-search__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -52,14 +50,14 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
           />
         </div>
         <button type="button" class="gh-search__submit" id="gigs-search-btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
         </button>
       </div>
 
-      <!-- Actions -->
+      <!-- Actions (Desktop) -->
       <div class="gh-topbar__actions">
         <a href="/whatsapp-marketing" class="gh-pill-highlight">
           <span class="gh-pill-pulse"></span>
@@ -68,192 +66,382 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
         <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gh-action-link">
           Rakebig Pro
         </a>
-        <a href={`https://wa.me/${SUPPORT_PHONE.replace(/[^0-9]/g, "")}?text=Hi%20Rakebig,%20I%20want%20to%20request%20a%20custom%20gig`} target="_blank" rel="noopener noreferrer" class="gh-btn-request">
+        <a href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20want%20to%20request%20a%20custom%20gig`} target="_blank" rel="noopener noreferrer" class="gh-btn-request">
           Request Custom Offer
         </a>
+      </div>
+
+      <!-- Mobile Right Controls (WhatsApp + Burger) -->
+      <div class="gh-topbar__mobile-controls">
+        <a href="/whatsapp-marketing" class="gh-pill-highlight gh-pill-highlight--mobile" aria-label="WhatsApp AI">
+          <span class="gh-pill-pulse"></span>
+          <span>AI</span>
+        </a>
+        <button type="button" class="gh-burger-btn" id="gh-burger-toggle" aria-label="Open Marketplace Menu" aria-expanded="false" data-gigs-burger>
+          <span class="gh-burger-line gh-burger-line--top"></span>
+          <span class="gh-burger-line gh-burger-line--mid"></span>
+          <span class="gh-burger-line gh-burger-line--bot"></span>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Secondary Category Sub-Nav with Fiverr Style Mega Menu -->
-  <nav class="gh-catnav" aria-label="Gigs Categories">
+  <!-- Secondary Category Sub-Nav with Scroll Buttons & Dropdowns -->
+  <nav class="gh-catnav" aria-label="Gigs Marketplace Categories">
     <div class="container gh-catnav__inner">
-      <ul class="gh-catnav__list">
-        <li class="gh-catnav__item">
-          <a href="#gigs-grid" data-category-filter="trending" class="gh-catnav__link gh-catnav__link--trending">
-            <span>Trending 🔥</span>
-          </a>
-        </li>
+      <!-- Left scroll button -->
+      <button type="button" class="gh-catnav__scroll-btn gh-catnav__scroll-btn--left" id="gh-scroll-left" aria-label="Scroll categories left">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        </svg>
+      </button>
 
-        <!-- Active Mega Menu Item: Programming & Tech matching user's image -->
-        <li class="gh-catnav__item gh-catnav__item--has-mega" data-mega-trigger>
-          <a href="#gigs-grid" data-category-filter="programming-tech" class="gh-catnav__link gh-catnav__link--active">
-            <span>Programming &amp; Tech</span>
-            <svg class="gh-catnav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M2.5 4.5L6 8l3.5-3.5"/>
-            </svg>
-          </a>
+      <ul class="gh-catnav__list" id="gh-catnav-list">
+        {categories.map((cat) => {
+          const isActive = activeCategory === cat.id;
+          const isMegaGrid = cat.submenuLayout === "mega-grid";
 
-          <!-- Fiverr-style Multi-Column Mega Menu Container -->
-          <div class="gh-mega-menu" data-mega-dropdown>
-            <div class="gh-mega-menu__content">
-              <div class="gh-mega-columns">
-                <!-- Column 1 -->
-                <div class="gh-mega-col">
-                  {col1.map((group) => (
-                    <div class="gh-mega-group">
-                      <h4 class="gh-mega-group__title">{group.title}</h4>
-                      <ul class="gh-mega-group__list">
-                        {group.items.map((item) => (
-                          <li>
-                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
-                              <span>{item.name}</span>
-                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
+          return (
+            <li class={`gh-catnav__item ${cat.hasSubmenu ? "gh-catnav__item--has-sub" : ""} ${isMegaGrid ? "gh-catnav__item--has-mega" : ""}`} data-cat-item={cat.id}>
+              <a
+                href={cat.id === "trending" ? "#gigs-grid" : `/gigs?cat=${cat.id}`}
+                data-category-filter={cat.id}
+                class={`gh-catnav__link ${cat.isTrending ? "gh-catnav__link--trending" : ""} ${isActive ? "gh-catnav__link--active" : ""}`}
+              >
+                <span>{cat.name}</span>
+                {cat.hasSubmenu && (
+                  <svg class="gh-catnav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="M2.5 4.5L6 8l3.5-3.5"/>
+                  </svg>
+                )}
+              </a>
+
+              {cat.hasSubmenu && (
+                <div class={`gh-submenu-dropdown ${isMegaGrid ? "gh-submenu-dropdown--mega" : "gh-submenu-dropdown--compact"}`} data-submenu-panel>
+                  <div class="gh-submenu-content">
+                    <div class={`gh-submenu-groups ${isMegaGrid ? "gh-submenu-groups--4col" : "gh-submenu-groups--2col"}`}>
+                      {cat.groups.map((group) => (
+                        <div class="gh-submenu-group">
+                          <h4 class="gh-submenu-group__title">{group.title}</h4>
+                          <ul class="gh-submenu-group__list">
+                            {group.items.map((item) => (
+                              <li>
+                                <a href={item.href || `/gigs?filter=${item.slug}`} class="gh-submenu-item">
+                                  <span class="gh-submenu-item__label">{item.name}</span>
+                                  {item.tag && (
+                                    <span class={`gh-tag-pill ${item.tag === "NEW" ? "gh-tag-pill--new" : item.tag === "HOT" ? "gh-tag-pill--hot" : "gh-tag-pill--popular"}`}>
+                                      {item.tag}
+                                    </span>
+                                  )}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+
+                          {group.footerAction && (
+                            <a href={group.footerAction.href} class="gh-submenu-action-link">
+                              <span>{group.footerAction.text}</span>
+                              <svg class="gh-wand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M15 4V2m0 16v-2m6-6h-2m-16 0H1m15.5-7.5l-1.5 1.5M4 18l1.5-1.5m10 0l1.5 1.5M4 6l1.5 1.5M8 12l9-9 3 3-9 9-4 1 1-4z"/>
+                              </svg>
                             </a>
-                          </li>
-                        ))}
-                      </ul>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
 
-                <!-- Column 2 -->
-                <div class="gh-mega-col">
-                  {col2.map((group) => (
-                    <div class="gh-mega-group">
-                      <h4 class="gh-mega-group__title">{group.title}</h4>
-                      <ul class="gh-mega-group__list">
-                        {group.items.map((item) => (
-                          <li>
-                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
-                              <span>{item.name}</span>
-                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-
-                <!-- Column 3 -->
-                <div class="gh-mega-col">
-                  {col3.map((group) => (
-                    <div class="gh-mega-group">
-                      <h4 class="gh-mega-group__title">{group.title}</h4>
-                      <ul class="gh-mega-group__list">
-                        {group.items.map((item) => (
-                          <li>
-                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
-                              <span>{item.name}</span>
-                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-
-                <!-- Column 4 -->
-                <div class="gh-mega-col">
-                  {col4.map((group) => (
-                    <div class="gh-mega-group">
-                      <h4 class="gh-mega-group__title">{group.title}</h4>
-                      <ul class="gh-mega-group__list">
-                        {group.items.map((item) => (
-                          <li>
-                            <a href={`/gigs?filter=${item.slug}`} class="gh-mega-item">
-                              <span>{item.name}</span>
-                              {item.tag && <span class="gh-mega-tag">{item.tag}</span>}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <!-- Mega Menu Bottom Banner matching screenshot -->
-              <div class="gh-mega-banner">
-                <div class="gh-mega-banner__left">
-                  <span class="gh-mega-banner__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="9" cy="7" r="4"></circle>
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                  </span>
-                  <div>
-                    <strong>Looking for dedicated tech experts?</strong>
-                    <p>Find app developers, Perfex CRM engineers, and AI specialists to manage your project end-to-end.</p>
+                    {cat.bottomBanner && (
+                      <div class="gh-mega-banner">
+                        <div class="gh-mega-banner__left">
+                          <span class="gh-mega-banner__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                              <circle cx="9" cy="7" r="4"></circle>
+                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                          </span>
+                          <div>
+                            <strong>{cat.bottomBanner.title}</strong>
+                            <p>{cat.bottomBanner.desc}</p>
+                          </div>
+                        </div>
+                        <a href={cat.bottomBanner.ctaHref} class="gh-mega-banner__btn">
+                          {cat.bottomBanner.ctaText}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gh-mega-banner__btn">
-                  Consult an Expert
-                </a>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li class="gh-catnav__item">
-          <a href="#gigs-grid" data-category-filter="ai-services" class="gh-catnav__link">
-            <span>AI Services &amp; Bots</span>
-          </a>
-        </li>
-        <li class="gh-catnav__item">
-          <a href="#gigs-grid" data-category-filter="digital-marketing" class="gh-catnav__link">
-            <span>WhatsApp Marketing</span>
-          </a>
-        </li>
-        <li class="gh-catnav__item">
-          <a href="#gigs-grid" data-category-filter="perfex-crm" class="gh-catnav__link">
-            <span>Perfex CRM</span>
-          </a>
-        </li>
-        <li class="gh-catnav__item">
-          <a href="#gigs-grid" data-category-filter="mobile-apps" class="gh-catnav__link">
-            <span>Mobile Apps</span>
-          </a>
-        </li>
-        <li class="gh-catnav__item">
-          <a href="#gigs-grid" data-category-filter="cloud-devops" class="gh-catnav__link">
-            <span>Cloud &amp; Open Source</span>
-          </a>
-        </li>
+              )}
+            </li>
+          );
+        })}
       </ul>
+
+      <!-- Right scroll button -->
+      <button type="button" class="gh-catnav__scroll-btn gh-catnav__scroll-btn--right" id="gh-scroll-right" aria-label="Scroll categories right">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Slide-In Marketplace Drawer -->
+  <div class="gh-drawer" id="gh-mobile-drawer" data-gigs-drawer aria-hidden="true">
+    <div class="gh-drawer__header">
+      <a href="/gigs" class="gh-brand" aria-label="Rakebig Gigs">
+        <span class="gh-brand__logo">rakebig</span>
+        <span class="gh-brand__dot">.</span>
+        <span class="gh-brand__sub">gigs</span>
+      </a>
+      <button type="button" class="gh-drawer__close" id="gh-drawer-close-btn" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Quick CTAs inside drawer -->
+    <div class="gh-drawer__actions">
+      <a href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20want%20to%20request%20a%20custom%20gig`} target="_blank" rel="noopener noreferrer" class="gh-drawer__cta-btn">
+        Request Custom Offer
+      </a>
+      <a href="/whatsapp-marketing" class="gh-drawer__whatsapp-btn">
+        <span class="gh-pill-pulse"></span>
+        <span>WhatsApp AI Broadcast</span>
+      </a>
+    </div>
+
+    <!-- Accordion Category List -->
+    <div class="gh-drawer__menu">
+      <p class="gh-drawer__menu-label">Marketplace Categories</p>
+      <div class="gh-drawer__accordion">
+        {categories.map((cat) => {
+          if (!cat.hasSubmenu) {
+            return (
+              <a href="#gigs-grid" data-category-filter={cat.id} class="gh-drawer__item-single">
+                <span>{cat.name}</span>
+                <span class="gh-drawer__arrow">→</span>
+              </a>
+            );
+          }
+
+          return (
+            <div class="gh-drawer__acc-item" data-acc-group>
+              <button type="button" class="gh-drawer__acc-trigger" data-acc-trigger aria-expanded="false">
+                <span>{cat.name}</span>
+                <svg class="gh-drawer__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M2.5 4.5L6 8l3.5-3.5"/>
+                </svg>
+              </button>
+              <div class="gh-drawer__acc-panel" data-acc-panel hidden>
+                {cat.groups.map((group) => (
+                  <div class="gh-drawer__subgroup">
+                    <h5 class="gh-drawer__subgroup-title">{group.title}</h5>
+                    <ul class="gh-drawer__subgroup-list">
+                      {group.items.map((item) => (
+                        <li>
+                          <a href={item.href || `/gigs?filter=${item.slug}`} class="gh-drawer__sub-link">
+                            <span>{item.name}</span>
+                            {item.tag && (
+                              <span class={`gh-tag-pill ${item.tag === "NEW" ? "gh-tag-pill--new" : item.tag === "HOT" ? "gh-tag-pill--hot" : "gh-tag-pill--popular"}`}>
+                                {item.tag}
+                              </span>
+                            )}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {group.footerAction && (
+                      <a href={group.footerAction.href} class="gh-drawer__action-sublink">
+                        <span>{group.footerAction.text}</span>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- Drawer Footer Links -->
+    <div class="gh-drawer__footer">
+      <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gh-drawer__foot-link">
+        Book a Consultation →
+      </a>
+      <a href="/" class="gh-drawer__foot-link gh-drawer__foot-link--dim">
+        ← Back to Rakebig.com Main Site
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Backdrop Overlay -->
+  <div class="gh-backdrop" id="gh-drawer-backdrop" aria-hidden="true"></div>
 </header>
 
 <script is:inline>
-  // Filter events when clicking category links
-  document.querySelectorAll('[data-category-filter]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const cat = link.getAttribute('data-category-filter');
-      window.dispatchEvent(new CustomEvent('gigCategoryFilter', { detail: { category: cat } }));
-    });
-  });
+  function initGigsHeader() {
+    const header = document.querySelector('[data-gigs-header]');
+    if (!header || header.dataset.gigsInit === '1') return;
+    header.dataset.gigsInit = '1';
 
-  // Search input handler
-  const searchInput = document.getElementById('gigs-search-input');
-  const searchBtn = document.getElementById('gigs-search-btn');
-  const triggerSearch = () => {
-    const q = searchInput ? searchInput.value.trim() : '';
-    window.dispatchEvent(new CustomEvent('gigSearchQuery', { detail: { query: q } }));
-  };
-  if (searchInput) {
-    searchInput.addEventListener('input', triggerSearch);
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') triggerSearch();
+    // 1. Category Filter Clicks
+    const filterLinks = header.querySelectorAll('[data-category-filter]');
+    filterLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const cat = link.getAttribute('data-category-filter');
+        if (cat) {
+          window.dispatchEvent(new CustomEvent('gigCategoryFilter', { detail: { category: cat } }));
+          // Update active link styling
+          header.querySelectorAll('.gh-catnav__link').forEach((l) => {
+            l.classList.toggle('gh-catnav__link--active', l.getAttribute('data-category-filter') === cat);
+          });
+          // Close mobile drawer if open
+          closeMobileDrawer();
+        }
+      });
+    });
+
+    // 2. Search Box Handlers
+    const searchInput = document.getElementById('gigs-search-input');
+    const searchBtn = document.getElementById('gigs-search-btn');
+    const dispatchSearch = () => {
+      const q = searchInput ? searchInput.value.trim() : '';
+      window.dispatchEvent(new CustomEvent('gigSearchQuery', { detail: { query: q } }));
+    };
+
+    if (searchInput) {
+      searchInput.addEventListener('input', dispatchSearch);
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          dispatchSearch();
+          const grid = document.getElementById('gigs-grid');
+          if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+    if (searchBtn) {
+      searchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        dispatchSearch();
+        const grid = document.getElementById('gigs-grid');
+        if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // 3. Category Horizontal Scroll with Buttons
+    const catList = document.getElementById('gh-catnav-list');
+    const scrollLeftBtn = document.getElementById('gh-scroll-left');
+    const scrollRightBtn = document.getElementById('gh-scroll-right');
+
+    const updateScrollButtons = () => {
+      if (!catList || !scrollLeftBtn || !scrollRightBtn) return;
+      const atStart = catList.scrollLeft <= 5;
+      const atEnd = catList.scrollLeft + catList.clientWidth >= catList.scrollWidth - 5;
+      scrollLeftBtn.classList.toggle('is-hidden', atStart);
+      scrollRightBtn.classList.toggle('is-hidden', atEnd);
+    };
+
+    if (scrollLeftBtn && catList) {
+      scrollLeftBtn.addEventListener('click', () => {
+        catList.scrollBy({ left: -220, behavior: 'smooth' });
+      });
+    }
+    if (scrollRightBtn && catList) {
+      scrollRightBtn.addEventListener('click', () => {
+        catList.scrollBy({ left: 220, behavior: 'smooth' });
+      });
+    }
+    if (catList) {
+      catList.addEventListener('scroll', updateScrollButtons, { passive: true });
+      window.addEventListener('resize', updateScrollButtons, { passive: true });
+      setTimeout(updateScrollButtons, 100);
+    }
+
+    // 4. Mobile Drawer Open / Close
+    const burgerToggle = document.getElementById('gh-burger-toggle');
+    const drawerCloseBtn = document.getElementById('gh-drawer-close-btn');
+    const drawer = document.getElementById('gh-mobile-drawer');
+    const backdrop = document.getElementById('gh-drawer-backdrop');
+
+    function openMobileDrawer() {
+      if (!drawer || !backdrop) return;
+      drawer.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      drawer.setAttribute('aria-hidden', 'false');
+      burgerToggle?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileDrawer() {
+      if (!drawer || !backdrop) return;
+      drawer.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden', 'true');
+      burgerToggle?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    burgerToggle?.addEventListener('click', () => {
+      if (drawer?.classList.contains('is-open')) closeMobileDrawer();
+      else openMobileDrawer();
+    });
+    drawerCloseBtn?.addEventListener('click', closeMobileDrawer);
+    backdrop?.addEventListener('click', closeMobileDrawer);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer?.classList.contains('is-open')) {
+        closeMobileDrawer();
+      }
+    });
+
+    // 5. Drawer Accordion Submenus
+    const accTriggers = header.querySelectorAll('[data-acc-trigger]');
+    accTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('[data-acc-group]');
+        const panel = item?.querySelector('[data-acc-panel]');
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Close others in accordion
+        accTriggers.forEach((otherTrig) => {
+          if (otherTrig !== trigger) {
+            otherTrig.setAttribute('aria-expanded', 'false');
+            const otherItem = otherTrig.closest('[data-acc-group]');
+            const otherPanel = otherItem?.querySelector('[data-acc-panel]');
+            if (otherPanel) otherPanel.hidden = true;
+            otherItem?.classList.remove('is-expanded');
+          }
+        });
+
+        trigger.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+        if (panel) panel.hidden = isExpanded;
+        item?.classList.toggle('is-expanded', !isExpanded);
+      });
+    });
+
+    // 6. Close drawer when clicking sublinks
+    drawer?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMobileDrawer();
+      });
     });
   }
-  if (searchBtn) {
-    searchBtn.addEventListener('click', triggerSearch);
-  }
+
+  initGigsHeader();
+  document.addEventListener('astro:after-swap', () => {
+    document.body.style.overflow = '';
+    const h = document.querySelector('[data-gigs-header]');
+    if (h) delete h.dataset.gigsInit;
+    initGigsHeader();
+  });
 </script>
 
 <style>
@@ -262,13 +450,14 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     border-bottom: 1px solid #e4e5e7;
     position: sticky;
     top: 0;
-    z-index: 90;
+    z-index: 95;
     font-family: inherit;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   }
 
+  /* Top Bar */
   .gh-topbar {
-    padding: 12px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #f1f2f4;
   }
 
@@ -276,13 +465,14 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
   .gh-topbar__brand-wrap {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     flex-shrink: 0;
   }
 
@@ -290,11 +480,11 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: #62646a;
     text-decoration: none;
-    padding: 4px 8px;
+    padding: 5px 9px;
     border-radius: 6px;
     background: #f7f7f8;
     transition: all 0.2s ease;
@@ -331,7 +521,7 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
   }
 
   .gh-brand__sub {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 700;
     color: #1dbf73;
     background: rgba(29, 191, 115, 0.1);
@@ -342,10 +532,11 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     letter-spacing: 0.05em;
   }
 
-  /* Fiverr Search Bar */
+  /* Fiverr-style Search Bar */
   .gh-search {
     flex: 1;
     max-width: 580px;
+    min-width: 240px;
     display: flex;
     align-items: center;
   }
@@ -400,7 +591,7 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
 
   .gh-search__submit:hover {
@@ -413,6 +604,7 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     height: 18px;
   }
 
+  /* Actions */
   .gh-topbar__actions {
     display: flex;
     align-items: center;
@@ -432,6 +624,11 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     border-radius: 20px;
     text-decoration: none;
     transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .gh-pill-highlight:hover {
+    background: #cbf9e2;
   }
 
   .gh-pill-pulse {
@@ -439,10 +636,10 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     height: 7px;
     border-radius: 50%;
     background: #00A884;
-    animation: pillPulse 1.8s infinite;
+    animation: ghPillPulse 1.8s infinite;
   }
 
-  @keyframes pillPulse {
+  @keyframes ghPillPulse {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.4; transform: scale(1.4); }
   }
@@ -469,6 +666,7 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     border-radius: 4px;
     text-decoration: none;
     transition: all 0.2s ease;
+    white-space: nowrap;
   }
 
   .gh-btn-request:hover {
@@ -476,24 +674,109 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     color: #ffffff;
   }
 
-  /* Category Sub-nav */
+  /* Mobile Controls */
+  .gh-topbar__mobile-controls {
+    display: none;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .gh-burger-btn {
+    display: inline-flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #e4e5e7;
+    background: #f7f7f8;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .gh-burger-line {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #222325;
+    border-radius: 2px;
+    position: absolute;
+    transition: transform 0.2s ease, opacity 0.15s ease, top 0.2s ease;
+  }
+
+  .gh-burger-line--top { top: 12px; }
+  .gh-burger-line--mid { top: 18px; }
+  .gh-burger-line--bot { top: 24px; }
+
+  /* Category Nav Bar */
   .gh-catnav {
     background: #ffffff;
+    position: relative;
   }
 
   .gh-catnav__inner {
     position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .gh-catnav__scroll-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    color: #62646a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    transition: all 0.2s ease;
+  }
+
+  .gh-catnav__scroll-btn:hover {
+    color: #1dbf73;
+    border-color: #1dbf73;
+    background: #fcfcfc;
+  }
+
+  .gh-catnav__scroll-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .gh-catnav__scroll-btn--left {
+    left: 0;
+  }
+
+  .gh-catnav__scroll-btn--right {
+    right: 0;
+  }
+
+  .gh-catnav__scroll-btn.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
   }
 
   .gh-catnav__list {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 22px;
     list-style: none;
-    padding: 0;
+    padding: 0 32px;
     margin: 0;
     overflow-x: auto;
     scrollbar-width: none;
+    scroll-behavior: smooth;
+    width: 100%;
   }
 
   .gh-catnav__list::-webkit-scrollbar {
@@ -509,7 +792,7 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 12px 0 10px 0;
+    padding: 12px 2px 10px 2px;
     font-size: 0.88rem;
     font-weight: 500;
     color: #62646a;
@@ -534,107 +817,195 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     font-weight: 600;
   }
 
+  .gh-catnav__link--trending:hover {
+    color: #d84315;
+    border-bottom-color: #e65100;
+  }
+
   .gh-catnav__caret {
     width: 10px;
     height: 10px;
+    margin-left: 2px;
+    transition: transform 0.2s ease;
   }
 
-  /* Fiverr-style Mega Menu */
-  .gh-catnav__item--has-mega:hover .gh-mega-menu,
-  .gh-catnav__item--has-mega:focus-within .gh-mega-menu {
+  .gh-catnav__item:hover .gh-catnav__caret {
+    transform: rotate(180deg);
+  }
+
+  /* Fiverr-style Dropdown & Mega Menu */
+  .gh-catnav__item--has-sub:hover .gh-submenu-dropdown,
+  .gh-catnav__item--has-sub:focus-within .gh-submenu-dropdown {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
   }
 
-  .gh-mega-menu {
+  .gh-submenu-dropdown {
     position: absolute;
     top: 100%;
-    left: -20px;
-    width: 1080px;
-    max-width: 95vw;
+    left: 0;
     background: #ffffff;
     border: 1px solid #e4e5e7;
     border-radius: 0 0 8px 8px;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
     visibility: hidden;
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    transform: translateY(6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
     pointer-events: none;
     z-index: 100;
   }
 
-  .gh-mega-menu__content {
-    padding: 24px 28px 16px 28px;
+  /* Invisible hover bridge */
+  .gh-submenu-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: transparent;
   }
 
-  .gh-mega-columns {
+  .gh-submenu-dropdown--compact {
+    width: 580px;
+    max-width: 90vw;
+  }
+
+  .gh-submenu-dropdown--mega {
+    width: 1080px;
+    max-width: 95vw;
+    left: -20px;
+  }
+
+  .gh-submenu-content {
+    padding: 22px 24px 18px 24px;
+  }
+
+  .gh-submenu-groups {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 28px;
   }
 
-  .gh-mega-col {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+  .gh-submenu-groups--2col {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .gh-mega-group__title {
-    font-size: 0.92rem;
+  .gh-submenu-groups--4col {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gh-submenu-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gh-submenu-group__title {
+    font-size: 0.95rem;
     font-weight: 700;
     color: #222325;
-    margin: 0 0 10px 0;
+    margin: 0 0 12px 0;
     letter-spacing: -0.01em;
   }
 
-  .gh-mega-group__list {
+  .gh-submenu-group__list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 8px;
   }
 
-  .gh-mega-item {
+  .gh-submenu-item {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    font-size: 0.82rem;
-    color: #62646a;
+    font-size: 0.84rem;
+    color: #55575d;
     text-decoration: none;
+    padding: 2px 0;
     transition: color 0.15s ease;
   }
 
-  .gh-mega-item:hover {
+  .gh-submenu-item:hover {
     color: #1dbf73;
   }
 
-  .gh-mega-tag {
-    font-size: 0.64rem;
-    font-weight: 700;
-    padding: 1px 5px;
-    border-radius: 3px;
-    background: #ff7640;
-    color: #ffffff;
-    letter-spacing: 0.04em;
+  .gh-submenu-item:hover .gh-submenu-item__label {
+    color: #1dbf73;
   }
 
-  /* Mega Menu Bottom Banner matching screenshot */
+  /* Tag Pills matching image 1 */
+  .gh-tag-pill {
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 9999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+
+  .gh-tag-pill--new {
+    border: 1px solid #ff3b81;
+    color: #ff3b81;
+    background: #fff0f5;
+  }
+
+  .gh-tag-pill--hot {
+    border: 1px solid #ff7640;
+    color: #ffffff;
+    background: #ff7640;
+  }
+
+  .gh-tag-pill--popular {
+    border: 1px solid #00a884;
+    color: #00875a;
+    background: #e3fcef;
+  }
+
+  /* "Let us manage your project" link matching image 1 */
+  .gh-submenu-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #4361ee;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f1f2f4;
+    transition: all 0.15s ease;
+  }
+
+  .gh-submenu-action-link:hover {
+    color: #2546db;
+    transform: translateX(2px);
+  }
+
+  .gh-wand-icon {
+    width: 15px;
+    height: 15px;
+    stroke-width: 2.2;
+    flex-shrink: 0;
+  }
+
+  /* Mega Banner */
   .gh-mega-banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    margin-top: 24px;
-    padding-top: 16px;
+    margin-top: 22px;
+    padding: 14px 18px;
     border-top: 1px solid #f1f2f4;
     background: #fafafa;
-    padding: 14px 18px;
     border-radius: 6px;
   }
 
@@ -692,12 +1063,326 @@ const col4 = FIVERR_MEGA_MENU_GROUPS.slice(7, 9);
     color: #ffffff;
   }
 
+  /* Mobile Drawer */
+  .gh-drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(340px, 86vw);
+    background: #ffffff;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.18);
+    z-index: 120;
+    transform: translateX(110%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .gh-drawer.is-open {
+    transform: translateX(0);
+  }
+
+  .gh-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eef2f7;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .gh-drawer__close {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: #f1f5f9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .gh-drawer__close svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .gh-drawer__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px;
+    background: #f8fafc;
+    border-bottom: 1px solid #eef2f7;
+  }
+
+  .gh-drawer__cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 14px;
+    background: #1dbf73;
+    color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(29, 191, 115, 0.25);
+  }
+
+  .gh-drawer__whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 14px;
+    background: #e3fcef;
+    color: #00875a;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gh-drawer__menu {
+    padding: 12px 0;
+    flex: 1;
+  }
+
+  .gh-drawer__menu-label {
+    padding: 6px 18px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  .gh-drawer__accordion {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gh-drawer__item-single {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222325;
+    text-decoration: none;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .gh-drawer__arrow {
+    color: #94a3b8;
+  }
+
+  .gh-drawer__acc-item {
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .gh-drawer__acc-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222325;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .gh-drawer__caret {
+    width: 14px;
+    height: 14px;
+    color: #62646a;
+    transition: transform 0.2s ease;
+  }
+
+  .gh-drawer__acc-item.is-expanded .gh-drawer__caret {
+    transform: rotate(180deg);
+  }
+
+  .gh-drawer__acc-panel {
+    background: #f8fafc;
+    padding: 10px 18px 14px 18px;
+    border-top: 1px solid #f1f5f9;
+  }
+
+  .gh-drawer__subgroup {
+    margin-bottom: 14px;
+  }
+
+  .gh-drawer__subgroup:last-child {
+    margin-bottom: 0;
+  }
+
+  .gh-drawer__subgroup-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #334155;
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .gh-drawer__subgroup-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .gh-drawer__sub-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: #62646a;
+    text-decoration: none;
+    padding: 3px 0;
+  }
+
+  .gh-drawer__sub-link:hover {
+    color: #1dbf73;
+  }
+
+  .gh-drawer__action-sublink {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4361ee;
+    text-decoration: none;
+  }
+
+  .gh-drawer__footer {
+    padding: 16px 18px;
+    background: #ffffff;
+    border-top: 1px solid #eef2f7;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gh-drawer__foot-link {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #222325;
+    text-decoration: none;
+  }
+
+  .gh-drawer__foot-link--dim {
+    color: #62646a;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+
+  /* Backdrop */
+  .gh-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 110;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .gh-backdrop.is-open {
+    display: block;
+    opacity: 1;
+  }
+
+  /* Responsive Rules */
   @media (max-width: 900px) {
     .gh-topbar__actions {
       display: none;
     }
+  }
+
+  @media (max-width: 768px) {
+    .gh-drawer {
+      display: flex;
+    }
+
+    .gh-topbar__mobile-controls {
+      display: flex;
+    }
+
+    .gh-topbar__inner {
+      gap: 10px;
+    }
+
+    /* Wrap brand row & search into 2 clean mobile rows */
+    .gh-topbar__brand-wrap {
+      flex: 1;
+      justify-content: flex-start;
+    }
+
     .gh-search {
+      width: 100%;
       max-width: 100%;
+      order: 3;
+      margin-top: 4px;
+    }
+
+    .gh-search__input {
+      height: 38px;
+      font-size: 0.85rem;
+      padding: 0 12px 0 36px;
+    }
+
+    .gh-search__submit {
+      height: 38px;
+      width: 44px;
+    }
+
+    .gh-brand__logo {
+      font-size: 1.45rem;
+    }
+
+    .gh-catnav__list {
+      padding: 0 10px;
+      gap: 16px;
+    }
+
+    .gh-catnav__scroll-btn {
+      display: none;
+    }
+
+    /* On mobile touch devices, disable hover dropdown in favor of drawer */
+    .gh-catnav__item--has-sub:hover .gh-submenu-dropdown {
+      display: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .gh-topbar__back-home span {
+      display: none;
+    }
+    .gh-topbar__back-home {
+      padding: 6px;
     }
   }
 </style>

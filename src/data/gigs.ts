@@ -38,11 +38,289 @@ export interface GigItem {
 export const GIG_CATEGORIES = [
   { id: "all", name: "All Services" },
   { id: "programming-tech", name: "Programming & Tech", hasMegaMenu: true },
-  { id: "ai-services", name: "AI Services & Agents", hasMegaMenu: true },
-  { id: "digital-marketing", name: "WhatsApp & Marketing", hasMegaMenu: true },
-  { id: "perfex-crm", name: "Perfex CRM & SaaS", hasMegaMenu: false },
-  { id: "mobile-apps", name: "Mobile Apps & Clones", hasMegaMenu: false },
-  { id: "cloud-devops", name: "Cloud & DevOps", hasMegaMenu: false },
+  { id: "ai-services", name: "AI Services & Bots", hasMegaMenu: true },
+  { id: "digital-marketing", name: "WhatsApp Marketing", hasMegaMenu: true },
+  { id: "perfex-crm", name: "Perfex CRM", hasMegaMenu: true },
+  { id: "mobile-apps", name: "Mobile Apps", hasMegaMenu: true },
+  { id: "cloud-devops", name: "Cloud & Open Source", hasMegaMenu: true },
+];
+
+export interface GigsSubmenuItem {
+  name: string;
+  slug: string;
+  tag?: "NEW" | "POPULAR" | "HOT";
+  href?: string;
+}
+
+export interface GigsSubmenuGroup {
+  title: string;
+  items: GigsSubmenuItem[];
+  footerAction?: {
+    text: string;
+    href: string;
+  };
+}
+
+export interface GigsCategoryConfig {
+  id: string;
+  name: string;
+  shortName?: string;
+  isTrending?: boolean;
+  hasSubmenu: boolean;
+  submenuLayout?: "single-col" | "two-col" | "mega-grid";
+  groups: GigsSubmenuGroup[];
+  bottomBanner?: {
+    title: string;
+    desc: string;
+    ctaText: string;
+    ctaHref: string;
+  };
+}
+
+export const GIGS_NAVIGATION_CATEGORIES: GigsCategoryConfig[] = [
+  {
+    id: "trending",
+    name: "Trending 🔥",
+    hasSubmenu: false,
+    isTrending: true,
+    groups: [],
+  },
+  {
+    id: "programming-tech",
+    name: "Programming & Tech",
+    hasSubmenu: true,
+    submenuLayout: "mega-grid",
+    groups: [
+      {
+        title: "Website Development",
+        items: [
+          { name: "Business Websites", slug: "business-websites" },
+          { name: "E-Commerce Development", slug: "ecommerce-development" },
+          { name: "Custom Websites", slug: "custom-websites" },
+          { name: "Landing Pages", slug: "landing-pages" },
+          { name: "Dropshipping Websites", slug: "dropshipping-websites" },
+        ],
+      },
+      {
+        title: "Website Platforms",
+        items: [
+          { name: "WordPress", slug: "wordpress" },
+          { name: "Shopify", slug: "shopify" },
+          { name: "Wix", slug: "wix" },
+          { name: "Webflow", slug: "webflow" },
+          { name: "Bubble", slug: "bubble" },
+        ],
+      },
+      {
+        title: "Website Maintenance",
+        items: [
+          { name: "Website Customization", slug: "website-customization" },
+          { name: "Bug Fixes", slug: "bug-fixes" },
+          { name: "Backup & Migration", slug: "backup-migration" },
+          { name: "Speed Optimization", slug: "speed-optimization" },
+        ],
+      },
+      {
+        title: "Software Development",
+        items: [
+          { name: "Full Stack Web Apps", slug: "full-stack-web-apps" },
+          { name: "Automations & Agents", slug: "automations-agents" },
+          { name: "APIs & Webhooks Integrations", slug: "apis-integrations" },
+          { name: "Databases & Performance", slug: "databases" },
+          { name: "QA & Testing", slug: "qa-review" },
+        ],
+      },
+    ],
+    bottomBanner: {
+      title: "Looking for dedicated tech experts?",
+      desc: "Find app developers, Perfex CRM engineers, and AI specialists to manage your project end-to-end.",
+      ctaText: "Let us manage your project 🪄",
+      ctaHref: "/contact",
+    },
+  },
+  {
+    id: "ai-services",
+    name: "AI Services & Bots",
+    shortName: "AI Services",
+    hasSubmenu: true,
+    submenuLayout: "two-col",
+    groups: [
+      {
+        title: "AI Mobile Development",
+        items: [
+          { name: "AI Mobile Apps", tag: "NEW", slug: "ai-mobile-apps" },
+          { name: "AI Websites & Software", tag: "NEW", slug: "ai-websites-software" },
+          { name: "AI Chatbot", slug: "ai-chatbot" },
+          { name: "AI Integrations", slug: "ai-integrations" },
+          { name: "AI Agents", slug: "ai-agents" },
+          { name: "AI Fine-Tuning", slug: "ai-fine-tuning" },
+          { name: "AI Technology Consulting", tag: "NEW", slug: "ai-technology-consulting" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+      {
+        title: "AI Workflows & Automation",
+        items: [
+          { name: "Custom LLM & RAG Pipelines", tag: "NEW", slug: "custom-llm-rag" },
+          { name: "Document Data Extraction", slug: "document-data-extraction" },
+          { name: "AI Voice & Call Agents", tag: "NEW", slug: "ai-voice-agents" },
+          { name: "Multimodal AI Vision", slug: "multimodal-ai-vision" },
+          { name: "Zapier / Make / n8n AI Automations", slug: "zapier-n8n-automations" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+    ],
+  },
+  {
+    id: "digital-marketing",
+    name: "WhatsApp Marketing",
+    hasSubmenu: true,
+    submenuLayout: "two-col",
+    groups: [
+      {
+        title: "WhatsApp Automation & Bots",
+        items: [
+          { name: "AI WhatsApp Chatbot", tag: "POPULAR", slug: "build-ai-whatsapp-marketing-chatbot" },
+          { name: "Official Meta Cloud API Setup", slug: "meta-cloud-api-setup" },
+          { name: "Klaviyo & WhatsApp E-Commerce Flows", tag: "HOT", slug: "setup-klaviyo-whatsapp-ecommerce-marketing-flows" },
+          { name: "Automated Broadcast Engine", slug: "automated-broadcast-engine" },
+          { name: "Green Tick Verification Help", slug: "green-tick-verification" },
+          { name: "WhatsApp CRM & Webhook Sync", tag: "NEW", slug: "whatsapp-crm-webhook" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+      {
+        title: "Conversion & Growth Funnels",
+        items: [
+          { name: "Abandoned Cart Recovery Automation", slug: "abandoned-cart-recovery" },
+          { name: "Multi-Agent Support Shared Inbox", slug: "multi-agent-inbox" },
+          { name: "Click-to-WhatsApp Ads Setup", tag: "NEW", slug: "click-to-whatsapp-ads" },
+          { name: "Automated Review & Feedback Requests", slug: "automated-reviews-bot" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+    ],
+  },
+  {
+    id: "perfex-crm",
+    name: "Perfex CRM",
+    hasSubmenu: true,
+    submenuLayout: "two-col",
+    groups: [
+      {
+        title: "Perfex CRM Customization",
+        items: [
+          { name: "Custom Module Development", tag: "POPULAR", slug: "customize-perfex-crm-modules-development" },
+          { name: "Perfex CRM Fresh Installation & Setup", slug: "perfex-crm-fresh-installation" },
+          { name: "Workflow & Email Automation Rules", slug: "setup-perfex-crm-customization-automation-workflow" },
+          { name: "Payment Gateway Integration", slug: "perfex-payment-gateways" },
+          { name: "Multi-Company SaaS Addon", tag: "NEW", slug: "perfex-multi-company-saas" },
+          { name: "Version Upgrade & Bug Fixing", slug: "customize-develop-and-fix-perfex-crm-modules" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+      {
+        title: "Business Integrations",
+        items: [
+          { name: "WhatsApp Notification Gateway", tag: "HOT", slug: "perfex-whatsapp-gateway" },
+          { name: "REST API & Webhooks Integration", slug: "perfex-rest-api" },
+          { name: "Bespoke Client Portal Styling", slug: "perfex-client-portal-ui" },
+          { name: "Accounting & GST Invoicing Sync", slug: "perfex-accounting-automation" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+    ],
+  },
+  {
+    id: "mobile-apps",
+    name: "Mobile Apps",
+    hasSubmenu: true,
+    submenuLayout: "two-col",
+    groups: [
+      {
+        title: "Mobile App Development",
+        items: [
+          { name: "Flutter Cross-Platform Apps", tag: "POPULAR", slug: "develop-flutter-mobile-app-clone-android-ios" },
+          { name: "AI Mobile Apps", tag: "NEW", slug: "ai-mobile-apps" },
+          { name: "Zepto / Blinkit Quick Commerce Clone", tag: "HOT", slug: "zepto-blinkit-clone-app" },
+          { name: "WhatsApp / Messenger Social Clone", slug: "whatsapp-messenger-clone-app" },
+          { name: "iOS & Android Store Publishing", tag: "NEW", slug: "app-store-publishing" },
+          { name: "Mobile App UI/UX & Redesign", slug: "mobile-app-ui-ux" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+      {
+        title: "Engineering & Backend",
+        items: [
+          { name: "Native Android App (Kotlin)", slug: "native-android-kotlin" },
+          { name: "Native iOS App (Swift)", slug: "native-ios-swift" },
+          { name: "Firebase & Supabase Cloud Sync", slug: "firebase-supabase-backend" },
+          { name: "Push Notifications & Deep Linking", slug: "push-notifications-deeplinking" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+    ],
+  },
+  {
+    id: "cloud-devops",
+    name: "Cloud & Open Source",
+    hasSubmenu: true,
+    submenuLayout: "two-col",
+    groups: [
+      {
+        title: "Cloud & DevOps",
+        items: [
+          { name: "Self-Hosted Coolify / aaPanel", tag: "NEW", slug: "coolify-aapanel" },
+          { name: "Enterprise Nextcloud Setup", slug: "deploy-nextcloud-rocketchat-enterprise-vps" },
+          { name: "Rocket.Chat & Mattermost Server", slug: "deploy-nextcloud-rocketchat-enterprise-vps" },
+          { name: "VPS Hardening & CrowdSec WAF", slug: "vps-hardening-waf" },
+          { name: "Docker CI/CD & GitHub Actions", slug: "docker-cicd-pipeline" },
+          { name: "AWS & DigitalOcean Migration", slug: "aws-digitalocean-migration" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+      {
+        title: "Managed Infrastructure",
+        items: [
+          { name: "Zero-Downtime Database Backups", slug: "database-backup-automation" },
+          { name: "Traefik / Nginx Reverse Proxy SSL", slug: "reverse-proxy-ssl" },
+          { name: "Server Monitoring & 24/7 Alerts", slug: "server-monitoring-alerts" },
+          { name: "Multi-Cloud High Availability", slug: "multi-cloud-ha" },
+        ],
+        footerAction: {
+          text: "Let us manage your project 🪄",
+          href: "/contact",
+        },
+      },
+    ],
+  },
 ];
 
 export const FIVERR_MEGA_MENU_GROUPS = [
