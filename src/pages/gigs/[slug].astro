@@ -237,6 +237,10 @@ const pageDescription = gig.shortDescription;
           <!-- Compare Packages Matrix Table -->
           <section class="gd-section">
             <h2 class="gd-section-title">Compare Packages</h2>
+            <div class="gd-matrix-scroll-hint">
+              <i class="fa-solid fa-arrows-left-right"></i>
+              <span>Swipe table horizontally to compare all packages</span>
+            </div>
             <div class="gd-matrix-table-wrap">
               <table class="gd-matrix-table">
                 <thead>
@@ -494,6 +498,24 @@ const pageDescription = gig.shortDescription;
 
       </div>
     </div>
+
+    <!-- Mobile Sticky Bottom Quick-Order Bar -->
+    <div class="gd-mobile-bottom-bar" id="gd-mobile-bottom-bar">
+      <div class="gd-mobile-bottom-bar__left">
+        <span class="gd-mobile-bottom-bar__label">From</span>
+        <strong class="gd-mobile-bottom-bar__price">₹{gig.packages.basic.priceInr.toLocaleString()}</strong>
+        <span class="gd-mobile-bottom-bar__usd">(${gig.packages.basic.priceUsd})</span>
+      </div>
+      <a
+        href={`https://wa.me/${cleanPhone}?text=${whatsappMessage("Basic", gig.packages.basic.priceInr)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="gd-mobile-bottom-bar__btn"
+      >
+        <span>Order Now</span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
   </main>
 
   <SiteFooter />
@@ -528,13 +550,25 @@ const pageDescription = gig.shortDescription;
     background: #ffffff;
     color: #222325;
     font-family: Macan, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding-bottom: 60px;
+    padding-bottom: 90px;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+    box-sizing: border-box;
   }
 
   .gd-container {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .gd-container {
+      padding: 0 16px;
+    }
   }
 
   .gd-top-nav {
@@ -544,6 +578,9 @@ const pageDescription = gig.shortDescription;
     padding: 16px 0;
     border-bottom: 1px solid #efeff0;
     margin-bottom: 24px;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .gd-breadcrumbs {
@@ -552,12 +589,16 @@ const pageDescription = gig.shortDescription;
     gap: 8px;
     font-size: 0.85rem;
     color: #74767e;
+    min-width: 0;
+    flex-wrap: wrap;
+    line-height: 1.4;
   }
 
   .gd-breadcrumbs a {
     color: #74767e;
     text-decoration: none;
     transition: color 0.15s ease;
+    white-space: nowrap;
   }
 
   .gd-breadcrumbs a:hover {
@@ -567,12 +608,35 @@ const pageDescription = gig.shortDescription;
   .gd-breadcrumbs__current {
     color: #222325;
     font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 240px;
   }
 
   .gd-top-actions {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .gd-top-nav {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 0;
+      margin-bottom: 16px;
+    }
+
+    .gd-breadcrumbs__current {
+      max-width: 180px;
+    }
+
+    .gd-top-actions {
+      align-self: flex-end;
+    }
   }
 
   .gd-icon-btn {
@@ -600,11 +664,23 @@ const pageDescription = gig.shortDescription;
     grid-template-columns: 1fr 410px;
     gap: 48px;
     align-items: start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .gd-left,
+  .gd-right {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   @media (max-width: 1024px) {
     .gd-grid {
       grid-template-columns: 1fr;
+      gap: 32px;
     }
   }
 
@@ -614,6 +690,16 @@ const pageDescription = gig.shortDescription;
     line-height: 1.3;
     color: #222325;
     margin: 0 0 16px 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  @media (max-width: 640px) {
+    .gd-title {
+      font-size: 1.35rem;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
   }
 
   .gd-seller-bar {
@@ -621,6 +707,7 @@ const pageDescription = gig.shortDescription;
     align-items: center;
     gap: 14px;
     margin-bottom: 24px;
+    flex-wrap: wrap;
   }
 
   .gd-seller-avatar {
@@ -628,6 +715,7 @@ const pageDescription = gig.shortDescription;
     height: 48px;
     border-radius: 50%;
     object-fit: cover;
+    flex-shrink: 0;
   }
 
   .gd-seller-meta {
@@ -663,6 +751,7 @@ const pageDescription = gig.shortDescription;
     align-items: center;
     gap: 6px;
     font-size: 0.88rem;
+    flex-wrap: wrap;
   }
 
   .gd-star {
@@ -794,13 +883,41 @@ const pageDescription = gig.shortDescription;
   }
 
   /* Matrix Table */
+  .gd-matrix-scroll-hint {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: #00875a;
+    background: #eaf8f1;
+    border: 1px solid #c3edd7;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .gd-matrix-scroll-hint {
+      display: inline-flex;
+    }
+  }
+
   .gd-matrix-table-wrap {
+    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
     border: 1px solid #e4e5e7;
     border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: inset -6px 0 8px -4px rgba(0, 0, 0, 0.08);
   }
 
   .gd-matrix-table {
+    min-width: 580px;
     width: 100%;
     border-collapse: collapse;
     text-align: left;
@@ -889,11 +1006,20 @@ const pageDescription = gig.shortDescription;
     border: 1px solid #e4e5e7;
   }
 
+  @media (max-width: 640px) {
+    .gd-seller-card-inner {
+      flex-direction: column;
+      padding: 18px;
+      gap: 16px;
+    }
+  }
+
   .gd-seller-card-avatar {
     width: 72px;
     height: 72px;
     border-radius: 50%;
     object-fit: cover;
+    flex-shrink: 0;
   }
 
   .gd-seller-card-info h3 {
@@ -915,6 +1041,13 @@ const pageDescription = gig.shortDescription;
     font-size: 0.82rem;
     color: #62646a;
     margin-bottom: 18px;
+  }
+
+  @media (max-width: 640px) {
+    .gd-seller-card-stats {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
   }
 
   .gd-btn-contact-seller {
@@ -1125,5 +1258,79 @@ const pageDescription = gig.shortDescription;
 
   .gd-btn-contact:hover {
     background: #f7f7f8;
+  }
+
+  @media (max-width: 1024px) {
+    .gd-sticky-box {
+      position: static;
+      top: auto;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      margin-top: 10px;
+    }
+  }
+
+  /* Mobile Sticky Bottom Quick-Order Bar */
+  .gd-mobile-bottom-bar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .gd-mobile-bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      padding: 10px 16px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+      border-top: 1px solid #e4e5e7;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+      z-index: 90;
+    }
+
+    .gd-mobile-bottom-bar__left {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .gd-mobile-bottom-bar__label {
+      font-size: 0.75rem;
+      color: #74767e;
+      font-weight: 500;
+    }
+
+    .gd-mobile-bottom-bar__price {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #222325;
+    }
+
+    .gd-mobile-bottom-bar__usd {
+      font-size: 0.75rem;
+      color: #74767e;
+    }
+
+    .gd-mobile-bottom-bar__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: #1dbf73;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .gd-mobile-bottom-bar__btn:hover,
+    .gd-mobile-bottom-bar__btn:active {
+      background: #19a463;
+    }
   }
 </style>

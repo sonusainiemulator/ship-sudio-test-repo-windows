@@ -198,9 +198,10 @@ const allSchemas = [...defaultSchemas, ...jsonLd];
 </html>
 
 <script>
-  // Lenis smooth scrolling (eased inertia). Skipped when reduced motion is preferred.
+  // Lenis smooth scrolling (eased inertia). Skipped when reduced motion is preferred or on touch/mobile devices to preserve native gesture momentum.
   import Lenis from "lenis";
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 1024;
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && !isTouch) {
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     const raf = (time: number) => {
       lenis.raf(time);

@@ -2,7 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.3] - 2026-10-08 00:58 IST
+
+### Fixed
+- **Mobile Horizontal Scrolling & Scroll Freeze on Gig Details Pages**:
+  - Fixed breadcrumbs and action icons in `.gd-top-nav` from blowing out mobile viewport by adding `flex-wrap: wrap`, text truncation on long subcategory titles (`max-width: 240px`), and clean stacked layout on `≤ 640px`.
+  - Added `min-width: 0; max-width: 100%; width: 100%;` on `.gd-left`, `.gd-right`, and `.gd-grid` to prevent CSS Grid from expanding past 100vw when housing table matrices.
+  - Wrapped Compare Packages Matrix Table with `overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y;` and added an intuitive mobile swipe hint (`.gd-matrix-scroll-hint`).
+  - Switched right sidebar order box on mobile (`≤ 1024px`) from `position: sticky; top: 90px;` to `position: static;` to eliminate mobile scroll trap issues.
+  - Added mobile fixed bottom action bar (`.gd-mobile-bottom-bar`) with package starting price and quick "Order Now" WhatsApp CTA.
+  - Disabled Lenis smooth scrolling on touch devices (`pointer: coarse` / `≤ 1024px`) in [Layout.astro](file:///g:/rakebig-com-new-site/src/layouts/Layout.astro) to eliminate touch lag, scroll freezing, and gesture interference, restoring native 120Hz hardware-accelerated touch momentum.
+  - Strictly clipped root document horizontal overflow in [global.css](file:///g:/rakebig-com-new-site/src/styles/global.css) with `overflow-x: clip; max-width: 100vw; width: 100%;`.
+
+---
+
 ## [1.4.2] - 2026-10-08 00:05 IST
+
 
 ### Fixed
 - **Mobile Dropdown Menu Design & Giant Caret Sizing Bug**:
