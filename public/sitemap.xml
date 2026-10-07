@@ -31,6 +31,16 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.rakebig.com/gigs/discover-ai-agents</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/495865289/original/314cba346183b51eb9fe2155aec2b7c0b0cea2bf.jpg</image:loc>
+      <image:title>Discover AI Agents and AI Automations for Business</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.rakebig.com/gigs/customize-perfex-crm-modules-development</loc>
     <lastmod>2026-09-24</lastmod>
     <changefreq>daily</changefreq>
@@ -108,6 +118,46 @@
     <image:image>
       <image:loc>https://www.rakebig.com/images/gigs/gig_klaviyo_ecommerce.jpg</image:loc>
       <image:title>Setup Klaviyo &amp; WhatsApp E-commerce Marketing Automation Flows</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/ai-voice-agents</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-ai-voice-agents.jpg</image:loc>
+      <image:title>AI Voice Agent and Automated Calling Bot with Retell, Vapi, and Twilio</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/custom-llm-rag</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-custom-llm-rag.jpg</image:loc>
+      <image:title>Custom LLM RAG Pipeline with LangChain, LlamaIndex, and Vector Database</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/zapier-n8n-automations</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-zapier-n8n-automations.jpg</image:loc>
+      <image:title>Autonomous AI Agents and Automated Workflows in n8n, Make, and Zapier</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/build-ai-employee-automation-hermes-openclaw</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-hermes-openclaw-ai-employee.jpg</image:loc>
+      <image:title>Build AI Employee and Autonomous Agent with Hermes Agent, OpenClaw, and n8n</image:title>
     </image:image>
   </url>
 

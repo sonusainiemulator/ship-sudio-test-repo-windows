@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2026-10-07 12:22 IST
+
+### Added
+- **Discover AI Agents Hub**: Added a full-featured Fiverr-style AI Agent discovery catalogue (`/discover-ai-agents` and `/gigs/discover-ai-agents`).
+  - Real-time search by title, keyword, tech stack, and tags.
+  - Category filters: Customer Service, Coding & Dev, Sales & Outreach, Data & Research, Workflow Automation, Voice & Audio.
+  - Interactive tag pills with instant filter toggles.
+  - Sorting options: "Most Popular", "Rating: High to Low", "Price: Low to High", and "Price: High to Low".
+  - High-converting gig cards with seller badges, star ratings, review counts, delivery speed, and starting prices.
+  - Responsive empty state with clear-all action.
+- **Fiverr-Style Category & Subcategory Navigation**:
+  - Implemented full Fiverr-inspired service taxonomy (`src/data/fiverrCategories.ts`) in [GigsHeader.astro](file:///g:/rakebig-com-new-site/src/components/GigsHeader.astro).
+  - Multi-column mega menus for AI Services, Programming & Tech, Digital Marketing, and Cloud / DevOps.
+  - Streamlined mobile submenus and drawer navigation.
+- **New AI Gig Service Offerings & High-Res Thumbnails**:
+  - AI Voice Agents (`/gigs/ai-voice-agents`)
+  - Custom LLM & RAG Pipelines (`/gigs/custom-llm-rag`)
+  - Zapier & n8n Workflow Automations (`/gigs/zapier-n8n-automations`)
+  - AI Employee Automation Hermes / OpenClaw (`/gigs/build-ai-employee-automation-hermes-openclaw`)
+  - High-resolution thumbnails added to `public/assets/gigs/`.
+- **SEO & Sitemap Indexing**:
+  - Updated [sitemap.xml](file:///g:/rakebig-com-new-site/public/sitemap.xml) with Discover AI Agents and all new gig URLs with appropriate change frequencies and priorities.
+
+---
+
 ## [1.3.0] - 2026-09-22
 
 ### Added

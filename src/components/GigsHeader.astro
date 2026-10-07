@@ -13,7 +13,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 ---
 
 <header class="gh-wrapper" data-gigs-header>
-  <!-- Top Primary Bar -->
+  <!-- Top Primary Bar matching Fiverr header -->
   <div class="gh-topbar">
     <div class="container gh-topbar__inner">
       <!-- Desktop & Mobile Row 1 Brand / Home / Actions -->
@@ -57,17 +57,63 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
         </button>
       </div>
 
-      <!-- Actions (Desktop) -->
+      <!-- Actions (Desktop matching screenshot: Notification, Message, Heart, Orders, Profile Avatar, Balance) -->
       <div class="gh-topbar__actions">
-        <a href="/whatsapp-marketing" class="gh-pill-highlight">
+        <!-- Quick WhatsApp AI pill -->
+        <a href="/whatsapp-marketing" class="gh-pill-highlight" title="WhatsApp Marketing Automation">
           <span class="gh-pill-pulse"></span>
           <span>WhatsApp AI</span>
         </a>
-        <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gh-action-link">
-          Rakebig Pro
-        </a>
+
+        <!-- Fiverr Header Icons -->
+        <div class="gh-user-tools">
+          <!-- Notification Bell with Alert Dot -->
+          <button type="button" class="gh-tool-icon" aria-label="Notifications" title="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="gh-badge-dot" aria-hidden="true"></span>
+          </button>
+
+          <!-- Messages / Mail -->
+          <button type="button" class="gh-tool-icon" aria-label="Messages" title="Messages">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </button>
+
+          <!-- Wishlist / Heart -->
+          <a href="/gigs" class="gh-tool-icon" aria-label="Saved Gigs" title="Saved Gigs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+            </svg>
+          </a>
+
+          <!-- Orders Link -->
+          <a href="/gigs" class="gh-orders-link" title="My Orders">
+            Orders
+          </a>
+
+          <!-- Avatar & Balance Badge -->
+          <div class="gh-avatar-badge" title="Rakebig Pro Verified Client">
+            <div class="gh-avatar-wrap">
+              <img
+                src="https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png"
+                alt="Account"
+                class="gh-avatar-img"
+                width="32"
+                height="32"
+              />
+              <span class="gh-online-dot"></span>
+            </div>
+            <span class="gh-balance-val">$24</span>
+          </div>
+        </div>
+
         <a href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20want%20to%20request%20a%20custom%20gig`} target="_blank" rel="noopener noreferrer" class="gh-btn-request">
-          Request Custom Offer
+          Request Offer
         </a>
       </div>
 
@@ -86,8 +132,8 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     </div>
   </div>
 
-  <!-- Secondary Category Sub-Nav with Scroll Buttons & Dropdowns -->
-  <nav class="gh-catnav" aria-label="Gigs Marketplace Categories">
+  <!-- Secondary Category Sub-Nav with Scroll Buttons & Mega Menu -->
+  <nav class="gh-catnav" aria-label="Gigs Marketplace Categories" data-catnav-root>
     <div class="container gh-catnav__inner">
       <!-- Left scroll button -->
       <button type="button" class="gh-catnav__scroll-btn gh-catnav__scroll-btn--left" id="gh-scroll-left" aria-label="Scroll categories left">
@@ -99,12 +145,11 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       <ul class="gh-catnav__list" id="gh-catnav-list">
         {categories.map((cat) => {
           const isActive = activeCategory === cat.id;
-          const isMegaGrid = cat.submenuLayout === "mega-grid";
-
           return (
-            <li class={`gh-catnav__item ${cat.hasSubmenu ? "gh-catnav__item--has-sub" : ""} ${isMegaGrid ? "gh-catnav__item--has-mega" : ""}`} data-cat-item={cat.id}>
+            <li class={`gh-catnav__item ${cat.hasSubmenu ? "gh-catnav__item--has-sub" : ""}`} data-cat-id={cat.id}>
               <a
                 href={cat.id === "trending" ? "#gigs-grid" : `/gigs?cat=${cat.id}`}
+                data-category-trigger={cat.id}
                 data-category-filter={cat.id}
                 class={`gh-catnav__link ${cat.isTrending ? "gh-catnav__link--trending" : ""} ${isActive ? "gh-catnav__link--active" : ""}`}
               >
@@ -115,65 +160,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
                   </svg>
                 )}
               </a>
-
-              {cat.hasSubmenu && (
-                <div class={`gh-submenu-dropdown ${isMegaGrid ? "gh-submenu-dropdown--mega" : "gh-submenu-dropdown--compact"}`} data-submenu-panel>
-                  <div class="gh-submenu-content">
-                    <div class={`gh-submenu-groups ${isMegaGrid ? "gh-submenu-groups--4col" : "gh-submenu-groups--2col"}`}>
-                      {cat.groups.map((group) => (
-                        <div class="gh-submenu-group">
-                          <h4 class="gh-submenu-group__title">{group.title}</h4>
-                          <ul class="gh-submenu-group__list">
-                            {group.items.map((item) => (
-                              <li>
-                                <a href={item.href || `/gigs?filter=${item.slug}`} class="gh-submenu-item">
-                                  <span class="gh-submenu-item__label">{item.name}</span>
-                                  {item.tag && (
-                                    <span class={`gh-tag-pill ${item.tag === "NEW" ? "gh-tag-pill--new" : item.tag === "HOT" ? "gh-tag-pill--hot" : "gh-tag-pill--popular"}`}>
-                                      {item.tag}
-                                    </span>
-                                  )}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-
-                          {group.footerAction && (
-                            <a href={group.footerAction.href} class="gh-submenu-action-link">
-                              <span>{group.footerAction.text}</span>
-                              <svg class="gh-wand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M15 4V2m0 16v-2m6-6h-2m-16 0H1m15.5-7.5l-1.5 1.5M4 18l1.5-1.5m10 0l1.5 1.5M4 6l1.5 1.5M8 12l9-9 3 3-9 9-4 1 1-4z"/>
-                              </svg>
-                            </a>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-
-                    {cat.bottomBanner && (
-                      <div class="gh-mega-banner">
-                        <div class="gh-mega-banner__left">
-                          <span class="gh-mega-banner__icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                              <circle cx="9" cy="7" r="4"></circle>
-                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                          </span>
-                          <div>
-                            <strong>{cat.bottomBanner.title}</strong>
-                            <p>{cat.bottomBanner.desc}</p>
-                          </div>
-                        </div>
-                        <a href={cat.bottomBanner.ctaHref} class="gh-mega-banner__btn">
-                          {cat.bottomBanner.ctaText}
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
             </li>
           );
         })}
@@ -185,6 +171,76 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
           <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
         </svg>
       </button>
+    </div>
+
+    <!-- Mega Menu Floating Panels (Rendered outside the scrollable UL so no vertical clipping occurs) -->
+    <div class="gh-mega-overlay" id="gh-mega-overlay">
+      <div class="container gh-mega-container">
+        {categories.filter(c => c.hasSubmenu).map((cat) => {
+          const isAi = cat.id === "ai-services";
+          return (
+            <div
+              class={`gh-mega-panel ${isAi ? "gh-mega-panel--ai" : ""}`}
+              data-mega-panel={cat.id}
+              role="region"
+              aria-label={`${cat.name} Menu`}
+            >
+              <div class="gh-mega-columns">
+                {cat.groups.map((group) => (
+                  <div class="gh-mega-group">
+                    <h4 class="gh-mega-group__title">{group.title}</h4>
+                    <ul class="gh-mega-group__list">
+                      {group.items.map((item) => (
+                        <li>
+                          <a href={item.href || `/gigs?filter=${item.slug}`} class="gh-mega-item">
+                            <span class="gh-mega-item__label">{item.name}</span>
+                            {item.tag && (
+                              <span class={`gh-tag-pill ${item.tag === "NEW" ? "gh-tag-pill--new" : item.tag === "HOT" ? "gh-tag-pill--hot" : "gh-tag-pill--popular"}`}>
+                                {item.tag}
+                              </span>
+                            )}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {group.footerAction && (
+                      <a href={group.footerAction.href} class="gh-mega-action-link">
+                        <span>{group.footerAction.text}</span>
+                        <svg class="gh-wand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M15 4V2m0 16v-2m6-6h-2m-16 0H1m15.5-7.5l-1.5 1.5M4 18l1.5-1.5m10 0l1.5 1.5M4 6l1.5 1.5M8 12l9-9 3 3-9 9-4 1 1-4z"/>
+                        </svg>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {cat.bottomBanner && (
+                <div class="gh-mega-bottom-banner">
+                  <div class="gh-mega-bottom-banner__left">
+                    <span class="gh-mega-bottom-banner__icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                      </svg>
+                    </span>
+                    <div>
+                      <strong>{cat.bottomBanner.title}</strong>
+                      <p>{cat.bottomBanner.desc}</p>
+                    </div>
+                  </div>
+                  <a href={cat.bottomBanner.ctaHref} class="gh-mega-bottom-banner__btn">
+                    {cat.bottomBanner.ctaText}
+                  </a>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   </nav>
 
@@ -206,12 +262,12 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
     <!-- Quick CTAs inside drawer -->
     <div class="gh-drawer__actions">
+      <a href="/gigs/discover-ai-agents" class="gh-drawer__ai-btn">
+        <span class="gh-pill-pulse"></span>
+        <span>Discover AI Agents 🤖</span>
+      </a>
       <a href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20want%20to%20request%20a%20custom%20gig`} target="_blank" rel="noopener noreferrer" class="gh-drawer__cta-btn">
         Request Custom Offer
-      </a>
-      <a href="/whatsapp-marketing" class="gh-drawer__whatsapp-btn">
-        <span class="gh-pill-pulse"></span>
-        <span>WhatsApp AI Broadcast</span>
       </a>
     </div>
 
@@ -291,7 +347,79 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     if (!header || header.dataset.gigsInit === '1') return;
     header.dataset.gigsInit = '1';
 
-    // 1. Category Filter Clicks
+    // 1. Mega Menu Desktop Hover Bridge
+    const catNav = header.querySelector('[data-catnav-root]');
+    const triggerLinks = header.querySelectorAll('[data-category-trigger]');
+    const overlay = document.getElementById('gh-mega-overlay');
+    const panels = header.querySelectorAll('[data-mega-panel]');
+    let closeTimeout = null;
+    let activeCatId = null;
+
+    function showMegaPanel(catId) {
+      if (closeTimeout) {
+        clearTimeout(closeTimeout);
+        closeTimeout = null;
+      }
+      activeCatId = catId;
+
+      // Update link active state
+      triggerLinks.forEach((link) => {
+        const id = link.getAttribute('data-category-trigger');
+        if (id === catId) {
+          link.classList.add('gh-catnav__link--hovered');
+        } else {
+          link.classList.remove('gh-catnav__link--hovered');
+        }
+      });
+
+      let found = false;
+      panels.forEach((p) => {
+        if (p.getAttribute('data-mega-panel') === catId) {
+          p.classList.add('is-active');
+          found = true;
+        } else {
+          p.classList.remove('is-active');
+        }
+      });
+
+      if (found && overlay) {
+        overlay.classList.add('is-open');
+      } else if (overlay) {
+        overlay.classList.remove('is-open');
+      }
+    }
+
+    function scheduleCloseMega() {
+      if (closeTimeout) clearTimeout(closeTimeout);
+      closeTimeout = setTimeout(() => {
+        triggerLinks.forEach((link) => link.classList.remove('gh-catnav__link--hovered'));
+        panels.forEach((p) => p.classList.remove('is-active'));
+        if (overlay) overlay.classList.remove('is-open');
+        activeCatId = null;
+      }, 150);
+    }
+
+    triggerLinks.forEach((link) => {
+      const catId = link.getAttribute('data-category-trigger');
+      link.addEventListener('mouseenter', () => showMegaPanel(catId));
+      link.addEventListener('focus', () => showMegaPanel(catId));
+    });
+
+    if (catNav) {
+      catNav.addEventListener('mouseleave', scheduleCloseMega);
+    }
+
+    if (overlay) {
+      overlay.addEventListener('mouseenter', () => {
+        if (closeTimeout) {
+          clearTimeout(closeTimeout);
+          closeTimeout = null;
+        }
+      });
+      overlay.addEventListener('mouseleave', scheduleCloseMega);
+    }
+
+    // 2. Category Filter Clicks
     const filterLinks = header.querySelectorAll('[data-category-filter]');
     filterLinks.forEach((link) => {
       link.addEventListener('click', (e) => {
@@ -302,13 +430,12 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
           header.querySelectorAll('.gh-catnav__link').forEach((l) => {
             l.classList.toggle('gh-catnav__link--active', l.getAttribute('data-category-filter') === cat);
           });
-          // Close mobile drawer if open
           closeMobileDrawer();
         }
       });
     });
 
-    // 2. Search Box Handlers
+    // 3. Search Box Handlers
     const searchInput = document.getElementById('gigs-search-input');
     const searchBtn = document.getElementById('gigs-search-btn');
     const dispatchSearch = () => {
@@ -322,7 +449,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
         if (e.key === 'Enter') {
           e.preventDefault();
           dispatchSearch();
-          const grid = document.getElementById('gigs-grid');
+          const grid = document.getElementById('gigs-grid') || document.getElementById('automate-services');
           if (grid) grid.scrollIntoView({ behavior: 'smooth' });
         }
       });
@@ -331,12 +458,12 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       searchBtn.addEventListener('click', (e) => {
         e.preventDefault();
         dispatchSearch();
-        const grid = document.getElementById('gigs-grid');
+        const grid = document.getElementById('gigs-grid') || document.getElementById('automate-services');
         if (grid) grid.scrollIntoView({ behavior: 'smooth' });
       });
     }
 
-    // 3. Category Horizontal Scroll with Buttons
+    // 4. Category Horizontal Scroll with Buttons
     const catList = document.getElementById('gh-catnav-list');
     const scrollLeftBtn = document.getElementById('gh-scroll-left');
     const scrollRightBtn = document.getElementById('gh-scroll-right');
@@ -351,12 +478,12 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
     if (scrollLeftBtn && catList) {
       scrollLeftBtn.addEventListener('click', () => {
-        catList.scrollBy({ left: -220, behavior: 'smooth' });
+        catList.scrollBy({ left: -260, behavior: 'smooth' });
       });
     }
     if (scrollRightBtn && catList) {
       scrollRightBtn.addEventListener('click', () => {
-        catList.scrollBy({ left: 220, behavior: 'smooth' });
+        catList.scrollBy({ left: 260, behavior: 'smooth' });
       });
     }
     if (catList) {
@@ -365,7 +492,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       setTimeout(updateScrollButtons, 100);
     }
 
-    // 4. Mobile Drawer Open / Close
+    // 5. Mobile Drawer Open / Close
     const burgerToggle = document.getElementById('gh-burger-toggle');
     const drawerCloseBtn = document.getElementById('gh-drawer-close-btn');
     const drawer = document.getElementById('gh-mobile-drawer');
@@ -397,12 +524,13 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     backdrop?.addEventListener('click', closeMobileDrawer);
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && drawer?.classList.contains('is-open')) {
-        closeMobileDrawer();
+      if (e.key === 'Escape') {
+        if (drawer?.classList.contains('is-open')) closeMobileDrawer();
+        scheduleCloseMega();
       }
     });
 
-    // 5. Drawer Accordion Submenus
+    // 6. Drawer Accordion Submenus
     const accTriggers = header.querySelectorAll('[data-acc-trigger]');
     accTriggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
@@ -410,7 +538,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
         const panel = item?.querySelector('[data-acc-panel]');
         const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
 
-        // Close others in accordion
         accTriggers.forEach((otherTrig) => {
           if (otherTrig !== trigger) {
             otherTrig.setAttribute('aria-expanded', 'false');
@@ -427,7 +554,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       });
     });
 
-    // 6. Close drawer when clicking sublinks
     drawer?.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         closeMobileDrawer();
@@ -452,13 +578,13 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     top: 0;
     z-index: 95;
     font-family: inherit;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   }
 
   /* Top Bar */
   .gh-topbar {
     padding: 10px 0;
-    border-bottom: 1px solid #f1f2f4;
+    border-bottom: 1px solid #e4e5e7;
   }
 
   .gh-topbar__inner {
@@ -466,7 +592,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    flex-wrap: wrap;
   }
 
   .gh-topbar__brand-wrap {
@@ -508,14 +633,14 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   }
 
   .gh-brand__logo {
-    font-size: 1.65rem;
+    font-size: 1.7rem;
     font-weight: 900;
     color: #222325;
     letter-spacing: -0.04em;
   }
 
   .gh-brand__dot {
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     font-weight: 900;
     color: #1dbf73;
   }
@@ -535,8 +660,8 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   /* Fiverr-style Search Bar */
   .gh-search {
     flex: 1;
-    max-width: 580px;
-    min-width: 240px;
+    max-width: 540px;
+    min-width: 200px;
     display: flex;
     align-items: center;
   }
@@ -558,8 +683,8 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   }
 
   .gh-search__icon svg {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
   }
 
   .gh-search__input {
@@ -600,11 +725,11 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   }
 
   .gh-search__submit svg {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
   }
 
-  /* Actions */
+  /* Actions matching Fiverr top bar */
   .gh-topbar__actions {
     display: flex;
     align-items: center;
@@ -644,16 +769,102 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     50% { opacity: 0.4; transform: scale(1.4); }
   }
 
-  .gh-action-link {
-    font-size: 0.88rem;
+  /* Fiverr Icons Row */
+  .gh-user-tools {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .gh-tool-icon {
+    position: relative;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    color: #74767e;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: color 0.18s ease, background 0.18s ease;
+  }
+
+  .gh-tool-icon:hover {
+    color: #1dbf73;
+    background: #f7f7f8;
+  }
+
+  .gh-tool-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .gh-badge-dot {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ff4071;
+    border: 1.5px solid #ffffff;
+  }
+
+  .gh-orders-link {
+    font-size: 0.9rem;
     font-weight: 600;
     color: #62646a;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.18s ease;
   }
 
-  .gh-action-link:hover {
+  .gh-orders-link:hover {
     color: #1dbf73;
+  }
+
+  .gh-avatar-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    padding: 3px 6px;
+    border-radius: 20px;
+    transition: background 0.18s ease;
+  }
+
+  .gh-avatar-badge:hover {
+    background: #f7f7f8;
+  }
+
+  .gh-avatar-wrap {
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+
+  .gh-avatar-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .gh-online-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1dbf73;
+    border: 1.5px solid #ffffff;
+  }
+
+  .gh-balance-val {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #404145;
   }
 
   .gh-btn-request {
@@ -662,7 +873,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     color: #1dbf73;
     background: transparent;
     border: 1px solid #1dbf73;
-    padding: 7px 16px;
+    padding: 6px 14px;
     border-radius: 4px;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -752,13 +963,8 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     height: 14px;
   }
 
-  .gh-catnav__scroll-btn--left {
-    left: 0;
-  }
-
-  .gh-catnav__scroll-btn--right {
-    right: 0;
-  }
+  .gh-catnav__scroll-btn--left { left: 0; }
+  .gh-catnav__scroll-btn--right { right: 0; }
 
   .gh-catnav__scroll-btn.is-hidden {
     opacity: 0;
@@ -769,7 +975,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   .gh-catnav__list {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 24px;
     list-style: none;
     padding: 0 32px;
     margin: 0;
@@ -786,28 +992,31 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   .gh-catnav__item {
     position: relative;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
   }
 
   .gh-catnav__link {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 12px 2px 10px 2px;
+    padding: 11px 2px 9px 2px;
     font-size: 0.88rem;
     font-weight: 500;
     color: #62646a;
     text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s ease;
   }
 
-  .gh-catnav__link:hover {
-    color: #1dbf73;
+  .gh-catnav__link:hover,
+  .gh-catnav__link.gh-catnav__link--hovered {
+    color: #222325;
     border-bottom-color: #1dbf73;
   }
 
   .gh-catnav__link--active {
-    color: #1dbf73;
+    color: #222325;
     font-weight: 600;
     border-bottom-color: #1dbf73;
   }
@@ -817,129 +1026,120 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     font-weight: 600;
   }
 
-  .gh-catnav__link--trending:hover {
+  .gh-catnav__link--trending:hover,
+  .gh-catnav__link--trending.gh-catnav__link--hovered {
     color: #d84315;
-    border-bottom-color: #e65100;
+    border-bottom-color: #1dbf73;
   }
 
   .gh-catnav__caret {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     margin-left: 2px;
     transition: transform 0.2s ease;
+    opacity: 0.6;
   }
 
-  .gh-catnav__item:hover .gh-catnav__caret {
+  .gh-catnav__link--hovered .gh-catnav__caret {
     transform: rotate(180deg);
   }
 
-  /* Fiverr-style Dropdown & Mega Menu */
-  .gh-catnav__item--has-sub:hover .gh-submenu-dropdown,
-  .gh-catnav__item--has-sub:focus-within .gh-submenu-dropdown {
+  /* Full Mega Menu Overlay (Positioned outside scrollable UL) */
+  .gh-mega-overlay {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid #e4e5e7;
+    border-bottom: 1px solid #e4e5e7;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .gh-mega-overlay.is-open {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
   }
 
-  .gh-submenu-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #ffffff;
-    border: 1px solid #e4e5e7;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
-    pointer-events: none;
-    z-index: 100;
+  .gh-mega-container {
+    position: relative;
+    padding: 24px 20px 28px 20px;
   }
 
-  /* Invisible hover bridge */
-  .gh-submenu-dropdown::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: 0;
-    right: 0;
-    height: 8px;
-    background: transparent;
+  .gh-mega-panel {
+    display: none;
   }
 
-  .gh-submenu-dropdown--compact {
-    width: 580px;
-    max-width: 90vw;
+  .gh-mega-panel.is-active {
+    display: block;
   }
 
-  .gh-submenu-dropdown--mega {
-    width: 1080px;
-    max-width: 95vw;
-    left: -20px;
-  }
-
-  .gh-submenu-content {
-    padding: 22px 24px 18px 24px;
-  }
-
-  .gh-submenu-groups {
+  /* Multi-column grid matching Screenshot 2 */
+  .gh-mega-columns {
     display: grid;
-    gap: 28px;
-  }
-
-  .gh-submenu-groups--2col {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .gh-submenu-groups--4col {
     grid-template-columns: repeat(4, 1fr);
+    gap: 32px 36px;
+    align-items: start;
   }
 
-  .gh-submenu-group {
+  /* AI Services specific 3 columns layout matching Screenshot 2 */
+  .gh-mega-panel--ai .gh-mega-columns {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 48px;
+  }
+
+  .gh-mega-group {
     display: flex;
     flex-direction: column;
+    margin-bottom: 8px;
   }
 
-  .gh-submenu-group__title {
+  .gh-mega-group__title {
     font-size: 0.95rem;
     font-weight: 700;
     color: #222325;
-    margin: 0 0 12px 0;
+    margin: 0 0 14px 0;
     letter-spacing: -0.01em;
   }
 
-  .gh-submenu-group__list {
+  .gh-mega-group__list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
   }
 
-  .gh-submenu-item {
+  .gh-mega-item {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    font-size: 0.84rem;
-    color: #55575d;
+    font-size: 0.86rem;
+    color: #62646a;
     text-decoration: none;
-    padding: 2px 0;
+    padding: 1px 0;
     transition: color 0.15s ease;
   }
 
-  .gh-submenu-item:hover {
+  .gh-mega-item:hover {
     color: #1dbf73;
   }
 
-  .gh-submenu-item:hover .gh-submenu-item__label {
+  .gh-mega-item:hover .gh-mega-item__label {
     color: #1dbf73;
   }
 
-  /* Tag Pills matching image 1 */
+  /* Tags matching Screenshot 2 */
   .gh-tag-pill {
     font-size: 0.62rem;
     font-weight: 700;
@@ -949,6 +1149,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     text-transform: uppercase;
     line-height: 1.3;
     flex-shrink: 0;
+    margin-left: 6px;
   }
 
   .gh-tag-pill--new {
@@ -969,53 +1170,53 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     background: #e3fcef;
   }
 
-  /* "Let us manage your project" link matching image 1 */
-  .gh-submenu-action-link {
+  /* "Let us manage your project" blue action link matching Screenshot 2 */
+  .gh-mega-action-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     color: #4361ee;
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     font-weight: 600;
     text-decoration: none;
     margin-top: 14px;
-    padding-top: 12px;
+    padding-top: 10px;
     border-top: 1px solid #f1f2f4;
     transition: all 0.15s ease;
   }
 
-  .gh-submenu-action-link:hover {
+  .gh-mega-action-link:hover {
     color: #2546db;
     transform: translateX(2px);
   }
 
   .gh-wand-icon {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     stroke-width: 2.2;
     flex-shrink: 0;
   }
 
-  /* Mega Banner */
-  .gh-mega-banner {
+  /* Bottom Banner inside Mega Menu */
+  .gh-mega-bottom-banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    margin-top: 22px;
-    padding: 14px 18px;
+    margin-top: 24px;
+    padding: 14px 20px;
     border-top: 1px solid #f1f2f4;
     background: #fafafa;
     border-radius: 6px;
   }
 
-  .gh-mega-banner__left {
+  .gh-mega-bottom-banner__left {
     display: flex;
     align-items: center;
     gap: 12px;
   }
 
-  .gh-mega-banner__icon {
+  .gh-mega-bottom-banner__icon {
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -1027,24 +1228,24 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     flex-shrink: 0;
   }
 
-  .gh-mega-banner__icon svg {
-    width: 20px;
-    height: 20px;
+  .gh-mega-bottom-banner__icon svg {
+    width: 18px;
+    height: 18px;
   }
 
-  .gh-mega-banner__left strong {
+  .gh-mega-bottom-banner__left strong {
     display: block;
     font-size: 0.86rem;
     color: #222325;
   }
 
-  .gh-mega-banner__left p {
+  .gh-mega-bottom-banner__left p {
     margin: 2px 0 0 0;
     font-size: 0.78rem;
     color: #74767e;
   }
 
-  .gh-mega-banner__btn {
+  .gh-mega-bottom-banner__btn {
     font-size: 0.82rem;
     font-weight: 600;
     color: #222325;
@@ -1053,32 +1254,30 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     padding: 6px 14px;
     border-radius: 4px;
     text-decoration: none;
-    white-space: nowrap;
     transition: all 0.2s ease;
   }
 
-  .gh-mega-banner__btn:hover {
-    border-color: #222325;
+  .gh-mega-bottom-banner__btn:hover {
     background: #222325;
     color: #ffffff;
+    border-color: #222325;
   }
 
-  /* Mobile Drawer */
+  /* Mobile Slide-In Drawer */
   .gh-drawer {
-    display: none;
     position: fixed;
     top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(340px, 86vw);
+    left: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: 100vh;
     background: #ffffff;
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.18);
     z-index: 120;
-    transform: translateX(110%);
-    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
   }
 
   .gh-drawer.is-open {
@@ -1090,83 +1289,71 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px;
-    border-bottom: 1px solid #eef2f7;
-    background: #ffffff;
-    position: sticky;
-    top: 0;
-    z-index: 2;
+    border-bottom: 1px solid #e4e5e7;
   }
 
   .gh-drawer__close {
-    width: 36px;
-    height: 36px;
-    border: 0;
-    background: #f1f5f9;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #334155;
+    background: transparent;
+    border: none;
+    color: #62646a;
     cursor: pointer;
+    padding: 6px;
+    display: flex;
   }
 
   .gh-drawer__close svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
 
   .gh-drawer__actions {
+    padding: 14px 20px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid #f1f2f4;
+  }
+
+  .gh-drawer__ai-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 14px 16px;
-    background: #f8fafc;
-    border-bottom: 1px solid #eef2f7;
+    padding: 10px;
+    background: #eaf8f1;
+    color: #00875a;
+    font-weight: 700;
+    font-size: 0.88rem;
+    border-radius: 6px;
+    text-decoration: none;
   }
 
   .gh-drawer__cta-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding: 10px 14px;
+    padding: 10px;
     background: #1dbf73;
     color: #ffffff;
-    border-radius: 6px;
-    font-size: 0.88rem;
     font-weight: 700;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(29, 191, 115, 0.25);
-  }
-
-  .gh-drawer__whatsapp-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 9px 14px;
-    background: #e3fcef;
-    color: #00875a;
+    font-size: 0.88rem;
     border-radius: 6px;
-    font-size: 0.84rem;
-    font-weight: 600;
     text-decoration: none;
   }
 
   .gh-drawer__menu {
-    padding: 12px 0;
     flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
   }
 
   .gh-drawer__menu-label {
-    padding: 6px 18px;
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    color: #95979d;
     text-transform: uppercase;
-    color: #94a3b8;
-    margin: 0;
+    letter-spacing: 0.08em;
+    margin: 0 0 10px 0;
   }
 
   .gh-drawer__accordion {
@@ -1178,20 +1365,16 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px 18px;
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 11px 0;
     color: #222325;
+    font-size: 0.92rem;
+    font-weight: 600;
     text-decoration: none;
-    border-bottom: 1px solid #f1f5f9;
-  }
-
-  .gh-drawer__arrow {
-    color: #94a3b8;
+    border-bottom: 1px solid #f7f7f8;
   }
 
   .gh-drawer__acc-item {
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f2f4;
   }
 
   .gh-drawer__acc-trigger {
@@ -1199,48 +1382,37 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px 18px;
-    font-size: 0.9rem;
+    padding: 12px 0;
+    background: transparent;
+    border: none;
+    font-size: 0.92rem;
     font-weight: 600;
     color: #222325;
-    background: transparent;
-    border: 0;
     cursor: pointer;
     text-align: left;
   }
 
-  .gh-drawer__caret {
-    width: 14px;
-    height: 14px;
-    color: #62646a;
+  .gh-drawer__acc-trigger svg {
     transition: transform 0.2s ease;
   }
 
-  .gh-drawer__acc-item.is-expanded .gh-drawer__caret {
+  .gh-drawer__acc-item.is-expanded .gh-drawer__acc-trigger svg {
     transform: rotate(180deg);
   }
 
   .gh-drawer__acc-panel {
-    background: #f8fafc;
-    padding: 10px 18px 14px 18px;
-    border-top: 1px solid #f1f5f9;
+    padding: 0 0 14px 10px;
   }
 
   .gh-drawer__subgroup {
     margin-bottom: 14px;
   }
 
-  .gh-drawer__subgroup:last-child {
-    margin-bottom: 0;
-  }
-
   .gh-drawer__subgroup-title {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 700;
-    color: #334155;
-    margin: 0 0 6px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    color: #62646a;
+    margin: 0 0 8px 0;
   }
 
   .gh-drawer__subgroup-list {
@@ -1257,9 +1429,9 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     align-items: center;
     justify-content: space-between;
     font-size: 0.82rem;
-    color: #62646a;
+    color: #74767e;
     text-decoration: none;
-    padding: 3px 0;
+    padding: 2px 0;
   }
 
   .gh-drawer__sub-link:hover {
@@ -1268,20 +1440,20 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
   .gh-drawer__action-sublink {
     display: inline-block;
-    margin-top: 8px;
+    color: #4361ee;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #4361ee;
     text-decoration: none;
+    margin-top: 6px;
   }
 
   .gh-drawer__footer {
-    padding: 16px 18px;
-    background: #ffffff;
-    border-top: 1px solid #eef2f7;
+    padding: 14px 20px;
+    border-top: 1px solid #e4e5e7;
+    background: #fafafa;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   .gh-drawer__foot-link {
@@ -1292,97 +1464,56 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   }
 
   .gh-drawer__foot-link--dim {
-    color: #62646a;
-    font-weight: 500;
-    font-size: 0.8rem;
+    color: #74767e;
   }
 
   /* Backdrop */
   .gh-backdrop {
-    display: none;
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.45);
-    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 110;
     opacity: 0;
-    transition: opacity 0.25s ease;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s;
   }
 
   .gh-backdrop.is-open {
-    display: block;
     opacity: 1;
+    visibility: visible;
   }
 
-  /* Responsive Rules */
-  @media (max-width: 900px) {
-    .gh-topbar__actions {
+  /* Responsive Breakpoints */
+  @media (max-width: 1024px) {
+    .gh-user-tools {
       display: none;
+    }
+
+    .gh-mega-columns {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
   }
 
-  @media (max-width: 768px) {
-    .gh-drawer {
-      display: flex;
+  @media (max-width: 840px) {
+    .gh-topbar__actions {
+      display: none;
     }
 
     .gh-topbar__mobile-controls {
       display: flex;
     }
 
-    .gh-topbar__inner {
-      gap: 10px;
-    }
-
-    /* Wrap brand row & search into 2 clean mobile rows */
-    .gh-topbar__brand-wrap {
-      flex: 1;
-      justify-content: flex-start;
-    }
-
     .gh-search {
+      order: 3;
       width: 100%;
       max-width: 100%;
-      order: 3;
-      margin-top: 4px;
+      min-width: 100%;
+      margin-top: 8px;
     }
 
-    .gh-search__input {
-      height: 38px;
-      font-size: 0.85rem;
-      padding: 0 12px 0 36px;
-    }
-
-    .gh-search__submit {
-      height: 38px;
-      width: 44px;
-    }
-
-    .gh-brand__logo {
-      font-size: 1.45rem;
-    }
-
-    .gh-catnav__list {
-      padding: 0 10px;
-      gap: 16px;
-    }
-
-    .gh-catnav__scroll-btn {
-      display: none;
-    }
-
-    /* On mobile touch devices, disable hover dropdown in favor of drawer */
-    .gh-catnav__item--has-sub:hover .gh-submenu-dropdown {
-      display: none;
-    }
-  }
-
-  @media (max-width: 420px) {
-    .gh-topbar__back-home span {
-      display: none;
-    }
-    .gh-topbar__back-home {
-      padding: 6px;
+    .gh-topbar__inner {
+      flex-wrap: wrap;
     }
   }
 </style>

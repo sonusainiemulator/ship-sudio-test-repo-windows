@@ -1,0 +1,1275 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import GigsHeader from "../../components/GigsHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { DISCOVER_AI_TABS, DISCOVER_PILLARS } from "../../data/discoverAiAgents";
+import { SITE_NAME, SITE_URL, SUPPORT_PHONE, BOOK_CONSULTATION_URL } from "../../consts";
+
+const pageTitle = `Discover AI Agents & AI Automations for Your Business | ${SITE_NAME} Gigs`;
+const pageDescription =
+  "Discover the power of AI Automations for your business. Handpick vetted senior developers for VAPI AI voice agents, WhatsApp AI chatbots, n8n & Make workflows, Apify scraping, and autonomous AI agents.";
+
+const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/gigs/discover-ai-agents"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: pageTitle,
+      description: pageDescription,
+      url: `${SITE_URL}/gigs/discover-ai-agents`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Gigs Marketplace",
+          item: `${SITE_URL}/gigs`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Discover AI Agents",
+          item: `${SITE_URL}/gigs/discover-ai-agents`,
+        },
+      ],
+    },
+  ]}
+>
+  <!-- Fiverr Header with Mega Menu active on AI Services -->
+  <GigsHeader activeCategory="ai-services" />
+
+  <main class="discover-page">
+    <!-- Breadcrumbs -->
+    <div class="discover-breadcrumbs-wrap">
+      <div class="container">
+        <nav class="discover-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="bc-sep">/</span>
+          <a href="/gigs">Gigs</a>
+          <span class="bc-sep">/</span>
+          <span class="bc-current">Discover AI Agents</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- 1. Hero Section matching Fiverr Discover AI Agents -->
+    <section class="discover-hero" aria-labelledby="discover-hero-title">
+      <div class="container discover-hero__inner">
+        <div class="discover-hero__badge">
+          <span class="discover-hero__badge-dot"></span>
+          <span>AUTONOMOUS AI &amp; VOICE SQUADS</span>
+        </div>
+        <h1 id="discover-hero-title" class="discover-hero__title">
+          Discover the power of AI<br />Automations for your business
+        </h1>
+        <p class="discover-hero__sub">
+          Connect with top-rated AI engineers specializing in Vapi, Retell, n8n, Make.com, LangChain, and official Meta WhatsApp Cloud API.
+        </p>
+        <div class="discover-hero__cta-wrap">
+          <a href="#automate-services" class="discover-hero__btn" id="hero-explore-btn">
+            Explore experts
+          </a>
+          <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="discover-hero__sub-link">
+            Speak with an AI Solutions Architect →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. "Automate Your Business, Amplify Your Growth" Section -->
+    <section class="discover-catalog" id="automate-services" aria-labelledby="catalog-heading">
+      <div class="container">
+        <header class="discover-catalog__header">
+          <h2 id="catalog-heading" class="discover-catalog__title">
+            Automate Your Business, Amplify Your Growth
+          </h2>
+          <p class="discover-catalog__subtitle">
+            Handpick services to polish, prep, and launch your product.
+          </p>
+        </header>
+
+        <!-- Category Filter Tabs with Horizontal Scroll Controls -->
+        <div class="discover-tabs-bar">
+          <button type="button" class="discover-tabs__arrow discover-tabs__arrow--left" id="tabs-scroll-left" aria-label="Scroll tabs left">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+          </button>
+
+          <div class="discover-tabs__track" id="discover-tabs-track" role="tablist" aria-label="AI Automation Categories">
+            {DISCOVER_AI_TABS.map((tab, idx) => (
+              <button
+                type="button"
+                role="tab"
+                class={`discover-tab-pill ${idx === 0 ? "is-active" : ""}`}
+                id={`tab-btn-${tab.id}`}
+                aria-controls={`tab-panel-${tab.id}`}
+                aria-selected={idx === 0 ? "true" : "false"}
+                data-tab-target={tab.id}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
+
+          <button type="button" class="discover-tabs__arrow discover-tabs__arrow--right" id="tabs-scroll-right" aria-label="Scroll tabs right">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Tab Panels with Gigs Grid & Browse Buttons -->
+        <div class="discover-panels">
+          {DISCOVER_AI_TABS.map((tab, tabIdx) => (
+            <div
+              class={`discover-panel ${tabIdx === 0 ? "is-active" : ""}`}
+              id={`tab-panel-${tab.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-btn-${tab.id}`}
+              hidden={tabIdx !== 0}
+            >
+              <!-- 8 Gigs Grid per Tab -->
+              <div class="discover-gigs-grid">
+                {tab.gigs.map((gig) => {
+                  const whatsappMessage = encodeURIComponent(`Hi Rakebig, I am interested in ordering or customizing this AI gig: "${gig.title}" (Starting at $${gig.priceUsd})`);
+                  return (
+                    <article class="dg-card" data-gig-id={gig.id}>
+                      <!-- Thumbnail Media -->
+                      <div class="dg-card__media">
+                        <img
+                          src={gig.thumbnail}
+                          alt={gig.title}
+                          class="dg-card__img"
+                          loading="lazy"
+                          width="580"
+                          height="330"
+                        />
+                        <button type="button" class="dg-card__fav" aria-label="Save gig to favorites" data-fav-btn>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dg-card__heart">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                          </svg>
+                        </button>
+                      </div>
+
+                      <!-- Card Content -->
+                      <div class="dg-card__content">
+                        <!-- Seller Header -->
+                        <div class="dg-card__seller">
+                          <img
+                            src={gig.sellerAvatar}
+                            alt={gig.sellerName}
+                            class="dg-card__seller-avatar"
+                            width="28"
+                            height="28"
+                            loading="lazy"
+                          />
+                          <div class="dg-card__seller-info">
+                            <span class="dg-card__seller-name">{gig.sellerName}</span>
+                            <span class="dg-card__seller-level">{gig.sellerLevel}</span>
+                          </div>
+                        </div>
+
+                        <!-- Gig Title -->
+                        <h3 class="dg-card__title">
+                          <a href={`https://wa.me/${whatsappPhoneClean}?text=${whatsappMessage}`} target="_blank" rel="noopener noreferrer" class="dg-card__title-link">
+                            {gig.title}
+                          </a>
+                        </h3>
+
+                        <!-- Rating & Review Count -->
+                        <div class="dg-card__rating">
+                          <span class="dg-card__star">★</span>
+                          <strong>{gig.rating.toFixed(1)}</strong>
+                          <span class="dg-card__reviews">({gig.reviewsCount})</span>
+                        </div>
+
+                        <!-- Card Footer Price & Action -->
+                        <div class="dg-card__footer">
+                          <div class="dg-card__price">
+                            <span class="dg-card__price-label">From</span>
+                            <span class="dg-card__price-val">${gig.priceUsd}</span>
+                            <span class="dg-card__price-inr">(₹{gig.priceInr.toLocaleString()})</span>
+                          </div>
+                          <a
+                            href={`https://wa.me/${whatsappPhoneClean}?text=${whatsappMessage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="dg-card__btn-order"
+                            title="Order via WhatsApp"
+                          >
+                            Order Now
+                          </a>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+
+              <!-- Browse Button matching Fiverr -->
+              <div class="discover-browse-sec">
+                <a
+                  href={`/gigs?cat=ai-services&filter=${tab.browseQuery}`}
+                  class="discover-browse-btn"
+                >
+                  <span>{tab.browseBtnText}</span>
+                  <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Three Comparison Pillars / Use Cases Section -->
+    <section class="discover-pillars" aria-labelledby="pillars-heading">
+      <div class="container">
+        <header class="discover-pillars__header">
+          <span class="discover-pillars__eyebrow">HIGH IMPACT AUTOMATIONS</span>
+          <h2 id="pillars-heading" class="discover-pillars__title">
+            Put Your Growth on Autopilot
+          </h2>
+          <p class="discover-pillars__subtitle">
+            Deploy autonomous agents that handle repetitive customer communication, bookings, and operations with zero downtime.
+          </p>
+        </header>
+
+        <div class="discover-pillars__grid">
+          {DISCOVER_PILLARS.map((col) => (
+            <div class="dp-card">
+              <div class="dp-card__header">
+                <span class="dp-card__num">{col.number}</span>
+                <h3 class="dp-card__name">{col.title}</h3>
+              </div>
+              <ul class="dp-card__list">
+                {col.items.map((item) => (
+                  <li class="dp-card__item">
+                    <span class="dp-card__check" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 16.17l-3.5-3.5-1.42 1.42L9 19l12-12-1.41-1.41z"/>
+                      </svg>
+                    </span>
+                    <span class="dp-card__text">
+                      <strong>{item.highlight}</strong> {item.rest}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div class="dp-card__footer">
+                <a
+                  href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20want%20to%20build%20a%20solution%20for%20${encodeURIComponent(col.title)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="dp-card__cta"
+                >
+                  Consult on {col.title} →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. "Ready to get automate?" CTA Forest Green Banner matching Fiverr -->
+    <section class="discover-cta-sec">
+      <div class="container">
+        <div class="discover-cta-banner">
+          <div class="discover-cta-banner__content">
+            <h2 class="discover-cta-banner__title">
+              Ready to get automate?
+            </h2>
+            <p class="discover-cta-banner__text">
+              Transform your daily business workflows with custom AI voice callers, smart chatbots, and intelligent automations built by Rakebig.
+            </p>
+            <div class="discover-cta-banner__actions">
+              <a href="#automate-services" class="discover-cta-banner__btn">
+                Explore experts
+              </a>
+              <a href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20am%20ready%20to%20automate%20my%20business%20workflows`} target="_blank" rel="noopener noreferrer" class="discover-cta-banner__wa-btn">
+                <span>Chat on WhatsApp</span>
+                <span class="discover-cta-banner__arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="discover-cta-banner__visual" aria-hidden="true">
+            <div class="discover-cta-card-preview">
+              <div class="dcc-header">
+                <div class="dcc-dot dcc-dot--red"></div>
+                <div class="dcc-dot dcc-dot--yellow"></div>
+                <div class="dcc-dot dcc-dot--green"></div>
+                <span class="dcc-title">ai-agent-engine.ts</span>
+              </div>
+              <div class="dcc-body">
+                <div class="dcc-line"><span class="dcc-k">const</span> agent = <span class="dcc-k">new</span> <span class="dcc-c">VapiAutonomousSquad</span>();</div>
+                <div class="dcc-line">agent.<span class="dcc-f">connectInbound</span>(&#123; retell: <span class="dcc-v">true</span>, crm: <span class="dcc-s">'Perfex'</span> &#125;);</div>
+                <div class="dcc-line">agent.<span class="dcc-f">onCall</span>(<span class="dcc-k">async</span> (caller) =&gt; &#123;</div>
+                <div class="dcc-line dcc-indent"><span class="dcc-k">await</span> agent.<span class="dcc-f">bookAppointment</span>(caller);</div>
+                <div class="dcc-line dcc-indent"><span class="dcc-k">await</span> agent.<span class="dcc-f">sendWhatsAppConfirmation</span>();</div>
+                <div class="dcc-line">&#125;);</div>
+                <div class="dcc-status">
+                  <span class="dcc-pulse"></span>
+                  <span>Agent Online • Handling 24/7 Calls</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
+
+<script is:inline>
+  function initDiscoverPage() {
+    // 1. Tab Switching
+    const tabButtons = document.querySelectorAll('[data-tab-target]');
+    const tabPanels = document.querySelectorAll('.discover-panel');
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab-target');
+
+        tabButtons.forEach((b) => {
+          const isActive = b === btn;
+          b.classList.toggle('is-active', isActive);
+          b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        tabPanels.forEach((panel) => {
+          const isTarget = panel.id === `tab-panel-${targetId}`;
+          panel.classList.toggle('is-active', isTarget);
+          panel.hidden = !isTarget;
+        });
+
+        // Ensure active pill is scrolled into view smoothly
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+    });
+
+    // 2. Tabs Horizontal Track Scrolling
+    const track = document.getElementById('discover-tabs-track');
+    const scrollLeft = document.getElementById('tabs-scroll-left');
+    const scrollRight = document.getElementById('tabs-scroll-right');
+
+    if (scrollLeft && track) {
+      scrollLeft.addEventListener('click', () => {
+        track.scrollBy({ left: -200, behavior: 'smooth' });
+      });
+    }
+    if (scrollRight && track) {
+      scrollRight.addEventListener('click', () => {
+        track.scrollBy({ left: 200, behavior: 'smooth' });
+      });
+    }
+
+    // 3. Heart Favorite Toggle
+    const favButtons = document.querySelectorAll('[data-fav-btn]');
+    favButtons.forEach((fBtn) => {
+      fBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fBtn.classList.toggle('is-active');
+        const heartSvg = fBtn.querySelector('.dg-card__heart');
+        if (fBtn.classList.contains('is-active')) {
+          heartSvg?.setAttribute('fill', '#e63946');
+          heartSvg?.setAttribute('stroke', '#e63946');
+        } else {
+          heartSvg?.setAttribute('fill', 'none');
+          heartSvg?.setAttribute('stroke', 'currentColor');
+        }
+      });
+    });
+
+    // 4. Smooth scroll explore button
+    const heroExploreBtn = document.getElementById('hero-explore-btn');
+    if (heroExploreBtn) {
+      heroExploreBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.getElementById('automate-services');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+  }
+
+  initDiscoverPage();
+  document.addEventListener('astro:after-swap', initDiscoverPage);
+</script>
+
+<style>
+  .discover-page {
+    background: #ffffff;
+    color: #222325;
+    font-family: inherit;
+    min-height: 100vh;
+  }
+
+  /* Breadcrumbs */
+  .discover-breadcrumbs-wrap {
+    background: #ffffff;
+    border-bottom: 1px solid #f1f2f4;
+    padding: 10px 0;
+  }
+
+  .discover-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #74767e;
+  }
+
+  .discover-breadcrumbs a {
+    color: #62646a;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .discover-breadcrumbs a:hover {
+    color: #1dbf73;
+  }
+
+  .bc-sep {
+    color: #c5c6c9;
+  }
+
+  .bc-current {
+    color: #222325;
+    font-weight: 600;
+  }
+
+  /* 1. Hero Section matching Fiverr Discover AI Agents */
+  .discover-hero {
+    background: #ffe0d4;
+    padding: 72px 0 80px 0;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid rgba(223, 94, 55, 0.15);
+  }
+
+  .discover-hero__inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .discover-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    background: rgba(223, 94, 55, 0.12);
+    color: #b5401d;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+
+  .discover-hero__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #df5e37;
+  }
+
+  .discover-hero__title {
+    font-size: 3.4rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: #df5e37;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.02em;
+    font-family: inherit;
+  }
+
+  .discover-hero__sub {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #553328;
+    max-width: 680px;
+    margin: 0 auto 32px auto;
+  }
+
+  .discover-hero__cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .discover-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 32px;
+    background: #222325;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  }
+
+  .discover-hero__btn:hover {
+    background: #111213;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  }
+
+  .discover-hero__sub-link {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #b5401d;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .discover-hero__sub-link:hover {
+    color: #8c2e11;
+    text-decoration: underline;
+  }
+
+  /* 2. "Automate Your Business, Amplify Your Growth" */
+  .discover-catalog {
+    padding: 64px 0 72px 0;
+    background: #ffffff;
+  }
+
+  .discover-catalog__header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 36px auto;
+  }
+
+  .discover-catalog__title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #222325;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px 0;
+  }
+
+  .discover-catalog__subtitle {
+    font-size: 1.05rem;
+    color: #62646a;
+    margin: 0;
+  }
+
+  /* Filter Tabs Bar */
+  .discover-tabs-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    margin-bottom: 36px;
+  }
+
+  .discover-tabs__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    color: #62646a;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .discover-tabs__arrow:hover {
+    color: #222325;
+    border-color: #222325;
+  }
+
+  .discover-tabs__arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .discover-tabs__track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    padding: 4px;
+    max-width: 900px;
+  }
+
+  .discover-tabs__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .discover-tab-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 22px;
+    border-radius: 9999px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #222325;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .discover-tab-pill:hover {
+    border-color: #222325;
+  }
+
+  .discover-tab-pill.is-active {
+    background: #222325;
+    color: #ffffff;
+    border-color: #222325;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Tab Panels */
+  .discover-panel {
+    display: none;
+  }
+
+  .discover-panel.is-active {
+    display: block;
+    animation: fadeIn 0.25s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Gigs Grid (4 cols on desktop, 2 on tablet, 1 on mobile) */
+  .discover-gigs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  /* Gig Card */
+  .dg-card {
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .dg-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    border-color: #b5b6ba;
+  }
+
+  .dg-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #f7f7f8;
+    overflow: hidden;
+  }
+
+  .dg-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .dg-card:hover .dg-card__img {
+    transform: scale(1.03);
+  }
+
+  .dg-card__fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #62646a;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dg-card__fav:hover {
+    transform: scale(1.1);
+    color: #e63946;
+  }
+
+  .dg-card__fav svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .dg-card__content {
+    padding: 14px 16px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .dg-card__seller {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .dg-card__seller-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .dg-card__seller-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .dg-card__seller-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #222325;
+  }
+
+  .dg-card__seller-level {
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: #74767e;
+  }
+
+  .dg-card__title {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: #404145;
+    margin: 0 0 10px 0;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .dg-card__title-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .dg-card__title-link:hover {
+    color: #1dbf73;
+  }
+
+  .dg-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.86rem;
+    margin-bottom: 14px;
+  }
+
+  .dg-card__star {
+    color: #222325;
+    font-size: 0.95rem;
+  }
+
+  .dg-card__rating strong {
+    font-weight: 700;
+    color: #222325;
+  }
+
+  .dg-card__reviews {
+    color: #74767e;
+    font-size: 0.8rem;
+  }
+
+  .dg-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid #f1f2f4;
+  }
+
+  .dg-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .dg-card__price-label {
+    font-size: 0.76rem;
+    color: #74767e;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .dg-card__price-val {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #222325;
+  }
+
+  .dg-card__price-inr {
+    font-size: 0.74rem;
+    color: #95979d;
+  }
+
+  .dg-card__btn-order {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1dbf73;
+    background: #edfbf4;
+    padding: 5px 11px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .dg-card__btn-order:hover {
+    background: #1dbf73;
+    color: #ffffff;
+  }
+
+  /* Browse Button Sec */
+  .discover-browse-sec {
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  .discover-browse-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: #ffffff;
+    border: 1px solid #222325;
+    color: #222325;
+    font-size: 0.94rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .discover-browse-btn:hover {
+    background: #222325;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .discover-browse-btn svg {
+    width: 15px;
+    height: 15px;
+    transition: transform 0.2s ease;
+  }
+
+  .discover-browse-btn:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* 3. Three Comparison Pillars */
+  .discover-pillars {
+    background: #fafafb;
+    padding: 72px 0 80px 0;
+    border-top: 1px solid #e4e5e7;
+    border-bottom: 1px solid #e4e5e7;
+  }
+
+  .discover-pillars__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px auto;
+  }
+
+  .discover-pillars__eyebrow {
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: #1dbf73;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .discover-pillars__title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #222325;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .discover-pillars__subtitle {
+    font-size: 1.05rem;
+    color: #62646a;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .discover-pillars__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .dp-card {
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    border-radius: 12px;
+    padding: 32px 28px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+  }
+
+  .dp-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    border-color: #1dbf73;
+  }
+
+  .dp-card__header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #f1f2f4;
+  }
+
+  .dp-card__num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #edfbf4;
+    color: #00875a;
+    font-weight: 900;
+    font-size: 1.15rem;
+  }
+
+  .dp-card__name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #222325;
+    margin: 0;
+  }
+
+  .dp-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+
+  .dp-card__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: #404145;
+  }
+
+  .dp-card__check {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: #2ecc71;
+    margin-top: 1px;
+  }
+
+  .dp-card__check svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .dp-card__text strong {
+    color: #222325;
+    font-weight: 700;
+  }
+
+  .dp-card__footer {
+    padding-top: 16px;
+    border-top: 1px solid #f1f2f4;
+  }
+
+  .dp-card__cta {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #1dbf73;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .dp-card__cta:hover {
+    color: #159357;
+  }
+
+  /* 4. "Ready to get automate?" CTA Forest Green Banner */
+  .discover-cta-sec {
+    padding: 64px 0 80px 0;
+    background: #ffffff;
+  }
+
+  .discover-cta-banner {
+    background: #003912;
+    border-radius: 16px;
+    padding: 56px 64px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    color: #ffffff;
+    box-shadow: 0 16px 40px rgba(0, 57, 18, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .discover-cta-banner__title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .discover-cta-banner__text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #c7dec9;
+    margin: 0 0 28px 0;
+  }
+
+  .discover-cta-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .discover-cta-banner__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    padding: 0 28px;
+    background: #222325;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .discover-cta-banner__btn:hover {
+    background: #111213;
+    transform: translateY(-2px);
+  }
+
+  .discover-cta-banner__wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 46px;
+    padding: 0 22px;
+    background: #1dbf73;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .discover-cta-banner__wa-btn:hover {
+    background: #17a864;
+    transform: translateY(-2px);
+  }
+
+  .discover-cta-banner__arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .discover-cta-banner__wa-btn:hover .discover-cta-banner__arrow {
+    transform: translateX(3px);
+  }
+
+  /* Code Card Preview in Banner */
+  .discover-cta-card-preview {
+    background: rgba(10, 42, 21, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 20px 22px;
+    font-family: monospace;
+    font-size: 0.86rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  }
+
+  .dcc-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 14px;
+  }
+
+  .dcc-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dcc-dot--red { background: #ff5f56; }
+  .dcc-dot--yellow { background: #ffbd2e; }
+  .dcc-dot--green { background: #27c93f; }
+
+  .dcc-title {
+    margin-left: 8px;
+    color: #a0caa7;
+    font-size: 0.76rem;
+  }
+
+  .dcc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    line-height: 1.5;
+  }
+
+  .dcc-k { color: #f38ba8; font-weight: 600; }
+  .dcc-c { color: #f9e2af; font-weight: 600; }
+  .dcc-f { color: #89b4fa; }
+  .dcc-s { color: #a6e3a1; }
+  .dcc-v { color: #fab387; }
+  .dcc-indent { padding-left: 20px; }
+
+  .dcc-status {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #a6e3a1;
+    font-size: 0.8rem;
+  }
+
+  .dcc-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2ecc71;
+    animation: dccPulse 1.8s infinite;
+  }
+
+  @keyframes dccPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 1080px) {
+    .discover-gigs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .discover-pillars__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .discover-cta-banner {
+      grid-template-columns: 1fr;
+      padding: 40px 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .discover-hero__title {
+      font-size: 2.2rem;
+    }
+
+    .discover-hero__sub {
+      font-size: 1rem;
+    }
+
+    .discover-catalog__title {
+      font-size: 1.6rem;
+    }
+
+    .discover-gigs-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .discover-cta-banner__title {
+      font-size: 1.8rem;
+    }
+  }
+</style>
