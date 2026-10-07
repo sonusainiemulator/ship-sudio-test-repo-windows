@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2026-10-07 23:37 IST
+
+### Fixed
+- **Mobile Responsive Gigs Mega Menu & Category Navigation**:
+  - Gated desktop floating mega overlay (`.gh-mega-overlay`) strictly to viewports `> 1024px`, preventing touch `focus` on mobile devices from accidentally opening the desktop multi-column overlay and trapping the screen.
+  - Added `@media (max-width: 1024px) { .gh-mega-overlay { display: none !important; } }` and scoped JS mouseenter/focus bridges to desktop screen widths.
+  - Added click-outside dismissal for desktop mega menus.
+
+### Added
+- **Mobile Categories Starter Chip**: Added a prominent "Categories" chip to the front of the category bar on mobile to open the full marketplace drawer with one tap.
+- **Mobile Caret Subcategory Triggers**: Added dedicated caret toggle buttons (`.gh-catnav__caret-mobile-btn`) next to category chips on mobile to open the drawer directly with that category's accordion expanded.
+- **Real-Time Live Search in Mobile Drawer**: Added a live search filter input (`#gh-drawer-search-input`) inside the marketplace drawer to instantly search across all 10 categories, subcategory groups, and individual services.
+- **Enhanced Mobile Drawer Accordion UX**:
+  - Service count badges on category accordion items.
+  - Visual highlight for the active category (`is-current-category`).
+  - Animated hamburger &rarr; X transformation on toggle (`aria-expanded="true"`).
+  - Modern touch pill styling with momentum scrolling and hidden desktop arrow buttons on `≤ 768px`.
+  - Dynamic viewport height (`100dvh`) and safe-area insets (`env(safe-area-inset-bottom)`) for modern mobile browsers.
+
+---
+
 ## [1.4.0] - 2026-10-07 12:22 IST
 
 ### Added

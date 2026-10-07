@@ -143,6 +143,16 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       </button>
 
       <ul class="gh-catnav__list" id="gh-catnav-list">
+        <!-- Quick All Categories trigger on mobile -->
+        <li class="gh-catnav__item gh-catnav__item--all-trigger">
+          <button type="button" class="gh-catnav__all-btn" id="gh-catnav-all-btn" aria-label="Explore all categories" data-open-drawer-btn>
+            <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            <span>Categories</span>
+          </button>
+        </li>
+
         {categories.map((cat) => {
           const isActive = activeCategory === cat.id;
           return (
@@ -155,11 +165,24 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
               >
                 <span>{cat.name}</span>
                 {cat.hasSubmenu && (
-                  <svg class="gh-catnav__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                  <svg class="gh-catnav__caret gh-catnav__caret--desktop" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
                     <path d="M2.5 4.5L6 8l3.5-3.5"/>
                   </svg>
                 )}
               </a>
+              {cat.hasSubmenu && (
+                <button
+                  type="button"
+                  class="gh-catnav__caret-mobile-btn"
+                  data-open-cat-drawer={cat.id}
+                  aria-label={`Open ${cat.name} subcategories`}
+                  title={`Open ${cat.name} subcategories`}
+                >
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M2.5 4.5L6 8l3.5-3.5"/>
+                  </svg>
+                </button>
+              )}
             </li>
           );
         })}
@@ -173,7 +196,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       </button>
     </div>
 
-    <!-- Mega Menu Floating Panels (Rendered outside the scrollable UL so no vertical clipping occurs) -->
+    <!-- Mega Menu Floating Panels (Rendered outside the scrollable UL for Desktop Viewports) -->
     <div class="gh-mega-overlay" id="gh-mega-overlay">
       <div class="container gh-mega-container">
         {categories.filter(c => c.hasSubmenu).map((cat) => {
@@ -271,37 +294,72 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       </a>
     </div>
 
+    <!-- Live Filter inside drawer -->
+    <div class="gh-drawer__search-box">
+      <svg class="gh-drawer__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input
+        type="text"
+        id="gh-drawer-search-input"
+        class="gh-drawer__search-input"
+        placeholder="Filter services & subcategories..."
+        aria-label="Filter services in menu"
+        autocomplete="off"
+      />
+      <button type="button" id="gh-drawer-search-clear" class="gh-drawer__search-clear" aria-label="Clear filter" style="display: none;">✕</button>
+    </div>
+
     <!-- Accordion Category List -->
     <div class="gh-drawer__menu">
-      <p class="gh-drawer__menu-label">Marketplace Categories</p>
+      <div class="gh-drawer__menu-header-row">
+        <p class="gh-drawer__menu-label">Marketplace Categories</p>
+        <span class="gh-drawer__cat-count">{categories.length} Categories</span>
+      </div>
       <div class="gh-drawer__accordion">
         {categories.map((cat) => {
+          const isCurrentActive = activeCategory === cat.id;
           if (!cat.hasSubmenu) {
             return (
-              <a href="#gigs-grid" data-category-filter={cat.id} class="gh-drawer__item-single">
-                <span>{cat.name}</span>
-                <span class="gh-drawer__arrow">→</span>
-              </a>
+              <div class="gh-drawer__acc-item" data-acc-group data-drawer-cat={cat.id}>
+                <a href="#gigs-grid" data-category-filter={cat.id} class="gh-drawer__item-single">
+                  <span class="gh-drawer__item-single-name">{cat.name}</span>
+                  <span class="gh-drawer__arrow">→</span>
+                </a>
+              </div>
             );
           }
 
+          const totalItems = cat.groups.reduce((acc, g) => acc + g.items.length, 0);
+
           return (
-            <div class="gh-drawer__acc-item" data-acc-group>
-              <button type="button" class="gh-drawer__acc-trigger" data-acc-trigger aria-expanded="false">
-                <span>{cat.name}</span>
+            <div class={`gh-drawer__acc-item ${isCurrentActive ? "is-expanded is-current-category" : ""}`} data-acc-group data-drawer-cat={cat.id}>
+              <button
+                type="button"
+                class="gh-drawer__acc-trigger"
+                data-acc-trigger
+                aria-expanded={isCurrentActive ? "true" : "false"}
+              >
+                <div class="gh-drawer__acc-trigger-left">
+                  <span class="gh-drawer__acc-name">{cat.name}</span>
+                  {totalItems > 0 && (
+                    <span class="gh-drawer__acc-badge">{totalItems}</span>
+                  )}
+                </div>
                 <svg class="gh-drawer__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <path d="M2.5 4.5L6 8l3.5-3.5"/>
                 </svg>
               </button>
-              <div class="gh-drawer__acc-panel" data-acc-panel hidden>
+              <div class="gh-drawer__acc-panel" data-acc-panel hidden={!isCurrentActive}>
                 {cat.groups.map((group) => (
-                  <div class="gh-drawer__subgroup">
+                  <div class="gh-drawer__subgroup" data-drawer-subgroup>
                     <h5 class="gh-drawer__subgroup-title">{group.title}</h5>
                     <ul class="gh-drawer__subgroup-list">
                       {group.items.map((item) => (
-                        <li>
+                        <li data-drawer-item>
                           <a href={item.href || `/gigs?filter=${item.slug}`} class="gh-drawer__sub-link">
-                            <span>{item.name}</span>
+                            <span class="gh-drawer__sub-name">{item.name}</span>
                             {item.tag && (
                               <span class={`gh-tag-pill ${item.tag === "NEW" ? "gh-tag-pill--new" : item.tag === "HOT" ? "gh-tag-pill--hot" : "gh-tag-pill--popular"}`}>
                                 {item.tag}
@@ -315,6 +373,9 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
                     {group.footerAction && (
                       <a href={group.footerAction.href} class="gh-drawer__action-sublink">
                         <span>{group.footerAction.text}</span>
+                        <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
                       </a>
                     )}
                   </div>
@@ -347,7 +408,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     if (!header || header.dataset.gigsInit === '1') return;
     header.dataset.gigsInit = '1';
 
-    // 1. Mega Menu Desktop Hover Bridge
+    // 1. Mega Menu Desktop Hover Bridge (strictly > 1024px)
     const catNav = header.querySelector('[data-catnav-root]');
     const triggerLinks = header.querySelectorAll('[data-category-trigger]');
     const overlay = document.getElementById('gh-mega-overlay');
@@ -355,14 +416,18 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     let closeTimeout = null;
     let activeCatId = null;
 
+    function isDesktop() {
+      return window.innerWidth > 1024;
+    }
+
     function showMegaPanel(catId) {
+      if (!isDesktop()) return; // Never show floating mega overlay on tablet / mobile
       if (closeTimeout) {
         clearTimeout(closeTimeout);
         closeTimeout = null;
       }
       activeCatId = catId;
 
-      // Update link active state
       triggerLinks.forEach((link) => {
         const id = link.getAttribute('data-category-trigger');
         if (id === catId) {
@@ -401,12 +466,18 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
     triggerLinks.forEach((link) => {
       const catId = link.getAttribute('data-category-trigger');
-      link.addEventListener('mouseenter', () => showMegaPanel(catId));
-      link.addEventListener('focus', () => showMegaPanel(catId));
+      link.addEventListener('mouseenter', () => {
+        if (isDesktop()) showMegaPanel(catId);
+      });
+      link.addEventListener('focus', () => {
+        if (isDesktop()) showMegaPanel(catId);
+      });
     });
 
     if (catNav) {
-      catNav.addEventListener('mouseleave', scheduleCloseMega);
+      catNav.addEventListener('mouseleave', () => {
+        if (isDesktop()) scheduleCloseMega();
+      });
     }
 
     if (overlay) {
@@ -416,8 +487,20 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
           closeTimeout = null;
         }
       });
-      overlay.addEventListener('mouseleave', scheduleCloseMega);
+      overlay.addEventListener('mouseleave', () => {
+        if (isDesktop()) scheduleCloseMega();
+      });
     }
+
+    // Dismiss mega panel when clicking outside on desktop
+    document.addEventListener('click', (e) => {
+      if (overlay?.classList.contains('is-open')) {
+        const target = e.target;
+        if (!catNav?.contains(target) && !overlay?.contains(target)) {
+          scheduleCloseMega();
+        }
+      }
+    });
 
     // 2. Category Filter Clicks
     const filterLinks = header.querySelectorAll('[data-category-filter]');
@@ -426,7 +509,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
         const cat = link.getAttribute('data-category-filter');
         if (cat) {
           window.dispatchEvent(new CustomEvent('gigCategoryFilter', { detail: { category: cat } }));
-          // Update active link styling
           header.querySelectorAll('.gh-catnav__link').forEach((l) => {
             l.classList.toggle('gh-catnav__link--active', l.getAttribute('data-category-filter') === cat);
           });
@@ -470,6 +552,11 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
     const updateScrollButtons = () => {
       if (!catList || !scrollLeftBtn || !scrollRightBtn) return;
+      if (window.innerWidth <= 768) {
+        scrollLeftBtn.classList.add('is-hidden');
+        scrollRightBtn.classList.add('is-hidden');
+        return;
+      }
       const atStart = catList.scrollLeft <= 5;
       const atEnd = catList.scrollLeft + catList.clientWidth >= catList.scrollWidth - 5;
       scrollLeftBtn.classList.toggle('is-hidden', atStart);
@@ -505,6 +592,11 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       drawer.setAttribute('aria-hidden', 'false');
       burgerToggle?.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';
+      // Auto-focus drawer search input on mobile open after short delay
+      setTimeout(() => {
+        const dSearch = document.getElementById('gh-drawer-search-input');
+        if (dSearch && window.innerWidth > 600) dSearch.focus();
+      }, 300);
     }
 
     function closeMobileDrawer() {
@@ -520,6 +612,16 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       if (drawer?.classList.contains('is-open')) closeMobileDrawer();
       else openMobileDrawer();
     });
+
+    // Support "Categories" trigger button in catnav
+    const openDrawerBtns = header.querySelectorAll('[data-open-drawer-btn]');
+    openDrawerBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openMobileDrawer();
+      });
+    });
+
     drawerCloseBtn?.addEventListener('click', closeMobileDrawer);
     backdrop?.addEventListener('click', closeMobileDrawer);
 
@@ -530,7 +632,46 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       }
     });
 
-    // 6. Drawer Accordion Submenus
+    // 6. Expand Drawer Category from mobile caret buttons
+    function expandDrawerCategory(catId) {
+      if (!drawer) return;
+      const targetItem = drawer.querySelector(`[data-drawer-cat="${catId}"]`);
+      if (!targetItem) return;
+      const trig = targetItem.querySelector('[data-acc-trigger]');
+      const panel = targetItem.querySelector('[data-acc-panel]');
+
+      header.querySelectorAll('[data-acc-group]').forEach((item) => {
+        if (item !== targetItem) {
+          item.classList.remove('is-expanded');
+          item.querySelector('[data-acc-trigger]')?.setAttribute('aria-expanded', 'false');
+          const p = item.querySelector('[data-acc-panel]');
+          if (p) p.hidden = true;
+        }
+      });
+
+      targetItem.classList.add('is-expanded');
+      trig?.setAttribute('aria-expanded', 'true');
+      if (panel) panel.hidden = false;
+
+      setTimeout(() => {
+        targetItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 250);
+    }
+
+    const openCatDrawerBtns = header.querySelectorAll('[data-open-cat-drawer]');
+    openCatDrawerBtns.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const catId = btn.getAttribute('data-open-cat-drawer');
+        openMobileDrawer();
+        if (catId) {
+          expandDrawerCategory(catId);
+        }
+      });
+    });
+
+    // 7. Drawer Accordion Submenus
     const accTriggers = header.querySelectorAll('[data-acc-trigger]');
     accTriggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
@@ -553,6 +694,70 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
         item?.classList.toggle('is-expanded', !isExpanded);
       });
     });
+
+    // 8. Drawer Real-Time Search Filter
+    const drawerSearch = document.getElementById('gh-drawer-search-input');
+    const drawerClear = document.getElementById('gh-drawer-search-clear');
+    if (drawerSearch) {
+      drawerSearch.addEventListener('input', () => {
+        const query = drawerSearch.value.trim().toLowerCase();
+        if (drawerClear) drawerClear.style.display = query ? 'flex' : 'none';
+
+        const accItems = drawer?.querySelectorAll('[data-acc-group]');
+        accItems?.forEach((catItem) => {
+          const singleLink = catItem.querySelector('.gh-drawer__item-single');
+          if (singleLink) {
+            const matchesSingle = !query || singleLink.textContent?.toLowerCase().includes(query);
+            catItem.style.display = matchesSingle ? '' : 'none';
+            return;
+          }
+
+          let catHasMatch = false;
+          const subGroups = catItem.querySelectorAll('[data-drawer-subgroup]');
+          subGroups.forEach((group) => {
+            let groupHasMatch = false;
+            const items = group.querySelectorAll('[data-drawer-item]');
+            items.forEach((item) => {
+              const text = item.textContent?.toLowerCase() || '';
+              if (!query || text.includes(query)) {
+                item.style.display = '';
+                groupHasMatch = true;
+                catHasMatch = true;
+              } else {
+                item.style.display = 'none';
+              }
+            });
+            group.style.display = (!query || groupHasMatch) ? '' : 'none';
+          });
+
+          if (query) {
+            if (catHasMatch) {
+              catItem.style.display = '';
+              catItem.classList.add('is-expanded');
+              catItem.querySelector('[data-acc-trigger]')?.setAttribute('aria-expanded', 'true');
+              const panel = catItem.querySelector('[data-acc-panel]');
+              if (panel) panel.hidden = false;
+            } else {
+              catItem.style.display = 'none';
+            }
+          } else {
+            catItem.style.display = '';
+            // Reset to default collapsed state
+            const isInitialActive = catItem.classList.contains('is-current-category');
+            catItem.classList.toggle('is-expanded', isInitialActive);
+            catItem.querySelector('[data-acc-trigger]')?.setAttribute('aria-expanded', isInitialActive ? 'true' : 'false');
+            const panel = catItem.querySelector('[data-acc-panel]');
+            if (panel) panel.hidden = !isInitialActive;
+          }
+        });
+      });
+
+      drawerClear?.addEventListener('click', () => {
+        drawerSearch.value = '';
+        drawerSearch.dispatchEvent(new Event('input'));
+        drawerSearch.focus();
+      });
+    }
 
     drawer?.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
@@ -905,6 +1110,12 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     border-radius: 6px;
     cursor: pointer;
     padding: 0;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .gh-burger-btn:hover {
+    background: #eef0f2;
+    border-color: #b5b6ba;
   }
 
   .gh-burger-line {
@@ -914,17 +1125,32 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     background: #222325;
     border-radius: 2px;
     position: absolute;
-    transition: transform 0.2s ease, opacity 0.15s ease, top 0.2s ease;
+    transition: transform 0.22s ease, opacity 0.15s ease, top 0.22s ease;
   }
 
   .gh-burger-line--top { top: 12px; }
   .gh-burger-line--mid { top: 18px; }
   .gh-burger-line--bot { top: 24px; }
 
+  /* Animated Burger -> X transformation */
+  .gh-burger-btn[aria-expanded="true"] .gh-burger-line--top {
+    top: 18px;
+    transform: rotate(45deg);
+  }
+  .gh-burger-btn[aria-expanded="true"] .gh-burger-line--mid {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .gh-burger-btn[aria-expanded="true"] .gh-burger-line--bot {
+    top: 18px;
+    transform: rotate(-45deg);
+  }
+
   /* Category Nav Bar */
   .gh-catnav {
     background: #ffffff;
     position: relative;
+    border-top: 1px solid #f7f7f8;
   }
 
   .gh-catnav__inner {
@@ -975,7 +1201,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   .gh-catnav__list {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
     list-style: none;
     padding: 0 32px;
     margin: 0;
@@ -994,6 +1220,32 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     white-space: nowrap;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+  }
+
+  /* All Categories trigger button */
+  .gh-catnav__all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background: #222325;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .gh-catnav__all-btn:hover {
+    background: #1dbf73;
+  }
+
+  .gh-catnav__all-btn svg {
+    flex-shrink: 0;
   }
 
   .gh-catnav__link {
@@ -1032,7 +1284,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     border-bottom-color: #1dbf73;
   }
 
-  .gh-catnav__caret {
+  .gh-catnav__caret--desktop {
     width: 9px;
     height: 9px;
     margin-left: 2px;
@@ -1040,11 +1292,27 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     opacity: 0.6;
   }
 
-  .gh-catnav__link--hovered .gh-catnav__caret {
+  .gh-catnav__link--hovered .gh-catnav__caret--desktop {
     transform: rotate(180deg);
   }
 
-  /* Full Mega Menu Overlay (Positioned outside scrollable UL) */
+  /* Mobile caret toggle button */
+  .gh-catnav__caret-mobile-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #74767e;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.15s ease;
+  }
+
+  /* Full Mega Menu Overlay (Desktop only) */
   .gh-mega-overlay {
     position: absolute;
     top: 100%;
@@ -1082,7 +1350,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     display: block;
   }
 
-  /* Multi-column grid matching Screenshot 2 */
   .gh-mega-columns {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1090,7 +1357,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     align-items: start;
   }
 
-  /* AI Services specific 3 columns layout matching Screenshot 2 */
   .gh-mega-panel--ai .gh-mega-columns {
     grid-template-columns: repeat(3, 1fr);
     gap: 28px 48px;
@@ -1139,7 +1405,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     color: #1dbf73;
   }
 
-  /* Tags matching Screenshot 2 */
   .gh-tag-pill {
     font-size: 0.62rem;
     font-weight: 700;
@@ -1170,7 +1435,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     background: #e3fcef;
   }
 
-  /* "Let us manage your project" blue action link matching Screenshot 2 */
   .gh-mega-action-link {
     display: inline-flex;
     align-items: center;
@@ -1197,7 +1461,6 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     flex-shrink: 0;
   }
 
-  /* Bottom Banner inside Mega Menu */
   .gh-mega-bottom-banner {
     display: flex;
     align-items: center;
@@ -1268,16 +1531,17 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     position: fixed;
     top: 0;
     left: 0;
-    width: 320px;
-    max-width: 85vw;
+    width: 360px;
+    max-width: 88vw;
     height: 100vh;
+    height: 100dvh;
     background: #ffffff;
     z-index: 120;
     display: flex;
     flex-direction: column;
     transform: translateX(-100%);
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 6px 0 32px rgba(0, 0, 0, 0.16);
   }
 
   .gh-drawer.is-open {
@@ -1288,29 +1552,44 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
-    border-bottom: 1px solid #e4e5e7;
+    padding: 14px 18px;
+    border-bottom: 1px solid #eef0f2;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 5;
   }
 
   .gh-drawer__close {
-    background: transparent;
-    border: none;
-    color: #62646a;
+    background: #f7f7f8;
+    border: 1px solid #e4e5e7;
+    border-radius: 6px;
+    color: #404145;
     cursor: pointer;
-    padding: 6px;
+    padding: 0;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    transition: all 0.15s ease;
+  }
+
+  .gh-drawer__close:hover {
+    background: #eef0f2;
+    color: #222325;
   }
 
   .gh-drawer__close svg {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
   }
 
   .gh-drawer__actions {
-    padding: 14px 20px;
+    padding: 12px 18px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     border-bottom: 1px solid #f1f2f4;
   }
 
@@ -1326,6 +1605,11 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     font-size: 0.88rem;
     border-radius: 6px;
     text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .gh-drawer__ai-btn:hover {
+    background: #daf3e5;
   }
 
   .gh-drawer__cta-btn {
@@ -1339,12 +1623,76 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     font-size: 0.88rem;
     border-radius: 6px;
     text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .gh-drawer__cta-btn:hover {
+    background: #19a463;
+  }
+
+  .gh-drawer__search-box {
+    display: flex;
+    align-items: center;
+    margin: 12px 18px 4px 18px;
+    position: relative;
+  }
+
+  .gh-drawer__search-icon {
+    position: absolute;
+    left: 11px;
+    width: 15px;
+    height: 15px;
+    color: #95979d;
+    pointer-events: none;
+  }
+
+  .gh-drawer__search-input {
+    width: 100%;
+    height: 38px;
+    padding: 0 30px 0 34px;
+    background: #f7f7f8;
+    border: 1px solid #e4e5e7;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    color: #222325;
+    outline: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .gh-drawer__search-input:focus {
+    background: #ffffff;
+    border-color: #1dbf73;
+  }
+
+  .gh-drawer__search-clear {
+    position: absolute;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e4e5e7;
+    border: none;
+    color: #62646a;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
   }
 
   .gh-drawer__menu {
     flex: 1;
     overflow-y: auto;
-    padding: 16px 20px;
+    padding: 14px 18px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gh-drawer__menu-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
   }
 
   .gh-drawer__menu-label {
@@ -1353,7 +1701,13 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     color: #95979d;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin: 0 0 10px 0;
+    margin: 0;
+  }
+
+  .gh-drawer__cat-count {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #95979d;
   }
 
   .gh-drawer__accordion {
@@ -1365,16 +1719,26 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 11px 0;
+    padding: 12px 4px;
     color: #222325;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
-    border-bottom: 1px solid #f7f7f8;
+    border-bottom: 1px solid #f1f2f4;
+  }
+
+  .gh-drawer__item-single:hover {
+    color: #1dbf73;
   }
 
   .gh-drawer__acc-item {
     border-bottom: 1px solid #f1f2f4;
+    transition: background 0.15s ease;
+  }
+
+  .gh-drawer__acc-item.is-current-category {
+    border-left: 3px solid #1dbf73;
+    padding-left: 8px;
   }
 
   .gh-drawer__acc-trigger {
@@ -1382,36 +1746,73 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
+    padding: 12px 4px;
     background: transparent;
     border: none;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #222325;
     cursor: pointer;
     text-align: left;
+    transition: color 0.15s ease;
+  }
+
+  .gh-drawer__acc-trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gh-drawer__acc-name {
+    line-height: 1.2;
+  }
+
+  .gh-drawer__acc-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #74767e;
+    background: #f1f2f4;
+    padding: 1px 6px;
+    border-radius: 10px;
   }
 
   .gh-drawer__acc-trigger svg {
     transition: transform 0.2s ease;
+    flex-shrink: 0;
+    color: #74767e;
   }
 
-  .gh-drawer__acc-item.is-expanded .gh-drawer__acc-trigger svg {
+  .gh-drawer__acc-item.is-expanded > .gh-drawer__acc-trigger {
+    color: #1dbf73;
+  }
+
+  .gh-drawer__acc-item.is-expanded > .gh-drawer__acc-trigger svg {
     transform: rotate(180deg);
+    color: #1dbf73;
   }
 
   .gh-drawer__acc-panel {
-    padding: 0 0 14px 10px;
+    background: #fafbfc;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 2px 0 12px 0;
+    border: 1px solid #edf0f2;
   }
 
   .gh-drawer__subgroup {
     margin-bottom: 14px;
   }
 
+  .gh-drawer__subgroup:last-child {
+    margin-bottom: 0;
+  }
+
   .gh-drawer__subgroup-title {
-    font-size: 0.84rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: #62646a;
+    color: #95979d;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin: 0 0 8px 0;
   }
 
@@ -1421,35 +1822,49 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 4px;
   }
 
   .gh-drawer__sub-link {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.82rem;
-    color: #74767e;
+    gap: 8px;
+    padding: 8px 6px;
+    font-size: 0.84rem;
+    color: #404145;
     text-decoration: none;
-    padding: 2px 0;
+    border-radius: 4px;
+    transition: color 0.15s ease, background 0.15s ease;
   }
 
-  .gh-drawer__sub-link:hover {
+  .gh-drawer__sub-link:hover,
+  .gh-drawer__sub-link:active {
     color: #1dbf73;
+    background: #edfbf4;
   }
 
   .gh-drawer__action-sublink {
-    display: inline-block;
-    color: #4361ee;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: #4361ee;
     text-decoration: none;
-    margin-top: 6px;
+    margin-top: 8px;
+    padding: 6px 0;
+    transition: color 0.15s ease;
+  }
+
+  .gh-drawer__action-sublink:hover {
+    color: #2546db;
   }
 
   .gh-drawer__footer {
-    padding: 14px 20px;
-    border-top: 1px solid #e4e5e7;
+    padding: 14px 18px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+    border-top: 1px solid #eef0f2;
     background: #fafafa;
     display: flex;
     flex-direction: column;
@@ -1471,7 +1886,8 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   .gh-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
     z-index: 110;
     opacity: 0;
     visibility: hidden;
@@ -1485,17 +1901,18 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
   /* Responsive Breakpoints */
   @media (max-width: 1024px) {
+    /* STRICTLY hide desktop mega overlay on mobile & tablet */
+    .gh-mega-overlay {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
     .gh-user-tools {
       display: none;
     }
 
-    .gh-mega-columns {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-  }
-
-  @media (max-width: 840px) {
     .gh-topbar__actions {
       display: none;
     }
@@ -1514,6 +1931,129 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
     .gh-topbar__inner {
       flex-wrap: wrap;
+    }
+
+    .gh-catnav__caret--desktop {
+      display: none;
+    }
+
+    .gh-catnav__caret-mobile-btn {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gh-catnav__scroll-btn {
+      display: none !important;
+    }
+
+    .gh-catnav__list {
+      padding: 0 12px;
+      gap: 8px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .gh-catnav__item {
+      display: inline-flex;
+      align-items: center;
+      background: #f7f7f8;
+      border: 1px solid #eef0f2;
+      border-radius: 20px;
+      padding: 2px 4px 2px 2px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .gh-catnav__item:has(.gh-catnav__link--active) {
+      background: #eaf8f1;
+      border-color: #1dbf73;
+    }
+
+    .gh-catnav__item--all-trigger {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .gh-catnav__link {
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      border-bottom: none;
+      color: #404145;
+    }
+
+    .gh-catnav__link:hover,
+    .gh-catnav__link.gh-catnav__link--hovered {
+      border-bottom: none;
+      color: #222325;
+    }
+
+    .gh-catnav__link--active {
+      border-bottom: none;
+      color: #00875a;
+      font-weight: 700;
+    }
+
+    .gh-catnav__link--trending {
+      color: #e65100;
+    }
+
+    .gh-catnav__caret-mobile-btn {
+      margin-right: 4px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gh-topbar {
+      padding: 8px 0;
+    }
+
+    .gh-brand__logo {
+      font-size: 1.45rem;
+    }
+
+    .gh-brand__dot {
+      font-size: 1.55rem;
+    }
+
+    .gh-brand__sub {
+      font-size: 0.72rem;
+      padding: 1px 5px;
+    }
+
+    .gh-topbar__back-home span {
+      display: none;
+    }
+
+    .gh-topbar__back-home {
+      padding: 5px 7px;
+    }
+
+    .gh-search__input {
+      height: 38px;
+      font-size: 0.85rem;
+      padding: 0 12px 0 38px;
+    }
+
+    .gh-search__icon {
+      left: 12px;
+    }
+
+    .gh-search__submit {
+      height: 38px;
+      width: 44px;
+    }
+
+    .gh-burger-btn {
+      width: 36px;
+      height: 36px;
+    }
+
+    .gh-drawer {
+      width: 320px;
+      max-width: 90vw;
     }
   }
 </style>
