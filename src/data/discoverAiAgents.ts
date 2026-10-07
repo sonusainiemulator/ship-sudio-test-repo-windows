@@ -35,13 +35,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will be ai developer for vapi ai chatbot, ai agent in ai mobile app, ai website",
         sellerName: "Palok",
         sellerUsername: "ai_vault1",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 17,
         priceUsd: 30,
         priceInr: 2550,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/495865289/original/314cba346183b51eb9fe2155aec2b7c0b0cea2bf.jpg"
+        thumbnail: "/assets/gigs/discover/gig-495865289.webp"
       },
       {
         id: "503861313",
@@ -49,13 +49,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will setup gohighlevel ghl ai voice agent chatbot booking vapi retell ai automation",
         sellerName: "Sales Elevated",
         sellerUsername: "sales_elevated",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/51c4a17cfc49d8c4e46eaae093b46950-1736768228399/1e19cb64-d9ae-44d5-a339-dae967a5b3a4.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-sales_elevated.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 36,
         priceUsd: 25,
         priceInr: 2125,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/503861313/original/83d7a8f8e1fae9ef0efebfa52be1bb3eef466a9c.png"
+        thumbnail: "/assets/gigs/discover/gig-503861313.webp"
       },
       {
         id: "505501040",
@@ -63,13 +63,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build retell ai voice agent, vapi ai calling agent, ghl voice ai cold calling",
         sellerName: "Jim D",
         sellerUsername: "jim_digits",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/6fa1311ea35ffc2e40a02dbf02ae79fb-1738760975618/eb421422-9214-411a-abdf-2fc9dbdc3c3c.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-jim_digits.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 22,
         priceUsd: 25,
         priceInr: 2125,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/505501040/original/58e235fe60803c7379659b89d4fe0f77983637e7.png"
+        thumbnail: "/assets/gigs/discover/gig-505501040.webp"
       },
       {
         id: "507761657",
@@ -77,13 +77,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will make com automation airtable database airtable CRM make com softr expert vapi ai",
         sellerName: "Caleb",
         sellerUsername: "expert__caleb",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/9fc2b77cbf9b2e591ea70643eaad7d4f-1740924976721/8e1c667a-115f-4bf0-a35d-a60d0322b28c.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-expert__caleb.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 14,
         priceUsd: 20,
         priceInr: 1700,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507761657/original/35d0337c8651f84260f89832cce611a300d6fb92.png"
+        thumbnail: "/assets/gigs/discover/gig-507761657.webp"
       },
       {
         id: "504938634",
@@ -91,13 +91,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build n8n automation, make com automation, ai voice agent with vapi and retell",
         sellerName: "Theophilus",
         sellerUsername: "theo_ai_dev",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/44f50f2aa7da6d396a40bf5e8e89f89e-1738152528751/6968ec9e-f4e9-4464-9430-c313ce474e2a.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-theo_ai_dev.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 19,
         priceUsd: 10,
         priceInr: 850,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/504938634/original/6c65099d0ca9cb84f186ff9029d5b08e7a02798e.png"
+        thumbnail: "/assets/gigs/discover/gig-504938634.webp"
       },
       {
         id: "507612143",
@@ -105,13 +105,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build ghl conversation ai, ghl voice ai, ghl vapi ai, ghl automation, ghl crm",
         sellerName: "Jason CRM",
         sellerUsername: "jason_crm_tech",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8834f89d5a9fae93f98242137688fa90-1740751912975/b8ee3467-3367-46e3-ae9e-128a1ce74c05.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 15,
         priceUsd: 20,
         priceInr: 1700,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507612143/original/6636735e054ba9b76612e3ea86fb5a4982635904.png"
+        thumbnail: "/assets/gigs/discover/gig-507612143.webp"
       },
       {
         id: "508316492",
@@ -119,13 +119,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build make com automation ai voice agent ai receptionist with retell, vapi, n8n",
         sellerName: "Micky J",
         sellerUsername: "micky_techflow",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/329486c4765d7869ec11077759adfbce-1741364536214/eef66710-bc5c-4860-ae95-654cb29c3bfa.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 11,
         priceUsd: 25,
         priceInr: 2125,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/508316492/original/a0209ea1712a1f1a54fae78b17b20e0ffcfb8e21.png"
+        thumbnail: "/assets/gigs/discover/gig-508316492.webp"
       },
       {
         id: "482315802",
@@ -133,13 +133,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will setup n8n ai agents, zapier, make, vapi ai chatbots and n8n workflow automation",
         sellerName: "Sohrab",
         sellerUsername: "sohrab_ai_pro",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/1269ec4602f067d26bb2fa4c0d5e1ee7-1718878235614/77405be6-dbda-4ddf-99e7-f0d5718ee495.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-sohrab_ai_pro.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 84,
         priceUsd: 50,
         priceInr: 4250,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/482315802/original/61f22ad8029fa03e87d46da975e5b302c342eb66.png"
+        thumbnail: "/assets/gigs/discover/gig-482315802.webp"
       }
     ]
   },
@@ -155,13 +155,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will do ai mobile app development, ai web app and whatsapp ai chatbot",
         sellerName: "FFNA Solutions",
         sellerUsername: "ffna_sol",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/4363ee0dae7c3b95eb0c50a1dfa0d182-1725884219451/72e811c4-b4a1-42e1-a070-5c6218d867c2.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 29,
         priceUsd: 80,
         priceInr: 6800,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/492110291/original/91b70d5fbfe1ad2db2ee6e996b79758e57ee714d.png"
+        thumbnail: "/assets/gigs/discover/gig-492110291.webp"
       },
       {
         id: "478912389",
@@ -169,13 +169,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build ai chatbot, whatsapp chatbot, whatsapp ai agents using whatsapp API",
         sellerName: "Adnan Ali",
         sellerUsername: "adnanali91",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/e1bb425c2859942e584288d61b36be9f-1715421598463/7fe8466e-2191-4475-b9aa-7bf6ef0b40eb.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Top Rated",
         rating: 5.0,
         reviewsCount: 142,
         priceUsd: 50,
         priceInr: 4250,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/478912389/original/8702c2e5b721ea7f12e2df0cf086ebf456108f9c.png"
+        thumbnail: "/assets/gigs/discover/gig-478912389.webp"
       },
       {
         id: "488319201",
@@ -183,13 +183,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will be generative ai ml llm engineer ai agent ai chatbot python full stack developer",
         sellerName: "Amperor",
         sellerUsername: "amperor285",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/9b2762a78f24c3e800d927cfa0292728-1721021481198/088522ee-48c0-424f-b3a6-843eecbe0a59.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 47,
         priceUsd: 65,
         priceInr: 5525,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/488319201/original/2443ce4b47eb59c2794eb8e3ef34d3bb0e10b1dc.png"
+        thumbnail: "/assets/gigs/discover/gig-488319201.webp"
       },
       {
         id: "501248102",
@@ -197,13 +197,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will develop custom ai chatbot for website, mobile app and CRM systems",
         sellerName: "DevPulse Studio",
         sellerUsername: "devpulse_ai",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 4.9,
         reviewsCount: 19,
         priceUsd: 35,
         priceInr: 2975,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/495865289/original/314cba346183b51eb9fe2155aec2b7c0b0cea2bf.jpg"
+        thumbnail: "/assets/gigs/discover/gig-501248102.webp"
       },
       {
         id: "499102482",
@@ -211,13 +211,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build customer support ai chatbot with openai RAG, pinecone and telegram integration",
         sellerName: "Alex Vance",
         sellerUsername: "alex_rag_dev",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/51c4a17cfc49d8c4e46eaae093b46950-1736768228399/1e19cb64-d9ae-44d5-a339-dae967a5b3a4.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 38,
         priceUsd: 45,
         priceInr: 3825,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/503861313/original/83d7a8f8e1fae9ef0efebfa52be1bb3eef466a9c.png"
+        thumbnail: "/assets/gigs/discover/gig-499102482.webp"
       },
       {
         id: "502391004",
@@ -225,13 +225,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will create manychat ai instagram and whatsapp lead generation chatbot",
         sellerName: "Sarah M",
         sellerUsername: "sarah_manychat",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/6fa1311ea35ffc2e40a02dbf02ae79fb-1738760975618/eb421422-9214-411a-abdf-2fc9dbdc3c3c.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 26,
         priceUsd: 30,
         priceInr: 2550,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/505501040/original/58e235fe60803c7379659b89d4fe0f77983637e7.png"
+        thumbnail: "/assets/gigs/discover/gig-502391004.webp"
       },
       {
         id: "506192831",
@@ -239,13 +239,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build ai financial advisor and appointment scheduler bot with cal com sync",
         sellerName: "Lucas Grey",
         sellerUsername: "lucas_ai_bots",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/44f50f2aa7da6d396a40bf5e8e89f89e-1738152528751/6968ec9e-f4e9-4464-9430-c313ce474e2a.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 14,
         priceUsd: 40,
         priceInr: 3400,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/504938634/original/6c65099d0ca9cb84f186ff9029d5b08e7a02798e.png"
+        thumbnail: "/assets/gigs/discover/gig-506192831.webp"
       },
       {
         id: "508119283",
@@ -253,13 +253,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will setup voiceflow and botpress enterprise ai assistant for your business",
         sellerName: "Victor Hugo",
         sellerUsername: "victor_botpress",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/1269ec4602f067d26bb2fa4c0d5e1ee7-1718878235614/77405be6-dbda-4ddf-99e7-f0d5718ee495.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 52,
         priceUsd: 60,
         priceInr: 5100,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/482315802/original/61f22ad8029fa03e87d46da975e5b302c342eb66.png"
+        thumbnail: "/assets/gigs/discover/gig-508119283.webp"
       }
     ]
   },
@@ -275,13 +275,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build make com automation, zapier n8n workflow automation",
         sellerName: "SamuFlow",
         sellerUsername: "samuflow",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/4363ee0dae7c3b95eb0c50a1dfa0d182-1725884219451/72e811c4-b4a1-42e1-a070-5c6218d867c2.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 63,
         priceUsd: 40,
         priceInr: 3400,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507761657/original/35d0337c8651f84260f89832cce611a300d6fb92.png"
+        thumbnail: "/assets/gigs/discover/gig-498219481.webp"
       },
       {
         id: "497182930",
@@ -289,13 +289,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build ai automation workflows, ai agent systems for your business make zapier n8n",
         sellerName: "Writer 19 Hours",
         sellerUsername: "writer_19hours",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8834f89d5a9fae93f98242137688fa90-1740751912975/b8ee3467-3367-46e3-ae9e-128a1ce74c05.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 28,
         priceUsd: 35,
         priceInr: 2975,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507612143/original/6636735e054ba9b76612e3ea86fb5a4982635904.png"
+        thumbnail: "/assets/gigs/discover/gig-497182930.webp"
       },
       {
         id: "501928374",
@@ -303,13 +303,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will do zapier automation asana make com api webhook post get trello make figma jira n8n",
         sellerName: "Deborah",
         sellerUsername: "deborah_ade022",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/329486c4765d7869ec11077759adfbce-1741364536214/eef66710-bc5c-4860-ae95-654cb29c3bfa.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 18,
         priceUsd: 25,
         priceInr: 2125,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/508316492/original/a0209ea1712a1f1a54fae78b17b20e0ffcfb8e21.png"
+        thumbnail: "/assets/gigs/discover/gig-501928374.webp"
       },
       {
         id: "504829103",
@@ -317,13 +317,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will connect hubspot salesforce stripe using custom make and n8n nodes",
         sellerName: "Marcus Ray",
         sellerUsername: "marcus_automations",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/6fa1311ea35ffc2e40a02dbf02ae79fb-1738760975618/eb421422-9214-411a-abdf-2fc9dbdc3c3c.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 41,
         priceUsd: 45,
         priceInr: 3825,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/505501040/original/58e235fe60803c7379659b89d4fe0f77983637e7.png"
+        thumbnail: "/assets/gigs/discover/gig-504829103.webp"
       },
       {
         id: "506721948",
@@ -331,13 +331,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build ai invoice processing ocr workflow in make com and airtable",
         sellerName: "Elena Rostova",
         sellerUsername: "elena_flows",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/51c4a17cfc49d8c4e46eaae093b46950-1736768228399/1e19cb64-d9ae-44d5-a339-dae967a5b3a4.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 22,
         priceUsd: 50,
         priceInr: 4250,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/503861313/original/83d7a8f8e1fae9ef0efebfa52be1bb3eef466a9c.png"
+        thumbnail: "/assets/gigs/discover/gig-506721948.webp"
       },
       {
         id: "509182374",
@@ -345,13 +345,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build automated lead qualification funnel with gpt4 and slack notifications",
         sellerName: "Daniel K",
         sellerUsername: "daniel_funnels",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 16,
         priceUsd: 30,
         priceInr: 2550,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/495865289/original/314cba346183b51eb9fe2155aec2b7c0b0cea2bf.jpg"
+        thumbnail: "/assets/gigs/discover/gig-509182374.webp"
       },
       {
         id: "482315802b",
@@ -359,13 +359,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will deploy open source n8n on vps with postgresql and ai connectors",
         sellerName: "Sohrab",
         sellerUsername: "sohrab_ai_pro",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/1269ec4602f067d26bb2fa4c0d5e1ee7-1718878235614/77405be6-dbda-4ddf-99e7-f0d5718ee495.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-sohrab_ai_pro.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 84,
         priceUsd: 50,
         priceInr: 4250,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/482315802/original/61f22ad8029fa03e87d46da975e5b302c342eb66.png"
+        thumbnail: "/assets/gigs/discover/gig-482315802b.webp"
       },
       {
         id: "504938634b",
@@ -373,13 +373,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will automate customer onboarding with stripe notion and sendgrid",
         sellerName: "Theophilus",
         sellerUsername: "theo_ai_dev",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/44f50f2aa7da6d396a40bf5e8e89f89e-1738152528751/6968ec9e-f4e9-4464-9430-c313ce474e2a.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-theo_ai_dev.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 19,
         priceUsd: 20,
         priceInr: 1700,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/504938634/original/6c65099d0ca9cb84f186ff9029d5b08e7a02798e.png"
+        thumbnail: "/assets/gigs/discover/gig-504938634b.webp"
       }
     ]
   },
@@ -395,13 +395,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build apify web scraping automation with ai data extraction",
         sellerName: "Hussain Zaydi",
         sellerUsername: "hussainzaydi_",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/4363ee0dae7c3b95eb0c50a1dfa0d182-1725884219451/72e811c4-b4a1-42e1-a070-5c6218d867c2.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 37,
         priceUsd: 40,
         priceInr: 3400,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/503861313/original/83d7a8f8e1fae9ef0efebfa52be1bb3eef466a9c.png"
+        thumbnail: "/assets/gigs/discover/gig-496182910.webp"
       },
       {
         id: "498716253",
@@ -409,13 +409,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build ai automation, fix make com n8n zapier, apify, build n8n automation",
         sellerName: "Dare Olarinre",
         sellerUsername: "dareolarinre",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 24,
         priceUsd: 25,
         priceInr: 2125,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/495865289/original/314cba346183b51eb9fe2155aec2b7c0b0cea2bf.jpg"
+        thumbnail: "/assets/gigs/discover/gig-498716253.webp"
       },
       {
         id: "502819201",
@@ -423,13 +423,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will do web scraping data extraction on bright data, zenrow apify n8n firecrawl supabase",
         sellerName: "Dane Buds",
         sellerUsername: "danebuds",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/6fa1311ea35ffc2e40a02dbf02ae79fb-1738760975618/eb421422-9214-411a-abdf-2fc9dbdc3c3c.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 58,
         priceUsd: 50,
         priceInr: 4250,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/505501040/original/58e235fe60803c7379659b89d4fe0f77983637e7.png"
+        thumbnail: "/assets/gigs/discover/gig-502819201.webp"
       },
       {
         id: "506192837",
@@ -437,13 +437,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will scrape google maps leads with ai phone and email enrichment",
         sellerName: "Leonid Tech",
         sellerUsername: "leonid_scrape",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/51c4a17cfc49d8c4e46eaae093b46950-1736768228399/1e19cb64-d9ae-44d5-a339-dae967a5b3a4.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 31,
         priceUsd: 30,
         priceInr: 2550,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507761657/original/35d0337c8651f84260f89832cce611a300d6fb92.png"
+        thumbnail: "/assets/gigs/discover/gig-506192837.webp"
       },
       {
         id: "507192841",
@@ -451,13 +451,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build linkedin profile scraper with anti bot bypass and csv export",
         sellerName: "Pavel K",
         sellerUsername: "pavel_crawlers",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8834f89d5a9fae93f98242137688fa90-1740751912975/b8ee3467-3367-46e3-ae9e-128a1ce74c05.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 19,
         priceUsd: 45,
         priceInr: 3825,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507612143/original/6636735e054ba9b76612e3ea86fb5a4982635904.png"
+        thumbnail: "/assets/gigs/discover/gig-507192841.webp"
       },
       {
         id: "508192855",
@@ -465,13 +465,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will create custom ecommerce product price monitoring bot with alerts",
         sellerName: "Zack Martin",
         sellerUsername: "zack_monitors",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/329486c4765d7869ec11077759adfbce-1741364536214/eef66710-bc5c-4860-ae95-654cb29c3bfa.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 15,
         priceUsd: 35,
         priceInr: 2975,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/508316492/original/a0209ea1712a1f1a54fae78b17b20e0ffcfb8e21.png"
+        thumbnail: "/assets/gigs/discover/gig-508192855.webp"
       },
       {
         id: "482315802c",
@@ -479,13 +479,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build playwright and puppeteer headless browser automation",
         sellerName: "Sohrab",
         sellerUsername: "sohrab_ai_pro",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/1269ec4602f067d26bb2fa4c0d5e1ee7-1718878235614/77405be6-dbda-4ddf-99e7-f0d5718ee495.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-sohrab_ai_pro.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 84,
         priceUsd: 55,
         priceInr: 4675,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/482315802/original/61f22ad8029fa03e87d46da975e5b302c342eb66.png"
+        thumbnail: "/assets/gigs/discover/gig-482315802c.webp"
       },
       {
         id: "504938634c",
@@ -493,13 +493,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will scrape real estate listings into airtable with automated ai summaries",
         sellerName: "Theophilus",
         sellerUsername: "theo_ai_dev",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/44f50f2aa7da6d396a40bf5e8e89f89e-1738152528751/6968ec9e-f4e9-4464-9430-c313ce474e2a.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-theo_ai_dev.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 19,
         priceUsd: 25,
         priceInr: 2125,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/504938634/original/6c65099d0ca9cb84f186ff9029d5b08e7a02798e.png"
+        thumbnail: "/assets/gigs/discover/gig-504938634c.webp"
       }
     ]
   },
@@ -515,13 +515,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will do n8n youtube automation, social media auto post n8n, n8n ai video automation",
         sellerName: "Yemisi Tech",
         sellerUsername: "yemisi_tech",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/4363ee0dae7c3b95eb0c50a1dfa0d182-1725884219451/72e811c4-b4a1-42e1-a070-5c6218d867c2.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 23,
         priceUsd: 30,
         priceInr: 2550,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/508316492/original/a0209ea1712a1f1a54fae78b17b20e0ffcfb8e21.png"
+        thumbnail: "/assets/gigs/discover/gig-495192841.webp"
       },
       {
         id: "498192850",
@@ -529,13 +529,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will do n8n wordpres automation zapier n8n social media automation make com whatsapp api",
         sellerName: "Olaluji Victor",
         sellerUsername: "olaluji_victor",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 46,
         priceUsd: 40,
         priceInr: 3400,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507612143/original/6636735e054ba9b76612e3ea86fb5a4982635904.png"
+        thumbnail: "/assets/gigs/discover/gig-498192850.webp"
       },
       {
         id: "501928471",
@@ -543,13 +543,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will make social media automation n8n social media ai automation make com automation",
         sellerName: "Mazee Tech",
         sellerUsername: "mazee_tech",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/6fa1311ea35ffc2e40a02dbf02ae79fb-1738760975618/eb421422-9214-411a-abdf-2fc9dbdc3c3c.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 31,
         priceUsd: 35,
         priceInr: 2975,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/507761657/original/35d0337c8651f84260f89832cce611a300d6fb92.png"
+        thumbnail: "/assets/gigs/discover/gig-501928471.webp"
       },
       {
         id: "505501040b",
@@ -557,13 +557,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build ai ugc and faceless tiktok youtube shorts video generator bot",
         sellerName: "Jim D",
         sellerUsername: "jim_digits",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/6fa1311ea35ffc2e40a02dbf02ae79fb-1738760975618/eb421422-9214-411a-abdf-2fc9dbdc3c3c.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-jim_digits.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 22,
         priceUsd: 50,
         priceInr: 4250,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/505501040/original/58e235fe60803c7379659b89d4fe0f77983637e7.png"
+        thumbnail: "/assets/gigs/discover/gig-505501040b.webp"
       },
       {
         id: "503861313b",
@@ -571,13 +571,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will automate instagram DM engagement funnel with ai voice notes and cal booking",
         sellerName: "Sales Elevated",
         sellerUsername: "sales_elevated",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/51c4a17cfc49d8c4e46eaae093b46950-1736768228399/1e19cb64-d9ae-44d5-a339-dae967a5b3a4.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-sales_elevated.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 36,
         priceUsd: 45,
         priceInr: 3825,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/503861313/original/83d7a8f8e1fae9ef0efebfa52be1bb3eef466a9c.png"
+        thumbnail: "/assets/gigs/discover/gig-503861313b.webp"
       },
       {
         id: "495865289b",
@@ -585,13 +585,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will setup ai linkedin content scheduler and comment reply engine in n8n",
         sellerName: "Palok",
         sellerUsername: "ai_vault1",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-ai_vault1.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 17,
         priceUsd: 35,
         priceInr: 2975,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/495865289/original/314cba346183b51eb9fe2155aec2b7c0b0cea2bf.jpg"
+        thumbnail: "/assets/gigs/discover/gig-495865289b.webp"
       },
       {
         id: "504938634d",
@@ -599,13 +599,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will connect canva api to n8n for automated social graphics generation and posting",
         sellerName: "Theophilus",
         sellerUsername: "theo_ai_dev",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/44f50f2aa7da6d396a40bf5e8e89f89e-1738152528751/6968ec9e-f4e9-4464-9430-c313ce474e2a.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-theo_ai_dev.png",
         sellerLevel: "Level 1",
         rating: 5.0,
         reviewsCount: 19,
         priceUsd: 30,
         priceInr: 2550,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/504938634/original/6c65099d0ca9cb84f186ff9029d5b08e7a02798e.png"
+        thumbnail: "/assets/gigs/discover/gig-504938634d.webp"
       },
       {
         id: "482315802d",
@@ -613,13 +613,13 @@ export const DISCOVER_AI_TABS: DiscoverTab[] = [
         title: "I will build multi platform auto poster for x, bluesky, linkedin, threads using ai",
         sellerName: "Sohrab",
         sellerUsername: "sohrab_ai_pro",
-        sellerAvatar: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/1269ec4602f067d26bb2fa4c0d5e1ee7-1718878235614/77405be6-dbda-4ddf-99e7-f0d5718ee495.png",
+        sellerAvatar: "/assets/gigs/avatars/avatar-sohrab_ai_pro.png",
         sellerLevel: "Level 2",
         rating: 5.0,
         reviewsCount: 84,
         priceUsd: 60,
         priceInr: 5100,
-        thumbnail: "https://fiverr-res.cloudinary.com/t_main1,q_auto,f_auto/gigs/482315802/original/61f22ad8029fa03e87d46da975e5b302c342eb66.png"
+        thumbnail: "/assets/gigs/discover/gig-482315802d.webp"
       }
     ]
   }

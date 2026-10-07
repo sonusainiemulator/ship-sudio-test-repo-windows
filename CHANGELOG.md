@@ -2,7 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2026-10-08 00:05 IST
+
+### Fixed
+- **Mobile Dropdown Menu Design & Giant Caret Sizing Bug**:
+  - Fixed SVG sizing bug in mobile drawer accordion triggers where chevron SVGs lacked explicit dimensions in CSS and expanded to full container width upon rotation (`rotate(180deg)`), producing a giant green triangle covering the viewport.
+  - Strictly clamped `.gh-drawer__caret` and `.gh-drawer__acc-trigger svg` dimensions with `width: 14px !important`, `height: 14px !important`, `max-width: 14px !important`, `min-width: 14px !important`, and `flex-shrink: 0 !important`.
+  - Added dedicated mobile category dropdown sheet (`#gh-mobile-dropdown`) directly beneath `.gh-catnav` with smooth slide-down popover animation, sticky header with item counts, quick "View all category gigs" action, and organized service subcategories.
+  - Added mobile category pill caret toggle buttons (`.gh-catnav__caret-mobile-btn`) with smooth rotation and active styling (`.is-dropdown-active`).
+
+### Added
+- **Local Assets Generation for Discover AI Agents**:
+  - Generated all 40 missing 16:9 WebP gig thumbnails in `public/assets/gigs/discover/` (`gig-[id].webp`) covering AI Voice Agents, Meta WhatsApp Automation, n8n/Make Workflows, Web Scraping, and Autonomous Multi-Agent Squads.
+  - Generated 10 high-resolution seller avatar images in `public/assets/gigs/avatars/` (`avatar-[username].png`).
+  - Updated `src/data/discoverAiAgents.ts` to point to local assets, completely removing all broken 404 remote Cloudinary image dependencies.
+
+---
+
 ## [1.4.1] - 2026-10-07 23:37 IST
+
 
 ### Fixed
 - **Mobile Responsive Gigs Mega Menu & Category Navigation**:
