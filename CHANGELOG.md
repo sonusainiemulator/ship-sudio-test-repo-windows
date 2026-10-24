@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.1] - 2026-10-25 01:36 IST
+
+### Fixed & Improved (Marketplace Header & Guest Auth State)
+- **Resolved Static `$24` and Fake User Avatar for Unauthenticated Guests**:
+  - Removed hardcoded `$24` balance and external Fiverr CDN avatar from [src/components/GigsHeader.astro](file:///g:/rakebig-com-new-site/src/components/GigsHeader.astro).
+  - **Guest State (Default)**: Replaced fake logged-in icons with clean, authentic marketplace guest actions:
+    - **Sign In** button (`.gh-auth-link`)
+    - **Join** button (`.gh-auth-btn-join`)
+    - Kept **WhatsApp AI** badge and **Request Offer** primary CTA.
+  - **Client Portal & Auth Modal**:
+    - Clicking "Sign In" or "Join" opens a branded Client Portal dialog (`#gh-auth-modal`) notifying visitors that account authentication is rolling out, with direct 1-click links for Instant WhatsApp Concierge and Request Custom Offer.
+  - **Prepared Architecture for Upcoming Full Auth System**:
+    - Built client-side auth synchronization (`syncAuthState`, `window.setRakebigUser`, `window.clearRakebigUser`).
+    - Authenticated view features custom user initials/avatar, dynamic balance, and a responsive dropdown menu (Orders, Saved Gigs, Sign Out).
+    - Added interactive demo preview toggle allowing team and developers to test both guest and authenticated header states.
+  - **Mobile Drawer Synchronization**: Added guest auth action row ("Sign In" and "Join Rakebig") to the slide-in mobile marketplace drawer.
+
 ## [1.7.0] - 2026-10-25 01:25 IST
 
 ### Added & Improved (SEO & AI LLM Indexing)

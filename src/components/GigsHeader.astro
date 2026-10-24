@@ -57,16 +57,26 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
         </button>
       </div>
 
-      <!-- Actions (Desktop matching screenshot: Notification, Message, Heart, Orders, Profile Avatar, Balance) -->
-      <div class="gh-topbar__actions">
+      <!-- Actions (Desktop: WhatsApp AI, Guest Tools or Authenticated Tools, Request Offer) -->
+      <div class="gh-topbar__actions" id="gh-topbar-actions">
         <!-- Quick WhatsApp AI pill -->
         <a href="/whatsapp-marketing" class="gh-pill-highlight" title="WhatsApp Marketing Automation">
           <span class="gh-pill-pulse"></span>
           <span>WhatsApp AI</span>
         </a>
 
-        <!-- Fiverr Header Icons -->
-        <div class="gh-user-tools">
+        <!-- Guest Tools (Default state: No fake user data, no $24) -->
+        <div class="gh-guest-tools" id="gh-guest-tools">
+          <button type="button" class="gh-auth-link" data-open-auth-modal="signin" title="Sign in to Rakebig Client Portal">
+            Sign In
+          </button>
+          <button type="button" class="gh-auth-btn-join" data-open-auth-modal="join" title="Join Rakebig Marketplace">
+            Join
+          </button>
+        </div>
+
+        <!-- Authenticated User Tools (Hidden by default; active only when user logs in) -->
+        <div class="gh-user-tools" id="gh-user-tools" style="display: none;">
           <!-- Notification Bell with Alert Dot -->
           <button type="button" class="gh-tool-icon" aria-label="Notifications" title="Notifications">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -96,19 +106,47 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
             Orders
           </a>
 
-          <!-- Avatar & Balance Badge -->
-          <div class="gh-avatar-badge" title="Rakebig Pro Verified Client">
+          <!-- Avatar & Dynamic Balance Badge with User Menu Dropdown -->
+          <div class="gh-avatar-badge" id="gh-user-menu-trigger" title="Account Menu" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
             <div class="gh-avatar-wrap">
+              <div class="gh-avatar-initials" id="gh-avatar-initials" aria-hidden="true">U</div>
               <img
-                src="https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/89f2bd03308a2cd79cc607a6e5e79c0e-1790498805453/a9fb6dde-8730-4051-ac24-5e08ad6638b7.png"
+                id="gh-avatar-img"
+                src=""
                 alt="Account"
                 class="gh-avatar-img"
                 width="32"
                 height="32"
+                style="display: none;"
               />
               <span class="gh-online-dot"></span>
             </div>
-            <span class="gh-balance-val">$24</span>
+            <span class="gh-balance-val" id="gh-balance-val">$0.00</span>
+            <svg class="gh-avatar-caret" viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M2.5 4.5L6 8l3.5-3.5"/>
+            </svg>
+
+            <!-- User Menu Dropdown -->
+            <div class="gh-user-dropdown" id="gh-user-dropdown" role="menu">
+              <div class="gh-user-dropdown__header">
+                <strong id="gh-dropdown-user-name">Verified Client</strong>
+                <span id="gh-dropdown-user-email">client@rakebig.com</span>
+              </div>
+              <div class="gh-user-dropdown__divider"></div>
+              <a href="/gigs" class="gh-user-dropdown__item" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <span>My Active Orders</span>
+              </a>
+              <a href="/gigs" class="gh-user-dropdown__item" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                <span>Saved Gigs</span>
+              </a>
+              <div class="gh-user-dropdown__divider"></div>
+              <button type="button" class="gh-user-dropdown__item gh-user-dropdown__item--logout" id="gh-btn-logout" role="menuitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span>Sign Out</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -351,6 +389,16 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
       </a>
     </div>
 
+    <!-- Mobile Auth Row for Guests -->
+    <div class="gh-drawer__auth-row" id="gh-drawer-auth-row">
+      <button type="button" class="gh-drawer__auth-btn gh-drawer__auth-btn--signin" data-open-auth-modal="signin">
+        Sign In
+      </button>
+      <button type="button" class="gh-drawer__auth-btn gh-drawer__auth-btn--join" data-open-auth-modal="join">
+        Join Rakebig
+      </button>
+    </div>
+
     <!-- Live Filter inside drawer -->
     <div class="gh-drawer__search-box">
       <svg class="gh-drawer__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -457,6 +505,67 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
 
   <!-- Mobile Backdrop Overlay -->
   <div class="gh-backdrop" id="gh-drawer-backdrop" aria-hidden="true"></div>
+
+  <!-- Client Portal & Auth Modal (Pre-configured for Upcoming Auth System) -->
+  <div class="gh-auth-modal" id="gh-auth-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="gh-auth-modal__overlay" id="gh-auth-modal-overlay"></div>
+    <div class="gh-auth-modal__dialog">
+      <button type="button" class="gh-auth-modal__close" id="gh-auth-modal-close" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="gh-auth-modal__header">
+        <div class="gh-auth-modal__badge">
+          <span class="gh-auth-modal__badge-dot"></span>
+          <span>Client Portal & Single Sign-On</span>
+        </div>
+        <h3 class="gh-auth-modal__title">Rakebig Client Dashboard</h3>
+        <p class="gh-auth-modal__desc">
+          Unified authentication and self-service project tracking are rolling out soon. You do <strong>not</strong> need an account to hire us today — our engineering and creative teams are available immediately!
+        </p>
+      </div>
+
+      <div class="gh-auth-modal__cards">
+        <a href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20want%20to%20discuss%20a%20project%20or%20custom%20gig`} target="_blank" rel="noopener noreferrer" class="gh-auth-card">
+          <div class="gh-auth-card__icon gh-auth-card__icon--wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+          </div>
+          <div class="gh-auth-card__info">
+            <strong>Instant WhatsApp Concierge</strong>
+            <span>Direct chat with technical leads for instant scopes & proposals</span>
+          </div>
+          <span class="gh-auth-card__arrow">→</span>
+        </a>
+
+        <a href={`https://wa.me/${whatsappPhoneClean}?text=Hi%20Rakebig,%20I%20want%20to%20request%20a%20custom%20offer`} target="_blank" rel="noopener noreferrer" class="gh-auth-card">
+          <div class="gh-auth-card__icon gh-auth-card__icon--offer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+          </div>
+          <div class="gh-auth-card__info">
+            <strong>Request a Custom Offer</strong>
+            <span>Fixed-price deliverables, milestone escrows & clear contracts</span>
+          </div>
+          <span class="gh-auth-card__arrow">→</span>
+        </a>
+      </div>
+
+      <div class="gh-auth-modal__footer">
+        <div class="gh-auth-modal__demo-toggle">
+          <span class="gh-auth-modal__demo-label">Testing logged-in header features?</span>
+          <button type="button" class="gh-auth-modal__demo-btn" id="gh-demo-login-btn">
+            Preview Authenticated View (Demo)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 
 <script is:inline>
@@ -867,6 +976,154 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
         closeMobileDrawer();
       });
     });
+
+    // 9. Authentication State Controller & Client Portal Modal (Guest default, ready for full auth system)
+    const authActionsContainer = header.querySelector('#gh-topbar-actions');
+    const guestTools = header.querySelector('#gh-guest-tools');
+    const userTools = header.querySelector('#gh-user-tools');
+    const balanceVal = header.querySelector('#gh-balance-val');
+    const avatarImg = header.querySelector('#gh-avatar-img');
+    const avatarInitials = header.querySelector('#gh-avatar-initials');
+    const userMenuTrigger = header.querySelector('#gh-user-menu-trigger');
+    const userDropdown = header.querySelector('#gh-user-dropdown');
+    const userNameEl = header.querySelector('#gh-dropdown-user-name');
+    const userEmailEl = header.querySelector('#gh-dropdown-user-email');
+    const logoutBtn = header.querySelector('#gh-btn-logout');
+    const demoLoginBtn = document.getElementById('gh-demo-login-btn');
+
+    // Auth Modal Elements
+    const authModal = document.getElementById('gh-auth-modal');
+    const authModalOverlay = document.getElementById('gh-auth-modal-overlay');
+    const authModalClose = document.getElementById('gh-auth-modal-close');
+    const authTriggers = document.querySelectorAll('[data-open-auth-modal]');
+
+    function getStoredUser() {
+      try {
+        const item = localStorage.getItem('rakebig_auth_user');
+        return item ? JSON.parse(item) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function syncAuthState() {
+      const user = getStoredUser();
+      if (user && user.isLoggedIn) {
+        // Authenticated State
+        authActionsContainer?.classList.add('is-authenticated');
+        if (guestTools) guestTools.style.display = 'none';
+        if (userTools) userTools.style.display = 'flex';
+
+        if (balanceVal) balanceVal.textContent = user.balance || '$0.00';
+        if (userNameEl) userNameEl.textContent = user.name || 'Verified Client';
+        if (userEmailEl) userEmailEl.textContent = user.email || 'client@rakebig.com';
+
+        if (user.avatar && avatarImg) {
+          avatarImg.src = user.avatar;
+          avatarImg.style.display = 'block';
+          if (avatarInitials) avatarInitials.style.display = 'none';
+        } else if (avatarInitials) {
+          if (avatarImg) avatarImg.style.display = 'none';
+          avatarInitials.style.display = 'flex';
+          avatarInitials.textContent = (user.name ? user.name[0] : 'U').toUpperCase();
+        }
+      } else {
+        // Guest State (DEFAULT - Fixes "$24 static showing without logged in user")
+        authActionsContainer?.classList.remove('is-authenticated');
+        if (guestTools) guestTools.style.display = 'flex';
+        if (userTools) userTools.style.display = 'none';
+        if (userDropdown) userDropdown.classList.remove('is-active');
+      }
+    }
+
+    // Expose programmatic hooks for upcoming full auth system
+    window.setRakebigUser = function(userData) {
+      try {
+        localStorage.setItem('rakebig_auth_user', JSON.stringify({
+          isLoggedIn: true,
+          name: userData?.name || 'Verified Client',
+          email: userData?.email || 'client@rakebig.com',
+          avatar: userData?.avatar || '',
+          balance: userData?.balance || '$0.00',
+          ...userData
+        }));
+      } catch (e) {}
+      syncAuthState();
+    };
+
+    window.clearRakebigUser = function() {
+      try {
+        localStorage.removeItem('rakebig_auth_user');
+      } catch (e) {}
+      syncAuthState();
+    };
+
+    // User Dropdown toggle
+    if (userMenuTrigger) {
+      userMenuTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = userDropdown?.classList.toggle('is-active');
+        userMenuTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      document.addEventListener('click', (e) => {
+        if (!userMenuTrigger.contains(e.target)) {
+          userDropdown?.classList.remove('is-active');
+          userMenuTrigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    // Logout button
+    logoutBtn?.addEventListener('click', () => {
+      window.clearRakebigUser();
+    });
+
+    // Auth Modal Open & Close Handlers
+    function openAuthModal() {
+      if (authModal) {
+        authModal.classList.add('is-open');
+        authModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeAuthModal() {
+      if (authModal) {
+        authModal.classList.remove('is-open');
+        authModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    }
+
+    authTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeMobileDrawer();
+        openAuthModal();
+      });
+    });
+
+    authModalOverlay?.addEventListener('click', closeAuthModal);
+    authModalClose?.addEventListener('click', closeAuthModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && authModal?.classList.contains('is-open')) {
+        closeAuthModal();
+      }
+    });
+
+    // Demo Login toggle button inside modal
+    demoLoginBtn?.addEventListener('click', () => {
+      window.setRakebigUser({
+        name: 'Demo Client',
+        email: 'client@rakebig.com',
+        balance: '$0.00'
+      });
+      closeAuthModal();
+    });
+
+    // Run initial sync
+    syncAuthState();
   }
 
   initGigsHeader();
@@ -1077,7 +1334,55 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     50% { opacity: 0.4; transform: scale(1.4); }
   }
 
-  /* Fiverr Icons Row */
+  /* Guest Tools (Default state when visitor is not logged in) */
+  .gh-guest-tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .gh-auth-link {
+    background: transparent;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #62646a;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: color 0.18s ease, background 0.18s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .gh-auth-link:hover {
+    color: #1dbf73;
+    background: #f7f7f8;
+  }
+
+  .gh-auth-btn-join {
+    background: transparent;
+    border: 1.5px solid #1dbf73;
+    color: #1dbf73;
+    font-size: 0.86rem;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .gh-auth-btn-join:hover {
+    background: #1dbf73;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(29, 191, 115, 0.25);
+  }
+
+  /* Fiverr User Icons Row (Shown only when user is authenticated) */
   .gh-user-tools {
     display: flex;
     align-items: center;
@@ -1132,6 +1437,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
   }
 
   .gh-avatar-badge {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 7px;
@@ -1139,6 +1445,7 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     padding: 3px 6px;
     border-radius: 20px;
     transition: background 0.18s ease;
+    user-select: none;
   }
 
   .gh-avatar-badge:hover {
@@ -1149,6 +1456,20 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     position: relative;
     width: 30px;
     height: 30px;
+  }
+
+  .gh-avatar-initials {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1dbf73, #0e9f6e);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(29, 191, 115, 0.25);
   }
 
   .gh-avatar-img {
@@ -1173,6 +1494,361 @@ const whatsappPhoneClean = SUPPORT_PHONE.replace(/[^0-9]/g, "");
     font-size: 0.88rem;
     font-weight: 700;
     color: #404145;
+  }
+
+  .gh-avatar-caret {
+    color: #74767e;
+    transition: transform 0.2s ease;
+  }
+
+  .gh-avatar-badge[aria-expanded="true"] .gh-avatar-caret {
+    transform: rotate(180deg);
+    color: #1dbf73;
+  }
+
+  /* User Menu Dropdown */
+  .gh-user-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    min-width: 210px;
+    z-index: 100;
+    padding: 6px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gh-user-dropdown.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .gh-user-dropdown__header {
+    padding: 10px 14px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .gh-user-dropdown__header strong {
+    font-size: 0.86rem;
+    color: #222325;
+    font-weight: 700;
+  }
+
+  .gh-user-dropdown__header span {
+    font-size: 0.76rem;
+    color: #74767e;
+  }
+
+  .gh-user-dropdown__divider {
+    height: 1px;
+    background: #f1f2f4;
+    margin: 4px 0;
+  }
+
+  .gh-user-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #404145;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .gh-user-dropdown__item:hover {
+    background: #f7f7f8;
+    color: #1dbf73;
+  }
+
+  .gh-user-dropdown__item svg {
+    width: 15px;
+    height: 15px;
+    color: #74767e;
+  }
+
+  .gh-user-dropdown__item--logout {
+    color: #e53e3e;
+  }
+
+  .gh-user-dropdown__item--logout:hover {
+    background: #fff5f5;
+    color: #c53030;
+  }
+
+  /* Drawer Mobile Auth Row */
+  .gh-drawer__auth-row {
+    display: flex;
+    gap: 8px;
+    margin: 10px 16px 8px;
+  }
+
+  .gh-drawer__auth-btn {
+    flex: 1;
+    padding: 9px 12px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .gh-drawer__auth-btn--signin {
+    background: #f7f7f8;
+    border: 1px solid #e4e5e7;
+    color: #222325;
+  }
+
+  .gh-drawer__auth-btn--signin:hover {
+    background: #eef0f2;
+  }
+
+  .gh-drawer__auth-btn--join {
+    background: #1dbf73;
+    border: 1px solid #1dbf73;
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .gh-drawer__auth-btn--join:hover {
+    background: #19a463;
+  }
+
+  /* Client Portal & Auth Modal Styles */
+  .gh-auth-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  .gh-auth-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .gh-auth-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 13, 26, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .gh-auth-modal__dialog {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+    border: 1px solid #e4e5e7;
+    padding: 28px 24px 22px;
+    z-index: 1;
+    transform: scale(0.96) translateY(8px);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gh-auth-modal.is-open .gh-auth-modal__dialog {
+    transform: scale(1) translateY(0);
+  }
+
+  .gh-auth-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #f7f7f8;
+    color: #62646a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .gh-auth-modal__close:hover {
+    background: #eef0f2;
+    color: #222325;
+  }
+
+  .gh-auth-modal__header {
+    margin-bottom: 20px;
+  }
+
+  .gh-auth-modal__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #00875a;
+    background: #eaf8f1;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .gh-auth-modal__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #1dbf73;
+  }
+
+  .gh-auth-modal__title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #222325;
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+  }
+
+  .gh-auth-modal__desc {
+    font-size: 0.88rem;
+    color: #62646a;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .gh-auth-modal__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .gh-auth-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    background: #f9fafb;
+    border: 1px solid #eef0f2;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .gh-auth-card:hover {
+    background: #ffffff;
+    border-color: #1dbf73;
+    box-shadow: 0 4px 12px rgba(29, 191, 115, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .gh-auth-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .gh-auth-card__icon--wa {
+    background: #eaf8f1;
+    color: #00a884;
+  }
+
+  .gh-auth-card__icon--offer {
+    background: #fff8eb;
+    color: #d97706;
+  }
+
+  .gh-auth-card__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .gh-auth-card__info strong {
+    font-size: 0.9rem;
+    color: #222325;
+    font-weight: 700;
+  }
+
+  .gh-auth-card__info span {
+    font-size: 0.78rem;
+    color: #74767e;
+    line-height: 1.35;
+  }
+
+  .gh-auth-card__arrow {
+    font-size: 1.1rem;
+    color: #b5b6ba;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .gh-auth-card:hover .gh-auth-card__arrow {
+    transform: translateX(3px);
+    color: #1dbf73;
+  }
+
+  .gh-auth-modal__footer {
+    border-top: 1px solid #f1f2f4;
+    padding-top: 14px;
+  }
+
+  .gh-auth-modal__demo-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .gh-auth-modal__demo-label {
+    font-size: 0.78rem;
+    color: #95979d;
+  }
+
+  .gh-auth-modal__demo-btn {
+    background: transparent;
+    border: 1px dashed #b5b6ba;
+    color: #404145;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .gh-auth-modal__demo-btn:hover {
+    border-color: #1dbf73;
+    color: #1dbf73;
+    background: #f7f7f8;
   }
 
   .gh-btn-request {
