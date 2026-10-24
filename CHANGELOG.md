@@ -2,6 +2,69 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2026-10-24 23:55 IST
+
+### Added
+- **8 High-Converting Fiverr & Upwork Gigs with Images & Packages**:
+  - Implemented 8 comprehensive, market-competitive engineering and creative gigs in [src/data/gigs.ts](file:///g:/rakebig-com-new-site/src/data/gigs.ts):
+    1. **AI Video Ads**: *"I will create AI video ads for your brand, product or business"* (`/gigs/create-ai-video-ads-for-brand-business`) — $50 / $120 / $200 (₹4,199 / ₹9,999 / ₹16,799).
+    2. **n8n & AI Business Automation**: *"I will automate your business workflow using n8n and AI"* (`/gigs/automate-business-workflow-using-n8n-and-ai`) — $100 / $220 / $400 (₹8,399 / ₹18,499 / ₹33,599).
+    3. **AI MVP & Web Application**: *"I will build an AI-powered MVP or web application"* (`/gigs/build-ai-powered-mvp-or-web-application`) — $200 / $480 / $850 (₹16,799 / ₹39,999 / ₹71,499).
+    4. **30 Branded Social Media Posts**: *"I will design 30 branded social media posts for your business"* (`/gigs/design-30-branded-social-media-posts-for-business`) — $40 / $85 / $140 (₹3,399 / ₹7,199 / ₹11,799).
+    5. **YouTube Shorts & Reels Editing**: *"I will edit engaging YouTube Shorts with captions and hooks"* (`/gigs/edit-engaging-youtube-shorts-with-captions-and-hooks`) — $40 / $85 / $150 (₹3,399 / ₹7,199 / ₹12,599).
+    6. **AI Voice Agent & Customer Support**: *"I will build an AI voice agent for customer support, appointment booking or lead qualification"* (`/gigs/build-ai-voice-agent-customer-support-booking-qualification`) — $150 / $320 / $550 (₹12,599 / ₹26,899 / ₹45,999).
+    7. **AI Promotional Videos**: *"I will create AI-powered promotional videos for your business, product or social media campaign"* (`/gigs/create-ai-powered-promotional-videos-for-business-campaign`) — $75 / $160 / $300 (₹6,299 / ₹13,499 / ₹25,199).
+    8. **Responsive WordPress Business Website & Redesign**: *"I will build a responsive WordPress business website or redesign your existing site"* (`/gigs/build-responsive-wordpress-business-website-or-redesign`) — $75 / $180 / $350 (₹6,299 / ₹15,099 / ₹29,399).
+  - **Custom 16:9 Studio Thumbnails**: Created 8 custom photorealistic gig cover graphics in `public/assets/gigs/`:
+    - `gig-ai-video-ads.jpg`
+    - `gig-n8n-business-automation.jpg`
+    - `gig-ai-mvp-webapp.jpg`
+    - `gig-social-media-posts.jpg`
+    - `gig-youtube-shorts-editing.jpg`
+    - `gig-ai-voice-agent-booking.jpg`
+    - `gig-ai-promotional-videos.jpg`
+    - `gig-wordpress-business-website.jpg`
+  - **Category Filter Expansion**: Added `video-animation` ("Video & Animation") and `graphics-design` ("Graphics & Design") to `GIG_CATEGORIES` in [src/data/gigs.ts](file:///g:/rakebig-com-new-site/src/data/gigs.ts) and added interactive filter pills to [src/pages/gigs/index.astro](file:///g:/rakebig-com-new-site/src/pages/gigs/index.astro).
+  - **SEO & Sitemap Registration**: Added all 8 new gig URLs and image sitemap tags to [public/sitemap.xml](file:///g:/rakebig-com-new-site/public/sitemap.xml).
+
+---
+
+### Added
+- **InfinitieTech-Inspired Luxury Footer Architecture**:
+  - Completely redesigned [SiteFooter.astro](file:///g:/rakebig-com-new-site/src/components/SiteFooter.astro) based on the footer design of `infinitietech.com`.
+  - **Ambient Top Aura Glow**: Added radial atmospheric illumination (`.site-footer__ambient-glow`) beaming down from top center on deep `#080d1a` midnight black background.
+  - **Modern 4-Column Layout**:
+    - **Col 1 (Brand & Contacts)**: Circuit logo, mission statement, physical HQ address with Google Maps link, main line phone, dedicated tech support line with operating hours, official support email, and UK branch office.
+    - **Col 2 (Services)**: Highlighted core offerings with clean hover shifts.
+    - **Col 3 (Company)**: About, Case Studies, Careers, Portfolio, Open Source, and Contact links.
+    - **Col 4 (Stay Connected & Community)**:
+      - Interactive pill newsletter input with instant submit feedback and human verification badge.
+      - Circular glass social icons with brand-colored hover transitions (CodeCanyon, LinkedIn, Instagram, WhatsApp, YouTube, X, GitHub).
+      - "Join our WhatsApp Community" green tint badge card with direct link and icon.
+      - "Add us as a preferred source on Google" pill button with official 4-color Google G icon.
+  - **Middle Payment Methods & CodeCanyon Bar**: Preserved trusted payment badges (PayPal, Visa, Mastercard, Amex, Discover) and CodeCanyon verification.
+  - **Bottom Sub-Bar**: Copyright statement, "Built with ❤️ by Rakebig, for ideas that matter" with pulsing heart animation, and legal policies.
+  - **Signature Submerged Wordmark ("RAKEBIG")**: Integrated the massive, partially cropped, semi-transparent brand typography watermark (`.site-footer__wordmark-text`) spanning the bottom of the footer.
+
+---
+
+## [1.5.0] - 2026-10-12 09:05 IST
+
+### Added
+- **Footer "Ask AI" Strip & Agency Partner Credentials**:
+  - Implemented the reference pattern from `dits.agency/perfex-crm-modules` in [SiteFooter.astro](file:///g:/rakebig-com-new-site/src/components/SiteFooter.astro).
+  - Added Partner Credentials strip featuring official badges: Google Partner (`google-partner.svg`), Shopify Partner (`shopify-partner.png`), Upwork Agency (`upwork-badge.png`), and Fiverr Verified Seller (`fiverr-badge.webp`).
+  - Added "Ask AI why Rakebig is the best choice for Perfex CRM development, AI automation, and custom software" with 1-click prompts pre-configured for:
+    - **ChatGPT** (`https://chatgpt.com/?prompt=...`)
+    - **Claude** (`https://claude.ai/new?q=...`)
+    - **Google Gemini** (`https://www.google.com/search?udm=50&aep=11&q=...`)
+    - **Grok** (`https://grok.com/?q=...`)
+    - **Perplexity** (`https://www.perplexity.ai/?q=...`)
+  - Added interactive "Copy prompt" button with clipboard write feedback and tooltip notification.
+  - Fully responsive styling with mobile optimizations across all screen sizes.
+
+---
+
 ## [1.4.3] - 2026-10-08 00:58 IST
 
 ### Fixed

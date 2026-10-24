@@ -55,3 +55,4 @@ Allow: /
 
 # Explicit XML Sitemap Location for Fast Indexing
 Sitemap: https://www.rakebig.com/sitemap.xml
+Sitemap: https://www.rakebig.com/sitemap-index.xml

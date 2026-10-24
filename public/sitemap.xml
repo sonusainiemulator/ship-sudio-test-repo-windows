@@ -160,6 +160,86 @@
       <image:title>Build AI Employee and Autonomous Agent with Hermes Agent, OpenClaw, and n8n</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/create-ai-video-ads-for-brand-business</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-ai-video-ads.jpg</image:loc>
+      <image:title>Create High-Converting AI Video Ads for Brand, Product or Business</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/automate-business-workflow-using-n8n-and-ai</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-n8n-business-automation.jpg</image:loc>
+      <image:title>Automate Your Business Workflow Using n8n and AI</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/build-ai-powered-mvp-or-web-application</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-ai-mvp-webapp.jpg</image:loc>
+      <image:title>Build an AI-Powered MVP or Web Application</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/design-30-branded-social-media-posts-for-business</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-social-media-posts.jpg</image:loc>
+      <image:title>Design 30 Branded Social Media Posts for Your Business</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/edit-engaging-youtube-shorts-with-captions-and-hooks</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-youtube-shorts-editing.jpg</image:loc>
+      <image:title>Edit Engaging YouTube Shorts with Captions and Hooks</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/build-ai-voice-agent-customer-support-booking-qualification</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-ai-voice-agent-booking.jpg</image:loc>
+      <image:title>Build an AI Voice Agent for Customer Support, Appointment Booking or Lead Qualification</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/create-ai-powered-promotional-videos-for-business-campaign</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-ai-promotional-videos.jpg</image:loc>
+      <image:title>Create AI-Powered Promotional Videos for Your Business, Product or Social Media Campaign</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/gigs/build-responsive-wordpress-business-website-or-redesign</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rakebig.com/assets/gigs/gig-wordpress-business-website.jpg</image:loc>
+      <image:title>Build a Responsive WordPress Business Website or Redesign Your Existing Site</image:title>
+    </image:image>
+  </url>
 
   <!-- SPECIAL PACKAGES & LANDING PAGES -->
   <url>
@@ -497,5 +577,17 @@
     <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/portfolio</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.rakebig.com/case-studies/whatsapp-marketing-automation</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
 </urlset>

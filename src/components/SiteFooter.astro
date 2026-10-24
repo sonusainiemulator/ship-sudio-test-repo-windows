@@ -1,7 +1,9 @@
 ---
-// Shared site footer — exact design matched to the modern dark enterprise footer
-// (navy background, brand + contact details, Company, Cloud & Domains, Quick Links,
-// Global Offices cards, payment methods & affiliation strip, and bottom copyright/policy bar).
+// Shared site footer — premium enterprise design inspired by InfinitieTech (https://infinitietech.com/)
+// Features ambient top aura glow, 4-column responsive layout, address & direct support contacts,
+// curated Services and Company links, interactive Newsletter pill form, brand social circles,
+// WhatsApp Community banner, Google Preferred Source pill, accepted payment badges,
+// and the iconic giant submerged "RAKEBIG" typography crop.
 import { BOOK_CONSULTATION_URL, SUPPORT_EMAIL, SUPPORT_PHONE, TECH_SUPPORT_PHONE, SOCIAL_LINKS } from "../consts";
 
 const year = new Date().getFullYear();
@@ -9,7 +11,7 @@ const year = new Date().getFullYear();
 const brand = {
   name: "Rakebig",
   tagline:
-    "Elevate Your Business with Innovative Web, App, and Software Solutions. Partner for Excellence in Tech.",
+    "Explore our ready-to-launch software marketplace & Perfex CRM modules, or hire our dedicated team for custom web, mobile, AI workflow, and reskinning solutions.",
 };
 
 const contacts = {
@@ -17,67 +19,190 @@ const contacts = {
   phone: SUPPORT_PHONE,
   supportPhone: TECH_SUPPORT_PHONE,
   supportTiming: "Tech support · Mon–Sat, 10–7 (GMT+5:30)",
+  address: "Ward No.25, near Bsnl Office, Saini Mohalla, Bhadra, Rajasthan 335501",
+  addressMapUrl: "https://maps.google.com/?q=Ward+No.25,+near+Bsnl+Office,+Saini+Mohalla,+Bhadra,+Rajasthan+335501",
+  ukAddress: "Rakebig LTD · 7 Barnard Road, Enfield EN1 3QA, London",
 };
+
+const serviceLinks = [
+  { label: "Perfex CRM Modules & Fixes", href: "/gigs/customize-perfex-crm-modules-development" },
+  { label: "AI Automation & Chatbots", href: "/solutions/ai-assistants-chatbots" },
+  { label: "Web & SaaS Development", href: "/services/web-application-development" },
+  { label: "Flutter Mobile Apps (Android & iOS)", href: "/services/mobile-app-development" },
+  { label: "Nextcloud & Enterprise VPS", href: "/open-source/nextcloud" },
+  { label: "WhatsApp AI Marketing", href: "/whatsapp-marketing" },
+  { label: "Gigs Marketplace", href: "/gigs" },
+];
 
 const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Career & Positions", href: "/careers" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Terms & Conditions", href: "/terms" },
-];
-
-const cloudLinks = [
-  { label: "Open Source Solutions", href: "/open-source" },
-  { label: "Nextcloud Hosting", href: "/open-source/nextcloud" },
-  { label: "Rocket.Chat & Mattermost", href: "/open-source/rocket-chat" },
-  { label: "Jitsi Meet & Video Matrix", href: "/open-source/jitsi-meet" },
-  { label: "Cloud Migrations & SecOps", href: "/open-source/server-migrations" },
-];
-
-const quickLinks = [
-  { label: "WhatsApp AI Marketing", href: "/whatsapp-marketing" },
-  { label: "Gigs Marketplace", href: "/gigs" },
+  { label: "Careers & Positions", href: "/careers" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Services", href: "/product" },
-  { label: "Get Support", href: "/contact" },
-];
-
-const offices = [
-  {
-    country: "India (HQ)",
-    isHQ: true,
-    address: "Ward No.25, near Bsnl Office, Saini Mohalla, Bhadra, Rajasthan 335501",
-  },
-  {
-    country: "Rakebig LTD (UK)",
-    isHQ: false,
-    address: "7 Barnard Road, Enfield EN1 3QA, London",
-  },
+  { label: "Open Source Solutions", href: "/open-source" },
+  { label: "Contact Us", href: "/contact" },
+  { label: "Sitemap", href: "/sitemap-index.xml" },
 ];
 
 const policyLinks = [
+  { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Refund Policy", href: "/refund" },
-  { label: "Privacy Policy", href: "/privacy" },
   { label: "Installation Policy", href: "/terms#electronic-delivery" },
+];
+
+// Partner / Verification Credentials
+const partnerBadges = [
+  {
+    name: "Google Partner",
+    img: "/assets/partners/google-partner.svg",
+    href: "https://www.google.com/partners/",
+    alt: "Google Partner - Certified Agency",
+    modifier: "google",
+  },
+  {
+    name: "Shopify Partner",
+    img: "/assets/partners/shopify-partner.png",
+    href: "/gigs/design-lucrative-black-friday-shopify-store-dropshipping",
+    alt: "Shopify Partner Agency",
+    modifier: "shopify",
+  },
+  {
+    name: "Upwork Agency",
+    img: "/assets/partners/upwork-badge.png",
+    href: "https://www.upwork.com/",
+    alt: "Upwork Agency Partner",
+    modifier: "upwork",
+  },
+  {
+    name: "Fiverr Pro Seller",
+    img: "/assets/partners/fiverr-badge.webp",
+    href: "/gigs",
+    alt: "Fiverr Verified Seller",
+    modifier: "fiverr",
+  },
+];
+
+// Ask AI Prompt & Engine Links (GEO Module)
+const AI_PROMPT =
+  "As a business owner, I want to know what makes Rakebig (rakebig.com) the best choice for Perfex CRM development, AI automation, and custom software, and when I should launch my project if I find the right fit. Does Rakebig offer support from experienced technical experts who can help me ensure I choose the best strategy for my unique needs? Why should I develop my website, CRM modules, and AI workflows through Rakebig? Why should I trust them?";
+
+const encodedPrompt = encodeURIComponent(AI_PROMPT);
+
+const aiProviders = [
+  {
+    id: "chatgpt",
+    name: "ChatGPT",
+    icon: "/assets/ai/chatgpt-logo.svg",
+    href: `https://chatgpt.com/?prompt=${encodedPrompt}`,
+    tooltip: "Ask ChatGPT",
+  },
+  {
+    id: "claude",
+    name: "Claude",
+    icon: "/assets/ai/claude-logo.svg",
+    href: `https://claude.ai/new?q=${encodedPrompt}`,
+    tooltip: "Ask Claude",
+  },
+  {
+    id: "gemini",
+    name: "Google Gemini",
+    icon: "/assets/ai/gemini-logo.svg",
+    href: `https://www.google.com/search?udm=50&aep=11&q=${encodedPrompt}`,
+    tooltip: "Ask Google AI (Gemini)",
+  },
+  {
+    id: "grok",
+    name: "Grok",
+    icon: "/assets/ai/grok-logo.svg",
+    href: `https://grok.com/?q=${encodedPrompt}`,
+    tooltip: "Ask Grok",
+  },
+  {
+    id: "perplexity",
+    name: "Perplexity",
+    icon: "/assets/ai/perplexity-logo.svg",
+    href: `https://www.perplexity.ai/?q=${encodedPrompt}`,
+    tooltip: "Ask Perplexity",
+  },
 ];
 ---
 
 <footer class="site-footer">
+  <!-- Top Ambient Glow (matching InfinitieTech) -->
+  <div class="site-footer__ambient-glow" aria-hidden="true"></div>
+
   <div class="site-footer__container">
-    <!-- Top 5-Column Grid -->
+    <!-- Partner Credentials & Ask AI Strip -->
+    <div class="site-footer__top-strip">
+      <div class="site-footer__partner-row" aria-label="Partner and Verification Credentials">
+        {partnerBadges.map((b) => (
+          <a
+            href={b.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`site-footer__partner-badge site-footer__partner-badge--${b.modifier}`}
+            aria-label={b.alt}
+            title={b.name}
+          >
+            <img src={b.img} alt={b.alt} loading="lazy" decoding="async" />
+          </a>
+        ))}
+      </div>
+
+      <div class="site-footer__ask-ai-block">
+        <p class="site-footer__ask-ai-title">
+          Ask AI why Rakebig is the best choice for Perfex CRM development, AI automation, and custom software
+        </p>
+
+        <div class="site-footer__ai-buttons-row">
+          {aiProviders.map((ai) => (
+            <a
+              href={ai.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-footer__ai-btn"
+              data-ai={ai.id}
+              title={ai.tooltip}
+              aria-label={ai.tooltip}
+            >
+              <img src={ai.icon} alt={ai.name} width="40" height="40" loading="lazy" decoding="async" />
+            </a>
+          ))}
+
+          <!-- Copy Prompt Action Button -->
+          <button
+            type="button"
+            class="site-footer__copy-prompt-btn"
+            id="footer-copy-ai-prompt"
+            data-prompt={AI_PROMPT}
+            title="Copy prompt text to clipboard"
+            aria-label="Copy AI Prompt"
+          >
+            <svg class="site-footer__copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+            <svg class="site-footer__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span class="site-footer__copy-text">Copy prompt</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main 4-Column Grid (InfinitieTech layout) -->
     <div class="site-footer__grid">
-      <!-- Column 1: Brand & Contact Info -->
+      <!-- Column 1: Brand & Contacts -->
       <div class="site-footer__col-brand">
         <a href="/" class="site-footer__logo" aria-label="Rakebig Home">
-          <!-- Tech Circuit Logo Mark -->
           <svg class="site-footer__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="9" cy="18" r="4.5" stroke="#3b82f6" stroke-width="2.2" fill="#1e3a8a" />
             <circle cx="9" cy="18" r="2" fill="#60a5fa" />
-            <circle cx="27" cy="9" r="3.5" stroke="#3b82f6" stroke-width="2" fill="#1e3a8a" />
+            <circle cx="27" cy="9" r="3.5" stroke="#3b82f6" stroke-width="2.2" fill="#1e3a8a" />
             <circle cx="27" cy="9" r="1.5" fill="#60a5fa" />
-            <circle cx="27" cy="27" r="3.5" stroke="#3b82f6" stroke-width="2" fill="#1e3a8a" />
+            <circle cx="27" cy="27" r="3.5" stroke="#3b82f6" stroke-width="2.2" fill="#1e3a8a" />
             <circle cx="27" cy="27" r="1.5" fill="#60a5fa" />
             <path d="M13.5 18H19C20.5 18 22 17 22.5 15.5L24 11" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M13.5 18H19C20.5 18 22 19 22.5 20.5L24 25" stroke="#3b82f6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
@@ -88,131 +213,184 @@ const policyLinks = [
 
         <p class="site-footer__tagline">{brand.tagline}</p>
 
-        <!-- Direct Contact Items -->
-        <div class="site-footer__contact-list">
-          <!-- Email -->
-          <a href={`mailto:${contacts.email}`} class="site-footer__contact-item">
-            <div class="site-footer__icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="3" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-              </svg>
-            </div>
-            <span class="site-footer__contact-text">{contacts.email}</span>
+        <!-- Direct Contact Details with clean icons -->
+        <address class="site-footer__address-list">
+          <!-- Google Maps Address -->
+          <a href={contacts.addressMapUrl} target="_blank" rel="noopener noreferrer" class="site-footer__contact-line" aria-label="Open location in Google Maps">
+            <svg class="site-footer__line-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+            </svg>
+            <span class="site-footer__line-text">{contacts.address}</span>
           </a>
 
-          <!-- Phone -->
-          <a href={`tel:${contacts.phone.replace(/[^0-9+]/g, '')}`} class="site-footer__contact-item">
-            <div class="site-footer__icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-            </div>
-            <span class="site-footer__contact-text">{contacts.phone}</span>
-          </a>
+          <!-- Main Phone -->
+          <div class="site-footer__contact-line">
+            <svg class="site-footer__line-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+            </svg>
+            <a href={`tel:${contacts.phone.replace(/[^0-9+]/g, '')}`} class="site-footer__line-link">{contacts.phone}</a>
+          </div>
 
-          <!-- Tech Support -->
-          <div class="site-footer__contact-item site-footer__contact-item--support">
-            <div class="site-footer__icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-                <path d="M18 19v1a2 2 0 0 1-2 2h-4" />
-              </svg>
-            </div>
-            <div class="site-footer__support-text">
-              <a href={`tel:${contacts.supportPhone.replace(/[^0-9+]/g, '')}`} class="site-footer__support-num">
-                {contacts.supportPhone}
-              </a>
-              <span class="site-footer__support-note">{contacts.supportTiming}</span>
+          <!-- Tech Support Line -->
+          <div class="site-footer__contact-line site-footer__contact-line--support">
+            <svg class="site-footer__line-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />
+            </svg>
+            <div class="site-footer__support-wrap">
+              <a href={`tel:${contacts.supportPhone.replace(/[^0-9+]/g, '')}`} class="site-footer__line-link">{contacts.supportPhone}</a>
+              <span class="site-footer__support-timing">{contacts.supportTiming}</span>
             </div>
           </div>
-        </div>
 
-        <!-- Social Media Buttons -->
-        <div class="site-footer__social-row">
-          <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z" /></svg>
-          </a>
-          <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </a>
-          <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.87 0-1.57.7-1.57 1.57s.7 1.57 1.57 1.57 1.57-.7 1.57-1.57-.7-1.57-1.57-1.57z" /></svg>
-          </a>
-          <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
-          </a>
-          <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" class="site-footer__social-btn" aria-label="X (Twitter)">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
-          </a>
-        </div>
+          <!-- Email -->
+          <div class="site-footer__contact-line">
+            <svg class="site-footer__line-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+            <a href={`mailto:${contacts.email}`} class="site-footer__line-link">{contacts.email}</a>
+          </div>
+
+          <!-- UK Branch -->
+          <div class="site-footer__contact-line site-footer__contact-line--uk">
+            <svg class="site-footer__line-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-.778.099-1.533.284-2.253" />
+            </svg>
+            <span class="site-footer__line-text">{contacts.ukAddress}</span>
+          </div>
+        </address>
       </div>
 
-      <!-- Column 2: Company -->
+      <!-- Column 2: Services -->
       <div class="site-footer__col">
-        <h3 class="site-footer__col-title">Company</h3>
-        <ul class="site-footer__links">
+        <h3 class="site-footer__col-heading">Services</h3>
+        <ul class="site-footer__nav-list">
+          {serviceLinks.map((link) => (
+            <li><a href={link.href} class="site-footer__nav-link">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: Company -->
+      <div class="site-footer__col">
+        <h3 class="site-footer__col-heading">Company</h3>
+        <ul class="site-footer__nav-list">
           {companyLinks.map((link) => (
-            <li><a href={link.href}>{link.label}</a></li>
+            <li><a href={link.href} class="site-footer__nav-link">{link.label}</a></li>
           ))}
         </ul>
       </div>
 
-      <!-- Column 3: Cloud & Domains -->
-      <div class="site-footer__col">
-        <h3 class="site-footer__col-title">Cloud & Domains</h3>
-        <ul class="site-footer__links">
-          {cloudLinks.map((link) => (
-            <li><a href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
+      <!-- Column 4: Stay Connected & Community (matching InfinitieTech) -->
+      <div class="site-footer__col-connected">
+        <h3 class="site-footer__col-heading">Stay Connected</h3>
+        <h4 class="site-footer__newsletter-title">Subscribe to Our Newsletter</h4>
+        <p class="site-footer__newsletter-desc">
+          Get product releases, architectural insights, and agency updates delivered to your inbox.
+        </p>
 
-      <!-- Column 4: Quick Links -->
-      <div class="site-footer__col">
-        <h3 class="site-footer__col-title">Quick Links</h3>
-        <ul class="site-footer__links">
-          {quickLinks.map((link) => (
-            <li><a href={link.href}>{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
+        <!-- Newsletter Pill Input -->
+        <form id="footer-newsletter-form" class="site-footer__newsletter-form" novalidate>
+          <div class="site-footer__pill-input-box">
+            <label for="footer-email-input" class="sr-only">Email address</label>
+            <input
+              id="footer-email-input"
+              type="email"
+              placeholder="Enter your email"
+              required
+              class="site-footer__pill-input"
+            />
+            <button type="submit" class="site-footer__pill-submit-btn">Subscribe</button>
+          </div>
+          <p class="site-footer__newsletter-disclaimer">
+            By subscribing, you agree to receive product releases and updates. Unsubscribe anytime.
+          </p>
+          <div class="site-footer__shield-notice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="site-footer__shield-icon" aria-hidden="true">
+              <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" />
+              <path d="m15 19 2 2 4-4" />
+            </svg>
+            <span>Protected by human verification.</span>
+          </div>
+        </form>
 
-      <!-- Column 5: Global Offices -->
-      <div class="site-footer__col site-footer__col--offices">
-        <h3 class="site-footer__col-title site-footer__title--globe">
-          <svg class="site-footer__globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="2" y1="12" x2="22" y2="12" />
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-          </svg>
-          <span>Global Offices</span>
-        </h3>
-
-        <div class="site-footer__offices-cards">
-          {offices.map((office) => (
-            <div class="site-footer__office-card">
-              <div class="site-footer__pin-box" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </div>
-              <div class="site-footer__office-content">
-                <div class="site-footer__office-head">
-                  <span class="site-footer__office-title">{office.country}</span>
-                  {office.isHQ && <span class="site-footer__hq-badge">HQ</span>}
-                </div>
-                <p class="site-footer__office-address">{office.address}</p>
-              </div>
-            </div>
-          ))}
+        <!-- Circular Social Media Icons Row -->
+        <div class="site-footer__social-circles">
+          <a href="https://codecanyon.net/user/rakebig" target="_blank" rel="noopener noreferrer" class="site-footer__social-circle site-footer__social-circle--envato" title="Rakebig on CodeCanyon" aria-label="CodeCanyon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.98 2.02c-.37-.02-.87.21-1.6.72-2.12 1.48-5.32 4.45-6.84 8.76-.7-1.34-1.63-2.61-2.82-3.69-.99-.91-2.13-1.64-3.41-2.02-.38-.11-.71.18-.62.56.77 3.25 2.61 6.13 5.16 8.16 1.4 1.11 3.01 1.95 4.75 2.45.19.06.39-.08.39-.28v-.15c0-1.84.44-3.77 1.48-5.5 1.54-2.58 3.51-4.79 5.25-6.93.59-.72.93-1.4.73-1.8-.13-.18-.3-.27-.47-.28z" />
+            </svg>
+          </a>
+          <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" class="site-footer__social-circle site-footer__social-circle--linkedin" title="Connect on LinkedIn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64c-.87 0-1.57.7-1.57 1.57s.7 1.57 1.57 1.57 1.57-.7 1.57-1.57-.7-1.57-1.57-1.57z" />
+            </svg>
+          </a>
+          <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" class="site-footer__social-circle site-footer__social-circle--instagram" title="Follow on Instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </a>
+          <a href={`https://api.whatsapp.com/send?phone=${contacts.phone.replace(/[^0-9]/g, '')}&text=Hello%20Rakebig,%20I%20am%20inquiring%20from%20your%20website.`} target="_blank" rel="noopener noreferrer" class="site-footer__social-circle site-footer__social-circle--whatsapp" title="Message on WhatsApp" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+              <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+            </svg>
+          </a>
+          <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" class="site-footer__social-circle site-footer__social-circle--youtube" title="Watch on YouTube" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg>
+          </a>
+          <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" class="site-footer__social-circle site-footer__social-circle--x" title="Follow on X" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" class="site-footer__social-circle site-footer__social-circle--github" title="Rakebig on GitHub" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
         </div>
+
+        <!-- Join WhatsApp Community Box (matching InfinitieTech) -->
+        <a href={`https://api.whatsapp.com/send?phone=${contacts.phone.replace(/[^0-9]/g, '')}&text=Hello,%20I%20would%20like%20to%20join%20the%20Rakebig%20WhatsApp%20Community.`} target="_blank" rel="noopener noreferrer" class="site-footer__community-box">
+          <span class="site-footer__community-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="site-footer__community-icon" aria-hidden="true">
+              <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+              <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+            </svg>
+          </span>
+          <span class="site-footer__community-text-wrap">
+            <span class="site-footer__community-heading">Join our WhatsApp Community</span>
+            <span class="site-footer__community-sub">Product news, tips, and updates</span>
+          </span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="site-footer__community-arrow" aria-hidden="true">
+            <path d="M17 7l-10 10" />
+            <path d="M8 7l9 0l0 9" />
+          </svg>
+        </a>
+
+        <!-- Add Us as a Preferred Source on Google Pill (matching InfinitieTech) -->
+        <a href="https://www.google.com/preferences/source?q=rakebig.com" target="_blank" rel="noopener noreferrer nofollow" class="site-footer__google-source-btn">
+          <svg viewBox="0 0 24 24" class="site-footer__google-g-icon" aria-hidden="true">
+            <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z" />
+            <path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1 .7-2.4 1.1-4 1.1-3 0-5.6-2-6.5-4.8H1.5v3C3.5 21.3 7.4 24 12 24z" />
+            <path fill="#FBBC05" d="M5.5 14.4a7.2 7.2 0 0 1 0-4.8v-3H1.5a12 12 0 0 0 0 10.8l4-3z" />
+            <path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4C17.9 1.2 15.2 0 12 0 7.4 0 3.5 2.7 1.5 6.6l4 3C6.4 6.8 9 4.8 12 4.8z" />
+          </svg>
+          <span class="site-footer__google-source-text">Add us as a preferred source on Google</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="site-footer__google-source-arrow" aria-hidden="true">
+            <path d="m7 5 6 7-6 7M14 5l6 7-6 7" />
+          </svg>
+        </a>
       </div>
     </div>
 
-    <!-- Middle Divider Strip: Accepted Payment Methods & Affiliation -->
+    <!-- Middle Strip: Accepted Payment Methods & CodeCanyon Affiliation -->
     <div class="site-footer__payments-bar">
       <div class="site-footer__payments-left">
         <span class="site-footer__strip-label">ACCEPTED PAYMENT METHODS</span>
@@ -226,14 +404,12 @@ const policyLinks = [
               <text x="61" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-style="italic" font-size="14.5" fill="#0079C1">Pal</text>
             </svg>
           </div>
-
           <!-- VISA -->
           <div class="site-footer__badge-card" title="Visa">
             <svg class="site-footer__badge-svg" viewBox="0 0 68 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <text x="5" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-style="italic" font-size="20" fill="#1434CB" letter-spacing="1">VISA</text>
             </svg>
           </div>
-
           <!-- Mastercard -->
           <div class="site-footer__badge-card" title="Mastercard">
             <svg class="site-footer__badge-svg" viewBox="0 0 54 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -242,7 +418,6 @@ const policyLinks = [
               <path d="M27 7.7a11.97 11.97 0 0 1 0 16.6 11.97 11.97 0 0 1 0-16.6z" fill="#FF5F00" />
             </svg>
           </div>
-
           <!-- American Express -->
           <div class="site-footer__badge-card site-footer__badge-card--amex" title="American Express">
             <svg class="site-footer__badge-svg" viewBox="0 0 105 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -250,7 +425,6 @@ const policyLinks = [
               <text x="52.5" y="16" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="9" fill="#ffffff" letter-spacing="0.5">AMERICAN EXPRESS</text>
             </svg>
           </div>
-
           <!-- Discover -->
           <div class="site-footer__badge-card" title="Discover">
             <svg class="site-footer__badge-svg" viewBox="0 0 85 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -262,7 +436,6 @@ const policyLinks = [
         </div>
       </div>
 
-      <!-- Right: Affiliated With -->
       <div class="site-footer__payments-right">
         <span class="site-footer__strip-label">AFFILIATED WITH</span>
         <div class="site-footer__affiliated-box">
@@ -275,43 +448,248 @@ const policyLinks = [
       </div>
     </div>
 
-    <!-- Bottom Bar: Copyright & Policies -->
+    <!-- Bottom Bar: Copyright & Policies & Infinitie Heart -->
     <div class="site-footer__bottom-bar">
       <p class="site-footer__copyright">
-        © {year} {brand.name}. All rights reserved.
+        © <span>{year}</span> {brand.name}. All Rights Reserved.
       </p>
+
+      <p class="site-footer__built-tag">
+        Built with
+        <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__heart-icon" aria-hidden="true">
+          <path d="M12 21s-6.716-4.35-9.192-8.03C.79 10.06 1.64 6.3 4.6 4.98c2.03-.9 4.32-.2 5.63 1.5L12 8.4l1.77-1.92c1.31-1.7 3.6-2.4 5.63-1.5 2.96 1.32 3.81 5.08 1.79 7.99C18.716 16.65 12 21 12 21Z" />
+        </svg>
+        by Rakebig, for ideas that matter
+      </p>
+
       <nav class="site-footer__policy-nav" aria-label="Footer Legal Links">
         {policyLinks.map((p) => (
           <a href={p.href} class="site-footer__policy-link">{p.label}</a>
         ))}
       </nav>
     </div>
+
+    <!-- The Signature Giant Submerged Wordmark (infinitietech.com design) -->
+    <div class="site-footer__wordmark-wrap" aria-hidden="true">
+      <span class="site-footer__wordmark-text">RAKEBIG</span>
+    </div>
   </div>
 </footer>
 
 <style>
-  /* Base Container & Background */
+  /* ==========================================================================
+     Base Background & Ambient Atmosphere (matching InfinitieTech)
+     ========================================================================== */
   .site-footer {
-    background-color: #0b1322;
-    background-image: linear-gradient(180deg, #0d1728 0%, #080e1a 100%);
-    color: #94a3b8;
-    padding: 70px 0 30px;
+    position: relative;
+    background-color: #080d1a;
+    background-image: linear-gradient(180deg, #090f1f 0%, #060912 100%);
+    color: #ffffff;
+    padding: 70px 0 0;
+    overflow: hidden;
     font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Top center ambient glow */
+  .site-footer__ambient-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    max-width: 960px;
+    height: 140px;
+    background: radial-gradient(ellipse at top, rgba(37, 99, 235, 0.22), rgba(59, 130, 246, 0.08) 50%, transparent 75%);
+    filter: blur(48px);
+    pointer-events: none;
+    border-radius: 9999px;
+    z-index: 1;
   }
 
   .site-footer__container {
+    position: relative;
+    z-index: 2;
     width: 100%;
-    max-width: 1320px;
+    max-width: 1440px;
     margin: 0 auto;
     padding: 0 24px;
     box-sizing: border-box;
   }
 
-  /* 5-Column Grid */
+  /* ==========================================================================
+     Top Strip: Partner Badges & Ask AI Module
+     ========================================================================== */
+  .site-footer__top-strip {
+    margin-bottom: 48px;
+    padding-bottom: 34px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .site-footer__partner-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__partner-badge {
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  .site-footer__partner-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    filter: brightness(1.06);
+  }
+
+  .site-footer__partner-badge img {
+    height: 52px;
+    width: auto;
+    max-height: 52px;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .site-footer__partner-badge--shopify {
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 0 14px;
+    box-sizing: border-box;
+  }
+  .site-footer__partner-badge--shopify img {
+    height: 36px;
+    max-height: 36px;
+  }
+
+  .site-footer__partner-badge--upwork {
+    background: #14a800;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .site-footer__partner-badge--fiverr {
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .site-footer__partner-badge--google {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Ask AI Block */
+  .site-footer__ask-ai-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .site-footer__ask-ai-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e2e8f0;
+    margin: 0;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+
+  .site-footer__ai-buttons-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__ai-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, filter 0.2s ease;
+    flex-shrink: 0;
+  }
+  .site-footer__ai-btn:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+    filter: brightness(1.1);
+  }
+  .site-footer__ai-btn img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: block;
+    object-fit: cover;
+  }
+
+  .site-footer__copy-prompt-btn {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    margin-left: 2px;
+  }
+  .site-footer__copy-prompt-btn:hover {
+    background: rgba(37, 99, 235, 0.25);
+    border-color: rgba(59, 130, 246, 0.45);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+  .site-footer__copy-icon,
+  .site-footer__check-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+  .site-footer__check-icon {
+    display: none;
+    color: #34d399;
+  }
+  .site-footer__copy-prompt-btn.is-copied {
+    background: rgba(16, 185, 129, 0.18);
+    border-color: rgba(16, 185, 129, 0.45);
+    color: #34d399;
+  }
+  .site-footer__copy-prompt-btn.is-copied .site-footer__copy-icon {
+    display: none;
+  }
+  .site-footer__copy-prompt-btn.is-copied .site-footer__check-icon {
+    display: inline-block;
+  }
+
+  /* ==========================================================================
+     Main 4-Column Grid (infinitietech.com style)
+     ========================================================================== */
   .site-footer__grid {
     display: grid;
-    grid-template-columns: 2.3fr 1.1fr 1.25fr 1.1fr 2.4fr;
+    grid-template-columns: 1.35fr 0.9fr 0.9fr 1.45fr;
     gap: 40px;
     align-items: flex-start;
   }
@@ -321,7 +699,6 @@ const policyLinks = [
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
   }
 
   .site-footer__logo {
@@ -337,13 +714,13 @@ const policyLinks = [
   }
 
   .site-footer__logo-mark {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
   }
 
   .site-footer__logo-text {
-    font-size: 26px;
+    font-size: 25px;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: -0.03em;
@@ -351,259 +728,417 @@ const policyLinks = [
   }
 
   .site-footer__tagline {
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: #94a3b8;
-    margin: 0;
-    max-width: 320px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 14px 0 20px;
+    max-width: 330px;
+    font-weight: 400;
   }
 
-  .site-footer__contact-list {
+  .site-footer__address-list {
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap: 11px;
+    font-style: normal;
     width: 100%;
-    margin-top: 4px;
   }
 
-  .site-footer__contact-item {
+  .site-footer__contact-line {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 10px;
     text-decoration: none;
-    color: #cbd5e1;
-    font-size: 14px;
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    line-height: 1.5;
     transition: color 0.15s ease;
   }
-  .site-footer__contact-item:hover {
+  .site-footer__contact-line:hover {
     color: #ffffff;
   }
 
-  .site-footer__icon-box {
-    width: 36px;
-    height: 36px;
+  .site-footer__line-icon {
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
-    border-radius: 8px;
-    background: rgba(30, 58, 138, 0.35);
-    border: 1px solid rgba(59, 130, 246, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #60a5fa;
-    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 2px;
+    transition: color 0.15s ease;
   }
-  .site-footer__contact-item:hover .site-footer__icon-box {
-    background: rgba(37, 99, 235, 0.5);
-    border-color: #3b82f6;
+  .site-footer__contact-line:hover .site-footer__line-icon {
+    color: #3b82f6;
+  }
+
+  .site-footer__line-text {
+    max-width: 290px;
+  }
+
+  .site-footer__line-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .site-footer__line-link:hover {
     color: #ffffff;
   }
-  .site-footer__icon-box svg {
-    width: 17px;
-    height: 17px;
-  }
 
-  .site-footer__contact-text {
-    word-break: break-all;
-  }
-
-  .site-footer__contact-item--support {
+  .site-footer__contact-line--support {
     align-items: flex-start;
   }
 
-  .site-footer__support-text {
+  .site-footer__support-wrap {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
 
-  .site-footer__support-num {
-    color: #cbd5e1;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.15s ease;
-  }
-  .site-footer__support-num:hover {
-    color: #ffffff;
+  .site-footer__support-timing {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.45);
   }
 
-  .site-footer__support-note {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.4;
+  .site-footer__contact-line--uk {
+    padding-top: 4px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
   }
 
-  /* Social Icons */
-  .site-footer__social-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 8px;
-  }
-
-  .site-footer__social-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #94a3b8;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  .site-footer__social-btn svg {
-    width: 17px;
-    height: 17px;
-  }
-  .site-footer__social-btn:hover {
-    background: #2563eb;
-    border-color: #2563eb;
-    color: #ffffff;
-    transform: translateY(-2px);
-  }
-
-  /* Link Columns (Company, Cloud & Domains, Quick Links) */
+  /* Columns 2 & 3: Navigation Links */
   .site-footer__col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .site-footer__col-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.01em;
-    margin: 0 0 20px;
+  .site-footer__col-heading {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0 0 16px;
     line-height: 1.2;
   }
 
-  .site-footer__links {
+  .site-footer__nav-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
-  .site-footer__links a {
-    color: #94a3b8;
+  .site-footer__nav-link {
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
     transition: color 0.15s ease, transform 0.15s ease;
     display: inline-block;
   }
-  .site-footer__links a:hover {
+  .site-footer__nav-link:hover {
     color: #ffffff;
     transform: translateX(2px);
   }
 
-  /* Global Offices Column */
-  .site-footer__col--offices {
-    width: 100%;
-  }
-
-  .site-footer__title--globe {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .site-footer__globe-icon {
-    width: 18px;
-    height: 18px;
-    color: #60a5fa;
-    flex-shrink: 0;
-  }
-
-  .site-footer__offices-cards {
+  /* Column 4: Stay Connected & Newsletter */
+  .site-footer__col-connected {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    width: 100%;
-  }
-
-  .site-footer__office-card {
-    background: rgba(15, 23, 42, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: flex;
     align-items: flex-start;
-    gap: 14px;
-    transition: all 0.2s ease;
-  }
-  .site-footer__office-card:hover {
-    background: rgba(15, 23, 42, 0.9);
-    border-color: rgba(59, 130, 246, 0.35);
-    transform: translateY(-2px);
   }
 
-  .site-footer__pin-box {
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    background: rgba(30, 58, 138, 0.35);
-    border: 1px solid rgba(59, 130, 246, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #60a5fa;
-    margin-top: 2px;
-  }
-  .site-footer__pin-box svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .site-footer__office-content {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .site-footer__office-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .site-footer__office-title {
-    font-size: 15px;
-    font-weight: 700;
+  .site-footer__newsletter-title {
+    font-size: 16px;
+    font-weight: 600;
     color: #ffffff;
     letter-spacing: -0.01em;
-  }
-
-  .site-footer__hq-badge {
-    background: #2563eb;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    padding: 2px 7px;
-    border-radius: 4px;
-    text-transform: uppercase;
+    margin: 0 0 6px;
     line-height: 1.3;
   }
 
-  .site-footer__office-address {
+  .site-footer__newsletter-desc {
     font-size: 12.5px;
-    color: #94a3b8;
-    line-height: 1.45;
-    margin: 0;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 16px;
+    max-width: 360px;
   }
 
-  /* Middle Divider Bar: Payment Methods & Affiliation */
+  /* Pill Newsletter Form (InfinitieTech signature) */
+  .site-footer__newsletter-form {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .site-footer__pill-input-box {
+    display: flex;
+    align-items: center;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    padding: 3px 4px 3px 16px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+  .site-footer__pill-input-box:focus-within {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  }
+
+  .site-footer__pill-input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 13.5px;
+    outline: none;
+    font-family: inherit;
+  }
+  .site-footer__pill-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .site-footer__pill-submit-btn {
+    border-radius: 9999px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+    font-family: inherit;
+    flex-shrink: 0;
+  }
+  .site-footer__pill-submit-btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.02);
+  }
+  .site-footer__pill-submit-btn:active {
+    transform: scale(0.98);
+  }
+
+  .site-footer__newsletter-disclaimer {
+    font-size: 11px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    padding: 0 8px;
+  }
+
+  .site-footer__shield-notice {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 0 8px;
+  }
+
+  .site-footer__shield-icon {
+    width: 14px;
+    height: 14px;
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  /* Circular Brand Social Icons */
+  .site-footer__social-circles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .site-footer__social-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .site-footer__social-circle svg {
+    width: 17px;
+    height: 17px;
+  }
+  .site-footer__social-circle:hover {
+    transform: scale(1.08);
+  }
+  .site-footer__social-circle--envato:hover {
+    background: rgba(130, 181, 65, 0.2);
+    border-color: rgba(130, 181, 65, 0.5);
+    color: #82b541;
+  }
+  .site-footer__social-circle--linkedin:hover {
+    background: rgba(10, 102, 194, 0.2);
+    border-color: rgba(10, 102, 194, 0.5);
+    color: #0a66c2;
+  }
+  .site-footer__social-circle--instagram:hover {
+    background: rgba(228, 64, 95, 0.2);
+    border-color: rgba(228, 64, 95, 0.5);
+    color: #e4405f;
+  }
+  .site-footer__social-circle--whatsapp:hover {
+    background: rgba(37, 211, 102, 0.2);
+    border-color: rgba(37, 211, 102, 0.5);
+    color: #25d366;
+  }
+  .site-footer__social-circle--youtube:hover {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: rgba(255, 0, 0, 0.5);
+    color: #ff0000;
+  }
+  .site-footer__social-circle--x:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+  }
+  .site-footer__social-circle--github:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.5);
+    color: #a78bfa;
+  }
+
+  /* Join WhatsApp Community Callout Box */
+  .site-footer__community-box {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 12px;
+    border: 1px solid rgba(37, 211, 102, 0.28);
+    background: rgba(37, 211, 102, 0.08);
+    padding: 10px 14px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  .site-footer__community-box:hover {
+    background: rgba(37, 211, 102, 0.14);
+    border-color: rgba(37, 211, 102, 0.45);
+    transform: translateY(-1px);
+  }
+
+  .site-footer__community-icon-wrap {
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    background: #25d366;
+    color: #0b1322;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .site-footer__community-icon {
+    width: 19px;
+    height: 19px;
+  }
+
+  .site-footer__community-text-wrap {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-footer__community-heading {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.3;
+  }
+
+  .site-footer__community-sub {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.3;
+  }
+
+  .site-footer__community-arrow {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.55);
+    flex-shrink: 0;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .site-footer__community-box:hover .site-footer__community-arrow {
+    transform: translate(2px, -2px);
+    color: #ffffff;
+  }
+
+  /* Add us as Preferred Source on Google Pill */
+  .site-footer__google-source-btn {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 8px 16px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12.5px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+  }
+  .site-footer__google-source-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .site-footer__google-g-icon {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+  }
+
+  .site-footer__google-source-text {
+    line-height: 1.3;
+  }
+
+  .site-footer__google-source-arrow {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.4);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .site-footer__google-source-btn:hover .site-footer__google-source-arrow {
+    transform: translateX(2px);
+    color: #ffffff;
+  }
+
+  /* ==========================================================================
+     Middle Payments & Affiliation Strip
+     ========================================================================== */
   .site-footer__payments-bar {
     margin-top: 48px;
-    padding: 26px 0;
+    padding: 24px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
@@ -618,7 +1153,7 @@ const policyLinks = [
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #64748b;
+    color: rgba(255, 255, 255, 0.45);
     margin-bottom: 12px;
   }
 
@@ -659,7 +1194,6 @@ const policyLinks = [
     padding: 0 8px;
   }
 
-  /* Affiliated With */
   .site-footer__payments-right {
     display: flex;
     flex-direction: column;
@@ -673,7 +1207,6 @@ const policyLinks = [
     color: #ffffff;
     font-weight: 600;
     font-size: 15px;
-    letter-spacing: -0.01em;
     height: 34px;
   }
 
@@ -687,32 +1220,58 @@ const policyLinks = [
     font-weight: 700;
   }
 
-  /* Bottom Copyright & Policy Bar */
+  /* ==========================================================================
+     Bottom Bar: Copyright & Policies & Built with Heart
+     ========================================================================== */
   .site-footer__bottom-bar {
     padding-top: 24px;
+    padding-bottom: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .site-footer__copyright {
-    font-size: 13px;
-    color: #64748b;
     margin: 0;
+  }
+
+  .site-footer__built-tag {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+  }
+
+  .site-footer__heart-icon {
+    width: 14px;
+    height: 14px;
+    color: #ef4444;
+    display: inline-block;
+    animation: footerHeartPulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes footerHeartPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
   }
 
   .site-footer__policy-nav {
     display: flex;
     align-items: center;
-    gap: 22px;
+    gap: 20px;
     flex-wrap: wrap;
   }
 
   .site-footer__policy-link {
-    font-size: 13px;
-    color: #94a3b8;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.55);
     text-decoration: none;
     transition: color 0.15s ease;
   }
@@ -720,28 +1279,58 @@ const policyLinks = [
     color: #ffffff;
   }
 
-  /* Responsive Breakpoints */
+  /* ==========================================================================
+     The Signature Giant Submerged Wordmark (infinitietech.com design)
+     ========================================================================== */
+  .site-footer__wordmark-wrap {
+    overflow: hidden;
+    margin-top: 16px;
+    margin-bottom: -55px;
+    user-select: none;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .site-footer__wordmark-text {
+    font-family: var(--font-heading, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    font-size: clamp(4.5rem, 16vw, 15rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 55%, transparent 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    transform: translateY(24%);
+    transition: transform 0.5s ease-out;
+    display: block;
+  }
+
+  /* ==========================================================================
+     Responsive Breakpoints
+     ========================================================================== */
   @media (max-width: 1200px) {
     .site-footer__grid {
-      grid-template-columns: 2.5fr 1fr 1.2fr 1fr;
+      grid-template-columns: 1.3fr 1fr 1fr;
     }
-    .site-footer__col--offices {
+    .site-footer__col-connected {
       grid-column: 1 / -1;
       margin-top: 10px;
+      max-width: 600px;
     }
-    .site-footer__offices-cards {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-    .site-footer__office-card {
-      flex: 1;
-      min-width: 280px;
+    .site-footer__wordmark-wrap {
+      margin-bottom: -40px;
     }
   }
 
   @media (max-width: 860px) {
     .site-footer {
-      padding: 50px 0 24px;
+      padding: 50px 0 0;
     }
     .site-footer__grid {
       grid-template-columns: 1fr 1fr;
@@ -750,31 +1339,69 @@ const policyLinks = [
     .site-footer__col-brand {
       grid-column: 1 / -1;
     }
-    .site-footer__col--offices {
+    .site-footer__col-connected {
       grid-column: 1 / -1;
-    }
-    .site-footer__offices-cards {
-      flex-direction: column;
-    }
-    .site-footer__office-card {
-      width: 100%;
     }
     .site-footer__payments-bar {
       flex-direction: column;
       align-items: flex-start;
-      gap: 24px;
+      gap: 20px;
     }
     .site-footer__bottom-bar {
       flex-direction: column-reverse;
       align-items: flex-start;
-      gap: 16px;
+      gap: 14px;
     }
-    .site-footer__policy-nav {
-      gap: 14px 18px;
+    .site-footer__wordmark-wrap {
+      margin-bottom: -30px;
+    }
+    .site-footer__wordmark-text {
+      transform: translateY(22%);
     }
   }
 
-  @media (max-width: 520px) {
+  @media (max-width: 640px) {
+    .site-footer__top-strip {
+      margin-bottom: 36px;
+      padding-bottom: 26px;
+      gap: 18px;
+    }
+    .site-footer__partner-row {
+      gap: 10px;
+    }
+    .site-footer__partner-badge {
+      height: 46px;
+    }
+    .site-footer__partner-badge img {
+      height: 46px;
+      max-height: 46px;
+    }
+    .site-footer__partner-badge--shopify {
+      padding: 0 10px;
+    }
+    .site-footer__partner-badge--shopify img {
+      height: 32px;
+      max-height: 32px;
+    }
+    .site-footer__ask-ai-title {
+      font-size: 14px;
+    }
+    .site-footer__ai-buttons-row {
+      gap: 8px;
+    }
+    .site-footer__ai-btn {
+      width: 38px;
+      height: 38px;
+    }
+    .site-footer__ai-btn img {
+      width: 38px;
+      height: 38px;
+    }
+    .site-footer__copy-prompt-btn {
+      height: 38px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
     .site-footer__grid {
       grid-template-columns: 1fr;
       gap: 30px;
@@ -782,5 +1409,51 @@ const policyLinks = [
     .site-footer__payment-badges {
       gap: 8px;
     }
+    .site-footer__wordmark-wrap {
+      margin-bottom: -22px;
+    }
+    .site-footer__wordmark-text {
+      transform: translateY(20%);
+    }
   }
 </style>
+
+<script>
+  // Copy AI prompt to clipboard
+  const copyBtn = document.getElementById('footer-copy-ai-prompt');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const prompt = copyBtn.getAttribute('data-prompt') || '';
+      try {
+        await navigator.clipboard.writeText(prompt);
+        copyBtn.classList.add('is-copied');
+        const textSpan = copyBtn.querySelector('.site-footer__copy-text');
+        if (textSpan) textSpan.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.classList.remove('is-copied');
+          if (textSpan) textSpan.textContent = 'Copy prompt';
+        }, 2200);
+      } catch (err) {
+        console.error('Failed to copy AI prompt:', err);
+      }
+    });
+  }
+
+  // Newsletter submission interaction
+  const newsletterForm = document.getElementById('footer-newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = newsletterForm.querySelector('button[type="submit"]');
+      const input = newsletterForm.querySelector('input[type="email"]');
+      if (btn && input && input.value) {
+        const originalText = btn.textContent;
+        btn.textContent = 'Subscribed!';
+        input.value = '';
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 3000);
+      }
+    });
+  }
+</script>

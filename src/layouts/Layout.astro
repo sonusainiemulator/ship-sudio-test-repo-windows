@@ -35,9 +35,9 @@ const {
   jsonLd = [],
 } = Astro.props;
 
-// Normalizing canonical URL without trailing slash (unless root)
-const normalizedPath = canonicalPath === '/' ? '' : canonicalPath.replace(/\/+$/, '');
-const canonicalUrl = `${SITE_URL}${normalizedPath}`;
+// Normalizing canonical URL without trailing slash (root domain keeps trailing slash)
+const normalizedPath = canonicalPath === '/' ? '/' : canonicalPath.replace(/\/+$/, '');
+const canonicalUrl = normalizedPath === '/' ? `${SITE_URL}/` : `${SITE_URL}${normalizedPath}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
 
 const defaultSchemas: Record<string, unknown>[] = [
