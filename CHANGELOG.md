@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.0] - 2026-10-25 01:25 IST
+
+### Added & Improved (SEO & AI LLM Indexing)
+- **High-Velocity Google & AI Search Engine Indexing for 8 Marketplace Gigs**:
+  - **Dynamic `FAQPage` JSON-LD Schema**:
+    - Added structured FAQ data (`faqs?: GigFaq[]`) to [src/data/gigs.ts](file:///g:/rakebig-com-new-site/src/data/gigs.ts) for all 8 gigs, covering buyer objections, delivery timelines, tools, and revision guarantees.
+    - Updated [src/pages/gigs/[slug].astro](file:///g:/rakebig-com-new-site/src/pages/gigs/[slug].astro) to render both semantic HTML FAQ accordions and valid `FAQPage` JSON-LD schema for Google Rich Results snippets and AI answer-engine ingestion (Perplexity, ChatGPT Search, Claude).
+  - **Enhanced E-Commerce Product Schema**:
+    - Injected missing schema properties (`sku`, `mpn`, `itemCondition`, `priceValidUntil: "2027-12-31"`) into all tier offers in [src/pages/gigs/[slug].astro](file:///g:/rakebig-com-new-site/src/pages/gigs/[slug].astro) for Google Merchant/Product rich snippet compliance.
+  - **Keyword Targeting & Meta Tags**:
+    - Added targeted keyword sets (`seoKeywords`) to each gig in [src/data/gigs.ts](file:///g:/rakebig-com-new-site/src/data/gigs.ts).
+    - Updated [Layout.astro](file:///g:/rakebig-com-new-site/src/layouts/Layout.astro) to accept and output `<meta name="keywords" content={keywords} />`.
+  - **Internal Link Mesh ("Related Verified Gigs")**:
+    - Implemented a "Related Verified Gigs" grid section at the bottom of [src/pages/gigs/[slug].astro](file:///g:/rakebig-com-new-site/src/pages/gigs/[slug].astro) linking 4 complementary gigs, passing PageRank equity and preventing crawl silos.
+  - **LLM Scraper Indexing (`llms.txt`)**:
+    - Added comprehensive markdown documentation in [public/llms.txt](file:///g:/rakebig-com-new-site/public/llms.txt) detailing gig offerings, exact pricing (USD & INR), tech stacks, and direct canonical links for AI crawlers (GPTBot, ClaudeBot, PerplexityBot).
+  - **XML Sitemap Crawl Tuning**:
+    - Tuned [public/sitemap.xml](file:///g:/rakebig-com-new-site/public/sitemap.xml) for all 8 gigs with `priority: 0.95`, `changefreq: daily`, and updated `lastmod: 2026-10-25`.
+
 ## [1.6.0] - 2026-10-24 23:55 IST
 
 ### Added

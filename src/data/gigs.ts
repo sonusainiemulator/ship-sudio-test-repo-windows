@@ -9,6 +9,11 @@ export interface GigPackage {
   features: string[];
 }
 
+export interface GigFaq {
+  question: string;
+  answer: string;
+}
+
 export interface GigItem {
   id: string;
   slug: string;
@@ -33,6 +38,8 @@ export interface GigItem {
     premium: GigPackage;
   };
   technologies: string[];
+  faqs?: GigFaq[];
+  seoKeywords?: string[];
 }
 
 export const GIG_CATEGORIES = [
@@ -1168,6 +1175,36 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["Runway Gen-3", "HeyGen / Kling", "ElevenLabs", "Premiere Pro / After Effects", "CapCut Pro"],
+    seoKeywords: [
+      "AI video ads",
+      "create AI commercials",
+      "TikTok AI video ads",
+      "Instagram Reels video ads",
+      "AI spokesperson video",
+      "HeyGen video ads",
+      "Runway Gen-3 ads",
+      "UGC AI video creator",
+      "AI advertising agency",
+      "video ads for business"
+    ],
+    faqs: [
+      {
+        question: "How do AI video ads perform compared to traditional commercial video production?",
+        answer: "AI video ads achieve comparable or higher click-through rates (often 25-40% higher on TikTok and Meta Ads) at a fraction of traditional studio production costs. They allow rapid A/B testing of hooks, copy, and visual angles without renting studios or hiring expensive production crews."
+      },
+      {
+        question: "Which AI models and video editing suites do you use?",
+        answer: "We combine top-tier generative AI models including Runway Gen-3, Kling, Midjourney, and HeyGen for photorealistic visuals and avatars, paired with ElevenLabs for natural vocal cadence and Premiere Pro/After Effects for frame-accurate motion editing and sound design."
+      },
+      {
+        question: "Do I own full commercial rights to run these videos as paid ads?",
+        answer: "Yes. Every video delivered includes 100% full commercial rights, licensed royalty-free background audio, and clear copyright ownership for paid advertising across Meta (Facebook & Instagram), TikTok, YouTube, LinkedIn, and Google Ads."
+      },
+      {
+        question: "What aspect ratios and video formats are delivered?",
+        answer: "We deliver high-definition 1080p and 4K MP4 files in 9:16 vertical (ideal for TikTok, Instagram Reels, and YouTube Shorts) and 1:1 / 16:9 widescreen formats (ideal for Facebook feed and website hero landing pages)."
+      }
+    ],
   },
   {
     id: "gig-n8n-business-automation",
@@ -1242,6 +1279,36 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["n8n", "OpenAI GPT-4o", "Claude 3.5 Sonnet", "Docker / VPS", "REST Webhooks", "PostgreSQL"],
+    seoKeywords: [
+      "n8n automation",
+      "AI workflow automation",
+      "n8n AI agent",
+      "Zapier alternative",
+      "Make to n8n migration",
+      "self-hosted n8n",
+      "OpenAI n8n integration",
+      "business process automation",
+      "CRM webhook automation",
+      "LangChain n8n nodes"
+    ],
+    faqs: [
+      {
+        question: "Why choose n8n over Zapier or Make.com for business automations?",
+        answer: "n8n can be self-hosted on a private VPS for $10-20/month with zero per-task or per-execution fees, saving businesses hundreds or thousands in monthly Zapier subscription costs while keeping customer data 100% private and GDPR-compliant."
+      },
+      {
+        question: "How do AI agents integrate into n8n workflows?",
+        answer: "n8n natively supports LangChain AI agent nodes, vector stores, and LLMs (OpenAI GPT-4o, Claude 3.5 Sonnet, DeepSeek). We configure agents that dynamically decide tool usage, parse unformatted customer emails, look up CRM data, and execute actions autonomously."
+      },
+      {
+        question: "Can n8n sync bi-directionally with Perfex CRM, HubSpot, and Google Sheets?",
+        answer: "Yes. We specialize in custom webhook and REST API integrations between n8n and Perfex CRM, HubSpot, Salesforce, Airtable, Notion, Stripe, and Google Workspace for seamless instant bi-directional updates."
+      },
+      {
+        question: "Do you provide ongoing maintenance and troubleshooting for self-hosted n8n?",
+        answer: "Yes. Every self-hosted n8n package includes automated nightly database backups, Docker restart policies, error-handling alert channels (Slack or Telegram), and dedicated post-launch technical warranty."
+      }
+    ],
   },
   {
     id: "gig-ai-mvp-webapp",
@@ -1316,6 +1383,36 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["Next.js / React", "FastAPI / Python", "PostgreSQL / Supabase", "OpenAI / Claude", "Stripe", "Tailwind CSS"],
+    seoKeywords: [
+      "AI MVP development",
+      "AI SaaS web application",
+      "Nextjs AI MVP",
+      "FastAPI AI developer",
+      "build AI web app",
+      "Supabase OpenAI MVP",
+      "hire AI SaaS developer",
+      "AI startup prototype",
+      "Stripe SaaS billing",
+      "production AI software"
+    ],
+    faqs: [
+      {
+        question: "What tech stack do you recommend for an AI web application MVP?",
+        answer: "We build modern AI applications using Next.js / React with Tailwind CSS on the frontend for lightning-fast UI, coupled with FastAPI (Python) or Node.js for backend AI prompt orchestration, and PostgreSQL / Supabase with Vector pgvector for data and user auth."
+      },
+      {
+        question: "How is Stripe billing and AI token usage handled in the app?",
+        answer: "We integrate Stripe Checkout and Customer Portal for subscription plans or one-time credit top-ups, combined with server-side rate limiting and token consumption tracking to prevent abuse and protect profit margins."
+      },
+      {
+        question: "How fast can we launch an AI MVP from concept to live URL?",
+        answer: "Our rapid MVP sprint delivers a fully functioning prototype within 4 to 8 days, deployed live to Vercel, Railway, or AWS with SSL, user authentication, and connected LLM streaming responses."
+      },
+      {
+        question: "Do I receive full GitHub repository access and deployment documentation?",
+        answer: "Yes, 100% full source code ownership is transferred directly to your GitHub/GitLab account upon completion, accompanied by an architecture guide and local development setup instructions."
+      }
+    ],
   },
   {
     id: "gig-social-media-posts",
@@ -1389,6 +1486,36 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["Figma", "Canva Pro", "Adobe Illustrator", "Photoshop", "Brand Guidelines"],
+    seoKeywords: [
+      "30 branded social media posts",
+      "social media post design",
+      "Canva social media templates",
+      "Instagram carousel design",
+      "brand identity graphics",
+      "LinkedIn post graphics",
+      "social media content calendar",
+      "Figma social media pack",
+      "e-commerce social graphics",
+      "social media marketing assets"
+    ],
+    faqs: [
+      {
+        question: "Do you create custom designs or use generic pre-made Canva templates?",
+        answer: "All designs are crafted bespoke to your unique brand identity, color palette, typography guidelines, and industry positioning. We never use generic recycled templates."
+      },
+      {
+        question: "Are editable source files included in the delivery?",
+        answer: "Yes! You receive editable Canva Pro or Figma master links so you and your internal team can easily reuse the layouts, swap text, or change imagery in the future."
+      },
+      {
+        question: "Do you write the captions and suggest hashtags for each post?",
+        answer: "Yes. Each post includes high-converting caption copy, targeted calls-to-action (CTAs), and curated low-competition/high-intent hashtags designed for organic algorithmic reach."
+      },
+      {
+        question: "What platforms are these graphics formatted for?",
+        answer: "Graphics are delivered in high-resolution PNG/JPG optimized for Instagram (1:1 square & 4:5 portrait), LinkedIn, Facebook, X (Twitter), and Pinterest, with matching 9:16 Story formats."
+      }
+    ],
   },
   {
     id: "gig-youtube-shorts-editing",
@@ -1463,6 +1590,36 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["Adobe Premiere Pro", "After Effects", "CapCut Pro", "Submagic", "Audition"],
+    seoKeywords: [
+      "YouTube Shorts video editor",
+      "Alex Hormozi captions",
+      "viral TikTok editing",
+      "Instagram Reels editor",
+      "kinetic typography subtitles",
+      "short form video editor",
+      "retention video editing",
+      "podcast video cutdowns",
+      "CapCut Pro editing",
+      "social video editor"
+    ],
+    faqs: [
+      {
+        question: "What is the 'Alex Hormozi style' subtitle effect and why is it so effective?",
+        answer: "It features bold, dynamic, word-by-word highlighted kinetic captions with animated emojis, high-contrast colors (yellow, green, white), and sound effects. Studies show it increases viewer watch time and completion rate by over 60% on mobile feeds."
+      },
+      {
+        question: "How do you optimize the first 3 seconds (the hook) of the video?",
+        answer: "We cut dead air, zoom in on key focal points, add contextual sound effects, and overlay visual teaser text or stock B-roll to immediately grip the viewer's attention and prevent swipe-aways."
+      },
+      {
+        question: "What video editing software do you use for rendering?",
+        answer: "We edit primarily in Adobe Premiere Pro and After Effects supplemented by CapCut Pro and professional sound design suites, exporting in crisp 1080x1920 60FPS vertical resolution."
+      },
+      {
+        question: "Can I send long-form podcast or YouTube video links for you to extract clips from?",
+        answer: "Yes! You can share timestamps or full podcast/webinar recordings. We identify the most engaging, viral moments, crop to vertical format, and edit them into standalone high-retention Shorts."
+      }
+    ],
   },
   {
     id: "gig-ai-voice-agent-booking",
@@ -1536,6 +1693,36 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["Retell AI", "Vapi AI", "Twilio", "ElevenLabs", "FastAPI / Node.js", "Perfex / HubSpot CRM"],
+    seoKeywords: [
+      "AI voice agent",
+      "automated calling bot",
+      "Vapi AI developer",
+      "Retell AI setup",
+      "Twilio AI voice bot",
+      "AI appointment booking",
+      "customer support voice agent",
+      "conversational voice AI",
+      "ElevenLabs voice bot",
+      "AI call center"
+    ],
+    faqs: [
+      {
+        question: "How natural do the AI voices sound on live phone calls?",
+        answer: "We use ElevenLabs and Deepgram ultra-realistic neural voice models with sub-800ms latency. Callers typically cannot distinguish the agent from a human representative, as it responds fluidly to interruptions and natural conversation pauses."
+      },
+      {
+        question: "Can the AI voice agent check real-time availability and book appointments?",
+        answer: "Yes! The bot integrates directly with Google Calendar, Cal.com, or Calendly via API tools to look up available slots, confirm attendee details, schedule bookings, and send instant SMS/WhatsApp confirmation links."
+      },
+      {
+        question: "What happens if a customer has a complex query or wants to speak to a human?",
+        answer: "We configure intelligent fallback logic: the voice agent can perform a warm live call transfer to a designated human team member's phone number or log an escalation ticket directly into your CRM."
+      },
+      {
+        question: "Which telephony providers are supported?",
+        answer: "We configure official Twilio SIP trunks, Vonage, or Telnyx, enabling local phone numbers across 100+ countries with inbound receiving and compliant outbound automated calling."
+      }
+    ],
   },
   {
     id: "gig-ai-promotional-videos",
@@ -1610,6 +1797,36 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["Runway Gen-3", "Midjourney", "ElevenLabs", "After Effects", "Cinema 4D / Blender"],
+    seoKeywords: [
+      "AI promotional videos",
+      "product promotional video",
+      "commercial video production",
+      "AI video marketing",
+      "3D product showcase",
+      "AI brand video",
+      "cinematic promo video",
+      "e-commerce product video",
+      "luxury brand commercial",
+      "video advertising campaign"
+    ],
+    faqs: [
+      {
+        question: "Can you showcase physical or digital products in the promotional video?",
+        answer: "Yes. We create 3D device/packaging mockups or integrate real photographs and screen recordings into cinematic AI-rendered environments with realistic lighting and camera moves."
+      },
+      {
+        question: "What is included in the full promotional video campaign package?",
+        answer: "The Premium package delivers 3 tailored video formats: a 15-second high-energy hook teaser, a 30-second feature highlight, and a 60-second narrative brand story, complete with A/B ad spend variations."
+      },
+      {
+        question: "Do you provide professional voiceover in multiple accents or languages?",
+        answer: "Yes. We offer professional studio-quality voiceovers in American, British, Australian, and international accents, as well as multi-language translations (Spanish, French, German, Hindi, etc.)."
+      },
+      {
+        question: "What licenses and rights do I receive with the final delivery?",
+        answer: "You receive 100% royalty-free commercial broadcast rights for perpetual use across TV, social media advertising, website landing pages, trade shows, and YouTube."
+      }
+    ],
   },
   {
     id: "gig-wordpress-business-website",
@@ -1687,5 +1904,35 @@ export const GIGS_CATALOG: GigItem[] = [
       },
     },
     technologies: ["WordPress", "Elementor Pro", "WooCommerce", "PHP / CSS3", "Yoast / RankMath SEO", "WP Rocket"],
+    seoKeywords: [
+      "WordPress business website",
+      "WordPress redesign",
+      "Elementor Pro developer",
+      "WooCommerce website development",
+      "responsive WordPress site",
+      "hire WordPress engineer",
+      "fast WordPress speed optimization",
+      "custom WordPress theme",
+      "WordPress migration",
+      "corporate website design"
+    ],
+    faqs: [
+      {
+        question: "Will my WordPress website be easy for my team to edit and update?",
+        answer: "Yes! We build using intuitive visual page builders like Elementor Pro or modern Gutenberg blocks. We also record a personalized video walkthrough showing you how to update text, images, blog posts, and products without writing code."
+      },
+      {
+        question: "How do you ensure the website loads fast on mobile devices?",
+        answer: "We optimize image compression (WebP), implement server-level caching, minify CSS/JS scripts, and eliminate bloated plugins to ensure Google PageSpeed scores of 90+ on desktop and mobile."
+      },
+      {
+        question: "Is on-page SEO included with the website build?",
+        answer: "Yes. Every website is built with SEO best practices: clean semantic HTML5 heading structures (H1, H2, H3), meta titles and descriptions, XML sitemap generation, OpenGraph social preview tags, and fast loading speeds."
+      },
+      {
+        question: "Can you redesign my existing live site without causing downtime or losing SEO rankings?",
+        answer: "Yes. We build the redesign on a private staging environment. Once you review and approve it, we perform the live migration during low-traffic hours and configure 301 redirects to preserve all existing Google search rankings."
+      }
+    ],
   },
 ];

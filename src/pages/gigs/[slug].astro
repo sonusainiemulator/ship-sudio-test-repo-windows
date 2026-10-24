@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import GigsHeader from "../../components/GigsHeader.astro";
+import GigCard from "../../components/GigCard.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { GIGS_CATALOG, type GigItem } from "../../data/gigs";
 import { SITE_NAME, SITE_URL, SUPPORT_PHONE, BOOK_CONSULTATION_URL } from "../../consts";
@@ -26,11 +27,40 @@ const whatsappMessage = (pkgName: string, priceInr: number) =>
 
 const pageTitle = `${gig.title} | ${SITE_NAME} Gigs`;
 const pageDescription = gig.shortDescription;
+
+const defaultFaqs = [
+  {
+    question: "How does the ordering and milestone delivery process work?",
+    answer: "After selecting your package tier (Basic, Standard, or Premium), you provide your technical requirements. We kick off development within 24 hours, provide live staging previews at milestones, and deliver 100% production-ready source code upon approval."
+  },
+  {
+    question: "Do I get full intellectual property and source code ownership?",
+    answer: "Yes, absolutely! 100% full source code ownership, GitHub/GitLab repository transfer, deployment playbooks, and commercial intellectual property rights belong entirely to you."
+  },
+  {
+    question: "What post-delivery support and bug-fix warranty is included?",
+    answer: "Every gig includes an SLA-backed bug-fix warranty (ranging from 30 to 90 days depending on package tier) with dedicated direct communication with senior engineers on WhatsApp, Slack, or email."
+  },
+  {
+    question: "Can I request custom modifications beyond the standard package scope?",
+    answer: "Yes. You can contact our lead developers directly on WhatsApp (+91 78274 08866) or book a 1-on-1 consultation call to receive a custom tailored proposal for complex enterprise requirements."
+  }
+];
+
+const gigFaqs = gig.faqs && gig.faqs.length > 0 ? gig.faqs : defaultFaqs;
+const relatedGigs = GIGS_CATALOG
+  .filter((g) => g.slug !== gig.slug)
+  .slice(0, 4);
+
+const keywords = gig.seoKeywords && gig.seoKeywords.length > 0
+  ? gig.seoKeywords.join(", ")
+  : `${gig.title}, ${gig.subcategory}, ${gig.category}, Rakebig Services, Fiverr Pro, Upwork Agency`;
 ---
 
 <Layout
   title={pageTitle}
   description={pageDescription}
+  keywords={keywords}
   canonicalPath={`/gigs/${gig.slug}`}
   ogImage={gig.thumbnail}
   jsonLd={[
@@ -40,6 +70,8 @@ const pageDescription = gig.shortDescription;
       name: gig.title,
       image: `${SITE_URL}${gig.thumbnail}`,
       description: gig.shortDescription,
+      sku: gig.id,
+      mpn: gig.id,
       brand: {
         "@type": "Brand",
         name: SITE_NAME,
@@ -58,6 +90,8 @@ const pageDescription = gig.shortDescription;
           price: gig.packages.basic.priceInr.toString(),
           priceCurrency: "INR",
           availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          priceValidUntil: "2027-12-31",
           url: `${SITE_URL}/gigs/${gig.slug}`,
           seller: {
             "@type": "Organization",
@@ -70,6 +104,8 @@ const pageDescription = gig.shortDescription;
           price: gig.packages.standard.priceInr.toString(),
           priceCurrency: "INR",
           availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          priceValidUntil: "2027-12-31",
           url: `${SITE_URL}/gigs/${gig.slug}`,
           seller: {
             "@type": "Organization",
@@ -82,6 +118,8 @@ const pageDescription = gig.shortDescription;
           price: gig.packages.premium.priceInr.toString(),
           priceCurrency: "INR",
           availability: "https://schema.org/InStock",
+          itemCondition: "https://schema.org/NewCondition",
+          priceValidUntil: "2027-12-31",
           url: `${SITE_URL}/gigs/${gig.slug}`,
           seller: {
             "@type": "Organization",
@@ -89,6 +127,18 @@ const pageDescription = gig.shortDescription;
           },
         },
       ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: gigFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
     },
     {
       "@context": "https://schema.org",
@@ -331,18 +381,12 @@ const pageDescription = gig.shortDescription;
           <section class="gd-section">
             <h2 class="gd-section-title">Frequently Asked Questions</h2>
             <div class="gd-faq-list">
-              <details class="gd-faq-item">
-                <summary>How does the ordering process work?</summary>
-                <p>After selecting your desired package tier (Basic, Standard, or Premium), you can submit your project requirements. Our engineering team will review your specifications and begin development immediately.</p>
-              </details>
-              <details class="gd-faq-item">
-                <summary>Do I get full source code access?</summary>
-                <p>Yes! 100% full source code ownership, repository commit access, and deployment playbooks are provided upon delivery.</p>
-              </details>
-              <details class="gd-faq-item">
-                <summary>What if I need custom modifications beyond the package?</summary>
-                <p>You can contact our lead developers directly on WhatsApp or phone to request a custom tailored offer for bespoke enterprise features.</p>
-              </details>
+              {gigFaqs.map((faq) => (
+                <details class="gd-faq-item">
+                  <summary>{faq.question}</summary>
+                  <p>{faq.answer}</p>
+                </details>
+              ))}
             </div>
           </section>
 
@@ -497,6 +541,26 @@ const pageDescription = gig.shortDescription;
         </div>
 
       </div>
+
+      <!-- Related Verified Gigs Section (SEO Crawl Mesh & Cross-Sell) -->
+      <section class="gd-related-sec">
+        <div class="gd-related-header">
+          <div>
+            <span class="gd-related-badge">POPULAR SERVICES</span>
+            <h2 class="gd-related-title">More Verified Engineering Gigs</h2>
+            <p class="gd-related-subtitle">Discover complementary AI automations, video production, web engineering, and CRM tools vetted by Rakebig.</p>
+          </div>
+          <a href="/gigs" class="gd-related-view-all">
+            <span>Explore All {GIGS_CATALOG.length} Gigs</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="gd-related-grid">
+          {relatedGigs.map((relGig) => (
+            <GigCard gig={relGig} />
+          ))}
+        </div>
+      </section>
     </div>
 
     <!-- Mobile Sticky Bottom Quick-Order Bar -->
@@ -1094,6 +1158,81 @@ const pageDescription = gig.shortDescription;
     font-size: 0.88rem;
     color: #62646a;
     line-height: 1.5;
+  }
+
+  /* Related Verified Gigs Section */
+  .gd-related-sec {
+    margin-top: 56px;
+    padding-top: 48px;
+    border-top: 1px solid #e4e5e7;
+  }
+
+  .gd-related-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .gd-related-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #059669;
+    background: #ecfdf5;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .gd-related-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+  }
+
+  .gd-related-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin: 4px 0 0;
+  }
+
+  .gd-related-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .gd-related-view-all:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+  }
+
+  .gd-related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    .gd-related-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gd-related-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* RIGHT STICKY ORDER BOX */

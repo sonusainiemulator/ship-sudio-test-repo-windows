@@ -18,6 +18,7 @@ import {
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
   /** Path this page canonically lives at (defaults to the current URL path). */
   canonicalPath?: string;
   /** Path to a social share image (defaults to the shared site preview). */
@@ -29,6 +30,7 @@ interface Props {
 const {
   title = `${SITE_NAME} — ${SITE_TAGLINE} | Perfex CRM & SaaS Solutions`,
   description = DEFAULT_DESCRIPTION,
+  keywords,
   canonicalPath = Astro.url.pathname,
   ogImage = DEFAULT_OG_IMAGE,
   type = 'website',
@@ -127,6 +129,7 @@ const allSchemas = [...defaultSchemas, ...jsonLd];
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <meta name="author" content="Rakebig Services" />
     <meta name="publisher" content="Rakebig Services" />
     <meta name="theme-color" content="#080e1a" />

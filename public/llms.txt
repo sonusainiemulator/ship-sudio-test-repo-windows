@@ -151,6 +151,82 @@ Hub: https://www.rakebig.com/open-source
 10. Coolify & aaPanel PaaS (https://www.rakebig.com/open-source/coolify-aapanel)
     - Self-hosted Heroku and cPanel alternative for automated Git push-to-deploy, Docker container management, and Nginx reverse proxies.
 
+## Verified Engineering & Creative Gigs (Rakebig Marketplace)
+Marketplace Hub: https://www.rakebig.com/gigs
+Fixed transparent pricing, SLA warranties, direct engineer communication, and 100% source code ownership.
+
+1. AI Video Ads for Brand, Product or Business (https://www.rakebig.com/gigs/create-ai-video-ads-for-brand-business)
+   - Scope: High-converting viral AI commercials for TikTok, Instagram Reels, Facebook, and YouTube with photorealistic AI avatars, dynamic motion graphics, and persuasive storytelling.
+   - Pricing: Basic $50 (₹4,199) / Standard $120 (₹9,999) / Premium $200 (₹16,799).
+   - Technologies: Runway Gen-3, Kling, HeyGen, ElevenLabs, Premiere Pro, After Effects.
+
+2. Automate Business Workflow Using n8n and AI (https://www.rakebig.com/gigs/automate-business-workflow-using-n8n-and-ai)
+   - Scope: Eliminate repetitive manual tasks and eliminate monthly Zapier/Make subscription bills by building smart, autonomous n8n workflows powered by OpenAI, Claude, webhooks, and seamless CRM integrations.
+   - Pricing: Basic $100 (₹8,399) / Standard $220 (₹18,499) / Premium $400 (₹33,599).
+   - Technologies: n8n, OpenAI GPT-4o, Claude 3.5 Sonnet, Docker/VPS, REST Webhooks, PostgreSQL.
+
+3. Build AI-Powered MVP or Web Application (https://www.rakebig.com/gigs/build-ai-powered-mvp-or-web-application)
+   - Scope: Rapidly turn AI startup ideas into production-ready web apps and SaaS MVPs. Features include user authentication (Supabase/Clerk), Stripe subscriptions, token rate limiting, and vector RAG pipelines.
+   - Pricing: Basic $200 (₹16,799) / Standard $480 (₹39,999) / Premium $850 (₹71,499).
+   - Technologies: Next.js / React, FastAPI / Python, PostgreSQL / Supabase, OpenAI, Stripe, Tailwind CSS.
+
+4. Design 30 Branded Social Media Posts for Business (https://www.rakebig.com/gigs/design-30-branded-social-media-posts-for-business)
+   - Scope: Skyrocket brand engagement with 30 cohesive, high-converting social media posts, carousel graphics, Instagram stories, caption copywriting, and editable Canva/Figma templates.
+   - Pricing: Basic $40 (₹3,399) / Standard $85 (₹7,199) / Premium $140 (₹11,799).
+   - Technologies: Figma, Canva Pro, Adobe Illustrator, Photoshop.
+
+5. Edit Engaging YouTube Shorts with Captions & Hooks (https://www.rakebig.com/gigs/edit-engaging-youtube-shorts-with-captions-and-hooks)
+   - Scope: Turn raw footage and podcasts into viral, high-retention YouTube Shorts, Instagram Reels, and TikToks with Alex Hormozi style bold kinetic typography, animated emojis, sound design, and first-3-second hook optimization.
+   - Pricing: Basic $40 (₹3,399) / Standard $85 (₹7,199) / Premium $150 (₹12,599).
+   - Technologies: Premiere Pro, After Effects, CapCut Pro, Submagic, Audition.
+
+6. Build AI Voice Agent for Customer Support & Booking (https://www.rakebig.com/gigs/build-ai-voice-agent-customer-support-booking-qualification)
+   - Scope: Deploy ultra-low latency (<800ms) conversational AI phone agents for inbound customer support, appointment scheduling via Google Calendar/Cal.com, outbound lead qualification, and CRM sync using Vapi, Retell AI, and Twilio.
+   - Pricing: Basic $150 (₹12,599) / Standard $320 (₹26,899) / Premium $550 (₹45,999).
+   - Technologies: Retell AI, Vapi AI, Twilio, ElevenLabs, FastAPI, Perfex CRM, HubSpot.
+
+7. Create AI-Powered Promotional Videos for Business & Products (https://www.rakebig.com/gigs/create-ai-powered-promotional-videos-for-business-campaign)
+   - Scope: Visually demonstrate company offerings and physical/digital products with cinematic AI promotional videos. Features include 3D product mockups, hyper-realistic scenes, multi-language studio voiceover, and full commercial broadcast licenses.
+   - Pricing: Basic $75 (₹6,299) / Standard $160 (₹13,499) / Premium $300 (₹25,199).
+   - Technologies: Runway Gen-3, Midjourney, ElevenLabs, After Effects, Cinema 4D.
+
+8. Build Responsive WordPress Business Website or Redesign (https://www.rakebig.com/gigs/build-responsive-wordpress-business-website-or-redesign)
+   - Scope: Modern, mobile-responsive WordPress business website development from scratch or full modern redesign. Blazing fast loading speed (90+ Google PageSpeed score), on-page SEO, WooCommerce e-commerce setup, and Elementor/Gutenberg builders.
+   - Pricing: Basic $75 (₹6,299) / Standard $180 (₹15,099) / Premium $350 (₹29,399).
+   - Technologies: WordPress, Elementor Pro, WooCommerce, PHP, Yoast / RankMath SEO, WP Rocket.
+
+9. Custom AI WhatsApp Marketing Chatbot (https://www.rakebig.com/gigs/build-ai-whatsapp-marketing-chatbot)
+   - Pricing: From $39 (₹2,999) / Standard $99 (₹7,999) / Premium $229 (₹18,999).
+   - Technologies: Meta WhatsApp Cloud API, OpenAI GPT-4o, Webhooks, Perfex CRM.
+
+10. Customize Perfex CRM Modules & Payment Gateways (https://www.rakebig.com/gigs/customize-perfex-crm-modules-development)
+    - Pricing: From $29 (₹2,499) / Standard $125 (₹9,999) / Premium $349 (₹27,999).
+    - Technologies: PHP CodeIgniter, MySQL, Perfex CRM, Stripe, Razorpay.
+
+11. Deploy Nextcloud Enterprise on VPS with SSL (https://www.rakebig.com/gigs/deploy-nextcloud-rocketchat-enterprise-vps)
+    - Pricing: From $45 (₹3,499) / Standard $109 (₹8,499) / Premium $279 (₹21,999).
+    - Technologies: Docker, Ubuntu, Nginx, Redis, MinIO S3, CrowdSec WAF.
+
+12. Full-Stack SaaS MVP with Stripe (https://www.rakebig.com/gigs/build-full-stack-saas-mvp-nextjs-laravel)
+    - Pricing: From $65 (₹4,999) / Standard $249 (₹19,999) / Premium $499 (₹39,999).
+    - Technologies: Next.js, Laravel, Tailwind CSS, PostgreSQL, Stripe.
+
+13. Cross-Platform Flutter Mobile App & App Store Publishing (https://www.rakebig.com/gigs/develop-flutter-mobile-app-clone-android-ios)
+    - Pricing: From $59 (₹4,499) / Standard $219 (₹16,999) / Premium $449 (₹34,999).
+    - Technologies: Flutter, Dart, Firebase, REST APIs, Google Maps SDK.
+
+14. Klaviyo & WhatsApp E-Commerce Retention Flows (https://www.rakebig.com/gigs/setup-klaviyo-whatsapp-ecommerce-marketing-flows)
+    - Pricing: From $32 (₹2,514) / Standard $89 (₹6,999) / Premium $199 (₹15,499).
+    - Technologies: Klaviyo, Shopify, WooCommerce, WhatsApp Cloud API.
+
+15. Custom LLM RAG Pipeline with Vector Database (https://www.rakebig.com/gigs/custom-llm-rag)
+    - Pricing: From $59 (₹4,499) / Standard $189 (₹14,999) / Premium $439 (₹34,999).
+    - Technologies: LangChain, LlamaIndex, Pinecone, Qdrant, FastAPI.
+
+16. Autonomous AI Employee with Hermes Agent & OpenClaw (https://www.rakebig.com/gigs/build-ai-employee-automation-hermes-openclaw)
+    - Pricing: From $59 (₹4,999) / Standard $219 (₹16,999) / Premium $449 (₹34,999).
+    - Technologies: Hermes Agent, OpenClaw, n8n, Model Context Protocol (MCP), Claude AI.
+
 ## Company, Culture & Case Studies
 - About Us: https://www.rakebig.com/about
   - Detailed agency background, 100% source code ownership philosophy, engineering standards, and global offices in India (HQ) and London (UK).
