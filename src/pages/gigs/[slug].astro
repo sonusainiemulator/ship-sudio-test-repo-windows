@@ -537,6 +537,37 @@ const keywords = gig.seoKeywords && gig.seoKeywords.length > 0
               </a>
             </div>
 
+            <!-- Need Flexibility When Hiring (Hourly Offer Card) -->
+            <div class="gd-hourly-card">
+              <div class="gd-hourly-header">
+                <img
+                  src={gig.seller?.avatar || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces"}
+                  alt={gig.seller?.name || "Seller"}
+                  class="gd-hourly-avatar"
+                  width="38"
+                  height="38"
+                  loading="lazy"
+                />
+                <h3 class="gd-hourly-title">Need flexibility when hiring?</h3>
+              </div>
+              <p class="gd-hourly-desc">
+                Hire by the hour, ideal for long-term projects with flexible hours and weekly payments.
+              </p>
+              <div class="gd-hourly-footer">
+                <div class="gd-hourly-price">
+                  <span class="gd-hourly-amount">₹9,966.54</span><span class="gd-hourly-unit">/hour</span>
+                </div>
+                <a
+                  href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hi Rakebig, I want to request an hourly offer for "${gig.title}" (₹9,966.54/hour). Please share availability and weekly payment terms.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="gd-hourly-cta"
+                >
+                  Request hourly offer
+                </a>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -1397,6 +1428,85 @@ const keywords = gig.seoKeywords && gig.seoKeywords.length > 0
 
   .gd-btn-contact:hover {
     background: #f7f7f8;
+  }
+
+  /* Need flexibility when hiring? (Hourly Offer Card) */
+  .gd-hourly-card {
+    border-top: 1px solid #e4e5e7;
+    padding: 20px 24px;
+    background: #ffffff;
+  }
+
+  .gd-hourly-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .gd-hourly-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #e4e5e7;
+    flex-shrink: 0;
+  }
+
+  .gd-hourly-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #222325;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .gd-hourly-desc {
+    font-size: 0.88rem;
+    color: #62646a;
+    line-height: 1.45;
+    margin: 0 0 16px 0;
+  }
+
+  .gd-hourly-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .gd-hourly-price {
+    display: inline-flex;
+    align-items: baseline;
+    font-size: 0.96rem;
+  }
+
+  .gd-hourly-amount {
+    font-weight: 700;
+    color: #222325;
+    letter-spacing: -0.01em;
+  }
+
+  .gd-hourly-unit {
+    font-weight: 500;
+    color: #404145;
+    font-size: 0.88rem;
+  }
+
+  .gd-hourly-cta {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #222325;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+    cursor: pointer;
+  }
+
+  .gd-hourly-cta:hover {
+    color: #1dbf73;
   }
 
   @media (max-width: 1024px) {

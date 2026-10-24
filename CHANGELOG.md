@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.2] - 2026-10-25 01:44 IST
+
+### Added (Gig Ordering Experience)
+- **"Need Flexibility When Hiring?" Hourly Offer Card on All Gigs**:
+  - Integrated dedicated hourly hiring section right below `panel-premium` inside the sticky order box in [src/pages/gigs/[slug].astro](file:///g:/rakebig-com-new-site/src/pages/gigs/[slug].astro):
+    - Circular seller avatar (`gig.seller.avatar`).
+    - Bold title: *"Need flexibility when hiring?"*.
+    - Description: *"Hire by the hour, ideal for long-term projects with flexible hours and weekly payments."*.
+    - Bottom row: **`₹9,966.54/hour`** rate display and underlined **"Request hourly offer"** link directing directly to WhatsApp concierge with prefilled hourly scope message.
+    - Positioned persistently inside `.gd-sticky-box` so it remains visible under whichever package tab (Basic, Standard, or Premium) is active.
+
 ## [1.7.1] - 2026-10-25 01:36 IST
 
 ### Fixed & Improved (Marketplace Header & Guest Auth State)
