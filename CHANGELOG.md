@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.4] - 2026-10-25 10:41 IST
+
+### Added (Documentation & SEO)
+- **Enterprise SEO-Friendly Company README (`README.md`)**:
+  - Replaced generic Astro boilerplate with comprehensive company profile for `rakebig.com`.
+  - Added verified brand shields: website status, Cal.com scheduling, 5.0★ Google Maps rating, WhatsApp Concierge, and GitHub profile.
+  - Documented core engineering capabilities: AI Business Automation, Perfex CRM Solutions, SaaS Platform Development, Flutter Mobile Apps, On-Demand Clones, and Hardened Self-Hosted Cloud Infrastructure.
+  - Included verified marketplace gigs pricing table, technical architecture matrix, client case studies, and verified physical office directories (Bhadra, Jaipur, and London, UK).
+
 ## [1.7.3] - 2026-10-25 01:50 IST
 
 ### Added (Client Consultation & Video Discovery Call)
