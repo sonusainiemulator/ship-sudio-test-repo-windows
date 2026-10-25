@@ -377,6 +377,112 @@ const keywords = gig.seoKeywords && gig.seoKeywords.length > 0
             </div>
           </section>
 
+          <!-- FREE VIDEO CONSULTATION SECTION (Google Meet / Zoom Banner) -->
+          <section class="gd-consult-banner" id="consultation-section">
+            <div class="gd-consult-banner__ambient-glow" aria-hidden="true"></div>
+            <div class="gd-consult-banner__content">
+              <div class="gd-consult-banner__badge">
+                <span class="gd-consult-pulse"></span>
+                <span>100% Free Discovery Call</span>
+              </div>
+              <h2 class="gd-consult-banner__title">Let's Discuss Your Project on Google Meet or Zoom</h2>
+              <p class="gd-consult-banner__desc">
+                Have custom architecture requirements, high-volume needs, or want to review your roadmap face-to-face? Book a free 30-minute video session directly with our senior engineering and AI leads.
+              </p>
+
+              <!-- Video Platforms supported -->
+              <div class="gd-consult-banner__platforms">
+                <div class="gd-platform-chip gd-platform-chip--meet">
+                  <svg class="gd-platform-chip__icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+                  </svg>
+                  <span>Google Meet</span>
+                </div>
+                <div class="gd-platform-chip gd-platform-chip--zoom">
+                  <svg class="gd-platform-chip__icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2.586l4.707-4.707A1 1 0 0 1 22 4.586v14.828a1 1 0 0 1-1.293.957L16 15.414V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/>
+                  </svg>
+                  <span>Zoom HD Video</span>
+                </div>
+                <div class="gd-platform-chip gd-platform-chip--screen">
+                  <svg class="gd-platform-chip__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                  <span>Live Screen Share</span>
+                </div>
+              </div>
+
+              <!-- Perks Grid -->
+              <div class="gd-consult-banner__perks">
+                <div class="gd-consult-perk-card">
+                  <div class="gd-consult-perk-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                  </div>
+                  <div>
+                    <strong>30 Minutes Free</strong>
+                    <span>Full technical scoping with zero pitch pressure</span>
+                  </div>
+                </div>
+
+                <div class="gd-consult-perk-card">
+                  <div class="gd-consult-perk-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                      <line x1="16" y1="13" x2="8" y2="13"></line>
+                      <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                  </div>
+                  <div>
+                    <strong>Fixed-Price Quotation</strong>
+                    <span>Receive detailed milestones within 2 hours</span>
+                  </div>
+                </div>
+
+                <div class="gd-consult-perk-card">
+                  <div class="gd-consult-perk-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <strong>NDA & IP Protected</strong>
+                    <span>100% confidential discussion and code ownership</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="gd-consult-banner__actions">
+                <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gd-consult-btn-primary">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span>Book Free Consultation Call</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a
+                  href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hi Rakebig, I want to book a free Google Meet or Zoom consultation for "${gig.title}". What slots are open?`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="gd-consult-btn-wa"
+                >
+                  <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
+                  <span>Book via WhatsApp Concierge</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
           <!-- FAQ Accordions -->
           <section class="gd-section">
             <h2 class="gd-section-title">Frequently Asked Questions</h2>
@@ -568,6 +674,70 @@ const keywords = gig.seoKeywords && gig.seoKeywords.length > 0
               </div>
             </div>
 
+          </div>
+
+          <!-- FREE CONSULTATION APPOINTMENT CARD (Google Meet / Zoom in Sidebar) -->
+          <div class="gd-consult-box">
+            <div class="gd-consult-badge">
+              <span class="gd-consult-pulse"></span>
+              <span>100% Free Consultation</span>
+            </div>
+
+            <h3 class="gd-consult-title">Discuss on Google Meet or Zoom</h3>
+            <p class="gd-consult-desc">
+              Have complex requirements, custom architecture, or enterprise scope? Book a 30-min discovery call directly with our technical team.
+            </p>
+
+            <div class="gd-consult-platforms">
+              <span class="gd-platform-pill gd-platform-pill--meet">
+                <svg viewBox="0 0 24 24" class="gd-platform-icon" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+                </svg>
+                <span>Google Meet</span>
+              </span>
+              <span class="gd-platform-pill gd-platform-pill--zoom">
+                <svg viewBox="0 0 24 24" class="gd-platform-icon" fill="currentColor">
+                  <path d="M4 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2.586l4.707-4.707A1 1 0 0 1 22 4.586v14.828a1 1 0 0 1-1.293.957L16 15.414V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/>
+                </svg>
+                <span>Zoom HD</span>
+              </span>
+            </div>
+
+            <ul class="gd-consult-perks">
+              <li>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span>30-Min Technical & Scope Scrutiny</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span>Detailed Milestones & Fixed Quote</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span>100% Free / Zero Pitch Pressure</span>
+              </li>
+            </ul>
+
+            <a href={BOOK_CONSULTATION_URL} target="_blank" rel="noopener noreferrer" class="gd-btn-consult-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>Schedule Free Video Call</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+
+            <a
+              href={`https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hi Rakebig, I would like to book a free Google Meet or Zoom consultation for "${gig.title}". What slots are open?`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="gd-btn-consult-wa"
+            >
+              <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+              <span>Book Appointment via WhatsApp</span>
+            </a>
           </div>
         </div>
 
@@ -1507,6 +1677,388 @@ const keywords = gig.seoKeywords && gig.seoKeywords.length > 0
 
   .gd-hourly-cta:hover {
     color: #1dbf73;
+  }
+
+  /* Sidebar Free Consultation Appointment Card */
+  .gd-consult-box {
+    margin-top: 18px;
+    border: 1px solid #e4e5e7;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 22px 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+
+  .gd-consult-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #00875a;
+    background: #eaf8f1;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  .gd-consult-pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1dbf73;
+    animation: gdConsultPulse 1.8s infinite;
+  }
+
+  @keyframes gdConsultPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.4; }
+  }
+
+  .gd-consult-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222325;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .gd-consult-desc {
+    font-size: 0.85rem;
+    color: #62646a;
+    line-height: 1.45;
+    margin: 0 0 14px 0;
+  }
+
+  .gd-consult-platforms {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .gd-platform-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .gd-platform-pill--meet {
+    background: #eaf8f1;
+    color: #00875a;
+    border: 1px solid #c2eed5;
+  }
+
+  .gd-platform-pill--zoom {
+    background: #e8f4fd;
+    color: #0b5cff;
+    border: 1px solid #bae0fc;
+  }
+
+  .gd-platform-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .gd-consult-perks {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .gd-consult-perks li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: #404145;
+  }
+
+  .gd-consult-perks li svg {
+    width: 15px;
+    height: 15px;
+    color: #1dbf73;
+    flex-shrink: 0;
+  }
+
+  .gd-btn-consult-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 14px;
+    background: #222325;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-bottom: 8px;
+  }
+
+  .gd-btn-consult-primary:hover {
+    background: #1dbf73;
+    box-shadow: 0 4px 12px rgba(29, 191, 115, 0.25);
+  }
+
+  .gd-btn-consult-primary svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gd-btn-consult-wa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 10px 14px;
+    background: #ffffff;
+    color: #222325;
+    font-size: 0.84rem;
+    font-weight: 600;
+    border: 1px solid #e4e5e7;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .gd-btn-consult-wa:hover {
+    background: #f7f7f8;
+    border-color: #1dbf73;
+    color: #00875a;
+  }
+
+  /* Main Content Consultation Banner */
+  .gd-consult-banner {
+    position: relative;
+    margin-bottom: 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #090e1a 0%, #101827 50%, #0d1526 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 32px 30px;
+    color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .gd-consult-banner__ambient-glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29, 191, 115, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .gd-consult-banner__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .gd-consult-banner__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #4ade80;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .gd-consult-banner__title {
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .gd-consult-banner__desc {
+    font-size: 0.92rem;
+    color: #94a3b8;
+    line-height: 1.55;
+    margin: 0 0 20px 0;
+    max-width: 680px;
+  }
+
+  .gd-consult-banner__platforms {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+
+  .gd-platform-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .gd-platform-chip--meet {
+    background: rgba(34, 197, 94, 0.14);
+    color: #86efac;
+    border: 1px solid rgba(74, 222, 128, 0.25);
+  }
+
+  .gd-platform-chip--zoom {
+    background: rgba(59, 130, 246, 0.14);
+    color: #93c5fd;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+  }
+
+  .gd-platform-chip--screen {
+    background: rgba(147, 51, 234, 0.14);
+    color: #d8b4fe;
+    border: 1px solid rgba(168, 85, 247, 0.25);
+  }
+
+  .gd-platform-chip__icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  .gd-consult-banner__perks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .gd-consult-perk-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .gd-consult-perk-card__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(29, 191, 115, 0.15);
+    color: #4ade80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .gd-consult-perk-card__icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gd-consult-perk-card strong {
+    display: block;
+    font-size: 0.86rem;
+    color: #f8fafc;
+    margin-bottom: 2px;
+  }
+
+  .gd-consult-perk-card span {
+    display: block;
+    font-size: 0.76rem;
+    color: #94a3b8;
+    line-height: 1.35;
+  }
+
+  .gd-consult-banner__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .gd-consult-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1dbf73;
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .gd-consult-btn-primary:hover {
+    background: #18a964;
+    box-shadow: 0 4px 16px rgba(29, 191, 115, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .gd-consult-btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 12px 18px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .gd-consult-btn-wa:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: #25d366;
+    color: #86efac;
+  }
+
+  @media (max-width: 768px) {
+    .gd-consult-banner {
+      padding: 24px 18px;
+    }
+
+    .gd-consult-banner__title {
+      font-size: 1.25rem;
+    }
+
+    .gd-consult-banner__perks {
+      grid-template-columns: 1fr;
+    }
+
+    .gd-consult-btn-primary,
+    .gd-consult-btn-wa {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   @media (max-width: 1024px) {

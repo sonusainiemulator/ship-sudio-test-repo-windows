@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.3] - 2026-10-25 01:50 IST
+
+### Added (Client Consultation & Video Discovery Call)
+- **Free Consultation Appointment Booking Sections on All Gigs (Google Meet & Zoom)**:
+  - **Left-Column Luxury Dark-Mode Banner (`.gd-consult-banner`)**:
+    - Embedded full-width consultation section directly before the FAQ accordion in [src/pages/gigs/[slug].astro](file:///g:/rakebig-com-new-site/src/pages/gigs/[slug].astro).
+    - Obsidian dark aesthetic (`#090e1a` to `#101827`) with emerald ambient radial glow and animated live pulse indicator.
+    - Badged header: *"100% Free Discovery Call"* and *"Let's Discuss Your Project on Google Meet or Zoom"*.
+    - Platform pills: **Google Meet**, **Zoom HD Video**, and **Live Screen Share**.
+    - 3-card benefit summary: **30 Minutes Free** (technical scoping), **Fixed-Price Quotation** (milestones within 2 hours), and **NDA & IP Protected** (confidentiality guaranteed).
+    - Dual CTA actions: Direct 1-click calendar sync via [Cal.com](https://cal.com/rakebigservices) and Instant WhatsApp Concierge booking.
+  - **Right-Sidebar Companion Booking Card (`.gd-consult-box`)**:
+    - Clean, modern light card mounted directly underneath the sticky package order box.
+    - Live green pulsing status badge (`100% Free Consultation`), platform badges, and bulleted technical review perks.
+    - High-visibility action buttons: *"Schedule Free Video Call"* and *"Book Appointment via WhatsApp"*.
+
 ## [1.7.2] - 2026-10-25 01:44 IST
 
 ### Added (Gig Ordering Experience)
